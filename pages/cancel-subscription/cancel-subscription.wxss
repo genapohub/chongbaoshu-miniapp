@@ -1,0 +1,179 @@
+.container {
+  min-height: 100vh;
+  background: #F8F9FA;
+}
+
+.page-content {
+  padding: 24rpx;
+}
+
+/* 挽留卡片 */
+.retention-card {
+  background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.rt-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #C62828;
+  margin-bottom: 20rpx;
+}
+
+.rt-desc {
+  font-size: 26rpx;
+  color: #6C757D;
+  line-height: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+/* 优惠卡片 */
+.discount-card {
+  background: linear-gradient(135deg, #FFEBEE, #FDE8EC);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  text-align: center;
+}
+
+.discount-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #E94560;
+  margin-bottom: 8rpx;
+}
+
+.discount-desc {
+  font-size: 24rpx;
+  color: #6C757D;
+  margin-bottom: 16rpx;
+}
+
+.discount-price {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #E94560;
+  margin-bottom: 8rpx;
+}
+
+.discount-original {
+  font-size: 22rpx;
+  color: #6C757D;
+  margin-bottom: 20rpx;
+}
+
+/* 卡片 */
+.card {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 24rpx;
+}
+
+/* 原因列表 */
+.reason-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.reason-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx;
+  border-radius: 12rpx;
+  background: #F8F9FA;
+  transition: all 0.2s ease;
+}
+
+.reason-item.selected {
+  background: #FFF5F7;
+  border: 2rpx solid #E94560;
+}
+
+.reason-text {
+  font-size: 26rpx;
+  color: #212529;
+  flex: 1;
+}
+
+/* 其他原因输入 */
+.other-input-wrapper {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #E9ECEF;
+}
+
+.other-input {
+  width: 100%;
+  padding: 20rpx;
+  background: #F8F9FA;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #212529;
+  border: 1rpx solid #E9ECEF;
+  box-sizing: border-box;
+}
+
+/* 按钮 */
+.btn {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  background: #E94560;
+  color: #FFFFFF;
+}
+
+.btn-danger {
+  background: #F0F0F0;
+  color: #993333;
+  font-weight: 500;
+  font-size: 28rpx;
+}
+
+.btn-danger[disabled] {
+  opacity: 0.4;
+}
+
+.btn-sm {
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 28rpx;
+  width: auto;
+  padding: 0 40rpx;
+  display: inline-block;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* 提示文本 */
+.hint-text {
+  text-align: center;
+  font-size: 22rpx;
+  color: #6C757D;
+  margin-top: 16rpx;
+}

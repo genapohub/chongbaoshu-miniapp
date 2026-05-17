@@ -1,0 +1,190 @@
+.container {
+  min-height: 100vh;
+  background: #F8FAFC;
+}
+
+.page-content {
+  padding: 24rpx;
+}
+
+/* 当前方案卡片 */
+.sub-status-card {
+  background: linear-gradient(135deg, #E94560, #C73650);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  color: #fff;
+  margin-bottom: 24rpx;
+}
+
+.ssc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.ssc-left {
+  flex: 1;
+}
+
+.ssc-label {
+  font-size: 24rpx;
+  opacity: 0.8;
+  margin-bottom: 8rpx;
+}
+
+.ssc-plan {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.ssc-meta {
+  display: flex;
+  gap: 16rpx;
+  font-size: 22rpx;
+  opacity: 0.9;
+}
+
+.badge-white {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 24rpx;
+  color: #1F2937;
+}
+
+/* 使用量 */
+.usage-item {
+  margin-bottom: 24rpx;
+}
+
+.usage-item:last-child {
+  margin-bottom: 0;
+}
+
+.usage-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  margin-bottom: 12rpx;
+}
+
+.usage-label {
+  color: #4B5563;
+}
+
+.usage-value {
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.progress-bar {
+  height: 12rpx;
+  background: #E5E7EB;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  transition: width 0.3s ease;
+}
+
+.fill-green {
+  background: #10B981;
+}
+
+.fill-blue {
+  background: #3B82F6;
+}
+
+.fill-red {
+  background: #EF4444;
+}
+
+/* 操作按钮 */
+.action-btns {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn-outline {
+  background: #fff;
+  border: 2rpx solid #E5E7EB;
+  color: #1F2937;
+}
+
+.btn-danger {
+  color: #EF4444;
+  border-color: #EF4444;
+}
+
+/* 支付历史 */
+.payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+.payment-item:last-child {
+  border-bottom: none;
+}
+
+.payment-info {
+  flex: 1;
+}
+
+.payment-title {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #1F2937;
+  margin-bottom: 6rpx;
+}
+
+.payment-date {
+  font-size: 22rpx;
+  color: #9CA3AF;
+}
+
+.payment-amount {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1F2937;
+}
+
+.empty-payment {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #9CA3AF;
+  font-size: 26rpx;
+}

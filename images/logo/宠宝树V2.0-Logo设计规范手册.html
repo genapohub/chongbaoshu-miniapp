@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>宠宝树 V2.0 · Logo设计规范手册</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#E94560;--primary-dark:#C73650;--primary-light:#FDE8EC;
+  --green:#00b894;--green-light:#E8F5E9;
+  --gold:#FFD700;--gold-light:#FFF9E6;
+  --text:#1A1A2E;--text-sec:#6B7280;
+  --bg:#F7F8FA;--white:#FFF;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+.header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);padding:60px 40px;color:#FFF;text-align:center}
+.header h1{font-size:36px;font-weight:800;margin-bottom:12px}
+.header .subtitle{font-size:16px;opacity:.9}
+.version{background:rgba(255,255,255,.2);display:inline-block;padding:4px 16px;border-radius:20px;font-size:12px;margin-top:16px}
+.section{max-width:1000px;margin:40px auto;padding:0 24px}
+.section-title{font-size:24px;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--primary);color:var(--primary)}
+.card{background:var(--white);border-radius:12px;padding:32px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.card-title{font-size:18px;font-weight:700;margin-bottom:20px;color:var(--text);display:flex;align-items:center;gap:10px}
+.logo-showcase{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;margin:24px 0}
+.logo-item{text-align:center;padding:24px;border:2px dashed #E5E7EB;border-radius:12px;flex:1;min-width:200px}
+.logo-item .preview{width:120px;height:120px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:64px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:24px;color:#FFF}
+.logo-item.dark .preview{background:linear-gradient(135deg,#1A1A2E,#16213E)}
+.logo-item .name{font-weight:600;font-size:14px;margin-bottom:4px}
+.logo-item .desc{font-size:12px;color:var(--text-sec)}
+.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0}
+.color-item{text-align:center;padding:20px;background:#F9FAFB;border-radius:8px}
+.color-swatch{width:80px;height:80px;border-radius:12px;margin:0 auto 12px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.color-name{font-weight:600;font-size:14px;margin-bottom:4px}
+.color-hex{font-size:13px;color:var(--text-sec);font-family:monospace}
+.usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin:20px 0}
+.usage-item{padding:20px;background:#F9FAFB;border-radius:8px}
+.usage-item h4{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--primary)}
+.usage-item p{font-size:13px;color:var(--text-sec);line-height:1.6}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0}
+.spec-item{background:#F9FAFB;padding:16px;border-radius:8px}
+.spec-item .label{font-size:11px;color:var(--text-sec);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.spec-item .value{font-size:16px;font-weight:700}
+.do-dont{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:20px 0}
+.do-item,.dont-item{padding:20px;border-radius:8px}
+.do-item{background:#E8F5E9;border-left:4px solid var(--green)}
+.dont-item{background:#FDE8EC;border-left:4px solid var(--primary)}
+.do-item h4,.dont-item h4{font-size:14px;font-weight:600;margin-bottom:8px}
+.do-item h4{color:var(--green)}
+.dont-item h4{color:var(--primary)}
+.do-item p,.dont-item p{font-size:13px;color:var(--text-sec)}
+.footer{background:#1A1A2E;color:#FFF;text-align:center;padding:40px;margin-top:60px}
+.footer p{opacity:.6;font-size:13px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🐾 宠宝树 Logo设计规范手册</h1>
+  <p class="subtitle">专业宠物繁育管理工具 · 品牌视觉系统 V2.0</p>
+  <div class="version">Version 2.0 · 2026年5月</div>
+</div>
+
+<div class="section">
+  <div class="section-title">📋 设计理念</div>
+  <div class="card">
+    <div class="card-title">🎨 品牌核心价值</div>
+    <p style="font-size:14px;line-height:2;margin-bottom:20px">
+      宠宝树Logo以<strong style="color:var(--primary)">"生命之树"</strong>为核心理念，融合<strong>宠物</strong>、<strong>关爱</strong>、<strong>成长</strong>三大元素。
+      树形结构象征宠物从出生到成长的完整生命周期，也代表品牌为宠物主人提供的持续关怀与支持。
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center">
+      <div style="flex:1;min-width:200px;padding:20px;background:#FDE8EC;border-radius:8px;text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">🌱</div>
+        <div style="font-weight:600;margin-bottom:4px">萌芽</div>
+        <div style="font-size:12px;color:var(--text-sec)">新生命的诞生</div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:20px;background:#E8F5E9;border-radius:8px;text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">🌿</div>
+        <div style="font-weight:600;margin-bottom:4px">成长</div>
+        <div style="font-size:12px;color:var(--text-sec)">健康快乐的陪伴</div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:20px;background:#FFF3E0;border-radius:8px;text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">🌳</div>
+        <div style="font-weight:600;margin-bottom:4px">传承</div>
+        <div style="font-size:12px;color:var(--text-sec)">血统的延续</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🎯 Logo设计方案</div>
+
+  <div class="card">
+    <div class="card-title">方案一：树形图标 + 品牌文字（推荐）</div>
+    <div class="logo-showcase">
+      <div class="logo-item">
+        <div class="preview" style="font-size:80px;line-height:1">🌳</div>
+        <div class="name">浅色版本</div>
+        <div class="desc">用于浅色背景</div>
+      </div>
+      <div class="logo-item dark">
+        <div class="preview" style="font-size:80px;line-height:1">🌳</div>
+        <div class="name">深色版本</div>
+        <div class="desc">用于深色背景</div>
+      </div>
+      <div class="logo-item">
+        <div class="preview" style="background:var(--green);font-size:80px;line-height:1">🌳</div>
+        <div class="name">绿色版本</div>
+        <div class="desc">用于成功/健康场景</div>
+      </div>
+    </div>
+    <div style="background:#FFF3E0;border-left:4px solid #F2994A;padding:16px;border-radius:0 8px 8px 0;margin-top:20px">
+      <strong style="color:#E65100">设计说明：</strong>
+      <p style="font-size:13px;margin-top:8px;line-height:1.8">
+        以简约的树形轮廓为基底，融入宠物爪印元素。树干象征宠物的成长历程，树枝上的爪印代表每一只被精心照料的宠物。
+        整体造型温暖而有生命力，传达专业与关爱并存的品牌形象。
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">方案二：圆形徽标 + 爪印组合</div>
+    <div class="logo-showcase">
+      <div class="logo-item">
+        <div class="preview" style="background:linear-gradient(135deg,#E94560,#FD79A8);font-size:80px;line-height:1">🐾</div>
+        <div class="name">主Logo</div>
+        <div class="desc">品牌标识</div>
+      </div>
+      <div class="logo-item dark">
+        <div class="preview" style="background:linear-gradient(135deg,#1A1A2E,#16213E);font-size:80px;line-height:1">🐾</div>
+        <div class="name">深色版本</div>
+        <div class="desc">深色背景使用</div>
+      </div>
+      <div class="logo-item">
+        <div class="preview" style="background:linear-gradient(135deg,#00b894,#00cec9);font-size:80px;line-height:1">🐾</div>
+        <div class="name">清新版本</div>
+        <div class="desc">健康/医疗场景</div>
+      </div>
+    </div>
+    <div style="background:#E3F2FD;border-left:4px solid #2D9CDB;padding:16px;border-radius:0 8px 8px 0;margin-top:20px">
+      <strong style="color:#1565C0">设计说明：</strong>
+      <p style="font-size:13px;margin-top:8px;line-height:1.8">
+        以宠物爪印为核心视觉元素，圆形轮廓象征家庭的温暖与保护。爪印是宠物最独特的印记，
+        也是主人与宠物之间情感连接的象征。渐变色彩增添现代感与活力。
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">方案三：组合Logo（图标+中英文）</div>
+    <div style="background:#FFF;padding:40px;border-radius:12px;text-align:center;margin:20px 0">
+      <div style="font-size:48px;margin-bottom:16px">🐾</div>
+      <div style="font-size:28px;font-weight:800;color:var(--primary);margin-bottom:4px">宠宝树</div>
+      <div style="font-size:12px;color:var(--text-sec);letter-spacing:2px">PET FAMILY TREE</div>
+    </div>
+    <div style="background:#1A1A2E;padding:40px;border-radius:12px;text-align:center;margin:20px 0">
+      <div style="font-size:48px;margin-bottom:16px;color:#FFF">🐾</div>
+      <div style="font-size:28px;font-weight:800;color:#FFF;margin-bottom:4px">宠宝树</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.6);letter-spacing:2px">PET FAMILY TREE</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🎨 色彩规范</div>
+  <div class="card">
+    <div class="card-title">品牌主色板</div>
+    <div class="color-grid">
+      <div class="color-item">
+        <div class="color-swatch" style="background:linear-gradient(135deg,#E94560,#FD79A8)"></div>
+        <div class="color-name">品牌红（主色）</div>
+        <div class="color-hex">#E94560 → #FD79A8</div>
+        <div style="font-size:11px;color:var(--text-sec);margin-top:4px">Primary Gradient</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch" style="background:#E94560"></div>
+        <div class="color-name">品牌红（纯色）</div>
+        <div class="color-hex">#E94560</div>
+        <div style="font-size:11px;color:var(--text-sec);margin-top:4px">Primary Solid</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch" style="background:#C73650"></div>
+        <div class="color-name">深红色</div>
+        <div class="color-hex">#C73650</div>
+        <div style="font-size:11px;color:var(--text-sec);margin-top:4px">Primary Dark</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch" style="background:#00b894"></div>
+        <div class="color-name">健康绿</div>
+        <div class="color-hex">#00b894</div>
+        <div style="font-size:11px;color:var(--text-sec);margin-top:4px">Health Green</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch" style="background:#FFD700"></div>
+        <div class="color-name">尊享金</div>
+        <div class="color-hex">#FFD700</div>
+        <div style="font-size:11px;color:var(--text-sec);margin-top:4px">Premium Gold</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch" style="background:#1A1A2E"></div>
+        <div class="color-name">深色背景</div>
+        <div class="color-hex">#1A1A2E</div>
+        <div style="font-size:11px;color:var(--text-sec);margin-top:4px">Dark Background</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📐 比例与尺寸规范</div>
+  <div class="card">
+    <div class="card-title">图标比例</div>
+    <div class="specs">
+      <div class="spec-item">
+        <div class="label">安全区域</div>
+        <div class="value">图标尺寸的 120%</div>
+      </div>
+      <div class="spec-item">
+        <div class="label">最小尺寸</div>
+        <div class="value">24 × 24 px</div>
+      </div>
+      <div class="spec-item">
+        <div class="label">推荐尺寸</div>
+        <div class="value">48 × 48 px</div>
+      </div>
+      <div class="spec-item">
+        <div class="label">大尺寸</div>
+        <div class="value">96 × 96 px</div>
+      </div>
+      <div class="spec-item">
+        <div class="label">启动图标</div>
+        <div class="value">1024 × 1024 px</div>
+      </div>
+      <div class="spec-item">
+        <div class="label">Favicon</div>
+        <div class="value">32 × 32 px</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">✅ 正确使用 & ❌ 错误示例</div>
+  <div class="card">
+    <div class="do-dont">
+      <div>
+        <div class="do-item">
+          <h4>✓ 应该这样做</h4>
+          <p>• 保持Logo完整显示，不裁切</p>
+          <p>• 使用规定的主色或渐变色</p>
+          <p>• 保持足够的留白空间</p>
+          <p>• 在浅色背景上使用浅色版本</p>
+          <p>• 在深色背景上使用深色版本</p>
+        </div>
+      </div>
+      <div>
+        <div class="dont-item">
+          <h4>✗ 避免这样做</h4>
+          <p>• 随意拉伸或压缩Logo比例</p>
+          <p>• 使用非品牌色彩</p>
+          <p>• 添加阴影、投影等效果</p>
+          <p>• 将Logo放置在过于复杂的背景上</p>
+          <p>• 修改Logo的图形或文字</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">📦 文件清单</div>
+  <div class="card">
+    <div class="card-title">需要创建的文件</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr style="background:#F9FAFB">
+        <th style="padding:12px;text-align:left;border-bottom:1px solid #E5E7EB;font-weight:600">文件类型</th>
+        <th style="padding:12px;text-align:left;border-bottom:1px solid #E5E7EB;font-weight:600">规格</th>
+        <th style="padding:12px;text-align:left;border-bottom:1px solid #E5E7EB;font-weight:600">用途</th>
+      </tr>
+      <tr>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">SVG矢量源文件</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">无限缩放</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">设计稿、Web使用</td>
+      </tr>
+      <tr>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">PNG - 浅色版</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">512×512, 256×256, 128×128, 64×64, 32×32</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">浅色背景应用</td>
+      </tr>
+      <tr>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">PNG - 深色版</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">同上</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">深色背景应用</td>
+      </tr>
+      <tr>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">启动页Logo</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">750×1334, 1125×2436</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">App启动画面</td>
+      </tr>
+      <tr>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">Favicon</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">32×32, 16×16</td>
+        <td style="padding:12px;border-bottom:1px solid #E5E7EB">网站浏览器标签</td>
+      </tr>
+      <tr>
+        <td style="padding:12px;">社交媒体头像</td>
+        <td style="padding:12px;">500×500</td>
+        <td style="padding:12px;">微信、微博等平台</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🤖 AI生成Logo提示词</div>
+  <div class="card">
+    <div class="card-title">Midjourney / DALL-E 提示词</div>
+    <div style="background:#1A1A2E;padding:20px;border-radius:8px;margin:16px 0">
+      <p style="color:#00ff88;font-size:13px;line-height:2;margin:0">
+        A minimalist logo design for "Pet Family Tree" app, featuring a stylized tree with paw print patterns, warm red gradient (#E94560 to #FD79A8), professional and caring vibe, clean modern style, vector graphics, transparent background --v 6 --s 250
+      </p>
+    </div>
+    <div style="background:#F9FAFB;padding:20px;border-radius:8px;margin:16px 0">
+      <p style="font-size:13px;line-height:2;margin:0;color:var(--text-sec)">
+        为"宠宝树"应用设计一个简约Logo，融合树形轮廓和宠物爪印元素，使用暖红色渐变（#E94560到#FD79A8），传达专业与关爱的品牌理念，现代简约风格，矢量图形，透明背景
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p style="font-size:20px;margin-bottom:12px">🐾 宠宝树</p>
+  <p>专业宠物繁育管理工具</p>
+  <p style="margin-top:16px">Logo Design Specification V2.0 · 2026</p>
+</div>
+
+</body>
+</html>

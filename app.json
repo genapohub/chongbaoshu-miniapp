@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/phone-login/phone-login",
+    "pages/index/index",
+    "pages/pets/pets",
+    "pages/pet-add/pet-add",
+    "pages/pet-detail/pet-detail",
+    "pages/pet-edit/pet-edit",
+    "pages/breeding-add/breeding-add",
+    "pages/breeding-detail/breeding-detail",
+    "pages/health-add/health-add",
+    "pages/pedigree/pedigree",
+    "pages/subscription/subscription",
+    "pages/change-plan/change-plan",
+    "pages/cancel-subscription/cancel-subscription",
+    "pages/profile/profile",
+    "pages/profile-edit/profile-edit",
+    "pages/remind-settings/remind-settings",
+    "pages/invite/invite",
+    "pages/invite-redeem/invite-redeem"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#E94560",
+    "navigationBarTitleText": "宠宝树",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F8F9FA",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#9CA3AF",
+    "selectedColor": "#E94560",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab-home-default.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/pets/pets",
+        "text": "宠物",
+        "iconPath": "images/tab-pet-default.png",
+        "selectedIconPath": "images/tab-pet-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab-mine-default.png",
+        "selectedIconPath": "images/tab-mine-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

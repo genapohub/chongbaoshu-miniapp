@@ -1,0 +1,52 @@
+<!-- 邀请码兑换页 - 模板 -->
+<view class="redeem-page">
+
+  <!-- 成功状态 -->
+  <view class="success-section" wx:if="{{success}}">
+    <view class="success-icon">🎉</view>
+    <view class="success-title">兑换成功！</view>
+    <view class="success-desc">您已获得 {{rewardDays}} 天Pro体验</view>
+    <button class="btn-home" bindtap="onGoHome">返回首页</button>
+  </view>
+
+  <!-- 兑换表单 -->
+  <view class="form-section" wx:else>
+    <view class="form-header">
+      <view class="header-icon">🎁</view>
+      <view class="header-title">输入邀请码</view>
+      <view class="header-desc">兑换后双方各得7天Pro体验</view>
+    </view>
+
+    <view class="code-input-group">
+      <input
+        class="code-input"
+        type="text"
+        maxlength="6"
+        placeholder="请输入6位邀请码"
+        value="{{inviteCode}}"
+        bindinput="onCodeInput"
+      />
+      <view class="btn-paste" bindtap="onPasteCode">粘贴</view>
+    </view>
+
+    <view class="error-msg" wx:if="{{errorMessage}}">{{errorMessage}}</view>
+
+    <button
+      class="btn-redeem"
+      bindtap="onRedeem"
+      disabled="{{loading || inviteCode.length < 6}}"
+      loading="{{loading}}"
+    >
+      {{loading ? '兑换中...' : '立即兑换'}}
+    </button>
+
+    <view class="tips">
+      <view class="tip-title">使用说明</view>
+      <view class="tip-item">1. 向好友获取6位邀请码</view>
+      <view class="tip-item">2. 输入邀请码并点击兑换</view>
+      <view class="tip-item">3. 兑换成功后Pro权益立即生效</view>
+      <view class="tip-item">4. 每个用户仅可兑换一次邀请码</view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,80 @@
+<view class="container">
+  <view class="page-content">
+    <!-- 当前方案卡片 -->
+    <view class="sub-status-card">
+      <view class="ssc-top">
+        <view class="ssc-left">
+          <view class="ssc-label">当前方案</view>
+          <view class="ssc-plan">{{subscription.planName}}</view>
+        </view>
+        <view class="badge badge-white" wx:if="{{subscription.billingCycle === 'yearly'}}">年付</view>
+        <view class="badge badge-white" wx:else>月付</view>
+      </view>
+      <view class="ssc-meta">
+        <text>生效：{{subscription.startDate}}</text>
+        <text>到期：{{subscription.endDate}}</text>
+        <text wx:if="{{subscription.autoRenew}}">自动续费</text>
+      </view>
+    </view>
+
+    <!-- 使用量 -->
+    <view class="card">
+      <view class="card-title">📊 使用量</view>
+
+      <view class="usage-item">
+        <view class="usage-header">
+          <text class="usage-label">宠物</text>
+          <text class="usage-value">{{usage.petCount}} / {{usage.maxPets}}</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill {{usage.petCount >= usage.maxPets ? 'fill-red' : 'fill-green'}}" style="width: {{usage.petPercent}}%"></view>
+        </view>
+      </view>
+
+      <view class="usage-item">
+        <view class="usage-header">
+          <text class="usage-label">配种记录</text>
+          <text class="usage-value">{{usage.breedingCount}} / {{usage.maxBreeding}}</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill {{usage.breedingCount >= usage.maxBreeding ? 'fill-red' : 'fill-green'}}" style="width: {{usage.breedingPercent}}%"></view>
+        </view>
+      </view>
+
+      <view class="usage-item">
+        <view class="usage-header">
+          <text class="usage-label">照片</text>
+          <text class="usage-value">{{usage.photoCount}} / {{usage.maxPhotos}}张/只</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill fill-blue" style="width: {{usage.photoPercent}}%"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-btns">
+      <button class="btn btn-outline" bindtap="goChangePlan">🔄 变更方案</button>
+      <button class="btn btn-outline btn-danger" bindtap="goCancelSubscription">🚫 取消续费</button>
+    </view>
+
+    <!-- 支付历史 -->
+    <view class="card">
+      <view class="card-title">💳 支付历史</view>
+
+      <view wx:if="{{paymentHistory.length > 0}}">
+        <view wx:for="{{paymentHistory}}" wx:key="id" class="payment-item">
+          <view class="payment-info">
+            <view class="payment-title">{{item.planName}}</view>
+            <view class="payment-date">{{item.payDate}} · {{item.payMethod}}</view>
+          </view>
+          <view class="payment-amount">¥{{item.amount}}</view>
+        </view>
+      </view>
+
+      <view wx:else class="empty-payment">
+        <text>暂无支付记录</text>
+      </view>
+    </view>
+  </view>
+</view>

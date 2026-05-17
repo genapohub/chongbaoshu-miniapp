@@ -1,0 +1,89 @@
+<!--
+  P6 添加配种页面 - 按设计稿复刻
+-->
+<view class="container">
+  <!-- 基本信息 -->
+  <view class="card">
+    <view class="card-title">💕 配种信息</view>
+
+    <view class="form-item">
+      <text class="form-label">配种日期 *</text>
+      <picker mode="date" value="{{formData.mating_date}}" bindchange="onMatingDateChange">
+        <view class="picker-wrap">
+          <text class="picker-value">{{formData.mating_date || '请选择日期'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">配种对象</text>
+      <input class="input-field" placeholder="请输入配种对象名称" value="{{formData.mate_name}}" bindinput="onInputChange" data-field="mate_name" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">配种方式</text>
+      <view class="picker-wrap" bindtap="showMethodPicker">
+        <text class="picker-value">{{formData.mating_method_display || '请选择'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">预产期</text>
+      <picker mode="date" value="{{formData.due_date}}" bindchange="onDueDateChange">
+        <view class="picker-wrap">
+          <text class="picker-value">{{formData.due_date || '请选择日期'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">配种费用</text>
+      <input class="input-field" type="digit" placeholder="请输入费用（元）" value="{{formData.fee}}" bindinput="onInputChange" data-field="fee" />
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="card">
+    <view class="card-title">📝 备注</view>
+    <textarea
+      class="textarea-field"
+      placeholder="请输入备注信息（可选）"
+      value="{{formData.notes}}"
+      bindinput="onNotesInput"
+      maxlength="500"
+    ></textarea>
+    <view class="textarea-counter">{{notesLength || 0}}/500</view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <button class="btn btn-primary btn-block" bindtap="submitForm" disabled="{{!canSubmit || loading}}">
+      <text wx:if="{{loading}}">保存中...</text>
+      <text wx:else>保存配种记录</text>
+    </button>
+  </view>
+</view>
+
+<!-- 配种方式选择弹窗 -->
+<view wx:if="{{showMethodPicker}}" class="picker-modal" bindtap="hideMethodPicker">
+  <view class="picker-content" catchtap="stopPropagation">
+    <view class="picker-header">
+      <text class="picker-title">选择配种方式</text>
+      <text class="picker-close" bindtap="hideMethodPicker">×</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view
+        wx:for="{{methodOptions}}"
+        wx:key="value"
+        class="picker-item {{formData.mating_method === item.value ? 'selected' : ''}}"
+        bindtap="selectMethod"
+        data-value="{{item.value}}"
+      >
+        <text class="picker-item-text">{{item.label}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

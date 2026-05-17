@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="page-content">
+    <!-- 损失提示 -->
+    <view class="retention-card">
+      <view class="rt-title">💔 取消后你将失去</view>
+      <view class="rt-desc">
+        <text>• 无限宠物管理 → 降为3只</text>
+        <text>• 血统证书功能 → 不可访问</text>
+        <text>• 专属客服 → 降为普通客服</text>
+        <text>• 优先提醒 → 降为普通提醒</text>
+        <text>• 当前Pro权益保留至 {{expireDate}}</text>
+      </view>
+    </view>
+
+    <!-- 挽留优惠 -->
+    <view class="discount-card">
+      <view class="discount-title">🎁 专属挽留优惠</view>
+      <view class="discount-desc">续费年付Pro享8折优惠</view>
+      <view class="discount-price">¥758.40/年</view>
+      <view class="discount-original">原价 ¥948/年 · 省 ¥189.60</view>
+      <button class="btn btn-primary btn-sm" bindtap="acceptOffer">接受优惠，继续订阅</button>
+    </view>
+
+    <!-- 取消原因 -->
+    <view class="card">
+      <view class="card-title">请告诉我们取消原因</view>
+      <view class="reason-list">
+        <view
+          wx:for="{{reasons}}"
+          wx:key="id"
+          class="reason-item {{selectedReason === item.id ? 'selected' : ''}}"
+          bindtap="selectReason"
+          data-id="{{item.id}}"
+        >
+          <radio checked="{{selectedReason === item.id}}" color="#E94560" />
+          <text class="reason-text">{{item.text}}</text>
+        </view>
+      </view>
+      
+      <view wx:if="{{selectedReason === 'other'}}" class="other-input-wrapper">
+        <input
+          class="other-input"
+          placeholder="请填写其他原因"
+          value="{{otherReason}}"
+          bindinput="onOtherReasonInput"
+        />
+      </view>
+    </view>
+
+    <button class="btn btn-danger btn-block" bindtap="confirmCancel" disabled="{{!canCancel}}">
+      确认取消自动续费
+    </button>
+    
+    <view class="hint-text">取消后当前周期内仍可使用Pro功能</view>
+  </view>
+</view>

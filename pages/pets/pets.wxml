@@ -1,0 +1,111 @@
+<!--
+  P2 宠物列表 - 按设计稿一比一复刻
+  结构：搜索栏 → 物种筛选Tab → 宠物卡片列表 → 限额提示 → FAB按钮
+-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search">
+    <text class="search-icon">🔍</text>
+    <input
+      class="search-input"
+      placeholder="搜索宠物名称…"
+      placeholder-class="search-placeholder"
+      value="{{searchKeyword}}"
+      bindinput="onSearch"
+    />
+  </view>
+
+  <!-- 物种筛选Tab -->
+  <scroll-view class="filters" scroll-x enable-flex>
+    <view
+      wx:for="{{filterTabs}}"
+      wx:key="key"
+      class="filter-tab {{currentFilter === item.key ? 'active' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onFilterTab"
+    >
+      {{item.label}}
+    </view>
+  </scroll-view>
+
+  <!-- 宠物列表 -->
+  <view class="pet-list">
+    <view
+      wx:for="{{petList}}"
+      wx:key="id"
+      class="pet-card"
+      data-id="{{item.id}}"
+      bindtap="goPetDetail"
+    >
+      <view class="pet-avatar">
+        <image
+          wx:if="{{item.avatar}}"
+          src="{{item.avatar}}"
+          mode="aspectFill"
+          class="avatar-img"
+        />
+        <view wx:else class="avatar-placeholder">{{item.speciesIcon}}</view>
+      </view>
+      <view class="pet-info">
+        <view class="pet-name-row">
+          <text class="pet-name">{{item.name}}</text>
+          <view wx:if="{{item.statusBadge}}" class="badge badge-{{item.statusBadge.type}}">{{item.statusBadge.label}}</view>
+        </view>
+        <text class="pet-desc">{{item.speciesLabel}} · {{item.genderLabel}} · {{item.age}}</text>
+      </view>
+      <text class="pet-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 免费版限额提示 -->
+  <view wx:if="{{showLimitHint}}" class="limit-hint">
+    <view class="limit-text">免费版限额 {{petCount}}/{{maxPets}} 只</view>
+    <view class="limit-desc">升级解锁更多宠物管理</view>
+    <view class="limit-btn" bindtap="goUpgrade">升级</view>
+  </view>
+
+  <!-- P14 限额弹窗 -->
+  <view wx:if="{{showLimitModal}}" class="limit-modal-overlay" bindtap="hideLimitModal">
+    <view class="limit-modal" catchtap="stopPropagation">
+      <view class="limit-modal-header">
+        <view class="limit-modal-icon">🐾</view>
+        <view class="limit-modal-title">宠物数量已达上限</view>
+        <view class="limit-modal-subtitle">免费版最多管理{{maxPets}}只宠物</view>
+      </view>
+      <view class="limit-modal-body">
+        <view class="limit-modal-progress">
+          <view class="limit-progress-info">
+            <text>当前使用</text>
+            <text class="limit-progress-num">{{petCount}}/{{maxPets}}</text>
+          </view>
+          <view class="limit-progress-bar">
+            <view class="limit-progress-fill" style="width: {{petCount/maxPets*100}}%"></view>
+          </view>
+        </view>
+        <view class="limit-modal-plans">
+          <view class="limit-plan" data-plan="basic">
+            <view class="limit-plan-name">Basic</view>
+            <view class="limit-plan-price">¥49</view>
+            <view class="limit-plan-period">/月 · 100只</view>
+          </view>
+          <view class="limit-plan selected" data-plan="pro">
+            <view class="limit-plan-name">Pro</view>
+            <view class="limit-plan-price">¥119</view>
+            <view class="limit-plan-period">/月 · 无限</view>
+          </view>
+        </view>
+        <view class="limit-modal-btn" bindtap="goPayment">立即升级</view>
+        <view class="limit-modal-cancel" bindtap="hideLimitModal">暂不升级</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{petList.length === 0 && !loading}}" class="empty-state">
+    <text class="empty-icon">🐾</text>
+    <text class="empty-text">还没有宠物，点击下方添加</text>
+  </view>
+
+  <!-- FAB 添加按钮 -->
+  <view class="fab" bindtap="goAddPet">＋</view>
+</view>

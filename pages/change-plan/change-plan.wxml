@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="page-content">
+    <!-- 当前方案 -->
+    <view class="current-plan">
+      <view class="plan-icon">💎</view>
+      <view class="plan-info">
+        <view class="plan-label">当前方案</view>
+        <view class="plan-name">{{currentPlan.name}}</view>
+      </view>
+    </view>
+
+    <!-- 可选方案 -->
+    <view class="card">
+      <view class="card-title">选择新方案</view>
+
+      <view
+        wx:for="{{plans}}"
+        wx:key="tier"
+        class="plan-card {{selectedTier === item.tier ? 'selected' : ''}} {{item.tier === currentTier ? 'disabled' : ''}}"
+        bindtap="selectPlan"
+        data-tier="{{item.tier}}"
+      >
+        <view class="plan-icon-wrapper" style="background: {{item.iconBg}}">
+          {{item.icon}}
+        </view>
+        <view class="plan-details">
+          <view class="plan-card-name">{{item.name}}</view>
+          <view class="plan-card-desc">{{item.desc}}</view>
+        </view>
+        <view class="plan-right">
+          <view class="plan-amount" style="color: {{item.amountColor}}">
+            {{item.amountLabel}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 降级规则说明 -->
+    <view wx:if="{{isDowngrade}}" class="warning-card">
+      <view class="warning-title">⚠️ 降级须知</view>
+      <view class="warning-text">
+        <text>• 降级将在当前周期结束后生效</text>
+        <text>• 超出限额的宠物数据将保留但不可新增</text>
+        <text>• Pro专属功能（血统证书等）将不可访问</text>
+        <text>• 剩余天数的差价不退还</text>
+      </view>
+    </view>
+
+    <!-- 升级规则说明 -->
+    <view wx:if="{{isUpgrade}}" class="success-card">
+      <view class="success-title">⬆️ 升级规则</view>
+      <view class="success-text">
+        <text>• 升级立即生效</text>
+        <text>• 按剩余天数计算差价</text>
+        <text>• Pro功能即时解锁</text>
+      </view>
+    </view>
+
+    <button class="btn btn-primary btn-block" bindtap="confirmChange" disabled="{{!selectedTier || selectedTier === currentTier}}">
+      确认变更
+    </button>
+  </view>
+</view>

@@ -1,0 +1,115 @@
+<view class="container">
+  <view class="card">
+    <view class="card-header">
+      <text class="card-icon">💉</text>
+      <text class="card-title">疫苗提醒</text>
+    </view>
+    <view class="setting-item">
+      <text class="setting-label">到期提醒</text>
+      <switch
+        checked="{{settings.remind_vaccine}}"
+        color="#E94560"
+        bindchange="onSwitchChange"
+        data-field="remind_vaccine"
+      />
+    </view>
+    <view class="setting-item" bindtap="showDaysPicker" data-type="vaccine">
+      <text class="setting-label">提前提醒天数</text>
+      <view class="setting-right">
+        <text class="setting-value">{{settings.remind_vaccine_days}}天</text>
+        <text class="setting-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <text class="card-icon">🐛</text>
+      <text class="card-title">驱虫提醒</text>
+    </view>
+    <view class="setting-item">
+      <text class="setting-label">到期提醒</text>
+      <switch
+        checked="{{settings.remind_deworm}}"
+        color="#E94560"
+        bindchange="onSwitchChange"
+        data-field="remind_deworm"
+      />
+    </view>
+    <view class="setting-item" bindtap="showDaysPicker" data-type="deworm">
+      <text class="setting-label">提前提醒天数</text>
+      <view class="setting-right">
+        <text class="setting-value">{{settings.remind_deworm_days}}天</text>
+        <text class="setting-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <text class="card-icon">🤰</text>
+      <text class="card-title">配种提醒</text>
+    </view>
+    <view class="setting-item">
+      <text class="setting-label">预产期提醒</text>
+      <switch
+        checked="{{settings.remind_due}}"
+        color="#E94560"
+        bindchange="onSwitchChange"
+        data-field="remind_due"
+      />
+    </view>
+    <view class="setting-item" bindtap="showDaysPicker" data-type="due">
+      <text class="setting-label">提前提醒天数</text>
+      <view class="setting-right">
+        <text class="setting-value">{{settings.remind_due_days}}天</text>
+        <text class="setting-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <text class="card-icon">📢</text>
+      <text class="card-title">通知方式</text>
+    </view>
+    <view class="setting-item">
+      <text class="setting-label">站内通知</text>
+      <switch
+        checked="{{settings.notify_in_app}}"
+        color="#E94560"
+        bindchange="onSwitchChange"
+        data-field="notify_in_app"
+      />
+    </view>
+    <view class="setting-item">
+      <text class="setting-label">微信推送</text>
+      <switch
+        checked="{{settings.notify_wechat}}"
+        color="#E94560"
+        bindchange="onSwitchChange"
+        data-field="notify_wechat"
+      />
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{pickerTitle}}" class="picker-modal" bindtap="hideDaysPicker">
+  <view class="picker-content" catchtap="stopPropagation">
+    <view class="picker-header">
+      <text class="picker-title">{{pickerTitle}}</text>
+      <text class="picker-close" bindtap="hideDaysPicker">×</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view
+        wx:for="{{pickerOptions}}"
+        wx:key="*this"
+        class="picker-item {{pickerCurrentValue === item ? 'selected' : ''}}"
+        bindtap="selectDays"
+        data-value="{{item}}"
+      >
+        <text class="picker-item-text">{{item}}天</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

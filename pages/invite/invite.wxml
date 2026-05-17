@@ -1,0 +1,56 @@
+<!-- 邀请好友页 - 模板 -->
+<view class="invite-page">
+
+  <!-- 邀请码卡片 -->
+  <view class="invite-card">
+    <view class="card-title">邀请好友，各得7天Pro</view>
+    <view class="invite-code">{{inviteCode || '加载中...'}}</view>
+    <view class="card-desc">分享邀请码给好友，好友兑换后双方各获7天Pro体验</view>
+    <view class="btn-row">
+      <button class="btn-copy" bindtap="onCopyCode">复制邀请码</button>
+      <button class="btn-share" open-type="share">分享给好友</button>
+    </view>
+  </view>
+
+  <!-- 统计区 -->
+  <view class="stats-section">
+    <view class="stat-item">
+      <view class="stat-value">{{stats.total_invites}}</view>
+      <view class="stat-label">邀请人数</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-value">{{stats.redeemed_invites}}</view>
+      <view class="stat-label">已兑换</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-value highlight">{{stats.total_reward_days}}</view>
+      <view class="stat-label">奖励天数</view>
+    </view>
+  </view>
+
+  <!-- 邀请记录 -->
+  <view class="records-section">
+    <view class="section-title">邀请记录</view>
+
+    <block wx:if="{{records.length > 0}}">
+      <view class="record-item" wx:for="{{records}}" wx:key="id">
+        <image class="record-avatar" src="{{item.invitee_avatar || '/images/default-avatar.png'}}" mode="aspectFill" />
+        <view class="record-info">
+          <view class="record-name">{{item.invitee_nickname || '新用户'}}</view>
+          <view class="record-time">{{item.redeemed_at || item.created_at}}</view>
+        </view>
+        <view class="record-status {{item.status}}">{{item.status === 'rewarded' ? '已发奖' : item.status === 'redeemed' ? '已兑换' : '待兑换'}}</view>
+      </view>
+    </block>
+
+    <view class="empty-state" wx:elif="{{!loading}}">
+      <view class="empty-icon">🔗</view>
+      <view class="empty-text">还没有邀请记录</view>
+      <view class="empty-hint">快去邀请好友吧</view>
+    </view>
+
+    <view class="load-more" wx:if="{{loading}}">加载中...</view>
+    <view class="load-more" wx:elif="{{!hasMore && records.length > 0}}">没有更多了</view>
+  </view>
+
+</view>

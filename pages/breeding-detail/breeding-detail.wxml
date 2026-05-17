@@ -1,0 +1,77 @@
+<!--
+  P7 繁育详情页 - 按设计稿复刻
+-->
+<view class="container">
+  <!-- 繁育记录卡片 -->
+  <view class="card breeding-card">
+    <view class="card-header">
+      <view class="card-title">💕 繁育记录</view>
+      <view class="badge badge-{{statusType}}">{{statusText}}</view>
+    </view>
+
+    <view class="breeding-info">
+      <view class="info-row">
+        <text class="info-label">配种日期</text>
+        <text class="info-value">{{breeding.mating_date || '-'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">配种对象</text>
+        <text class="info-value">{{breeding.mate_name || '-'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">配种方式</text>
+        <text class="info-value">{{breeding.mating_method || '-'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">预产期</text>
+        <text class="info-value due-date">{{breeding.due_date || '-'}}</text>
+      </view>
+      <view class="info-row" wx:if="{{breeding.ultrasound_date}}">
+        <text class="info-label">孕检日期</text>
+        <text class="info-value">{{breeding.ultrasound_date}}</text>
+      </view>
+      <view class="info-row" wx:if="{{breeding.delivery_date}}">
+        <text class="info-label">分娩日期</text>
+        <text class="info-value">{{breeding.delivery_date}}</text>
+      </view>
+      <view class="info-row" wx:if="{{breeding.puppy_count}}">
+        <text class="info-label">幼崽数量</text>
+        <text class="info-value">{{breeding.puppy_count}}只</text>
+      </view>
+    </view>
+
+    <view class="notes-section" wx:if="{{breeding.notes}}">
+      <text class="notes-label">备注</text>
+      <text class="notes-text">{{breeding.notes}}</text>
+    </view>
+  </view>
+
+  <!-- 状态更新卡片 -->
+  <view class="card status-card">
+    <view class="card-title">📋 更新状态</view>
+
+    <view class="status-list">
+      <view
+        wx:for="{{statusOptions}}"
+        wx:key="value"
+        class="status-item {{breeding.status === item.value ? 'current' : ''}} {{item.disabled ? 'disabled' : ''}}"
+        bindtap="updateStatus"
+        data-status="{{item.value}}"
+      >
+        <view class="status-icon">{{item.icon}}</view>
+        <view class="status-info">
+          <text class="status-name">{{item.label}}</text>
+          <text class="status-desc">{{item.desc}}</text>
+        </view>
+        <view wx:if="{{breeding.status === item.value}}" class="status-check">✓</view>
+        <view wx:if="{{item.disabled}}" class="status-lock">🔒</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <button class="btn btn-outline" bindtap="editBreeding">编辑记录</button>
+    <button class="btn btn-danger" bindtap="deleteBreeding">删除记录</button>
+  </view>
+</view>

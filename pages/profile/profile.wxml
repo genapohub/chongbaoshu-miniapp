@@ -1,0 +1,87 @@
+<!--
+  P21 我的页面 - 按设计稿一比一复刻
+  结构：头部渐变背景 → 订阅状态卡片 → 菜单列表 → 退出登录
+-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="profile-header">
+    <view class="profile-avatar">
+      <image wx:if="{{userInfo.avatar_url}}" src="{{userInfo.avatar_url}}" mode="aspectFill" class="avatar-img" />
+      <view wx:else class="avatar-placeholder">👤</view>
+    </view>
+    <text class="profile-name">{{userInfo.nickname || '未设置昵称'}}</text>
+    <view wx:if="{{userInfo.subscription_tier === 'pro'}}" class="badge-pro">PRO</view>
+    
+    <view class="profile-stats">
+      <view class="profile-stat">
+        <text class="stat-num">{{stats.petCount}}</text>
+        <text class="stat-label">宠物</text>
+      </view>
+      <view class="profile-stat">
+        <text class="stat-num">{{stats.breedingCount}}</text>
+        <text class="stat-label">配种</text>
+      </view>
+      <view class="profile-stat">
+        <text class="stat-num">{{stats.inviteCount}}</text>
+        <text class="stat-label">邀请</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="content">
+    <!-- 订阅状态卡片 -->
+    <view class="sub-status-card">
+      <view class="ssc-left">
+        <text class="ssc-label">当前方案</text>
+        <text class="ssc-plan">{{subscriptionPlan}}</text>
+      </view>
+      <view class="btn btn-sm ssc-btn" bindtap="goSubscription">管理 ›</view>
+    </view>
+    <view class="ssc-meta">
+      <text>到期：{{expireDate || '永久'}}</text>
+      <text>{{isAutoRenew ? '自动续费' : '已关闭'}}</text>
+    </view>
+
+    <!-- 菜单列表 -->
+    <view class="card menu-card">
+      <view class="menu-item" bindtap="goMenu" data-url="/pages/profile-edit/profile-edit">
+        <text class="menu-icon">🏠</text>
+        <text class="menu-text">宠舍信息</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goMenu" data-url="/pages/remind-settings/remind-settings">
+        <text class="menu-icon">🔔</text>
+        <text class="menu-text">提醒设置</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goMenu" data-url="/pages/invite/invite">
+        <text class="menu-icon">🎁</text>
+        <text class="menu-text">邀请好友 <text class="menu-tag">+1月Pro</text></text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goMenu" data-url="/pages/invite-redeem/invite-redeem">
+        <text class="menu-icon">🔑</text>
+        <text class="menu-text">兑换邀请码</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goMenu" data-url="/pages/subscription/subscription">
+        <text class="menu-icon">💎</text>
+        <text class="menu-text">订阅管理</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goFeedback">
+        <text class="menu-icon">💬</text>
+        <text class="menu-text">意见反馈</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goAbout">
+        <text class="menu-icon">ℹ️</text>
+        <text class="menu-text">关于宠宝树</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 退出登录 -->
+    <view class="btn btn-block logout-btn" bindtap="onLogout">退出登录</view>
+  </view>
+</view>

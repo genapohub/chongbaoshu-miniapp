@@ -1,0 +1,198 @@
+/* 邀请好友页 - 样式 */
+.invite-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+/* 邀请码卡片 */
+.invite-card {
+  margin: 30rpx;
+  padding: 50rpx 40rpx;
+  background: linear-gradient(135deg, #E94560, #C73650);
+  border-radius: 24rpx;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 8rpx 30rpx rgba(233, 69, 96, 0.3);
+}
+
+.invite-card .card-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+
+.invite-card .invite-code {
+  font-size: 64rpx;
+  font-weight: 700;
+  letter-spacing: 12rpx;
+  margin: 30rpx 0;
+  font-family: 'Courier New', monospace;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20rpx 30rpx;
+  border-radius: 16rpx;
+}
+
+.invite-card .card-desc {
+  font-size: 24rpx;
+  opacity: 0.85;
+  margin-bottom: 30rpx;
+  line-height: 1.5;
+}
+
+.btn-row {
+  display: flex;
+  gap: 20rpx;
+  justify-content: center;
+}
+
+.btn-copy, .btn-share {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-copy {
+  background: #fff;
+  color: #E94560;
+}
+
+.btn-share {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* 统计区 */
+.stats-section {
+  margin: 0 30rpx 30rpx;
+  display: flex;
+  gap: 20rpx;
+}
+
+.stat-item {
+  flex: 1;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.stat-item .stat-value {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.stat-item .stat-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.stat-item .stat-value.highlight {
+  color: #E94560;
+}
+
+/* 记录列表 */
+.records-section {
+  margin: 0 30rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.record-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.record-avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background: #eee;
+}
+
+.record-info {
+  flex: 1;
+}
+
+.record-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.record-time {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.record-status {
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.record-status.redeemed {
+  background: #E8F5E9;
+  color: #4CAF50;
+}
+
+.record-status.rewarded {
+  background: #FFF3E0;
+  color: #FF9800;
+}
+
+.record-status.pending {
+  background: #F5F5F5;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 80rpx 0;
+}
+
+.empty-state .empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-state .empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 12rpx;
+}
+
+.empty-state .empty-hint {
+  font-size: 24rpx;
+  color: #ccc;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}

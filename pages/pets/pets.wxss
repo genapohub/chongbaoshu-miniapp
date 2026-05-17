@@ -1,0 +1,373 @@
+/* P2 宠物列表样式 - 按设计稿一比一复刻 */
+
+.container {
+  min-height: 100vh;
+  background: #F7F8FA;
+  padding: 16rpx;
+  padding-bottom: 160rpx;
+}
+
+/* 搜索栏 */
+.search {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 16rpx 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.06);
+}
+
+.search-icon {
+  font-size: 28rpx;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 28rpx;
+  flex: 1;
+  margin-left: 16rpx;
+  background: transparent;
+}
+
+.search-placeholder {
+  color: #9CA3AF;
+}
+
+/* 筛选Tab */
+.filters {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+  white-space: nowrap;
+}
+
+.filter-tab {
+  padding: 10rpx 24rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  background: #fff;
+  color: #6B7280;
+  border: 2rpx solid #E5E7EB;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.filter-tab.active {
+  background: #E94560;
+  color: #fff;
+  border-color: #E94560;
+}
+
+/* 宠物列表 */
+.pet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+/* 宠物卡片 */
+.pet-card {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.06);
+}
+
+.pet-avatar {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 16rpx;
+  background: #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+
+.avatar-placeholder {
+  font-size: 48rpx;
+}
+
+.pet-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pet-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.pet-name {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.badge {
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  font-size: 20rpx;
+  font-weight: 600;
+}
+
+.badge-green {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.badge-orange {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.badge-purple {
+  background: #EDE9FE;
+  color: #7C3AED;
+}
+
+.badge-gray {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.pet-desc {
+  font-size: 24rpx;
+  color: #9CA3AF;
+  margin-top: 6rpx;
+}
+
+.pet-arrow {
+  color: #D1D5DB;
+  font-size: 32rpx;
+}
+
+/* 限额提示 */
+.limit-hint {
+  background: #FCE7F3;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16rpx;
+}
+
+.limit-text {
+  font-size: 26rpx;
+  color: #E94560;
+  font-weight: 600;
+}
+
+.limit-desc {
+  font-size: 22rpx;
+  color: #9CA3AF;
+  margin-top: 4rpx;
+}
+
+.limit-btn {
+  background: #E94560;
+  color: #fff;
+  padding: 12rpx 24rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #9CA3AF;
+  margin-top: 16rpx;
+}
+
+/* FAB按钮 */
+.fab {
+  position: fixed;
+  bottom: 140rpx;
+  right: 32rpx;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: #E94560;
+  color: #fff;
+  font-size: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(233, 69, 96, 0.4);
+  z-index: 10;
+}
+
+/* P14 限额弹窗 */
+.limit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.limit-modal {
+  width: 100%;
+  background: #fff;
+  border-radius: 32rpx 32rpx 0 0;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.limit-modal-header {
+  background: linear-gradient(135deg, #E94560, #FD79A8);
+  padding: 48rpx 32rpx 32rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.limit-modal-icon {
+  font-size: 72rpx;
+  margin-bottom: 16rpx;
+}
+
+.limit-modal-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.limit-modal-subtitle {
+  font-size: 24rpx;
+  opacity: 0.85;
+}
+
+.limit-modal-body {
+  padding: 32rpx;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.limit-modal-progress {
+  margin-bottom: 32rpx;
+}
+
+.limit-progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  margin-bottom: 16rpx;
+  color: #6B7280;
+}
+
+.limit-progress-num {
+  font-weight: 700;
+  color: #E94560;
+}
+
+.limit-progress-bar {
+  height: 12rpx;
+  background: #F3F4F6;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.limit-progress-fill {
+  height: 100%;
+  background: #E94560;
+  border-radius: 6rpx;
+  transition: width 0.3s;
+}
+
+.limit-modal-plans {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+
+.limit-plan {
+  flex: 1;
+  border: 2rpx solid #E5E7EB;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.limit-plan.selected {
+  border-color: #E94560;
+  background: #FFF0F3;
+}
+
+.limit-plan-name {
+  font-size: 26rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.limit-plan-price {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #E94560;
+  margin-top: 8rpx;
+}
+
+.limit-plan-period {
+  font-size: 22rpx;
+  color: #9CA3AF;
+  margin-top: 4rpx;
+}
+
+.limit-modal-btn {
+  width: 100%;
+  background: #E94560;
+  color: #fff;
+  padding: 28rpx;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+}
+
+.limit-modal-cancel {
+  text-align: center;
+  font-size: 24rpx;
+  color: #9CA3AF;
+  margin-top: 16rpx;
+  cursor: pointer;
+}

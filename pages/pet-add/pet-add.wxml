@@ -1,0 +1,147 @@
+<!--
+  添加宠物页面 - 按设计稿复刻
+  结构：头像上传 → 基本信息 → 血统信息 → 标签 → 提交按钮
+-->
+<view class="container">
+  <!-- 头像上传区域 -->
+  <view class="card">
+    <view class="form-section">
+      <text class="form-label">宠物头像</text>
+      <view class="avatar-upload" bindtap="chooseAvatar">
+        <image wx:if="{{formData.avatar}}" src="{{formData.avatar}}" class="avatar-img" mode="aspectFill" />
+        <view wx:else class="avatar-placeholder">
+          <text class="avatar-icon">📷</text>
+          <text class="avatar-text">点击上传</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="card">
+    <text class="card-title">基本信息</text>
+
+    <view class="form-item">
+      <text class="form-label">宠物名称 *</text>
+      <input class="input-field" placeholder="请输入宠物名称" value="{{formData.name}}" bindinput="onInputChange" data-field="name" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">物种 *</text>
+      <view class="picker-wrap" bindtap="showSpeciesPicker">
+        <text class="picker-value">
+          {{speciesDisplay.label || '请选择物种'}}
+        </text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">品种</text>
+      <input class="input-field" placeholder="请输入品种" value="{{formData.breed}}" bindinput="onInputChange" data-field="breed" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <view class="gender-options">
+        <view class="gender-option {{formData.gender === 'male' ? 'active' : ''}}" bindtap="selectGender" data-gender="male">
+          <text>公</text>
+        </view>
+        <view class="gender-option {{formData.gender === 'female' ? 'active' : ''}}" bindtap="selectGender" data-gender="female">
+          <text>母</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">出生日期</text>
+      <picker mode="date" value="{{formData.birth_date}}" bindchange="onBirthDateChange">
+        <view class="picker-wrap">
+          <text class="picker-value">{{formData.birth_date || '请选择日期'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">颜色</text>
+      <input class="input-field" placeholder="请输入颜色" value="{{formData.color}}" bindinput="onInputChange" data-field="color" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">芯片号</text>
+      <input class="input-field" placeholder="请输入芯片号" value="{{formData.chip_no}}" bindinput="onInputChange" data-field="chip_no" />
+    </view>
+  </view>
+
+  <!-- 血统信息（展开/收起） -->
+  <view class="card">
+    <view class="card-header" bindtap="togglePedigree">
+      <text class="card-title">血统信息</text>
+      <text class="toggle-arrow">{{showPedigree ? '‹' : '›'}}</text>
+    </view>
+
+    <view wx:if="{{showPedigree}}" class="pedigree-section">
+      <view class="form-item">
+        <text class="form-label">父亲名称</text>
+        <input class="input-field" placeholder="请输入父亲名称" value="{{formData.father_name}}" bindinput="onInputChange" data-field="father_name" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">父亲品种</text>
+        <input class="input-field" placeholder="请输入父亲品种" value="{{formData.father_breed}}" bindinput="onInputChange" data-field="father_breed" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">母亲名称</text>
+        <input class="input-field" placeholder="请输入母亲名称" value="{{formData.mother_name}}" bindinput="onInputChange" data-field="mother_name" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">母亲品种</text>
+        <input class="input-field" placeholder="请输入母亲品种" value="{{formData.mother_breed}}" bindinput="onInputChange" data-field="mother_breed" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签选择 -->
+  <view class="card">
+    <text class="card-title">添加标签</text>
+    <view class="tag-options">
+      <view wx:for="{{availableTags}}" wx:key="index"
+            class="tag-option {{selectedTagsIndex[item] ? 'selected' : ''}}"
+            bindtap="toggleTag" data-tag="{{item}}">
+        {{item}}
+      </view>
+      <view wx:for="{{customTags}}" wx:key="index"
+            class="tag-option {{selectedTagsIndex[item] ? 'selected' : ''}}"
+            bindtap="toggleTag" data-tag="{{item}}">
+        {{item}}
+      </view>
+    </view>
+    <view class="add-tag-row">
+      <input class="input-field small" placeholder="自定义标签" value="{{newTag}}" bindinput="onNewTagInput" />
+      <view class="btn-add-tag" bindtap="addCustomTag">添加</view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <view class="btn-primary" bindtap="submitForm">保存宠物</view>
+  </view>
+</view>
+
+<!-- 物种选择弹窗 -->
+<view wx:if="{{showSpeciesPicker}}" class="picker-modal" bindtap="hideSpeciesPicker">
+  <view class="picker-content" catchtap="stopPropagation">
+    <view class="picker-header">
+      <text class="picker-title">选择物种</text>
+      <text class="picker-close" bindtap="hideSpeciesPicker">×</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view wx:for="{{speciesOptions}}" wx:key="value"
+            class="picker-item {{formData.species === item.value ? 'selected' : ''}}"
+            bindtap="selectSpecies" data-value="{{item.value}}">
+        <text class="picker-item-icon">{{item.icon}}</text>
+        <text class="picker-item-text">{{item.label}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

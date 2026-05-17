@@ -1,0 +1,22 @@
+<!--
+  P15 登录引导页 - 按设计稿一比一复刻
+-->
+<view class="login-page">
+  <view class="login-logo">🐾</view>
+  <text class="login-title">宠宝树</text>
+  <text class="login-subtitle">记录宠物成长的每一刻</text>
+  
+  <view class="login-btn login-wechat" bindtap="onWxLogin">
+    <text class="btn-icon">💬</text>
+    <text>微信一键登录</text>
+  </view>
+  
+  <view class="login-btn login-phone" bindtap="onPhoneLogin">
+    <text class="btn-icon">📱</text>
+    <text>手机号登录</text>
+  </view>
+  
+  <text class="login-skip" bindtap="skipLogin">跳过登录</text>
+  
+  <text class="login-terms">登录即同意《用户协议》和《隐私政策》</text>
+</view>
