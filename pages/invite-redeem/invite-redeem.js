@@ -9,9 +9,9 @@ Page({
   data: {
     inviteCode: '',
     loading: false,
-    success: false,
+    status: 'input', // input/success/error
     errorMessage: '',
-    rewardDays: 0,
+    rewardDays: 7,
   },
 
   onLoad(options) {
@@ -24,8 +24,9 @@ Page({
   /** 输入邀请码 */
   onCodeInput(e) {
     this.setData({
-      inviteCode: e.detail.value.toUpperCase().replace(/[^A-Z0-9]/g, ''),
+      inviteCode: e.detail.value.toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 8),
       errorMessage: '',
+      status: 'input',
     })
   },
 
@@ -34,8 +35,8 @@ Page({
     try {
       const clipData = await wx.getClipboardData()
       if (clipData.data) {
-        const code = clipData.data.toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 6)
-        this.setData({ inviteCode: code, errorMessage: '' })
+        const code = clipData.data.toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 8)
+        this.setData({ inviteCode: code, errorMessage: '', status: 'input' })
       }
     } catch (err) {
       // 剪贴板读取失败，忽略
@@ -46,8 +47,8 @@ Page({
   async onRedeem() {
     const { inviteCode } = this.data
 
-    if (!inviteCode || inviteCode.length < 6) {
-      this.setData({ errorMessage: '请输入6位邀请码' })
+    if (!inviteCode || inviteCode.length !== 8) {
+      this.setData({ errorMessage: '请输入8位邀请码' })
       return
     }
 
@@ -55,17 +56,17 @@ Page({
 
     try {
       const res = await api.post('/invite/redeem', { code: inviteCode })
-
-      if (res.code === 0) {
-        this.setData({
-          success: true,
-          rewardDays: res.data.reward_days || 7,
-        })
-      } else {
-        this.setData({ errorMessage: res.message || '兑换失败' })
-      }
+      this.setData({
+        success: true,
+        status: 'success',
+        rewardDays: res.reward_days || 7,
+      })
     } catch (err) {
-      this.setData({ errorMessage: '网络异常，请稍后重试' })
+      const msg = err.message || '邀请码无效'
+      this.setData({
+        errorMessage: msg,
+        status: 'error',
+      })
     } finally {
       this.setData({ loading: false })
     }
@@ -74,5 +75,14 @@ Page({
   /** 返回首页 */
   onGoHome() {
     wx.switchTab({ url: '/pages/index/index' })
+  },
+
+  /** 重新输入 */
+  onReInput() {
+    this.setData({
+      inviteCode: '',
+      status: 'input',
+      errorMessage: '',
+    })
   },
 })

@@ -1,163 +1,270 @@
-const api = require('../../utils/api');
+var api = require('../../utils/api');
 
 Page({
   data: {
-    petId: null,
-    breedingId: null,
-    isEdit: false,
+    motherPetId: null,
+    motherPetName: '',
+    motherPetBreed: '',
+    motherPetAvatar: '',
+    motherDisabled: false,
+    fatherPetId: null,
+    fatherPetName: '',
+    fatherPetBreed: '',
+    fatherPetAvatar: '',
+    fatherDisabled: false,
+    showMotherPicker: false,
+    showFatherPicker: false,
+    showFatherError: false,
+    motherPetList: [],
+    fatherPetList: [],
     formData: {
-      mating_date: '',
-      mate_name: '',
-      mating_method: '',
-      mating_method_display: '',
-      due_date: '',
-      fee: '',
+      breed_date: '',
+      breed_method: 'natural',
+      breed_count: 1,
       notes: '',
     },
-    notesLength: 0,
-    showMethodPicker: false,
-    methodOptions: [
-      { value: 'natural', label: '自然交配' },
-      { value: 'artificial', label: '人工授精' },
-      { value: 'ivf', label: '试管受精' },
-    ],
+    dueDate: '',
     canSubmit: false,
     loading: false,
   },
 
-  onLoad(options) {
-    if (options.id) {
-      this.setData({
-        breedingId: options.id,
-        isEdit: true,
-      });
-      this.loadBreedingData(options.id);
-    }
-    if (options.pet_id) {
-      this.setData({ petId: options.pet_id });
+  onLoad: function(options) {
+    wx.setNavigationBarTitle({ title: '添加配种' });
+    if (options && options.pet_id) {
+      this.setData({ motherPetId: options.pet_id });
+      this.loadPetInfo(options.pet_id, 'mother');
     }
     this.checkCanSubmit();
   },
 
-  async loadBreedingData(id) {
-    try {
-      wx.showLoading({ title: '加载中...', mask: true });
-
-      const res = await api.get(`/breeding/${id}`);
-      const method = this.data.methodOptions.find(m => m.value === res.mating_method);
-
-      this.setData({
-        formData: {
-          ...res,
-          mating_date: res.mating_date ? res.mating_date.split(' ')[0] : '',
-          due_date: res.due_date ? res.due_date.split(' ')[0] : '',
-          mating_method_display: method ? method.label : '',
-        },
-        notesLength: res.notes ? res.notes.length : 0,
-      });
-
-      this.checkCanSubmit();
-    } catch (err) {
-      console.error('加载繁育记录失败:', err);
-      wx.showToast({ title: '加载失败', icon: 'none' });
-    } finally {
-      wx.hideLoading();
-    }
-  },
-
-  onInputChange(e) {
-    const field = e.currentTarget.dataset.field;
-    const value = e.detail.value;
-
-    this.setData({
-      [`formData.${field}`]: value,
+  loadPetInfo: function(petId, type) {
+    var that = this;
+    var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+    api.get('/pets/' + petId).then(function(res) {
+      if (res) {
+        var data = res.data || res;
+        var avatar = data.avatar_photo ? baseUrl + data.avatar_photo : '';
+        var gender = data.gender || 'female';
+        
+        if (gender === 'female' || type === 'mother') {
+          that.setData({
+            motherPetId: petId,
+            motherPetName: data.name,
+            motherPetBreed: data.breed || '未知品种',
+            motherPetAvatar: avatar,
+            motherDisabled: true,
+          });
+        } else {
+          that.setData({
+            fatherPetId: petId,
+            fatherPetName: data.name,
+            fatherPetBreed: data.breed || '未知品种',
+            fatherPetAvatar: avatar,
+            fatherDisabled: true,
+          });
+        }
+        that.checkCanSubmit();
+      }
+    }).catch(function(err) {
+      console.error('加载宠物信息失败:', err);
     });
+  },
 
+  showMotherPicker() {
+    this.loadPetList('female');
+    this.setData({ showMotherPicker: true });
+  },
+
+  hideMotherPicker() {
+    this.setData({ showMotherPicker: false });
+  },
+
+  showFatherPicker() {
+    this.loadPetList('male');
+    this.setData({ showFatherPicker: true });
+  },
+
+  hideFatherPicker() {
+    this.setData({ showFatherPicker: false });
+  },
+
+  loadPetList: function(gender) {
+    var that = this;
+    var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+    var url = '/pets?page=1&pageSize=100';
+    if (gender === 'female') {
+      url += '&status=active';
+    }
+    api.get(url).then(function(res) {
+      var pets = [];
+      if (res) {
+        var data = res.data || res;
+        if (data.list) {
+          pets = data.list;
+        } else if (Array.isArray(data)) {
+          pets = data;
+        }
+      }
+      var filtered = [];
+      for (var i = 0; i < pets.length; i++) {
+        if (pets[i].gender === gender) {
+          var pet = pets[i];
+          if (pet.avatar_photo) {
+            pet.avatar_photo = baseUrl + pet.avatar_photo;
+          }
+          filtered.push(pet);
+        }
+      }
+      if (gender === 'female') {
+        that.setData({ motherPetList: filtered });
+      } else {
+        that.setData({ fatherPetList: filtered });
+      }
+    }).catch(function(err) {
+      console.error('加载宠物列表失败:', err);
+    });
+  },
+
+  selectMother: function(e) {
+    var dataset = e.currentTarget.dataset;
+    var id = dataset.id;
+    var name = dataset.name;
+    var breed = dataset.breed;
+    var avatar = dataset.avatar;
+    this.setData({
+      motherPetId: id,
+      motherPetName: name,
+      motherPetBreed: breed || '未知品种',
+      motherPetAvatar: avatar || '',
+      showMotherPicker: false,
+    });
     this.checkCanSubmit();
+  },
+
+  selectFather: function(e) {
+    var dataset = e.currentTarget.dataset;
+    var id = dataset.id;
+    var name = dataset.name;
+    var breed = dataset.breed;
+    var avatar = dataset.avatar;
+    this.setData({
+      fatherPetId: id,
+      fatherPetName: name,
+      fatherPetBreed: breed || '未知品种',
+      fatherPetAvatar: avatar || '',
+      showFatherPicker: false,
+      showFatherError: false,
+    });
+    this.checkCanSubmit();
+  },
+
+  onDateChange(e) {
+    const date = e.detail.value;
+    this.setData({
+      'formData.breed_date': date,
+    });
+    this.calculateDueDate(date);
+    this.checkCanSubmit();
+  },
+
+  calculateDueDate(date) {
+    if (!date) {
+      this.setData({ dueDate: '' });
+      return;
+    }
+
+    const petDate = new Date(date);
+    let days = 63;
+
+    if (this.data.motherPetBreed) {
+      const catBreeds = ['猫', '英短', '美短', '布偶', '橘猫', '狸花'];
+      if (catBreeds.some(b => this.data.motherPetBreed.includes(b))) {
+        days = 65;
+      }
+    }
+
+    const dueDate = new Date(petDate.getTime());
+    dueDate.setDate(dueDate.getDate() + days);
+    const dueDateStr = `${dueDate.getFullYear()}-${String(dueDate.getMonth() + 1).padStart(2, '0')}-${String(dueDate.getDate()).padStart(2, '0')}`;
+
+    this.setData({ dueDate: dueDateStr });
+  },
+
+  selectBreedMethod(e) {
+    const method = e.currentTarget.dataset.value;
+    this.setData({
+      'formData.breed_method': method,
+    });
+  },
+
+  increaseCount() {
+    const count = this.data.formData.breed_count;
+    if (count < 10) {
+      this.setData({
+        'formData.breed_count': count + 1,
+      });
+    }
+  },
+
+  decreaseCount() {
+    const count = this.data.formData.breed_count;
+    if (count > 1) {
+      this.setData({
+        'formData.breed_count': count - 1,
+      });
+    }
   },
 
   onNotesInput(e) {
-    const value = e.detail.value;
     this.setData({
-      'formData.notes': value,
-      notesLength: value ? value.length : 0,
-    });
-  },
-
-  onMatingDateChange(e) {
-    this.setData({
-      'formData.mating_date': e.detail.value,
-    });
-    this.checkCanSubmit();
-  },
-
-  onDueDateChange(e) {
-    this.setData({
-      'formData.due_date': e.detail.value,
-    });
-  },
-
-  showMethodPicker() {
-    this.setData({ showMethodPicker: true });
-  },
-
-  hideMethodPicker() {
-    this.setData({ showMethodPicker: false });
-  },
-
-  stopPropagation() {},
-
-  selectMethod(e) {
-    const value = e.currentTarget.dataset.value;
-    const method = this.data.methodOptions.find(m => m.value === value);
-
-    this.setData({
-      'formData.mating_method': value,
-      'formData.mating_method_display': method ? method.label : '',
-      showMethodPicker: false,
+      'formData.notes': e.detail.value,
     });
   },
 
   checkCanSubmit() {
-    const { mating_date } = this.data.formData;
-    const canSubmit = !!mating_date;
+    const { motherPetId, fatherPetId, formData } = this.data;
+    const canSubmit = motherPetId && fatherPetId && formData.breed_date;
     this.setData({ canSubmit });
   },
 
+  stopPropagation() {},
+
   async submitForm() {
-    if (!this.data.canSubmit || this.data.loading) return;
+    if (!this.data.canSubmit) {
+      if (!this.data.fatherPetId) {
+        this.setData({ showFatherError: true });
+      }
+      return;
+    }
 
     this.setData({ loading: true });
 
     try {
-      const { formData, petId, isEdit, breedingId } = this.data;
-
-      const submitData = {
-        mate_name: formData.mate_name || null,
-        mating_date: formData.mating_date,
-        mating_method: formData.mating_method || 'natural',
-        due_date: formData.due_date || null,
-        fee: formData.fee && !isNaN(parseFloat(formData.fee)) ? parseFloat(formData.fee) : null,
-        notes: formData.notes || null,
+      const data = {
+        pet_id: parseInt(this.data.motherPetId),
+        mate_name: this.data.fatherPetName,
+        mating_date: this.data.formData.breed_date,
+        mating_method: this.data.formData.breed_method === 'natural' ? 'natural' : 'artificial',
+        due_date: this.data.dueDate,
+        breed_count: this.data.formData.breed_count,
+        notes: this.data.formData.notes || null,
       };
 
-      if (isEdit) {
-        await api.put(`/breeding/${breedingId}`, submitData);
-        wx.showToast({ title: '更新成功', icon: 'success' });
-      } else {
-        await api.post('/breeding', {
-          ...submitData,
-          pet_id: petId,
-        });
-        wx.showToast({ title: '添加成功', icon: 'success' });
-      }
+      await api.post('/breeding', data);
+
+      wx.showToast({
+        title: '添加成功',
+        icon: 'success',
+      });
 
       setTimeout(() => {
         wx.navigateBack();
       }, 1500);
     } catch (err) {
-      console.error('保存失败:', err);
-      wx.showToast({ title: '保存失败', icon: 'none' });
+      wx.showToast({
+        title: '保存失败',
+        icon: 'none',
+      });
     } finally {
       this.setData({ loading: false });
     }

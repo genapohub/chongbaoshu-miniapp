@@ -116,25 +116,28 @@
 }
 
 .next-date-card {
-  background: linear-gradient(135deg, #FFF5F7, #FFFFFF);
+  background: #EBF5FF;
 }
 
 .next-date-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .next-date-label {
   font-size: 28rpx;
   font-weight: 500;
-  color: #333;
+  color: #1E88E5;
+  flex-shrink: 0;
 }
 
 .next-date-value {
   font-size: 28rpx;
   font-weight: 600;
-  color: #E94560;
+  color: #1E88E5;
+  flex: 1;
+  word-break: break-all;
 }
 
 .submit-section {
@@ -234,4 +237,57 @@
 
 .picker-item.selected .picker-item-text {
   color: #E94560;
+}
+
+.picker-empty {
+  padding: 80rpx 32rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.pet-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+
+.pet-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+  background: #F5F5F5;
+}
+
+.pet-avatar.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FFE4E1, #FFC0CB);
+}
+
+.avatar-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #E94560;
+}
+
+.pet-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-name {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.pet-breed {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 4rpx;
 }

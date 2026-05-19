@@ -1,64 +1,104 @@
-<!--
-  P6 添加配种页面 - 按设计稿复刻
--->
 <view class="container">
-  <!-- 基本信息 -->
-  <view class="card">
-    <view class="card-title">💕 配种信息</view>
+  <view class="form-section">
+    <view class="form-item required">
+      <text class="form-label">母犬</text>
+      <view class="picker-wrap pet-picker {{motherDisabled ? 'disabled' : ''}}" bindtap="{{motherDisabled ? '' : 'showMotherPicker'}}">
+        <view class="pet-display">
+          <image wx:if="{{motherPetName && motherPetAvatar}}" class="pet-avatar-small" src="{{motherPetAvatar}}" mode="aspectFill" />
+          <view wx:if="{{motherPetName && !motherPetAvatar}}" class="pet-avatar-small placeholder">
+            <text class="avatar-text">{{motherPetName.charAt(0)}}</text>
+          </view>
+          <view class="pet-text-wrap">
+            <text class="pet-text">{{motherPetName || '请选择母犬'}}</text>
+            <text wx:if="{{motherPetName}}" class="pet-detail">（{{motherPetBreed}}·♀）</text>
+          </view>
+        </view>
+        <text wx:if="{{!motherDisabled}}" class="picker-arrow">▼</text>
+      </view>
+    </view>
 
-    <view class="form-item">
-      <text class="form-label">配种日期 *</text>
-      <picker mode="date" value="{{formData.mating_date}}" bindchange="onMatingDateChange">
-        <view class="picker-wrap">
-          <text class="picker-value">{{formData.mating_date || '请选择日期'}}</text>
-          <text class="picker-arrow">›</text>
+    <view class="form-item required">
+      <text class="form-label">公犬</text>
+      <view class="picker-wrap pet-picker {{fatherDisabled ? 'disabled' : ''}}" bindtap="{{fatherDisabled ? '' : 'showFatherPicker'}}">
+        <view class="pet-display">
+          <image wx:if="{{fatherPetName && fatherPetAvatar}}" class="pet-avatar-small" src="{{fatherPetAvatar}}" mode="aspectFill" />
+          <view wx:if="{{fatherPetName && !fatherPetAvatar}}" class="pet-avatar-small placeholder">
+            <text class="avatar-text">{{fatherPetName.charAt(0)}}</text>
+          </view>
+          <view class="pet-text-wrap">
+            <text class="pet-text {{!fatherPetName ? 'placeholder' : ''}}">{{fatherPetName || '选择公犬'}}</text>
+            <text wx:if="{{fatherPetName}}" class="pet-detail">（{{fatherPetBreed}}·♂）</text>
+          </view>
+        </view>
+        <text wx:if="{{!fatherDisabled}}" class="picker-arrow">▼</text>
+      </view>
+      <view wx:if="{{!fatherPetId && showFatherError}}" class="error-tip">
+        <text>⚠️ 请选择公犬</text>
+      </view>
+    </view>
+
+    <view class="form-item required">
+      <text class="form-label">配种日期</text>
+      <picker mode="date" value="{{formData.breed_date}}" bindchange="onDateChange">
+        <view class="picker-wrap date-picker">
+          <text class="picker-value">{{formData.breed_date || '请选择日期'}}</text>
+          <text class="date-icon">📅</text>
         </view>
       </picker>
     </view>
 
-    <view class="form-item">
-      <text class="form-label">配种对象</text>
-      <input class="input-field" placeholder="请输入配种对象名称" value="{{formData.mate_name}}" bindinput="onInputChange" data-field="mate_name" />
+    <view class="due-date-card">
+      <view class="due-date-main">
+        <text class="due-date-icon">📅</text>
+        <text class="due-date-label">预计预产期：</text>
+        <text class="due-date-value">{{dueDate || '--'}}</text>
+      </view>
+      <text class="due-date-note">犬类默认+63天，猫类+65天，可手动修改</text>
     </view>
 
     <view class="form-item">
       <text class="form-label">配种方式</text>
-      <view class="picker-wrap" bindtap="showMethodPicker">
-        <text class="picker-value">{{formData.mating_method_display || '请选择'}}</text>
-        <text class="picker-arrow">›</text>
+      <view class="breed-method-group">
+        <view 
+          class="method-option {{formData.breed_method === 'natural' ? 'active' : ''}}" 
+          bindtap="selectBreedMethod" data-value="natural"
+        >
+          <text>自然交配</text>
+        </view>
+        <view 
+          class="method-option {{formData.breed_method === 'artificial' ? 'active' : ''}}" 
+          bindtap="selectBreedMethod" data-value="artificial"
+        >
+          <text>人工授精</text>
+        </view>
       </view>
     </view>
 
     <view class="form-item">
-      <text class="form-label">预产期</text>
-      <picker mode="date" value="{{formData.due_date}}" bindchange="onDueDateChange">
-        <view class="picker-wrap">
-          <text class="picker-value">{{formData.due_date || '请选择日期'}}</text>
-          <text class="picker-arrow">›</text>
+      <text class="form-label">配种次数</text>
+      <view class="count-control">
+        <view class="count-btn" bindtap="decreaseCount">
+          <text>−</text>
         </view>
-      </picker>
+        <text class="count-value">{{formData.breed_count}}</text>
+        <view class="count-btn plus" bindtap="increaseCount">
+          <text>+</text>
+        </view>
+      </view>
     </view>
 
     <view class="form-item">
-      <text class="form-label">配种费用</text>
-      <input class="input-field" type="digit" placeholder="请输入费用（元）" value="{{formData.fee}}" bindinput="onInputChange" data-field="fee" />
+      <text class="form-label">备注</text>
+      <textarea 
+        class="textarea-field" 
+        placeholder="输入备注信息..." 
+        value="{{formData.notes}}" 
+        bindinput="onNotesInput"
+        maxlength="500"
+      ></textarea>
     </view>
   </view>
 
-  <!-- 备注 -->
-  <view class="card">
-    <view class="card-title">📝 备注</view>
-    <textarea
-      class="textarea-field"
-      placeholder="请输入备注信息（可选）"
-      value="{{formData.notes}}"
-      bindinput="onNotesInput"
-      maxlength="500"
-    ></textarea>
-    <view class="textarea-counter">{{notesLength || 0}}/500</view>
-  </view>
-
-  <!-- 提交按钮 -->
   <view class="submit-section">
     <button class="btn btn-primary btn-block" bindtap="submitForm" disabled="{{!canSubmit || loading}}">
       <text wx:if="{{loading}}">保存中...</text>
@@ -67,22 +107,67 @@
   </view>
 </view>
 
-<!-- 配种方式选择弹窗 -->
-<view wx:if="{{showMethodPicker}}" class="picker-modal" bindtap="hideMethodPicker">
+<view wx:if="{{showMotherPicker}}" class="picker-modal" bindtap="hideMotherPicker">
   <view class="picker-content" catchtap="stopPropagation">
     <view class="picker-header">
-      <text class="picker-title">选择配种方式</text>
-      <text class="picker-close" bindtap="hideMethodPicker">×</text>
+      <text class="picker-title">选择母犬</text>
+      <text class="picker-close" bindtap="hideMotherPicker">×</text>
     </view>
     <scroll-view scroll-y class="picker-list">
+      <view wx:if="{{motherPetList.length === 0}}" class="picker-empty">
+        <text>暂无母犬，请先添加宠物</text>
+      </view>
       <view
-        wx:for="{{methodOptions}}"
-        wx:key="value"
-        class="picker-item {{formData.mating_method === item.value ? 'selected' : ''}}"
-        bindtap="selectMethod"
-        data-value="{{item.value}}"
+        wx:for="{{motherPetList}}"
+        wx:key="id"
+        class="picker-item pet-item {{motherPetId === item.id ? 'selected' : ''}}"
+        bindtap="selectMother"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+        data-breed="{{item.breed}}"
+        data-avatar="{{item.avatar_photo}}"
       >
-        <text class="picker-item-text">{{item.label}}</text>
+        <image wx:if="{{item.avatar_photo}}" class="pet-avatar" src="{{item.avatar_photo}}" mode="aspectFill" />
+        <view wx:else class="pet-avatar placeholder">
+          <text class="avatar-text">{{item.name ? item.name.charAt(0) : '?'}}</text>
+        </view>
+        <view class="pet-info">
+          <text class="pet-name">{{item.name}}</text>
+          <text class="pet-breed">{{item.breed || '未知品种'}}·♀</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view wx:if="{{showFatherPicker}}" class="picker-modal" bindtap="hideFatherPicker">
+  <view class="picker-content" catchtap="stopPropagation">
+    <view class="picker-header">
+      <text class="picker-title">选择公犬</text>
+      <text class="picker-close" bindtap="hideFatherPicker">×</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view wx:if="{{fatherPetList.length === 0}}" class="picker-empty">
+        <text>暂无公犬，请先添加宠物</text>
+      </view>
+      <view
+        wx:for="{{fatherPetList}}"
+        wx:key="id"
+        class="picker-item pet-item {{fatherPetId === item.id ? 'selected' : ''}}"
+        bindtap="selectFather"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+        data-breed="{{item.breed}}"
+        data-avatar="{{item.avatar_photo}}"
+      >
+        <image wx:if="{{item.avatar_photo}}" class="pet-avatar" src="{{item.avatar_photo}}" mode="aspectFill" />
+        <view wx:else class="pet-avatar placeholder">
+          <text class="avatar-text">{{item.name ? item.name.charAt(0) : '?'}}</text>
+        </view>
+        <view class="pet-info">
+          <text class="pet-name">{{item.name}}</text>
+          <text class="pet-breed">{{item.breed || '未知品种'}}·♂</text>
+        </view>
       </view>
     </scroll-view>
   </view>

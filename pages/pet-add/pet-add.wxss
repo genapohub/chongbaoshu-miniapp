@@ -108,6 +108,29 @@
   border-color: #E94560;
 }
 
+/* 角色选项 */
+.role-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.role-option {
+  padding: 16rpx 28rpx;
+  background: #F8F9FA;
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  color: #666;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.role-option.active {
+  background: #FFF0F3;
+  color: #E94560;
+  border-color: #E94560;
+}
+
 /* 血统信息区域 */
 .card-header {
   display: flex;

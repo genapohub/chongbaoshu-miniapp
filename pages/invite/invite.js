@@ -50,12 +50,10 @@ Page({
   async loadInviteCode() {
     try {
       const res = await api.get('/invite/code')
-      if (res.code === 0) {
-        this.setData({
-          inviteCode: res.data.invite_code,
-          inviteUrl: res.data.invite_url,
-        })
-      }
+      this.setData({
+        inviteCode: res.invite_code || '',
+        inviteUrl: res.invite_url || '',
+      })
     } catch (err) {
       console.error('获取邀请码失败', err)
     }
@@ -65,9 +63,7 @@ Page({
   async loadStats() {
     try {
       const res = await api.get('/invite/stats')
-      if (res.code === 0) {
-        this.setData({ stats: res.data })
-      }
+      this.setData({ stats: res })
     } catch (err) {
       console.error('获取统计失败', err)
     }
@@ -83,15 +79,13 @@ Page({
         page: this.data.page,
         pageSize: this.data.pageSize,
       })
-      if (res.code === 0) {
-        const newRecords = res.data.list || []
-        this.setData({
-          records: this.data.page === 1 ? newRecords : [...this.data.records, ...newRecords],
-          total: res.data.total,
-          page: this.data.page + 1,
-          hasMore: newRecords.length >= this.data.pageSize,
-        })
-      }
+      const newRecords = res.list || []
+      this.setData({
+        records: this.data.page === 1 ? newRecords : [...this.data.records, ...newRecords],
+        total: res.total,
+        page: this.data.page + 1,
+        hasMore: newRecords.length >= this.data.pageSize,
+      })
     } catch (err) {
       console.error('获取记录失败', err)
     } finally {

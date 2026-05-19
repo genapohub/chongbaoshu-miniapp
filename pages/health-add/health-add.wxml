@@ -63,8 +63,8 @@
 
     <view wx:if="{{nextDate}}" class="card next-date-card">
       <view class="next-date-row">
-        <text class="next-date-label">📅 下次接种</text>
-        <text class="next-date-value">{{nextDate}}</text>
+        <text class="next-date-label">📅 下次接种自动计算：</text>
+        <text class="next-date-value">{{nextDateInfo}}</text>
       </view>
     </view>
   </view>
@@ -121,8 +121,8 @@
 
     <view wx:if="{{nextDate}}" class="card next-date-card">
       <view class="next-date-row">
-        <text class="next-date-label">📅 下次驱虫</text>
-        <text class="next-date-value">{{nextDate}}</text>
+        <text class="next-date-label">📅 下次驱虫自动计算：</text>
+        <text class="next-date-value">{{nextDateInfo}}</text>
       </view>
     </view>
   </view>
@@ -203,6 +203,37 @@
         data-value="{{item.value}}"
       >
         <text class="picker-item-text">{{item.label}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view wx:if="{{showPetPicker}}" class="picker-modal" bindtap="hidePetPicker">
+  <view class="picker-content" catchtap="stopPropagation">
+    <view class="picker-header">
+      <text class="picker-title">选择宠物</text>
+      <text class="picker-close" bindtap="hidePetPicker">×</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view wx:if="{{petList.length === 0}}" class="picker-empty">
+        <text>暂无宠物，请先添加宠物</text>
+      </view>
+      <view
+        wx:for="{{petList}}"
+        wx:key="id"
+        class="picker-item pet-item {{petId === item.id ? 'selected' : ''}}"
+        bindtap="selectPet"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        <image wx:if="{{item.avatar_photo}}" class="pet-avatar" src="{{item.avatar_photo}}" mode="aspectFill" />
+        <view wx:else class="pet-avatar placeholder">
+          <text class="avatar-text">{{item.name ? item.name.charAt(0) : '?'}}</text>
+        </view>
+        <view class="pet-info">
+          <text class="pet-name">{{item.name}}</text>
+          <text class="pet-breed">{{item.breed || '未知品种'}}</text>
+        </view>
       </view>
     </scroll-view>
   </view>

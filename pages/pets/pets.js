@@ -22,74 +22,123 @@ Page({
     maxPets: 3,
     showLimitHint: false,
     showLimitModal: false,
+    selectedPlan: 'pro',
+    fromBreeding: false,
+    touchStartX: 0,
+    touchEndX: 0,
+    touchStartTime: 0,
+    currentTouchId: null,
+    isLongPress: false,
+    showDeleteModal: false,
+    showCannotDeleteModal: false,
+    deletingPet: null,
   },
 
   onShow() {
+    const app = getApp();
+    this.setData({ fromBreeding: app.globalData.fromBreeding || false });
+    app.globalData.fromBreeding = false;
     this.loadPets();
     this.loadLimits();
   },
 
-  async loadPets() {
-    this.setData({ loading: true });
-    try {
-      const res = await api.get('/pets', { page: 1, pageSize: 100 });
-      const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+  loadPets() {
+    var that = this;
+    that.setData({ loading: true });
+    api.get('/pets', { page: 1, pageSize: 100 }).then(function(res) {
+      var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+      var data = res.data || res;
+      var list = data.list || [];
+      var allPetList = [];
+      for (var i = 0; i < list.length; i++) {
+        var pet = list[i];
+        var speciesInfo = constants.SPECIES[pet.species];
+        var genderInfo = constants.GENDER[pet.gender];
+        var speciesLabel = speciesInfo && speciesInfo.label ? speciesInfo.label : pet.species;
+        var speciesIcon = speciesInfo && speciesInfo.icon ? speciesInfo.icon : '🐾';
+        var genderLabel = genderInfo && genderInfo.label ? genderInfo.label : '';
+        var avatar = pet.avatar_photo ? baseUrl + pet.avatar_photo : '';
+        var item = {};
+        for (var key in pet) {
+          item[key] = pet[key];
+        }
+        item.speciesLabel = speciesLabel;
+        item.speciesIcon = speciesIcon;
+        item.genderLabel = genderLabel;
+        item.age = calcAge(pet.birth_date);
+        item.avatar = avatar;
+        item.statusBadge = that.getStatusBadge(pet.status);
+        allPetList.push(item);
+      }
 
-      const allPetList = (res.list || []).map(pet => ({
-        ...pet,
-        speciesLabel: constants.SPECIES[pet.species]?.label || pet.species,
-        speciesIcon: constants.SPECIES[pet.species]?.icon || '🐾',
-        genderLabel: constants.GENDER[pet.gender]?.label || '',
-        age: calcAge(pet.birth_date),
-        avatar: pet.photos?.[0]?.photo_url ? `${baseUrl}${pet.photos[0].photo_url}` : '',
-        statusBadge: this.getStatusBadge(pet.status),
-      }));
+      var filteredList = that.filterPets(allPetList, that.data.currentFilter, that.data.searchKeyword);
 
-      const filteredList = this.filterPets(allPetList, this.data.currentFilter, this.data.searchKeyword);
-
-      this.setData({
-        allPetList,
+      that.setData({
+        allPetList: allPetList,
         petList: filteredList,
         petCount: filteredList.length,
         loading: false,
       });
-    } catch (err) {
+    }).catch(function(err) {
       console.error('加载宠物列表失败:', err);
-      this.setData({ loading: false });
-    }
+      that.setData({ loading: false });
+    });
   },
 
   filterPets(petList, filter, keyword) {
-    let result = petList;
+    var result = petList.slice();
 
     if (filter !== 'all') {
-      result = result.filter(pet => pet.species === filter);
+      var filtered1 = [];
+      for (var i = 0; i < result.length; i++) {
+        if (result[i].species === filter) {
+          filtered1.push(result[i]);
+        }
+      }
+      result = filtered1;
     }
 
     if (keyword) {
-      const kw = keyword.toLowerCase();
-      result = result.filter(pet =>
-        pet.name.toLowerCase().includes(kw) ||
-        (pet.breed && pet.breed.toLowerCase().includes(kw))
-      );
+      var kw = keyword.toLowerCase();
+      var filtered2 = [];
+      for (var j = 0; j < result.length; j++) {
+        var pet = result[j];
+        var nameMatch = pet.name.toLowerCase().indexOf(kw) !== -1;
+        var breedMatch = pet.breed && pet.breed.toLowerCase().indexOf(kw) !== -1;
+        if (nameMatch || breedMatch) {
+          filtered2.push(pet);
+        }
+      }
+      result = filtered2;
     }
 
     return result;
   },
 
-  async loadLimits() {
-    try {
-      const res = await api.get('/auth/limits');
+  loadLimits() {
+    var that = this;
+    api.get('/auth/limits').then(function(res) {
       if (res) {
-        this.setData({
-          maxPets: res.max_pets || 3,
-          petCount: res.current_pets || 0,
-          showLimitHint: res.max_pets && res.current_pets >= res.max_pets,
+        var data = res.data || res;
+        var tier = data.tier || 'free';
+        var tierNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
+        var tierName = tierNames[tier] || '免费版';
+        var maxPets = data.maxPets || data.max_pets || 3;
+        var currentPets = data.currentPets || data.current_pets || 0;
+        var showLimitHint = false;
+        if (maxPets && currentPets >= maxPets) {
+          showLimitHint = true;
+        }
+        that.setData({
+          currentTier: tierName,
+          maxPets: maxPets,
+          petCount: currentPets,
+          showLimitHint: showLimitHint,
         });
       }
-    } catch (err) {
+    }).catch(function(err) {
       console.error('加载限额信息失败:', err);
-    }
+    });
   },
 
   getStatusBadge(status) {
@@ -133,8 +182,17 @@ Page({
   },
 
   goPetDetail(e) {
+    if (this.data.isLongPress) {
+      this.setData({ isLongPress: false });
+      return;
+    }
+    
     const id = e.currentTarget.dataset.id;
-    wx.navigateTo({ url: `/pages/pet-detail/pet-detail?id=${id}` });
+    if (this.data.fromBreeding) {
+      wx.navigateTo({ url: `/pages/breeding-add/breeding-add?pet_id=${id}` });
+    } else {
+      wx.navigateTo({ url: `/pages/pet-detail/pet-detail?id=${id}` });
+    }
   },
 
   goUpgrade() {
@@ -145,10 +203,183 @@ Page({
     this.setData({ showLimitModal: false });
   },
 
+  selectPlan(e) {
+    var plan = e.currentTarget.dataset.plan;
+    this.setData({ selectedPlan: plan });
+  },
+
   goPayment() {
     this.setData({ showLimitModal: false });
     wx.navigateTo({ url: '/pages/subscription/subscription' });
   },
 
   stopPropagation() {},
+
+  onWxLogin() {},
+
+  onTouchStart(e) {
+    this.setData({
+      touchStartX: e.touches[0].clientX,
+      touchStartTime: Date.now(),
+      currentTouchId: e.currentTarget.dataset.id,
+      isLongPress: false,
+    });
+  },
+
+  onTouchMove(e) {
+    var data = this.data;
+    var touchStartX = data.touchStartX;
+    var touchStartTime = data.touchStartTime;
+    var isLongPress = data.isLongPress;
+    var currentTouchId = data.currentTouchId;
+    var currentX = e.touches[0].clientX;
+    var diff = touchStartX - currentX;
+    var touchDuration = Date.now() - touchStartTime;
+    
+    if (!isLongPress && touchDuration > 200 && diff > 10) {
+      this.setData({ isLongPress: true });
+      isLongPress = true;
+    }
+    
+    if (isLongPress) {
+      var deleteBtnWidth = 160;
+      var translateX = Math.max(-deleteBtnWidth, Math.min(0, -diff));
+      var petList = data.petList;
+      var index = -1;
+      for (var i = 0; i < petList.length; i++) {
+        if (petList[i].id === currentTouchId) {
+          index = i;
+          break;
+        }
+      }
+      if (index !== -1) {
+        var updatedList = petList.slice();
+        var updatedItem = {};
+        for (var key in updatedList[index]) {
+          updatedItem[key] = updatedList[index][key];
+        }
+        updatedItem.translateX = translateX;
+        updatedList[index] = updatedItem;
+        this.setData({ petList: updatedList });
+      }
+    }
+  },
+
+  onTouchEnd(e) {
+    var data = this.data;
+    var touchStartX = data.touchStartX;
+    var touchEndX = data.touchEndX;
+    var currentTouchId = data.currentTouchId;
+    var isLongPress = data.isLongPress;
+    var diff = touchStartX - touchEndX;
+    var deleteBtnWidth = 160;
+    var petList = data.petList;
+    var index = -1;
+    for (var i = 0; i < petList.length; i++) {
+      if (petList[i].id === currentTouchId) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index !== -1) {
+      var updatedList = petList.slice();
+      var updatedItem = {};
+      for (var key in updatedList[index]) {
+        updatedItem[key] = updatedList[index][key];
+      }
+      if (isLongPress && diff > 30) {
+        updatedItem.translateX = -deleteBtnWidth;
+      } else {
+        updatedItem.translateX = 0;
+      }
+      updatedList[index] = updatedItem;
+      this.setData({ 
+        petList: updatedList,
+        isLongPress: false,
+        touchStartX: 0,
+        touchEndX: 0,
+        touchStartTime: 0,
+      });
+    } else {
+      this.setData({ 
+        isLongPress: false,
+        touchStartX: 0,
+        touchEndX: 0,
+        touchStartTime: 0,
+      });
+    }
+  },
+
+  getPetIndex(id) {
+    var petList = this.data.petList;
+    for (var i = 0; i < petList.length; i++) {
+      if (petList[i].id === id) {
+        return i;
+      }
+    }
+    return -1;
+  },
+
+  deletePet(e) {
+    var pet = e.currentTarget.dataset.pet;
+    this.setData({ 
+      deletingPet: pet, 
+      showDeleteModal: true 
+    });
+    
+    var index = this.getPetIndex(pet.id);
+    if (index !== -1) {
+      var petList = this.data.petList.slice();
+      var updatedItem = {};
+      for (var key in petList[index]) {
+        updatedItem[key] = petList[index][key];
+      }
+      updatedItem.translateX = 0;
+      petList[index] = updatedItem;
+      this.setData({ petList: petList });
+    }
+  },
+
+  cancelDelete: function() {
+    this.setData({ showDeleteModal: false });
+  },
+
+  confirmDelete: function() {
+    var that = this;
+    var deletingPet = that.data.deletingPet;
+    api.del('/pets/' + deletingPet.id, null, { loading: false }).then(function() {
+      wx.showToast({ title: '删除成功', icon: 'success' });
+      that.setData({ showDeleteModal: false });
+      setTimeout(function() {
+        that.loadPets();
+        that.loadLimits();
+      }, 1000);
+    }).catch(function(err) {
+      var hasBreedingMsg = false;
+      if (err && err.response && err.response.data && err.response.data.message) {
+        hasBreedingMsg = err.response.data.message.indexOf('繁育') !== -1;
+      }
+      var is404 = false;
+      if (err && err.response && err.response.status === 404) {
+        is404 = true;
+      }
+      
+      if (hasBreedingMsg) {
+        that.setData({ showDeleteModal: false, showCannotDeleteModal: true });
+      } else if (is404) {
+        wx.showToast({ title: '宠物不存在', icon: 'none' });
+        that.setData({ showDeleteModal: false });
+        setTimeout(function() {
+          that.loadPets();
+        }, 1000);
+      } else {
+        wx.showToast({ title: '删除失败', icon: 'none' });
+      }
+    });
+  },
+
+  closeCannotDeleteModal() {
+    this.setData({ showCannotDeleteModal: false });
+  },
 });

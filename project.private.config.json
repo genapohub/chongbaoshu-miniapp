@@ -1,6 +1,6 @@
 {
-  "libVersion": "3.16.0",
-  "projectname": "miniprogram",
+  "libVersion": "development",
+  "projectname": "chongbaoshu-miniapp",
   "condition": {},
   "setting": {
     "urlCheck": false,
@@ -14,7 +14,7 @@
     "useStaticServer": false,
     "useLanDebug": false,
     "showES6CompileOption": false,
-    "compileHotReLoad": true,
+    "compileHotReLoad": false,
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true,
     "bigPackageSizeSupport": false,

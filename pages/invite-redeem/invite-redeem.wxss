@@ -4,8 +4,8 @@
   background: #f5f5f5;
 }
 
-/* 成功状态 */
-.success-section {
+/* 结果状态（成功/错误） */
+.result-section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,26 +14,42 @@
   min-height: 100vh;
 }
 
-.success-icon {
-  font-size: 120rpx;
-  margin-bottom: 30rpx;
+.result-icon {
+  font-size: 160rpx;
+  margin-bottom: 40rpx;
 }
 
-.success-title {
+.result-icon.success {
+  color: #4CAF50;
+}
+
+.result-icon.error {
+  font-size: 120rpx;
+  color: #E94560;
+  width: 160rpx;
+  height: 160rpx;
+  line-height: 160rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(233, 69, 96, 0.1);
+}
+
+.result-title {
   font-size: 40rpx;
   font-weight: 700;
   color: #333;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
 }
 
-.success-desc {
+.result-desc {
   font-size: 28rpx;
   color: #666;
-  margin-bottom: 60rpx;
+  margin-bottom: 80rpx;
+  text-align: center;
 }
 
-.btn-home {
-  width: 400rpx;
+.btn-action {
+  width: 360rpx;
   height: 88rpx;
   line-height: 88rpx;
   background: #E94560;
@@ -82,7 +98,7 @@
   align-items: center;
   background: #fff;
   border-radius: 16rpx;
-  padding: 0 24rpx;
+  padding: 0 32rpx;
   height: 100rpx;
   margin-bottom: 20rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
@@ -91,16 +107,17 @@
 .code-input {
   flex: 1;
   height: 100rpx;
-  font-size: 36rpx;
+  font-size: 40rpx;
   font-weight: 600;
-  letter-spacing: 16rpx;
+  letter-spacing: 8rpx;
   color: #333;
+  text-align: center;
 }
 
 .btn-paste {
   font-size: 28rpx;
   color: #E94560;
-  padding: 10rpx 20rpx;
+  padding: 10rpx 24rpx;
 }
 
 /* 错误信息 */
@@ -119,7 +136,7 @@
   background: #E94560;
   color: #fff;
   border-radius: 48rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: 600;
   border: none;
   margin-top: 20rpx;

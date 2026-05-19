@@ -27,34 +27,41 @@ Page({
   },
 
   onPullDownRefresh() {
-    this.loadData().then(() => wx.stopPullDownRefresh());
+    var that = this;
+    that.loadData();
+    setTimeout(function() {
+      wx.stopPullDownRefresh();
+    }, 1000);
   },
 
-  async loadData() {
-    try {
-      const app = getApp();
-      if (!app.globalData.token) {
-        this.setData({ loading: false, userInfo: null });
-        return;
-      }
+  loadData() {
+    var that = this;
+    var app = getApp();
+    if (!app.globalData.token) {
+      that.setData({ loading: false, userInfo: null });
+      return;
+    }
 
-      this.setData({ userInfo: app.globalData.userInfo });
+    that.setData({ userInfo: app.globalData.userInfo });
 
-      // 并行请求
-      const [dashboard, usage, limits] = await Promise.all([
-        api.get('/auth/dashboard').catch(() => null),
-        api.get('/subscriptions/usage').catch(() => null),
-        api.get('/auth/limits').catch(() => null),
-      ]);
+    Promise.all([
+      api.get('/auth/dashboard').catch(function() { return null; }),
+      api.get('/subscriptions/usage').catch(function() { return null; }),
+      api.get('/auth/limits').catch(function() { return null; }),
+    ]).then(function(results) {
+      var dashboard = results[0];
+      var usage = results[1];
+      var limits = results[2];
 
-      // 订阅信息
-      const tier = usage?.tier || 'free';
-      const planNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
+      var tier = usage && usage.tier ? usage.tier : 'free';
+      var planNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
 
-      // 处理提醒数据（按紧急度排序）
-      const healthReminders = (dashboard?.data?.upcomingReminders || []).map(r => {
-        const days = daysFromNow(r.next_date);
-        let color, badge, badgeBg, badgeColor;
+      var upcomingReminders = dashboard && dashboard.data && dashboard.data.upcomingReminders ? dashboard.data.upcomingReminders : [];
+      var healthReminders = [];
+      for (var i = 0; i < upcomingReminders.length; i++) {
+        var r = upcomingReminders[i];
+        var days = daysFromNow(r.next_date);
+        var color, badge, badgeBg, badgeColor;
         
         if (days <= 0) {
           color = '#EB5757';
@@ -73,57 +80,81 @@ Page({
           badgeColor = '#2D9CDB';
         }
 
-        return {
-          id: r.id,
-          text: `${r.pet_name || '宠物'} - ${r.type === 'vaccine' ? '疫苗' : r.type === 'deworm' ? '驱虫' : '健康'}${r.vaccine_type ? `(${r.vaccine_type})` : ''}`,
-          color,
-          badge,
-          badgeBg,
-          badgeColor,
-          priority: days <= 0 ? 0 : days <= 3 ? 1 : 2,
-        };
-      });
+        var typeText = '健康';
+        if (r.type === 'vaccine') {
+          typeText = '疫苗';
+        } else if (r.type === 'deworm') {
+          typeText = '驱虫';
+        }
+        var vaccineType = r.vaccine_type ? '(' + r.vaccine_type + ')' : '';
 
-      // 预产期提醒
-      const dueReminders = (dashboard?.data?.dueBreedings || []).map(r => {
-        const days = daysFromNow(r.due_date);
-        return {
-          id: `due-${r.id}`,
-          text: `${r.mother_name || '母犬'} - 预产期还剩${days}天`,
+        healthReminders.push({
+          id: r.id,
+          text: (r.pet_name || '宠物') + ' - ' + typeText + vaccineType,
+          color: color,
+          badge: badge,
+          badgeBg: badgeBg,
+          badgeColor: badgeColor,
+          priority: days <= 0 ? 0 : (days <= 3 ? 1 : 2),
+        });
+      }
+
+      var dueBreedings = dashboard && dashboard.data && dashboard.data.dueBreedings ? dashboard.data.dueBreedings : [];
+      var dueReminders = [];
+      for (var j = 0; j < dueBreedings.length; j++) {
+        var r = dueBreedings[j];
+        var days = daysFromNow(r.due_date);
+        dueReminders.push({
+          id: 'due-' + r.id,
+          text: (r.mother_name || '母犬') + ' - 预产期还剩' + days + '天',
           color: '#9B51E0',
           badge: '预产期',
           badgeBg: '#F3E5F5',
           badgeColor: '#9B51E0',
           priority: 3,
-        };
+        });
+      }
+
+      var allReminders = healthReminders.concat(dueReminders);
+      allReminders.sort(function(a, b) {
+        return a.priority - b.priority;
       });
 
-      // 合并并排序提醒
-      const allReminders = [...healthReminders, ...dueReminders].sort((a, b) => a.priority - b.priority);
-
-      // 最近动态（模拟数据）
-      const activities = [
+      var activities = [
         { text: '豆豆的疫苗记录已更新', time: '2小时前' },
         { text: '新增配种记录：小白 × 大黄', time: '昨天' },
       ];
 
-      this.setData({
+      function formatLimit(value) {
+        if (value === 'unlimited' || value >= 999999) {
+          return '无限';
+        }
+        return value;
+      }
+
+      var petCount = usage && usage.usage && usage.usage.petCount ? usage.usage.petCount : 0;
+      var maxPets = limits && limits.maxPets ? formatLimit(limits.maxPets) : 3;
+      var breedingCount = usage && usage.usage && usage.usage.breedingCount ? usage.usage.breedingCount : 0;
+      var maxBreedingRecords = limits && limits.maxBreedingRecords ? formatLimit(limits.maxBreedingRecords) : 3;
+      var breedingInProgressCount = dashboard && dashboard.data && dashboard.data.stats && dashboard.data.stats.breedingCount ? dashboard.data.stats.breedingCount : 0;
+
+      that.setData({
         subscriptionTier: tier,
         subscriptionPlan: planNames[tier],
-        petCount: usage?.usage?.petCount || 0,
-        maxPets: limits?.limits?.maxPets || 3,
-        breedingCount: usage?.usage?.breedingCount || 0,
-        maxBreedingRecords: limits?.limits?.maxBreedingRecords || 3,
-        breedingInProgressCount: dashboard?.data?.stats?.breedingCount || 0,
+        petCount: petCount,
+        maxPets: maxPets,
+        breedingCount: breedingCount,
+        maxBreedingRecords: maxBreedingRecords,
+        breedingInProgressCount: breedingInProgressCount,
         reminderCount: allReminders.length,
         reminders: allReminders.slice(0, 4),
         recentActivities: activities,
         loading: false,
       });
-    } catch (err) {
+    }).catch(function(err) {
       console.error('首页加载失败:', err);
-      this.setData({ loading: false });
-    }
+      that.setData({ loading: false });
+    });
   },
 
   // 跳转登录

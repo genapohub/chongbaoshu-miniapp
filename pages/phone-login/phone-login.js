@@ -1,5 +1,5 @@
-const api = require('../../utils/api');
-const app = getApp();
+var api = require('../../utils/api');
+var app = getApp();
 
 Page({
   data: {
@@ -11,36 +11,33 @@ Page({
     loading: false,
   },
 
-  goBack() {
+  goBack: function() {
     wx.navigateBack();
   },
 
-  // 手机号输入
-  onPhoneInput(e) {
-    const phone = e.detail.value;
-    this.setData({ phone });
+  onPhoneInput: function(e) {
+    var phone = e.detail.value;
+    this.setData({ phone: phone });
     this.checkCanLogin();
   },
 
-  // 验证码输入
-  onCodeInput(e) {
-    const code = e.detail.value;
-    this.setData({ code });
+  onCodeInput: function(e) {
+    var code = e.detail.value;
+    this.setData({ code: code });
     this.checkCanLogin();
   },
 
-  // 检查是否可以登录
-  checkCanLogin() {
-    const { phone, code } = this.data;
-    const canLogin = phone.length === 11 && code.length === 6;
-    this.setData({ canLogin });
+  checkCanLogin: function() {
+    var phone = this.data.phone;
+    var code = this.data.code;
+    var canLogin = phone.length === 11 && code.length === 6;
+    this.setData({ canLogin: canLogin });
   },
 
-  // 发送验证码
-  sendCode() {
+  sendCode: function() {
     if (this.data.counting) return;
 
-    const phone = this.data.phone.trim();
+    var phone = this.data.phone.trim();
     if (!phone) {
       wx.showToast({ title: '请输入手机号', icon: 'none' });
       return;
@@ -51,58 +48,54 @@ Page({
       return;
     }
 
-    // 发送验证码
     this.sendVerificationCode(phone);
   },
 
-  // 发送验证码API
-  async sendVerificationCode(phone) {
-    try {
-      wx.showLoading({ title: '发送中...', mask: true });
+  sendVerificationCode: function(phone) {
+    var that = this;
+    wx.showLoading({ title: '发送中...', mask: true });
 
-      await api.post('/auth/send-code', { phone });
-
+    api.post('/auth/send-code', { phone: phone }).then(function() {
       wx.showToast({ title: '验证码已发送', icon: 'success' });
-
-      // 开始倒计时
-      this.startCountdown();
-    } catch (err) {
+      that.startCountdown();
+    }).catch(function(err) {
       console.error('发送验证码失败:', err);
       wx.showToast({
         title: err.message || '发送失败，请重试',
         icon: 'none',
       });
-    } finally {
+    }).finally(function() {
       wx.hideLoading();
-    }
+    });
   },
 
-  // 开始倒计时
-  startCountdown() {
-    this.setData({
+  startCountdown: function() {
+    var that = this;
+    that.setData({
       counting: true,
       countdown: 60,
     });
 
-    const timer = setInterval(() => {
-      const countdown = this.data.countdown - 1;
+    var timer = setInterval(function() {
+      var countdown = that.data.countdown - 1;
       if (countdown <= 0) {
         clearInterval(timer);
-        this.setData({
+        that.setData({
           counting: false,
           countdown: 60,
         });
       } else {
-        this.setData({ countdown });
+        that.setData({ countdown: countdown });
       }
     }, 1000);
   },
 
-  // 登录
-  async onLogin() {
-    if (!this.data.canLogin || this.data.loading) return;
+  onLogin: function() {
+    var that = this;
+    if (!that.data.canLogin || that.data.loading) return;
 
-    const { phone, code } = this.data;
+    var phone = that.data.phone;
+    var code = that.data.code;
 
     if (!/^1[3-9]\d{9}$/.test(phone)) {
       wx.showToast({ title: '手机号格式不正确', icon: 'none' });
@@ -114,43 +107,36 @@ Page({
       return;
     }
 
-    this.setData({ loading: true });
+    that.setData({ loading: true });
 
-    try {
-      // 调用后端登录接口
-      const res = await api.post('/auth/phone-login', { phone, code });
-
-      // 保存token
+    api.post('/auth/phone-login', { phone: phone, code: code }).then(function(res) {
       if (res.token) {
         wx.setStorageSync('token', res.token);
         app.globalData.token = res.token;
       }
 
-      // 保存用户信息
       if (res.user) {
         wx.setStorageSync('userInfo', res.user);
         app.globalData.userInfo = res.user;
       }
 
-      // 登录成功提示
       if (res.isNew) {
         wx.showToast({ title: '欢迎加入宠宝树！', icon: 'success' });
       } else {
         wx.showToast({ title: '登录成功', icon: 'success' });
       }
 
-      // 跳转首页
-      setTimeout(() => {
+      setTimeout(function() {
         wx.switchTab({ url: '/pages/index/index' });
       }, 1000);
-    } catch (err) {
+    }).catch(function(err) {
       console.error('登录失败:', err);
       wx.showToast({
         title: err.message || '登录失败，请重试',
         icon: 'none',
       });
-    } finally {
-      this.setData({ loading: false });
-    }
+    }).finally(function() {
+      that.setData({ loading: false });
+    });
   },
 });

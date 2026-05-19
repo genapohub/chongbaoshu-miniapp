@@ -38,19 +38,20 @@ Page({
       selectedReason: id,
       otherReason: id === 'other' ? this.data.otherReason : '',
     });
+    this.checkCanCancel();
   },
 
   onOtherReasonInput(e) {
     this.setData({
       otherReason: e.detail.value,
     });
+    this.checkCanCancel();
   },
 
-  get canCancel() {
+  checkCanCancel() {
     const { selectedReason, otherReason } = this.data;
-    if (!selectedReason) return false;
-    if (selectedReason === 'other') return otherReason.trim().length > 0;
-    return true;
+    const canCancel = selectedReason && (selectedReason !== 'other' || otherReason.trim().length > 0);
+    this.setData({ canCancel });
   },
 
   acceptOffer() {
@@ -86,7 +87,7 @@ Page({
   },
 
   confirmCancel() {
-    if (!this.canCancel) {
+    if (!this.data.canCancel) {
       return;
     }
 

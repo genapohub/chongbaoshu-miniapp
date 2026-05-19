@@ -1,7 +1,7 @@
 /**
  * P21 我的页面 - 按设计稿一比一复刻
  */
-const api = require('../../utils/api');
+var api = require('../../utils/api');
 
 Page({
   data: {
@@ -16,60 +16,89 @@ Page({
     isAutoRenew: false,
   },
 
-  onShow() {
+  onShow: function() {
     this.loadProfile();
   },
 
-  async loadProfile() {
-    const app = getApp();
+  loadProfile: function() {
+    var that = this;
+    var app = getApp();
     if (!app.globalData.token) return;
 
-    try {
-      const [profile, subscription, dashboard, inviteStats] = await Promise.all([
-        api.get('/auth/profile').catch(() => null),
-        api.get('/subscriptions/current').catch(() => null),
-        api.get('/auth/dashboard').catch(() => null),
-        api.get('/invite/stats').catch(() => null),
-      ]);
+    Promise.all([
+      api.get('/auth/profile').catch(function() { return null; }),
+      api.get('/subscriptions/current').catch(function() { return null; }),
+      api.get('/auth/dashboard').catch(function() { return null; }),
+      api.get('/invite/stats').catch(function() { return null; }),
+    ]).then(function(results) {
+      var profile = results[0];
+      var subscription = results[1];
+      var dashboard = results[2];
+      var inviteStats = results[3];
 
-      // 订阅信息
-      const planNames = { free: '免费版', basic: '基础版', pro: 'Pro 专业版' };
-      const tier = subscription?.tier || 'free';
+      var planNames = { free: '免费版', basic: '基础版', pro: 'Pro 专业版' };
+      var tier = subscription && subscription.tier ? subscription.tier : 'free';
 
-      this.setData({
-        userInfo: profile?.data || app.globalData.userInfo,
+      var userInfo = app.globalData.userInfo;
+      if (profile && profile.data) {
+        userInfo = profile.data;
+      }
+
+      var petCount = 0;
+      if (dashboard && dashboard.data && dashboard.data.stats && dashboard.data.stats.petCount) {
+        petCount = dashboard.data.stats.petCount;
+      }
+
+      var breedingCount = 0;
+      if (dashboard && dashboard.data && dashboard.data.stats && dashboard.data.stats.breedingCount) {
+        breedingCount = dashboard.data.stats.breedingCount;
+      }
+
+      var inviteCount = 0;
+      if (inviteStats && inviteStats.inviteCount) {
+        inviteCount = inviteStats.inviteCount;
+      }
+
+      var expireDate = '';
+      if (subscription && subscription.expires_at) {
+        expireDate = subscription.expires_at.split('T')[0];
+      }
+
+      var isAutoRenew = true;
+      if (subscription && subscription.auto_renew === false) {
+        isAutoRenew = false;
+      }
+
+      that.setData({
+        userInfo: userInfo,
         stats: {
-          petCount: dashboard?.data?.stats?.petCount || 0,
-          breedingCount: dashboard?.data?.stats?.breedingCount || 0,
-          inviteCount: inviteStats?.inviteCount || 0,
+          petCount: petCount,
+          breedingCount: breedingCount,
+          inviteCount: inviteCount,
         },
         subscriptionPlan: planNames[tier],
-        expireDate: subscription?.expires_at ? subscription.expires_at.split('T')[0] : '',
-        isAutoRenew: subscription?.auto_renew !== false,
+        expireDate: expireDate,
+        isAutoRenew: isAutoRenew,
       });
-    } catch (err) {
+    }).catch(function(err) {
       console.error('加载个人信息失败:', err);
-    }
+    });
   },
 
-  // 跳转菜单
-  goMenu(e) {
-    const url = e.currentTarget.dataset.url;
-    wx.navigateTo({ url });
+  goMenu: function(e) {
+    var url = e.currentTarget.dataset.url;
+    wx.navigateTo({ url: url });
   },
 
-  // 跳转订阅
-  goSubscription() {
+  goSubscription: function() {
     wx.navigateTo({ url: '/pages/subscription/subscription' });
   },
 
-  // 意见反馈
-  goFeedback() {
+  goFeedback: function() {
     wx.showToast({ title: '意见反馈功能开发中', icon: 'none' });
   },
 
-  // 关于宠宝树
-  goAbout() {
+  goAbout: function() {
     wx.showModal({
       title: '关于宠宝树',
       content: '宠宝树 v1.0\n专业宠物繁育管理工具',
@@ -77,12 +106,12 @@ Page({
     });
   },
 
-  // 退出登录
-  onLogout() {
+  onLogout: function() {
+    var that = this;
     wx.showModal({
       title: '确认退出',
       content: '退出后需要重新登录',
-      success: (res) => {
+      success: function(res) {
         if (res.confirm) {
           getApp().logout();
         }

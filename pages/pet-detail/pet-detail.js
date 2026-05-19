@@ -1,9 +1,9 @@
 /**
  * P4 宠物详情 - 按设计稿一比一复刻
  */
-const api = require('../../utils/api');
-const constants = require('../../utils/constants');
-const { calcAge } = require('../../utils/auth');
+var api = require('../../utils/api');
+var constants = require('../../utils/constants');
+var authUtils = require('../../utils/auth');
 
 Page({
   data: {
@@ -25,76 +25,141 @@ Page({
     canAddPhoto: false,
   },
 
-  onLoad(options) {
+  onLoad: function(options) {
     this.setData({ petId: options.id });
     this.loadData();
   },
 
-  onShow() {
-    if (this.data.petId && this._loaded) {
-      this.loadRecords();
+  onShow: function() {
+    if (this.data.petId) {
+      this.loadData();
     }
   },
 
-  async loadData() {
-    const { petId } = this.data;
+  loadData: function() {
+    var that = this;
+    var petId = that.data.petId;
     if (!petId) return;
 
-    try {
-      // 单独调用宠物详情接口（不依赖其他接口）
-      const petRes = await api.get(`/pets/${petId}`);
-      
-      // 其他接口用独立的 catch 处理
-      const breedingRes = await api.get('/breeding', { pet_id: petId }).catch(() => ({ list: [] }));
-      const healthRes = await api.get('/health', { pet_id: petId }).catch(() => ({ list: [] }));
-      const pedigreeRes = await api.get(`/pets/${petId}/pedigree`).catch(() => null);
-      const limitsRes = await api.get('/auth/limits').catch(() => null);
+    Promise.all([
+      api.get('/pets/' + petId),
+      api.get('/breeding', { pet_id: petId }).catch(function() { return { list: [] }; }),
+      api.get('/health', { pet_id: petId }).catch(function() { return { list: [] }; }),
+      api.get('/pets/' + petId + '/pedigree').catch(function() { return null; }),
+      api.get('/auth/limits').catch(function() { return null; }),
+    ]).then(function(results) {
+      var petRes = results[0];
+      var breedingRes = results[1];
+      var healthRes = results[2];
+      var pedigreeRes = results[3];
+      var limitsRes = results[4];
 
-      const pet = petRes;
-      const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
-      const photos = pet.photos?.map(p => `${baseUrl}${p.photo_url}`) || [];
+      console.log('petRes:', petRes);
 
-      this.setData({
+      var pet = petRes.data || petRes;
+      var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+      console.log('baseUrl:', baseUrl);
+      var rawPhotos = pet.photos || [];
+      console.log('rawPhotos:', rawPhotos);
+      var photos = [];
+      for (var i = 0; i < rawPhotos.length; i++) {
+        var p = rawPhotos[i];
+        var url = baseUrl + p.photo_url;
+        console.log('photo ' + i + ': ' + p.photo_url + ' -> ' + url);
+        photos.push(url);
+      }
+      var avatarPhoto = pet.avatar_photo || '';
+      var avatar = avatarPhoto ? baseUrl + avatarPhoto : '';
+      console.log('avatar_photo:', avatarPhoto);
+      console.log('avatar:', avatar);
+
+      var speciesInfo = constants.SPECIES[pet.species];
+      var speciesLabel = speciesInfo && speciesInfo.label ? speciesInfo.label : pet.species;
+      var speciesIcon = speciesInfo && speciesInfo.icon ? speciesInfo.icon : '🐾';
+
+      var genderInfo = constants.GENDER[pet.gender];
+      var genderLabel = genderInfo && genderInfo.label ? genderInfo.label : '';
+
+      var birthDate = '';
+      if (pet.birth_date) {
+        birthDate = pet.birth_date.split('T')[0];
+      }
+
+      that.setData({
         pet: {
-          ...pet,
-          speciesLabel: constants.SPECIES[pet.species]?.label || pet.species,
-          speciesIcon: constants.SPECIES[pet.species]?.icon || '🐾',
-          genderLabel: constants.GENDER[pet.gender]?.label || '',
-          age: calcAge(pet.birth_date),
-          birthDate: pet.birth_date?.split('T')[0] || '',
+          name: pet.name,
+          species: pet.species,
+          breed: pet.breed,
+          speciesLabel: speciesLabel,
+          speciesIcon: speciesIcon,
+          gender: pet.gender,
+          genderLabel: genderLabel,
+          age: authUtils.calcAge(pet.birth_date),
+          birthDate: birthDate,
           color: pet.color,
           chipNo: pet.chip_number,
-          avatar: photos[0] || '',
-          photos,
-          statusLabel: this.getStatusLabel(pet.status),
+          avatar: avatar,
+          photos: photos,
+          status: pet.status,
+          statusLabel: that.getStatusLabel(pet.status),
         },
         photoCount: photos.length,
-        maxPhotos: limitsRes?.max_photos_per_pet || 3,
-        canAddPhoto: photos.length < (limitsRes?.max_photos_per_pet || 3),
-        isPro: limitsRes?.tier === 'pro',
+        maxPhotos: limitsRes && limitsRes.max_photos_per_pet ? limitsRes.max_photos_per_pet : 3,
+        canAddPhoto: photos.length < (limitsRes && limitsRes.max_photos_per_pet ? limitsRes.max_photos_per_pet : 3),
+        isPro: limitsRes && limitsRes.tier === 'pro',
       });
 
-      const breedingRecords = (breedingRes.list || []).map(rec => ({
-        id: rec.id,
-        name: rec.mate_name ? `${pet.name} × ${rec.mate_name}` : pet.name,
-        date: rec.mating_date?.split('T')[0] || '',
-        status: this.getBreedingStatus(rec.status),
-        statusType: this.getBreedingStatusType(rec.status),
-      }));
-      this.setData({ breedingRecords });
+      wx.setNavigationBarTitle({ title: '宠物详情' });
 
-      const healthRecords = (healthRes.list || []).map(rec => ({
-        id: rec.id,
-        name: rec.type === 'vaccine' ? `${rec.vaccine_name}疫苗` : rec.type === 'deworm' ? `${rec.deworm_type === 'internal' ? '体内' : '体外'}驱虫` : rec.name,
-        date: rec.record_date?.split('T')[0] || '',
-        nextDate: rec.next_date?.split('T')[0] || '',
-        status: this.getHealthStatus(rec),
-        statusType: this.getHealthStatusType(rec),
-      }));
-      this.setData({ healthRecords });
+      var breedingRecords = [];
+      var breedingList = breedingRes.list || [];
+      for (var j = 0; j < breedingList.length; j++) {
+        var rec = breedingList[j];
+        var date = '';
+        if (rec.mating_date) {
+          date = rec.mating_date.split('T')[0];
+        }
+        breedingRecords.push({
+          id: rec.id,
+          name: rec.mate_name ? pet.name + ' × ' + rec.mate_name : pet.name,
+          date: date,
+          status: that.getBreedingStatus(rec.status),
+          statusType: that.getBreedingStatusType(rec.status),
+        });
+      }
+      that.setData({ breedingRecords: breedingRecords });
+
+      var healthRecords = [];
+      var healthList = healthRes.list || [];
+      for (var k = 0; k < healthList.length; k++) {
+        var rec = healthList[k];
+        var name = rec.name;
+        if (rec.type === 'vaccine') {
+          name = rec.vaccine_name + '疫苗';
+        } else if (rec.type === 'deworm') {
+          name = (rec.deworm_type === 'internal' ? '体内' : '体外') + '驱虫';
+        }
+        var date = '';
+        if (rec.record_date) {
+          date = rec.record_date.split('T')[0];
+        }
+        var nextDate = '';
+        if (rec.next_date) {
+          nextDate = rec.next_date.split('T')[0];
+        }
+        healthRecords.push({
+          id: rec.id,
+          name: name,
+          date: date,
+          nextDate: nextDate,
+          status: that.getHealthStatus(rec),
+          statusType: that.getHealthStatusType(rec),
+        });
+      }
+      that.setData({ healthRecords: healthRecords });
 
       if (pedigreeRes) {
-        this.setData({
+        that.setData({
           pedigree: {
             regName: pedigreeRes.registration_name,
             regNo: pedigreeRes.registration_number,
@@ -107,39 +172,73 @@ Page({
           },
         });
       }
-    } catch (err) {
+    }).catch(function(err) {
       console.error('加载宠物详情失败:', err);
-    } finally {
-      this._loaded = true;
-    }
+    }).finally(function() {
+      that._loaded = true;
+    });
   },
 
-  async loadRecords() {
-    const petId = this.data.petId;
+  loadRecords: function() {
+    var that = this;
+    var petId = that.data.petId;
     if (!petId) return;
 
-    const breedingRes = await api.get('/breeding', { pet_id: petId }).catch(() => ({ list: [] }));
-    const healthRes = await api.get('/health', { pet_id: petId }).catch(() => ({ list: [] }));
+    Promise.all([
+      api.get('/breeding', { pet_id: petId }).catch(function() { return { list: [] }; }),
+      api.get('/health', { pet_id: petId }).catch(function() { return { list: [] }; }),
+    ]).then(function(results) {
+      var breedingRes = results[0];
+      var healthRes = results[1];
 
-    const pet = this.data.pet;
-    const breedingRecords = (breedingRes.list || []).map(rec => ({
-      id: rec.id,
-      name: rec.mate_name ? `${pet.name} × ${rec.mate_name}` : pet.name,
-      date: rec.mating_date?.split('T')[0] || '',
-      status: this.getBreedingStatus(rec.status),
-      statusType: this.getBreedingStatusType(rec.status),
-    }));
+      var pet = that.data.pet;
+      var breedingRecords = [];
+      var breedingList = breedingRes.list || [];
+      for (var i = 0; i < breedingList.length; i++) {
+        var rec = breedingList[i];
+        var date = '';
+        if (rec.mating_date) {
+          date = rec.mating_date.split('T')[0];
+        }
+        breedingRecords.push({
+          id: rec.id,
+          name: rec.mate_name ? pet.name + ' × ' + rec.mate_name : pet.name,
+          date: date,
+          status: that.getBreedingStatus(rec.status),
+          statusType: that.getBreedingStatusType(rec.status),
+        });
+      }
 
-    const healthRecords = (healthRes.list || []).map(rec => ({
-      id: rec.id,
-      name: rec.type === 'vaccine' ? `${rec.vaccine_name}疫苗` : rec.type === 'deworm' ? `${rec.deworm_type === 'internal' ? '体内' : '体外'}驱虫` : rec.name,
-      date: rec.record_date?.split('T')[0] || '',
-      nextDate: rec.next_date?.split('T')[0] || '',
-      status: this.getHealthStatus(rec),
-      statusType: this.getHealthStatusType(rec),
-    }));
+      var healthRecords = [];
+      var healthList = healthRes.list || [];
+      for (var j = 0; j < healthList.length; j++) {
+        var rec = healthList[j];
+        var name = rec.name;
+        if (rec.type === 'vaccine') {
+          name = rec.vaccine_name + '疫苗';
+        } else if (rec.type === 'deworm') {
+          name = (rec.deworm_type === 'internal' ? '体内' : '体外') + '驱虫';
+        }
+        var date = '';
+        if (rec.record_date) {
+          date = rec.record_date.split('T')[0];
+        }
+        var nextDate = '';
+        if (rec.next_date) {
+          nextDate = rec.next_date.split('T')[0];
+        }
+        healthRecords.push({
+          id: rec.id,
+          name: name,
+          date: date,
+          nextDate: nextDate,
+          status: that.getHealthStatus(rec),
+          statusType: that.getHealthStatusType(rec),
+        });
+      }
 
-    this.setData({ breedingRecords, healthRecords });
+      that.setData({ breedingRecords: breedingRecords, healthRecords: healthRecords });
+    });
   },
 
   getStatusLabel(status) {
@@ -233,45 +332,57 @@ Page({
     wx.navigateTo({ url: `/pages/pet-edit/pet-edit?id=${this.data.petId}` });
   },
 
-  addPhoto() {
-    const { petId, photoCount, maxPhotos } = this.data;
+  addPhoto: function() {
+    var petId = this.data.petId;
+    var photoCount = this.data.photoCount;
+    var maxPhotos = this.data.maxPhotos;
     
     if (photoCount >= maxPhotos) {
       wx.showToast({ title: '已达照片上限', icon: 'none' });
       return;
     }
 
+    var that = this;
     wx.chooseImage({
       count: maxPhotos - photoCount,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: (res) => {
-        const tempFilePaths = res.tempFilePaths;
-        this.uploadPhotos(tempFilePaths);
+      success: function(res) {
+        var tempFilePaths = res.tempFilePaths;
+        that.uploadPhotos(tempFilePaths);
       },
-      fail: () => {
+      fail: function() {
         wx.showToast({ title: '选择图片失败', icon: 'none' });
       },
     });
   },
 
-  async uploadPhotos(filePaths) {
-    const { petId } = this.data;
+  uploadPhotos: function(filePaths) {
+    var that = this;
+    var petId = that.data.petId;
     
     wx.showLoading({ title: '上传中...', mask: true });
     
-    try {
-      for (const filePath of filePaths) {
-        await this.uploadPhoto(filePath, petId);
+    var uploadIndex = 0;
+    function uploadNext() {
+      if (uploadIndex >= filePaths.length) {
+        wx.hideLoading();
+        wx.showToast({ title: '上传成功', icon: 'success' });
+        that.loadData();
+        return;
       }
       
-      wx.hideLoading();
-      wx.showToast({ title: '上传成功', icon: 'success' });
-      this.loadData();
-    } catch (err) {
-      wx.hideLoading();
-      wx.showToast({ title: '上传失败', icon: 'none' });
+      var filePath = filePaths[uploadIndex];
+      that.uploadPhoto(filePath, petId).then(function() {
+        uploadIndex++;
+        uploadNext();
+      }).catch(function(err) {
+        wx.hideLoading();
+        wx.showToast({ title: '上传失败', icon: 'none' });
+      });
     }
+    
+    uploadNext();
   },
 
   uploadPhoto(filePath, petId) {

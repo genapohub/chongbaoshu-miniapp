@@ -2,14 +2,22 @@
 <view class="redeem-page">
 
   <!-- 成功状态 -->
-  <view class="success-section" wx:if="{{success}}">
-    <view class="success-icon">🎉</view>
-    <view class="success-title">兑换成功！</view>
-    <view class="success-desc">您已获得 {{rewardDays}} 天Pro体验</view>
-    <button class="btn-home" bindtap="onGoHome">返回首页</button>
+  <view class="result-section" wx:if="{{status === 'success'}}">
+    <view class="result-icon success">🎉</view>
+    <view class="result-title">兑换成功！</view>
+    <view class="result-desc">您已获得{{rewardDays}}天Pro体验</view>
+    <button class="btn-action" bindtap="onGoHome">开始使用</button>
   </view>
 
-  <!-- 兑换表单 -->
+  <!-- 错误状态 -->
+  <view class="result-section" wx:elif="{{status === 'error'}}">
+    <view class="result-icon error">✕</view>
+    <view class="result-title">邀请码无效</view>
+    <view class="result-desc">{{errorMessage || '该邀请码不存在或已过期，请确认后重试'}}</view>
+    <button class="btn-action" bindtap="onReInput">重新输入</button>
+  </view>
+
+  <!-- 输入状态 -->
   <view class="form-section" wx:else>
     <view class="form-header">
       <view class="header-icon">🎁</view>
@@ -21,8 +29,8 @@
       <input
         class="code-input"
         type="text"
-        maxlength="6"
-        placeholder="请输入6位邀请码"
+        maxlength="8"
+        placeholder="请输入邀请码"
         value="{{inviteCode}}"
         bindinput="onCodeInput"
       />
@@ -34,15 +42,15 @@
     <button
       class="btn-redeem"
       bindtap="onRedeem"
-      disabled="{{loading || inviteCode.length < 6}}"
+      disabled="{{loading || inviteCode.length !== 8}}"
       loading="{{loading}}"
     >
-      {{loading ? '兑换中...' : '立即兑换'}}
+      {{loading ? '兑换中...' : '兑换'}}
     </button>
 
     <view class="tips">
       <view class="tip-title">使用说明</view>
-      <view class="tip-item">1. 向好友获取6位邀请码</view>
+      <view class="tip-item">1. 向好友获取邀请码</view>
       <view class="tip-item">2. 输入邀请码并点击兑换</view>
       <view class="tip-item">3. 兑换成功后Pro权益立即生效</view>
       <view class="tip-item">4. 每个用户仅可兑换一次邀请码</view>

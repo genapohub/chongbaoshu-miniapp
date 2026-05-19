@@ -33,33 +33,50 @@
     <view
       wx:for="{{petList}}"
       wx:key="id"
-      class="pet-card"
-      data-id="{{item.id}}"
-      bindtap="goPetDetail"
+      class="pet-card-container"
     >
-      <view class="pet-avatar">
-        <image
-          wx:if="{{item.avatar}}"
-          src="{{item.avatar}}"
-          mode="aspectFill"
-          class="avatar-img"
-        />
-        <view wx:else class="avatar-placeholder">{{item.speciesIcon}}</view>
+      <view class="pet-delete-btn" bindtap="deletePet" data-pet="{{item}}">
+        <text>删除</text>
       </view>
-      <view class="pet-info">
-        <view class="pet-name-row">
-          <text class="pet-name">{{item.name}}</text>
-          <view wx:if="{{item.statusBadge}}" class="badge badge-{{item.statusBadge.type}}">{{item.statusBadge.label}}</view>
+      <view
+        class="pet-card"
+        data-id="{{item.id}}"
+        bindtap="goPetDetail"
+        bindtouchstart="onTouchStart"
+        bindtouchmove="onTouchMove"
+        bindtouchend="onTouchEnd"
+        style="transform: translateX({{item.translateX || 0}}rpx);"
+      >
+        <view class="pet-avatar">
+          <image
+            wx:if="{{item.avatar}}"
+            src="{{item.avatar}}"
+            mode="aspectFill"
+            class="avatar-img"
+          />
+          <view wx:else class="avatar-placeholder">{{item.speciesIcon}}</view>
         </view>
-        <text class="pet-desc">{{item.speciesLabel}} · {{item.genderLabel}} · {{item.age}}</text>
+        <view class="pet-info">
+          <view class="pet-name-row">
+            <text class="pet-name">{{item.name}}</text>
+            <view wx:if="{{item.statusBadge}}" class="badge badge-{{item.statusBadge.type}}">{{item.statusBadge.label}}</view>
+          </view>
+          <text class="pet-desc">{{item.speciesLabel}} · {{item.genderLabel}} · {{item.age}}</text>
+        </view>
+        <text class="pet-arrow">›</text>
       </view>
-      <text class="pet-arrow">›</text>
     </view>
   </view>
 
-  <!-- 免费版限额提示 -->
-  <view wx:if="{{showLimitHint}}" class="limit-hint">
-    <view class="limit-text">免费版限额 {{petCount}}/{{maxPets}} 只</view>
+  <!-- 左滑提示 -->
+  <view wx:if="{{petList.length > 0}}" class="swipe-hint">
+    <text class="swipe-hint-icon">←</text>
+    <text class="swipe-hint-text">长按左滑显示删除按钮</text>
+  </view>
+
+  <!-- 限额提示 -->
+  <view wx:if="{{showLimitHint && petList.length > 0}}" class="limit-hint">
+    <view class="limit-text">{{currentTier || '免费版'}}限额 {{petCount}}/{{maxPets}} 只</view>
     <view class="limit-desc">升级解锁更多宠物管理</view>
     <view class="limit-btn" bindtap="goUpgrade">升级</view>
   </view>
@@ -83,15 +100,17 @@
           </view>
         </view>
         <view class="limit-modal-plans">
-          <view class="limit-plan" data-plan="basic">
+          <view class="limit-plan {{selectedPlan === 'basic' ? 'selected' : ''}}" data-plan="basic" bindtap="selectPlan">
             <view class="limit-plan-name">Basic</view>
             <view class="limit-plan-price">¥49</view>
             <view class="limit-plan-period">/月 · 100只</view>
+            <view class="limit-plan-check" wx:if="{{selectedPlan === 'basic'}}">✓</view>
           </view>
-          <view class="limit-plan selected" data-plan="pro">
+          <view class="limit-plan {{selectedPlan === 'pro' ? 'selected' : ''}}" data-plan="pro" bindtap="selectPlan">
             <view class="limit-plan-name">Pro</view>
             <view class="limit-plan-price">¥119</view>
             <view class="limit-plan-period">/月 · 无限</view>
+            <view class="limit-plan-check" wx:if="{{selectedPlan === 'pro'}}">✓</view>
           </view>
         </view>
         <view class="limit-modal-btn" bindtap="goPayment">立即升级</view>
@@ -104,6 +123,40 @@
   <view wx:if="{{petList.length === 0 && !loading}}" class="empty-state">
     <text class="empty-icon">🐾</text>
     <text class="empty-text">还没有宠物，点击下方添加</text>
+  </view>
+
+  <!-- 删除确认弹窗 -->
+  <view wx:if="{{showDeleteModal}}" class="delete-modal-overlay" bindtap="cancelDelete">
+    <view class="delete-modal" catchtap="stopPropagation">
+      <view class="delete-modal-icon">⚠️</view>
+      <view class="delete-modal-title">确认删除宠物？</view>
+      <view class="delete-modal-desc">删除后该宠物的所有档案、繁育记录、健康记录将无法恢复。</view>
+      <view class="delete-modal-stats">
+        <text>⚠️ {{deletingPet.name || ''}}删除后关联数据将一并移除。</text>
+      </view>
+      <view class="delete-modal-actions">
+        <view class="delete-modal-btn cancel" bindtap="cancelDelete">取消</view>
+        <view class="delete-modal-btn confirm" bindtap="confirmDelete">确认删除</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无法删除弹窗 -->
+  <view wx:if="{{showCannotDeleteModal}}" class="delete-modal-overlay" bindtap="closeCannotDeleteModal">
+    <view class="delete-modal cannot-delete" catchtap="stopPropagation">
+      <view class="delete-modal-icon error">🚫</view>
+      <view class="delete-modal-title">无法删除</view>
+      <view class="delete-modal-desc">该宠物存在进行中的繁育记录（怀孕中），请先将繁育状态更改为"已结束"后再删除。</view>
+      <view class="delete-modal-guide">
+        <text class="guide-title">💡 操作指引：</text>
+        <text class="guide-step">1. 进入宠物详情 → 繁育Tab</text>
+        <text class="guide-step">2. 将当前繁育记录标记为"已结束"</text>
+        <text class="guide-step">3. 返回列表重新删除</text>
+      </view>
+      <view class="delete-modal-actions">
+        <view class="delete-modal-btn confirm" bindtap="closeCannotDeleteModal">我知道了</view>
+      </view>
+    </view>
   </view>
 
   <!-- FAB 添加按钮 -->

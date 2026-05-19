@@ -54,6 +54,17 @@
     </view>
 
     <view class="form-item">
+      <text class="form-label">角色</text>
+      <view class="role-options">
+        <view wx:for="{{roleOptions}}" wx:key="value"
+              class="role-option {{formData.role === item.value ? 'active' : ''}}"
+              bindtap="selectRole" data-role="{{item.value}}">
+          <text>{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
       <text class="form-label">出生日期</text>
       <picker mode="date" value="{{formData.birth_date}}" bindchange="onBirthDateChange">
         <view class="picker-wrap">

@@ -8,8 +8,12 @@ const app = getApp();
  * 通用请求方法
  */
 function request(options) {
-  return new Promise((resolve, reject) => {
-    const { url, method = 'GET', data, loading = true, loadingText = '加载中...' } = options;
+  return new Promise(function(resolve, reject) {
+    var url = options.url;
+    var method = options.method || 'GET';
+    var data = options.data;
+    var loading = options.loading !== undefined ? options.loading : true;
+    var loadingText = options.loadingText || '加载中...';
 
     if (loading) {
       wx.showLoading({ title: loadingText, mask: true });
@@ -90,20 +94,40 @@ function request(options) {
 }
 
 // 便捷方法
-function get(url, data, options = {}) {
-  return request({ url, method: 'GET', data, ...options });
+function get(url, data, options) {
+  options = options || {};
+  var params = { url: url, method: 'GET', data: data };
+  for (var key in options) {
+    params[key] = options[key];
+  }
+  return request(params);
 }
 
-function post(url, data, options = {}) {
-  return request({ url, method: 'POST', data, ...options });
+function post(url, data, options) {
+  options = options || {};
+  var params = { url: url, method: 'POST', data: data };
+  for (var key in options) {
+    params[key] = options[key];
+  }
+  return request(params);
 }
 
-function put(url, data, options = {}) {
-  return request({ url, method: 'PUT', data, ...options });
+function put(url, data, options) {
+  options = options || {};
+  var params = { url: url, method: 'PUT', data: data };
+  for (var key in options) {
+    params[key] = options[key];
+  }
+  return request(params);
 }
 
-function del(url, data, options = {}) {
-  return request({ url, method: 'DELETE', data, ...options });
+function del(url, data, options) {
+  options = options || {};
+  var params = { url: url, method: 'DELETE', data: data };
+  for (var key in options) {
+    params[key] = options[key];
+  }
+  return request(params);
 }
 
 module.exports = {

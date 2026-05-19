@@ -1,4 +1,4 @@
-const api = require('../../utils/api.js');
+var api = require('../../utils/api.js');
 
 Page({
   data: {
@@ -14,6 +14,7 @@ Page({
       father_breed: '',
       mother_name: '',
       mother_breed: '',
+      role: '',
       avatar: '',
     },
     speciesDisplay: {},
@@ -26,6 +27,12 @@ Page({
       { value: 'rabbit', label: '兔', icon: '🐰' },
       { value: 'other', label: '其他', icon: '🐾' },
     ],
+    roleOptions: [
+      { value: 'breeder', label: '种犬' },
+      { value: 'for_sale', label: '在售' },
+      { value: 'puppy', label: '幼崽' },
+      { value: 'retired', label: '退役' },
+    ],
     availableTags: ['纯种', '繁育', '赛级', '家养', '活泼', '温顺'],
     customTags: [],
     selectedTags: [],
@@ -33,85 +40,111 @@ Page({
     newTag: '',
   },
 
-  onLoad(options) {
+  onLoad: function(options) {
     console.log('Add Pet Page loaded:', options);
   },
 
-  onInputChange(e) {
-    const field = e.currentTarget.dataset.field;
-    const value = e.detail.value;
-    this.setData({
-      [`formData.${field}`]: value,
-    });
+  onInputChange: function(e) {
+    var field = e.currentTarget.dataset.field;
+    var value = e.detail.value;
+    var obj = {};
+    obj['formData.' + field] = value;
+    this.setData(obj);
   },
 
-  chooseAvatar() {
+  chooseAvatar: function() {
+    var that = this;
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: (res) => {
-        const tempFilePath = res.tempFilePaths[0];
-        this.setData({
+      success: function(res) {
+        var tempFilePath = res.tempFilePaths[0];
+        that.setData({
           'formData.avatar': tempFilePath,
         });
       },
-      fail: () => {
+      fail: function() {
         wx.showToast({ title: '选择图片失败', icon: 'none' });
       },
     });
   },
 
-  showSpeciesPicker() {
+  showSpeciesPicker: function() {
     this.setData({ showSpeciesPicker: true });
   },
 
-  hideSpeciesPicker() {
+  hideSpeciesPicker: function() {
     this.setData({ showSpeciesPicker: false });
   },
 
-  stopPropagation() {},
+  stopPropagation: function() {},
 
-  selectSpecies(e) {
-    const value = e.currentTarget.dataset.value;
-    const speciesOption = this.data.speciesOptions.find(item => item.value === value);
+  selectSpecies: function(e) {
+    var value = e.currentTarget.dataset.value;
+    var speciesOptions = this.data.speciesOptions;
+    var speciesOption = {};
+    for (var i = 0; i < speciesOptions.length; i++) {
+      if (speciesOptions[i].value === value) {
+        speciesOption = speciesOptions[i];
+        break;
+      }
+    }
 
     this.setData({
       'formData.species': value,
-      speciesDisplay: speciesOption || {},
+      speciesDisplay: speciesOption,
       showSpeciesPicker: false,
     });
   },
 
-  selectGender(e) {
-    const gender = e.currentTarget.dataset.gender;
+  selectGender: function(e) {
+    var gender = e.currentTarget.dataset.gender;
+    var currentGender = this.data.formData.gender;
+    var newGender = currentGender === gender ? '' : gender;
     this.setData({
-      'formData.gender': this.data.formData.gender === gender ? '' : gender,
+      'formData.gender': newGender,
     });
   },
 
-  onBirthDateChange(e) {
+  selectRole: function(e) {
+    var role = e.currentTarget.dataset.role;
+    var currentRole = this.data.formData.role;
+    var newRole = currentRole === role ? '' : role;
+    this.setData({
+      'formData.role': newRole,
+    });
+  },
+
+  onBirthDateChange: function(e) {
     this.setData({
       'formData.birth_date': e.detail.value,
     });
   },
 
-  togglePedigree() {
+  togglePedigree: function() {
     this.setData({
       showPedigree: !this.data.showPedigree,
     });
   },
 
-  toggleTag(e) {
-    const tag = e.currentTarget.dataset.tag;
+  toggleTag: function(e) {
+    var tag = e.currentTarget.dataset.tag;
     console.log('点击标签:', tag);
 
-    const selectedTagsIndex = { ...this.data.selectedTagsIndex };
-    const selectedTags = [...this.data.selectedTags];
+    var selectedTagsIndex = {};
+    var oldIndex = this.data.selectedTagsIndex;
+    var oldKeys = Object.keys(oldIndex);
+    for (var i = 0; i < oldKeys.length; i++) {
+      var key = oldKeys[i];
+      selectedTagsIndex[key] = oldIndex[key];
+    }
+
+    var selectedTags = this.data.selectedTags.slice();
 
     if (selectedTagsIndex[tag]) {
       delete selectedTagsIndex[tag];
-      const index = selectedTags.indexOf(tag);
+      var index = selectedTags.indexOf(tag);
       if (index > -1) {
         selectedTags.splice(index, 1);
       }
@@ -125,18 +158,18 @@ Page({
       }
     }
 
-    this.setData({ selectedTagsIndex, selectedTags });
+    this.setData({ selectedTagsIndex: selectedTagsIndex, selectedTags: selectedTags });
     console.log('当前选中标签:', selectedTags);
   },
 
-  onNewTagInput(e) {
+  onNewTagInput: function(e) {
     this.setData({
       newTag: e.detail.value,
     });
   },
 
-  addCustomTag() {
-    const newTag = this.data.newTag.trim();
+  addCustomTag: function() {
+    var newTag = this.data.newTag.trim();
     if (!newTag) {
       wx.showToast({ title: '请输入标签内容', icon: 'none' });
       return;
@@ -145,21 +178,45 @@ Page({
       wx.showToast({ title: '最多选择5个标签', icon: 'none' });
       return;
     }
-    if (this.data.selectedTags.includes(newTag)) {
+    var hasTag = false;
+    for (var i = 0; i < this.data.selectedTags.length; i++) {
+      if (this.data.selectedTags[i] === newTag) {
+        hasTag = true;
+        break;
+      }
+    }
+    if (hasTag) {
       wx.showToast({ title: '标签已存在', icon: 'none' });
       return;
     }
 
-    const customTags = [...this.data.customTags, newTag];
-    const selectedTagsIndex = { ...this.data.selectedTagsIndex, [newTag]: true };
-    const selectedTags = [...this.data.selectedTags, newTag];
+    var customTags = this.data.customTags.slice();
+    customTags.push(newTag);
 
-    this.setData({ customTags, selectedTagsIndex, selectedTags, newTag: '' });
+    var selectedTagsIndex = {};
+    var oldIndex = this.data.selectedTagsIndex;
+    var oldKeys = Object.keys(oldIndex);
+    for (var j = 0; j < oldKeys.length; j++) {
+      var key = oldKeys[j];
+      selectedTagsIndex[key] = oldIndex[key];
+    }
+    selectedTagsIndex[newTag] = true;
+
+    var selectedTags = this.data.selectedTags.slice();
+    selectedTags.push(newTag);
+
+    this.setData({ 
+      customTags: customTags, 
+      selectedTagsIndex: selectedTagsIndex, 
+      selectedTags: selectedTags, 
+      newTag: '' 
+    });
     wx.showToast({ title: '添加成功', icon: 'success' });
   },
 
-  validateForm() {
-    const { name, species } = this.data.formData;
+  validateForm: function() {
+    var name = this.data.formData.name;
+    var species = this.data.formData.species;
     if (!name.trim()) {
       wx.showToast({ title: '请输入宠物名称', icon: 'none' });
       return false;
@@ -171,27 +228,70 @@ Page({
     return true;
   },
 
-  async submitForm() {
-    if (!this.validateForm()) return;
+  submitForm: function() {
+    var that = this;
+    if (!that.validateForm()) return;
 
-    try {
-      const data = {
-        ...this.data.formData,
-        tags: this.data.selectedTags,
-      };
+    var formData = that.data.formData;
+    var avatarPath = formData.avatar;
 
-      if (data.avatar) {
-        delete data.avatar;
-      }
+    var uploadData = {
+      name: formData.name,
+      species: formData.species,
+      breed: formData.breed || '',
+      gender: formData.gender || '',
+      birth_date: formData.birth_date || '',
+      color: formData.color || '',
+      chip_no: formData.chip_no || '',
+      father_name: formData.father_name || '',
+      father_breed: formData.father_breed || '',
+      mother_name: formData.mother_name || '',
+      mother_breed: formData.mother_breed || '',
+      role: formData.role || '',
+      tags: that.data.selectedTags.join(','),
+    };
 
-      const result = await api.post('/pets', data);
-      wx.showToast({ title: '添加成功', icon: 'success' });
-
-      setTimeout(() => {
-        wx.navigateBack({ delta: 1 });
-      }, 1500);
-    } catch (error) {
-      console.error('添加宠物失败:', error);
+    if (avatarPath) {
+      wx.uploadFile({
+        url: 'http://localhost:3001/api/pets',
+        filePath: avatarPath,
+        name: 'avatar',
+        formData: uploadData,
+        header: {
+          'Authorization': 'Bearer ' + getApp().globalData.token,
+          'Content-Type': 'multipart/form-data'
+        },
+        success: function(res) {
+          try {
+            var result = JSON.parse(res.data);
+            if (result.code === 0) {
+              wx.showToast({ title: '添加成功', icon: 'success' });
+              setTimeout(function() {
+                wx.navigateBack({ delta: 1 });
+              }, 1500);
+            } else {
+              wx.showToast({ title: result.detail || '添加失败', icon: 'none' });
+            }
+          } catch (e) {
+            console.error('解析响应失败:', e);
+            wx.showToast({ title: '添加失败', icon: 'none' });
+          }
+        },
+        fail: function(error) {
+          console.error('上传失败:', error);
+          wx.showToast({ title: '上传失败', icon: 'none' });
+        }
+      });
+    } else {
+      api.post('/pets', uploadData).then(function(result) {
+        wx.showToast({ title: '添加成功', icon: 'success' });
+        setTimeout(function() {
+          wx.navigateBack({ delta: 1 });
+        }, 1500);
+      }).catch(function(error) {
+        console.error('添加宠物失败:', error);
+        wx.showToast({ title: '添加失败', icon: 'none' });
+      });
     }
   },
 });
