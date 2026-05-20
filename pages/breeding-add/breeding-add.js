@@ -26,6 +26,9 @@ Page({
     dueDate: '',
     canSubmit: false,
     loading: false,
+    // 近亲检测结果
+    inbreedingResult: null,
+    showInbreedingWarning: false,
   },
 
   onLoad: function(options) {
@@ -46,7 +49,7 @@ Page({
         var avatar = data.avatar_photo ? baseUrl + data.avatar_photo : '';
         var gender = data.gender || 'female';
         
-        if (gender === 'female' || type === 'mother') {
+        if (gender === 'female') {
           that.setData({
             motherPetId: petId,
             motherPetName: data.name,
@@ -54,6 +57,10 @@ Page({
             motherPetAvatar: avatar,
             motherDisabled: true,
           });
+          // 如果已经选了父宠，自动检测近亲
+          if (that.data.fatherPetId) {
+            that.checkInbreeding();
+          }
         } else {
           that.setData({
             fatherPetId: petId,
@@ -62,6 +69,10 @@ Page({
             fatherPetAvatar: avatar,
             fatherDisabled: true,
           });
+          // 如果已经选了母宠，自动检测近亲
+          if (that.data.motherPetId) {
+            that.checkInbreeding();
+          }
         }
         that.checkCanSubmit();
       }
@@ -156,6 +167,32 @@ Page({
       showFatherError: false,
     });
     this.checkCanSubmit();
+    // 选择父宠后自动检测近亲
+    if (this.data.motherPetId) {
+      this.checkInbreeding();
+    }
+  },
+
+  checkInbreeding: function() {
+    var that = this;
+    if (!this.data.motherPetId || !this.data.fatherPetId) {
+      this.setData({ inbreedingResult: null });
+      return;
+    }
+
+    api.post('/breeding/check-inbreeding', {
+      mother_pet_id: this.data.motherPetId,
+      father_pet_id: this.data.fatherPetId
+    }).then(function(res) {
+      if (res && res.data) {
+        that.setData({
+          inbreedingResult: res.data,
+          showInbreedingWarning: res.data.is_inbreeding
+        });
+      }
+    }).catch(function(err) {
+      console.error('近亲检测失败:', err);
+    });
   },
 
   onDateChange(e) {

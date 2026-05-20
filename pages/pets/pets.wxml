@@ -71,7 +71,7 @@
   <!-- 左滑提示 -->
   <view wx:if="{{petList.length > 0}}" class="swipe-hint">
     <text class="swipe-hint-icon">←</text>
-    <text class="swipe-hint-text">长按左滑显示删除按钮</text>
+    <text class="swipe-hint-text">左滑显示删除按钮</text>
   </view>
 
   <!-- 限额提示 -->

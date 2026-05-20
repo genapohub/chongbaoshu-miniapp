@@ -11,7 +11,9 @@ Page({
       remind_due_days: 7,
       notify_in_app: true,
       notify_wechat: false,
+      notify_sms: false,
     },
+    isPro: false,
     vaccineDaysOptions: [3, 7, 14, 30],
     dewormDaysOptions: [3, 5, 7],
     dueDaysOptions: [3, 7, 14],
@@ -41,7 +43,9 @@ Page({
           remind_due_days: res.remind_due_days || 7,
           notify_in_app: res.notify_in_app !== false,
           notify_wechat: res.notify_wechat === true,
-        }
+          notify_sms: res.notify_sms === true,
+        },
+        isPro: res.subscription_tier === 'pro',
       });
     } catch (err) {
       console.error('加载设置失败:', err);
@@ -51,9 +55,30 @@ Page({
   async onSwitchChange(e) {
     const field = e.currentTarget.dataset.field;
     const value = e.detail.value;
+    
+    const proFields = ['notify_wechat', 'notify_sms'];
+    if (proFields.includes(field) && !this.data.isPro) {
+      wx.showToast({ title: '此功能为Pro专属', icon: 'none' });
+      this.setData({ [`settings.${field}`]: false });
+      return;
+    }
+    
     this.setData({ [`settings.${field}`]: value });
     try {
       await api.put('/auth/profile', { [field]: value });
+      
+      const remindFields = {
+        remind_vaccine: '疫苗到期提醒',
+        remind_deworm: '驱虫到期提醒',
+        remind_due: '预产期提醒',
+        notify_in_app: '站内通知'
+      };
+      if (remindFields[field]) {
+        wx.showToast({ 
+          title: `${remindFields[field]}${value ? '开启' : '关闭'}成功`, 
+          icon: 'none' 
+        });
+      }
     } catch (err) {
       this.setData({ [`settings.${field}`]: !value });
       wx.showToast({ title: '保存失败', icon: 'none' });
@@ -61,6 +86,11 @@ Page({
   },
 
   showDaysPicker(e) {
+    if (!this.data.isPro) {
+      wx.showToast({ title: '此功能为Pro专属', icon: 'none' });
+      return;
+    }
+
     const type = e.currentTarget.dataset.type;
     let title = '';
     let options = [];

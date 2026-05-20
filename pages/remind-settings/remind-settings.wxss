@@ -131,3 +131,28 @@
   color: #E94560;
   font-weight: 600;
 }
+
+.pro-banner {
+  display: flex;
+  align-items: center;
+  background: rgba(138, 43, 226, 0.1);
+  border: 2rpx solid rgba(138, 43, 226, 0.2);
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-top: 8rpx;
+}
+
+.pro-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.pro-text {
+  font-size: 26rpx;
+  color: #8B5CF6;
+  line-height: 1.5;
+}
+
+.pro-locked {
+  opacity: 0.7;
+}

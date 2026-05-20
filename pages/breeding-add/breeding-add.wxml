@@ -37,6 +37,15 @@
       </view>
     </view>
 
+    <!-- 近亲检测结果 -->
+    <view wx:if="{{inbreedingResult}}" class="inbreeding-result {{inbreedingResult.is_inbreeding ? 'warning' : 'success'}}">
+      <text class="inbreeding-icon">{{inbreedingResult.is_inbreeding ? '⚠️' : '✅'}}</text>
+      <view class="inbreeding-text">
+        <text class="inbreeding-title">{{inbreedingResult.is_inbreeding ? '近亲检测警告' : '近亲检测通过'}}</text>
+        <text class="inbreeding-message">{{inbreedingResult.message}}</text>
+      </view>
+    </view>
+
     <view class="form-item required">
       <text class="form-label">配种日期</text>
       <picker mode="date" value="{{formData.breed_date}}" bindchange="onDateChange">

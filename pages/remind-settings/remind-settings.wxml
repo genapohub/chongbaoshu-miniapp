@@ -13,7 +13,7 @@
         data-field="remind_vaccine"
       />
     </view>
-    <view class="setting-item" bindtap="showDaysPicker" data-type="vaccine">
+    <view class="setting-item pro-locked" bindtap="showDaysPicker" data-type="vaccine">
       <text class="setting-label">提前提醒天数</text>
       <view class="setting-right">
         <text class="setting-value">{{settings.remind_vaccine_days}}天</text>
@@ -36,7 +36,7 @@
         data-field="remind_deworm"
       />
     </view>
-    <view class="setting-item" bindtap="showDaysPicker" data-type="deworm">
+    <view class="setting-item pro-locked" bindtap="showDaysPicker" data-type="deworm">
       <text class="setting-label">提前提醒天数</text>
       <view class="setting-right">
         <text class="setting-value">{{settings.remind_deworm_days}}天</text>
@@ -59,7 +59,7 @@
         data-field="remind_due"
       />
     </view>
-    <view class="setting-item" bindtap="showDaysPicker" data-type="due">
+    <view class="setting-item pro-locked" bindtap="showDaysPicker" data-type="due">
       <text class="setting-label">提前提醒天数</text>
       <view class="setting-right">
         <text class="setting-value">{{settings.remind_due_days}}天</text>
@@ -91,6 +91,20 @@
         data-field="notify_wechat"
       />
     </view>
+    <view class="setting-item">
+      <text class="setting-label">短信通知</text>
+      <switch
+        checked="{{settings.notify_sms}}"
+        color="#E94560"
+        bindchange="onSwitchChange"
+        data-field="notify_sms"
+      />
+    </view>
+  </view>
+
+  <view class="pro-banner">
+    <text class="pro-icon">💎</text>
+    <text class="pro-text">Pro专属：自定义提醒时间 + 多渠道通知（微信+短信）</text>
   </view>
 </view>
 

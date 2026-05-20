@@ -325,6 +325,10 @@ Page({
   },
 
   goPedigreeCert() {
+    if (!this.data.isPro) {
+      wx.showToast({ title: '此功能为Pro专属', icon: 'none' });
+      return;
+    }
     wx.navigateTo({ url: `/pages/pedigree-cert/pedigree-cert?pet_id=${this.data.petId}` });
   },
 

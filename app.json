@@ -18,7 +18,8 @@
     "pages/profile-edit/profile-edit",
     "pages/remind-settings/remind-settings",
     "pages/invite/invite",
-    "pages/invite-redeem/invite-redeem"
+    "pages/invite-redeem/invite-redeem",
+    "pages/feedback/feedback"
   ],
   "window": {
     "navigationBarBackgroundColor": "#E94560",

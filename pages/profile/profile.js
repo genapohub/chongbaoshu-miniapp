@@ -5,7 +5,9 @@ var api = require('../../utils/api');
 
 Page({
   data: {
-    userInfo: null,
+    userInfo: {},
+    displayAvatar: '',
+    displayName: '',
     stats: {
       petCount: 0,
       breedingCount: 0,
@@ -14,6 +16,7 @@ Page({
     subscriptionPlan: '免费版',
     expireDate: '',
     isAutoRenew: false,
+    loading: false,
   },
 
   onShow: function() {
@@ -23,7 +26,13 @@ Page({
   loadProfile: function() {
     var that = this;
     var app = getApp();
-    if (!app.globalData.token) return;
+
+    that.setData({ loading: true });
+
+    if (!app.globalData.token) {
+      that.setData({ loading: false });
+      return;
+    }
 
     Promise.all([
       api.get('/auth/profile').catch(function() { return null; }),
@@ -39,9 +48,12 @@ Page({
       var planNames = { free: '免费版', basic: '基础版', pro: 'Pro 专业版' };
       var tier = subscription && subscription.tier ? subscription.tier : 'free';
 
-      var userInfo = app.globalData.userInfo;
+      var userInfo = {};
+      if (app.globalData.userInfo) {
+        userInfo = app.globalData.userInfo;
+      }
       if (profile && profile.data) {
-        userInfo = profile.data;
+        userInfo = Object.assign({}, userInfo, profile.data);
       }
 
       var petCount = 0;
@@ -69,8 +81,22 @@ Page({
         isAutoRenew = false;
       }
 
+      var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+      var kennelLogo = userInfo.kennel_logo;
+      if (kennelLogo && !kennelLogo.startsWith('http')) {
+        kennelLogo = baseUrl + kennelLogo;
+      }
+      var avatarUrl = userInfo.avatar_url;
+      if (avatarUrl && !avatarUrl.startsWith('http')) {
+        avatarUrl = baseUrl + avatarUrl;
+      }
+      var displayAvatar = kennelLogo || avatarUrl || '';
+      var displayName = userInfo.kennel_name || userInfo.nickname || '';
+
       that.setData({
         userInfo: userInfo,
+        displayAvatar: displayAvatar,
+        displayName: displayName,
         stats: {
           petCount: petCount,
           breedingCount: breedingCount,
@@ -79,9 +105,11 @@ Page({
         subscriptionPlan: planNames[tier],
         expireDate: expireDate,
         isAutoRenew: isAutoRenew,
+        loading: false,
       });
     }).catch(function(err) {
       console.error('加载个人信息失败:', err);
+      that.setData({ loading: false });
     });
   },
 
@@ -95,7 +123,7 @@ Page({
   },
 
   goFeedback: function() {
-    wx.showToast({ title: '意见反馈功能开发中', icon: 'none' });
+    wx.navigateTo({ url: '/pages/feedback/feedback' });
   },
 
   goAbout: function() {

@@ -188,31 +188,77 @@ Page({
     if (this.data.loading) return;
     this.setData({ loading: true });
 
-    try {
-      const { formData, breedTags } = this.data;
-      const regionStr = formData.region.join(' ');
-      const kennelAddress = (regionStr + ' ' + formData.address).trim();
+    const { formData, breedTags } = this.data;
+    const regionStr = formData.region.join(' ');
+    const kennelAddress = (regionStr + ' ' + formData.address).trim();
 
-      const data = {
-        kennel_name: formData.kennel_name,
-        kennel_address: kennelAddress,
-        kennel_intro: formData.kennel_intro,
-        kennel_logo: formData.kennel_logo,
-        main_breeds: JSON.stringify(breedTags),
-        phone: formData.phone,
-        wechat: formData.wechat,
-      };
+    const that = this;
+    const isNewLogo = formData.kennel_logo && !formData.kennel_logo.startsWith('http://localhost:3001');
 
-      await api.put('/auth/profile', data);
-      wx.showToast({ title: '保存成功', icon: 'success' });
-      setTimeout(() => {
-        wx.navigateBack({ delta: 1 });
-      }, 1500);
-    } catch (error) {
-      console.error('保存失败:', error);
-      wx.showToast({ title: '保存失败', icon: 'none' });
-    } finally {
-      this.setData({ loading: false });
+    if (isNewLogo) {
+      wx.uploadFile({
+        url: 'http://localhost:3001/api/auth/profile',
+        filePath: formData.kennel_logo,
+        name: 'kennel_logo',
+        formData: {
+          kennel_name: formData.kennel_name,
+          kennel_address: kennelAddress,
+          kennel_intro: formData.kennel_intro,
+          main_breeds: JSON.stringify(breedTags),
+          phone: formData.phone,
+          wechat: formData.wechat,
+        },
+        header: {
+          'Authorization': 'Bearer ' + getApp().globalData.token
+        },
+        success: function(res) {
+            try {
+              var result = JSON.parse(res.data);
+              if (result.code === 0) {
+                getApp().globalData.userInfo = result.data;
+                wx.setStorageSync('userInfo', result.data);
+                wx.showToast({ title: '保存成功', icon: 'success' });
+                setTimeout(() => {
+                  wx.navigateBack({ delta: 1 });
+                }, 1500);
+              } else {
+                wx.showToast({ title: result.message || '保存失败', icon: 'none' });
+              }
+            } catch (e) {
+              console.error('解析响应失败:', e);
+              wx.showToast({ title: '保存失败', icon: 'none' });
+            }
+          },
+        fail: function(error) {
+          console.error('上传失败:', error);
+          wx.showToast({ title: '保存失败', icon: 'none' });
+        },
+        complete: function() {
+          that.setData({ loading: false });
+        }
+      });
+    } else {
+      try {
+        const data = {
+          kennel_name: formData.kennel_name,
+          kennel_address: kennelAddress,
+          kennel_intro: formData.kennel_intro,
+          main_breeds: JSON.stringify(breedTags),
+          phone: formData.phone,
+          wechat: formData.wechat,
+        };
+
+        await api.put('/auth/profile', data);
+        wx.showToast({ title: '保存成功', icon: 'success' });
+        setTimeout(() => {
+          wx.navigateBack({ delta: 1 });
+        }, 1500);
+      } catch (error) {
+        console.error('保存失败:', error);
+        wx.showToast({ title: '保存失败', icon: 'none' });
+      } finally {
+        that.setData({ loading: false });
+      }
     }
   },
 });

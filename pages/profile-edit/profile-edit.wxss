@@ -22,6 +22,13 @@
   padding: 16rpx 0;
 }
 
+.logo-upload-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160rpx;
+}
+
 .form-item {
   margin-bottom: 24rpx;
 }
@@ -87,6 +94,12 @@
 
 .logo-text {
   font-size: 22rpx;
+}
+
+.logo-hint {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 12rpx;
 }
 
 .picker-wrap {

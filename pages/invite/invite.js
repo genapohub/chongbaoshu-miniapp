@@ -115,4 +115,18 @@ Page({
   onGoRedeem() {
     wx.navigateTo({ url: '/pages/invite-redeem/invite-redeem' })
   },
+
+  /** 获取字符串首字符 */
+  getFirstChar(str) {
+    return str ? str.charAt(0) : '?';
+  },
+
+  /** 格式化日期 */
+  formatDate(dateStr) {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}-${day} 注册`;
+  },
 })

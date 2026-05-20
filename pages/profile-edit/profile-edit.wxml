@@ -2,12 +2,15 @@
   <view class="card">
     <view class="form-section">
       <text class="form-label">Logo</text>
-      <view class="logo-upload" bindtap="chooseLogo">
-        <image wx:if="{{formData.kennel_logo}}" src="{{formData.kennel_logo}}" class="logo-img" mode="aspectFill" />
-        <view wx:else class="logo-placeholder">
-          <text class="logo-icon">📷</text>
-          <text class="logo-text">点击上传</text>
+      <view class="logo-upload-wrap">
+        <view class="logo-upload" bindtap="chooseLogo">
+          <image wx:if="{{formData.kennel_logo}}" src="{{formData.kennel_logo}}" class="logo-img" mode="aspectFill" />
+          <view wx:else class="logo-placeholder">
+            <text class="logo-icon">📷</text>
+            <text class="logo-text">点击上传</text>
+          </view>
         </view>
+        <text wx:if="{{formData.kennel_logo}}" class="logo-hint">点击更换</text>
       </view>
     </view>
   </view>

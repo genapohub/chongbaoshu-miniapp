@@ -6,10 +6,10 @@
   <!-- 头部 -->
   <view class="profile-header">
     <view class="profile-avatar">
-      <image wx:if="{{userInfo.avatar_url}}" src="{{userInfo.avatar_url}}" mode="aspectFill" class="avatar-img" />
+      <image wx:if="{{displayAvatar}}" src="{{displayAvatar}}" mode="aspectFill" class="avatar-img" />
       <view wx:else class="avatar-placeholder">👤</view>
     </view>
-    <text class="profile-name">{{userInfo.nickname || '未设置昵称'}}</text>
+    <text class="profile-name">{{displayName || '未设置昵称'}}</text>
     <view wx:if="{{userInfo.subscription_tier === 'pro'}}" class="badge-pro">PRO</view>
     
     <view class="profile-stats">
