@@ -159,16 +159,27 @@ Page({
       that.setData({ healthRecords: healthRecords });
 
       if (pedigreeRes) {
+        var pedigreeData = pedigreeRes.data || pedigreeRes;
         that.setData({
           pedigree: {
-            regName: pedigreeRes.registration_name,
-            regNo: pedigreeRes.registration_number,
-            kennel: pedigreeRes.kennel_name,
-            color: pedigreeRes.color,
-            father: pedigreeRes.father_name,
-            mother: pedigreeRes.mother_name,
-            fatherFather: pedigreeRes.father_father_name,
-            fatherMother: pedigreeRes.father_mother_name,
+            regName: pedigreeData.registration_name || pedigreeData.pet_name || '',
+            regNo: pedigreeData.registration_number || '',
+            kennel: pedigreeData.kennel_name || '',
+            color: pedigreeData.color || '',
+            father: pedigreeData.father_name || '—',
+            mother: pedigreeData.mother_name || '—',
+            fatherFather: pedigreeData.father_father_name || '—',
+            fatherMother: pedigreeData.father_mother_name || '—',
+            motherFather: pedigreeData.mother_father_name || '—',
+            motherMother: pedigreeData.mother_mother_name || '—',
+            fatherFatherFather: pedigreeData.father_father_father_name || '—',
+            fatherFatherMother: pedigreeData.father_father_mother_name || '—',
+            fatherMotherFather: pedigreeData.father_mother_father_name || '—',
+            fatherMotherMother: pedigreeData.father_mother_mother_name || '—',
+            motherFatherFather: pedigreeData.mother_father_father_name || '—',
+            motherFatherMother: pedigreeData.mother_father_mother_name || '—',
+            motherMotherFather: pedigreeData.mother_mother_father_name || '—',
+            motherMotherMother: pedigreeData.mother_mother_mother_name || '—',
           },
         });
       }

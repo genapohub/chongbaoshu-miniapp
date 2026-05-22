@@ -1,68 +1,114 @@
 const api = require('../../utils/api');
-const { SUBSCRIPTION_PLANS, SUBSCRIPTION_TIER } = require('../../utils/constants');
 
 Page({
   data: {
     currentTier: 'free',
-    currentPlan: { name: '免费版' },
-    selectedTier: null,
+    currentPlan: { name: '免费版', icon: '🔷' },
+    selectedTier: '',
     isDowngrade: false,
     isUpgrade: false,
-    plans: [
-      {
+    availablePlans: [],
+    allPlans: {
+      free: {
         tier: 'free',
         name: '免费版',
         desc: '3只宠物 · 基础功能',
-        icon: '🆓',
-        iconBg: '#E8F5E9',
-        amountLabel: '免费',
-        amountColor: '#2E7D32',
+        icon: '🔷',
+        iconBg: '#F3F4F6',
       },
-      {
+      basic: {
         tier: 'basic',
-        name: 'Basic',
+        name: '基础版',
         desc: '100只宠物 · 数据导出',
         icon: '⭐',
         iconBg: '#E3F2FD',
-        amountLabel: '¥49/月',
-        amountColor: '#1976D2',
       },
-      {
+      pro: {
         tier: 'pro',
         name: 'Pro 专业版',
-        desc: '无限宠物 · 全部功能',
+        desc: '无限宠物 · 血统证书',
         icon: '💎',
-        iconBg: '#FFF3E0',
-        amountLabel: '¥149/月',
-        amountColor: '#E94560',
+        iconBg: '#FFE4E8',
       },
-    ],
+    },
   },
 
-  onLoad() {
+  onLoad(options) {
+    if (options && options.tier) {
+      this.setData({ selectedTier: options.tier });
+    }
     this.loadCurrentTier();
   },
 
   async loadCurrentTier() {
     try {
-      const res = await api.get('/auth/limits');
-      if (res && res.tier) {
-        const currentTier = res.tier;
-        const planInfo = SUBSCRIPTION_PLANS[currentTier] || SUBSCRIPTION_PLANS.free;
+      const profile = await api.get('/auth/profile').catch(() => null);
+      console.log('Profile API response:', profile);
+      
+      if (profile && profile.subscription_tier) {
+        const currentTier = profile.subscription_tier;
+        console.log('Profile returned tier:', currentTier);
+        const validTiers = ['free', 'basic', 'pro'];
+        if (!validTiers.includes(currentTier)) {
+          console.warn('Invalid tier from API, using default');
+          return;
+        }
+        const planIcons = {
+          free: '🔷',
+          basic: '⭐',
+          pro: '💎',
+        };
         
+        const planNames = {
+          free: '免费版',
+          basic: '基础版',
+          pro: 'Pro 专业版',
+        };
+
         this.setData({
           currentTier: currentTier,
-          currentPlan: { name: planInfo.name },
+          currentPlan: { name: planNames[currentTier] || '免费版', icon: planIcons[currentTier] },
         });
+      } else {
+        console.log('Profile response is empty or no subscription_tier field, keeping default');
       }
     } catch (err) {
       console.error('加载订阅等级失败:', err);
+      console.log('Keeping default currentTier: free');
+    } finally {
+      this.updateAvailablePlans();
     }
   },
 
+  updateAvailablePlans() {
+    const { currentTier, allPlans } = this.data;
+    const tierOrder = ['free', 'basic', 'pro'];
+    const currentIndex = tierOrder.indexOf(currentTier);
+    
+    const availablePlans = tierOrder
+      .filter(tier => tier !== currentTier)
+      .map(tier => {
+        const plan = allPlans[tier];
+        const newIndex = tierOrder.indexOf(tier);
+        return {
+          ...plan,
+          isDowngrade: newIndex < currentIndex,
+          tagType: newIndex < currentIndex ? 'downgrade' : 'upgrade',
+          tagText: newIndex < currentIndex ? '降级' : '升级',
+        };
+      });
+    
+    this.setData({ availablePlans });
+    console.log('Available plans:', availablePlans);
+  },
+
   selectPlan(e) {
+    console.log('selectPlan called', e);
     const tier = e.currentTarget.dataset.tier;
+    console.log('tier:', tier, 'currentTier:', this.data.currentTier);
+    
     if (tier === this.data.currentTier) {
+      console.log('same tier, returning');
       return;
     }
     
@@ -75,49 +121,54 @@ Page({
       isDowngrade: newIndex < currentIndex,
       isUpgrade: newIndex > currentIndex,
     });
+    console.log('selectedTier set to:', tier);
+    const tierNames = {
+      free: '免费版',
+      basic: '基础版',
+      pro: 'Pro 专业版',
+    };
+    wx.showToast({ title: '已选择: ' + tierNames[tier], icon: 'none' });
+  },
+
+  getTagType(tier) {
+    const tierOrder = ['free', 'basic', 'pro'];
+    const currentIndex = tierOrder.indexOf(this.data.currentTier);
+    const newIndex = tierOrder.indexOf(tier);
+    return newIndex < currentIndex ? 'downgrade' : 'upgrade';
+  },
+
+  getTagText(tier) {
+    const tierOrder = ['free', 'basic', 'pro'];
+    const currentIndex = tierOrder.indexOf(this.data.currentTier);
+    const newIndex = tierOrder.indexOf(tier);
+    return newIndex < currentIndex ? '降级' : '升级';
+  },
+
+  goBack() {
+    wx.navigateBack();
   },
 
   confirmChange() {
-    const { selectedTier, currentTier, isUpgrade } = this.data;
+    const { selectedTier, currentTier } = this.data;
     
     if (!selectedTier || selectedTier === currentTier) {
       return;
     }
 
-    const confirmText = isUpgrade ? '确认升级' : '确认降级';
-    const content = isUpgrade 
-      ? '升级将立即生效，是否确认？' 
-      : '降级将在当前周期结束后生效，是否确认？';
-
     wx.showModal({
-      title: confirmText,
-      content: content,
+      title: this.data.isDowngrade ? '确认降级' : '确认升级',
+      content: this.data.isDowngrade 
+        ? '降级将在当前周期结束后生效，确定继续吗？' 
+        : '升级将立即生效，确定继续吗？',
       confirmText: '确认',
       cancelText: '取消',
-      success: async (res) => {
+      success: (res) => {
         if (res.confirm) {
-          await this.performChange();
+          wx.navigateTo({ 
+            url: `/pages/payment-confirm/payment-confirm?tier=${selectedTier}` 
+          });
         }
       },
     });
-  },
-
-  async performChange() {
-    try {
-      wx.showLoading({ title: '处理中...' });
-      
-      await api.post('/subscriptions/upgrade', { tier: this.data.selectedTier });
-      
-      wx.showToast({ title: '变更成功', icon: 'success' });
-      
-      setTimeout(() => {
-        wx.navigateBack();
-      }, 1500);
-    } catch (err) {
-      console.error('变更失败:', err);
-      wx.showToast({ title: err.message || '变更失败', icon: 'none' });
-    } finally {
-      wx.hideLoading();
-    }
   },
 });

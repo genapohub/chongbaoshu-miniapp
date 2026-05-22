@@ -52,18 +52,18 @@ Page({
       if (app.globalData.userInfo) {
         userInfo = app.globalData.userInfo;
       }
-      if (profile && profile.data) {
-        userInfo = Object.assign({}, userInfo, profile.data);
+      if (profile) {
+        userInfo = Object.assign({}, userInfo, profile);
       }
 
       var petCount = 0;
-      if (dashboard && dashboard.data && dashboard.data.stats && dashboard.data.stats.petCount) {
-        petCount = dashboard.data.stats.petCount;
+      if (dashboard && dashboard.stats && dashboard.stats.petCount) {
+        petCount = dashboard.stats.petCount;
       }
 
       var breedingCount = 0;
-      if (dashboard && dashboard.data && dashboard.data.stats && dashboard.data.stats.breedingCount) {
-        breedingCount = dashboard.data.stats.breedingCount;
+      if (dashboard && dashboard.stats && dashboard.stats.breedingCount) {
+        breedingCount = dashboard.stats.breedingCount;
       }
 
       var inviteCount = 0;

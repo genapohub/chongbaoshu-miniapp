@@ -42,9 +42,10 @@ Page({
       let autoRenew = false;
       let planName = '免费版';
       let billingCycle = 'monthly';
+      let tier = 'free';
 
       if (profile) {
-        const tier = profile.subscription_tier || 'free';
+        tier = profile.subscription_tier || 'free';
         const planInfo = SUBSCRIPTION_PLANS[tier] || SUBSCRIPTION_PLANS.free;
         planName = planInfo.name;
 
@@ -75,6 +76,7 @@ Page({
             startDate,
             endDate,
             autoRenew,
+            showCancelButton: tier !== 'free',
           },
           usage: {
             petCount,

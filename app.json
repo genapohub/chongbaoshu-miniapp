@@ -11,15 +11,20 @@
     "pages/breeding-detail/breeding-detail",
     "pages/health-add/health-add",
     "pages/pedigree/pedigree",
+    "pages/pedigree-cert/pedigree-cert",
+    "pages/subscribe/subscribe",
     "pages/subscription/subscription",
     "pages/change-plan/change-plan",
+    "pages/plan-select/plan-select",
     "pages/cancel-subscription/cancel-subscription",
     "pages/profile/profile",
     "pages/profile-edit/profile-edit",
     "pages/remind-settings/remind-settings",
     "pages/invite/invite",
     "pages/invite-redeem/invite-redeem",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/payment-confirm/payment-confirm",
+    "pages/payment-success/payment-success"
   ],
   "window": {
     "navigationBarBackgroundColor": "#E94560",

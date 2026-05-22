@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="navbar">
+    <view class="navbar-left" bindtap="goHome">
+      <text class="navbar-back">‹</text>
+    </view>
+    <view class="navbar-title">支付成功</view>
+    <view class="navbar-right"></view>
+  </view>
+
+  <view class="page-content">
+    <view class="success-icon">✓</view>
+    <view class="success-title">支付成功</view>
+    <view class="success-desc">恭喜您已成功升级到{{planName}}</view>
+    
+    <view class="plan-card">
+      <view class="plan-icon" style="background: {{planIconBg}}">{{planIcon}}</view>
+      <view class="plan-info">
+        <text class="plan-name">{{planName}}</text>
+        <text class="plan-desc">{{planDesc}}</text>
+      </view>
+    </view>
+
+    <view class="order-detail">
+      <view class="detail-row">
+        <text class="detail-label">方案</text>
+        <text class="detail-value">{{planName}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label">周期</text>
+        <text class="detail-value">{{periodText}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label">实付金额</text>
+        <text class="detail-value primary">¥{{totalAmount}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label">下次扣费</text>
+        <text class="detail-value">{{nextBillingDate}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label">自动续费</text>
+        <text class="detail-value success">已开启</text>
+      </view>
+    </view>
+
+    <view class="tips-section">
+      <view class="tips-title">💡 温馨提示</view>
+      <view class="tips-list">
+        <text>• 订阅已生效，功能已解锁</text>
+        <text>• 可在「我的」-「订阅方案」查看详情</text>
+        <text>• 到期前会自动提醒续费</text>
+      </view>
+    </view>
+
+    <view class="invite-card">
+      <view class="invite-icon">🎁</view>
+      <view class="invite-content">
+        <view class="invite-title">邀请好友，各得1个月Pro</view>
+        <view class="invite-desc">分享你的邀请码，好友注册后双方各获Pro体验</view>
+      </view>
+      <button class="invite-btn" bindtap="goInvite">立即邀请 →</button>
+    </view>
+
+    <button class="start-btn" bindtap="goStartUsing">开始使用</button>
+  </view>
+</view>

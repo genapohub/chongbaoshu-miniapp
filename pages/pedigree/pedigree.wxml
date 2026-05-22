@@ -1,6 +1,136 @@
 <view class="container">
-  <view class="card">
-    <text style="font-size: 32rpx; font-weight: 600;">pedigree</text>
-    <text style="font-size: 26rpx; color: #999; margin-top: 12rpx;">页面开发中...</text>
+  <!-- 有宠物时显示 -->
+  <view wx:if="{{pets.length > 0}}">
+    <!-- 非Pro用户显示升级弹窗 -->
+    <view wx:if="{{!isPro}}" class="upgrade-popup">
+      <view class="upgrade-header">
+        <view class="upgrade-icon">💎</view>
+        <view class="upgrade-title">解锁血统证书</view>
+        <view class="upgrade-desc">升级Pro查看完整血统信息</view>
+      </view>
+      <view class="upgrade-benefits">
+        <view class="benefit-item">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">血统证书生成与分享</text>
+        </view>
+        <view class="benefit-item">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">三代血统树可视化</text>
+        </view>
+        <view class="benefit-item">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">近亲系数自动检测</text>
+        </view>
+        <view class="benefit-item">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">无限宠物管理</text>
+        </view>
+      </view>
+      <view class="upgrade-action">
+        <view class="upgrade-plan">
+          <view class="plan-info">
+            <text class="plan-name">Pro 专业版</text>
+            <text class="plan-price">¥119/月</text>
+          </view>
+        </view>
+        <view class="upgrade-btn" bindtap="goUpgrade">立即升级</view>
+      </view>
+    </view>
+
+    <!-- Pro用户：正常显示宠物选择 -->
+    <view class="pro-content">
+      <view class="section-title">选择宠物查看血统证书</view>
+      <view class="pet-list">
+        <view 
+          wx:for="{{pets}}" 
+          wx:key="id" 
+          class="pet-item" 
+          data-id="{{item.id}}"
+          bindtap="selectPet"
+        >
+          <view class="pet-avatar">
+            <image wx:if="{{item.avatar}}" src="{{item.avatar}}" mode="aspectFill" class="avatar-img" />
+            <view wx:else class="avatar-placeholder">{{item.species === 'dog' ? '🐕' : '🐈'}}</view>
+          </view>
+          <view class="pet-info">
+            <view class="pet-name">{{item.name}}</view>
+            <view class="pet-desc">{{item.breed || item.species}}</view>
+          </view>
+          <view class="pet-arrow">›</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无宠物时显示设计稿UI -->
+  <view wx:else>
+    <!-- 模糊预览背景 -->
+    <view class="preview-container">
+      <view class="preview-bg">
+        <view class="preview-card">
+          <view class="preview-header">血统证书</view>
+          <view class="preview-body">
+            <view class="preview-avatar"></view>
+            <view class="preview-line"></view>
+            <view class="preview-line"></view>
+            <view class="preview-line"></view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 锁定卡片 -->
+      <view class="lock-card">
+        <view class="lock-icon">🔒</view>
+        <view class="lock-title">Pro 专属功能</view>
+        <view class="lock-desc">升级Pro解锁血统证书</view>
+        <view class="lock-btn" bindtap="goUpgrade">立即升级</view>
+      </view>
+    </view>
+
+    <!-- Pro专属权益 -->
+    <view class="benefits-card">
+      <view class="benefits-title">💎 Pro 专属权益</view>
+      <view class="benefits-list">
+        <view class="benefit-row">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">血统证书生成与分享</text>
+        </view>
+        <view class="benefit-row">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">三代血统树可视化</text>
+        </view>
+        <view class="benefit-row">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">近亲系数自动检测</text>
+        </view>
+        <view class="benefit-row">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">无限宠物管理</text>
+        </view>
+        <view class="benefit-row">
+          <text class="benefit-check">✓</text>
+          <text class="benefit-text">专属客服支持</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 订阅方案 -->
+    <view class="plan-card">
+      <view class="plan-badge">推荐</view>
+      <view class="plan-content">
+        <view class="plan-icon-wrapper">
+          <view class="plan-icon">💎</view>
+        </view>
+        <view class="plan-info">
+          <view class="plan-name">Pro 专业版</view>
+          <view class="plan-desc">解锁全部功能</view>
+        </view>
+        <view class="plan-price">
+          <text class="price-symbol">¥</text>
+          <text class="price-num">119</text>
+          <text class="price-unit">/月</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

@@ -184,6 +184,6 @@ Page({
 
   // 跳转订阅
   goSubscription() {
-    wx.navigateTo({ url: '/pages/subscription/subscription' });
+    wx.navigateTo({ url: '/pages/plan-select/plan-select' });
   },
 });

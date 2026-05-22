@@ -1,92 +1,128 @@
 .container {
   min-height: 100vh;
-  background: #F8F9FA;
+  background: #F5F5F5;
 }
 
 .page-content {
   padding: 24rpx;
 }
 
-/* 当前方案 */
 .current-plan {
-  background: #E9ECEF;
-  border-radius: 20rpx;
+  background: #F3F4F6;
+  border-radius: 12rpx;
   padding: 24rpx;
   margin-bottom: 24rpx;
   display: flex;
   align-items: center;
-  gap: 20rpx;
+  gap: 16rpx;
+  position: relative;
 }
 
-.plan-icon {
+.current-badge {
+  position: absolute;
+  top: -12rpx;
+  left: 24rpx;
+  background: #6B7280;
+  color: #fff;
+  font-size: 18rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
+}
+
+.current-plan-icon {
   font-size: 40rpx;
 }
 
-.plan-info {
+.current-plan-info {
   flex: 1;
 }
 
-.plan-label {
-  font-size: 26rpx;
-  color: #6C757D;
-  margin-bottom: 8rpx;
-}
-
-.plan-name {
-  font-size: 30rpx;
+.current-plan-name {
+  font-size: 28rpx;
   font-weight: 700;
   color: #212529;
 }
 
-/* 卡片 */
-.card {
-  background: #FFFFFF;
-  border-radius: 20rpx;
-  padding: 28rpx;
-  margin-bottom: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
-}
-
-.card-title {
-  font-size: 30rpx;
+.section-title {
+  font-size: 26rpx;
   font-weight: 600;
   color: #212529;
+  margin-bottom: 16rpx;
+}
+
+.debug-info {
+  background: #E0E7FF;
+  padding: 12rpx 16rpx;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  gap: 24rpx;
+  font-size: 22rpx;
+  color: #4338CA;
+}
+
+.plans-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
   margin-bottom: 24rpx;
 }
 
-/* 方案卡片 */
 .plan-card {
   display: flex;
   align-items: center;
-  gap: 20rpx;
-  padding: 24rpx;
-  border-radius: 16rpx;
-  border: 2rpx solid #E9ECEF;
-  margin-bottom: 16rpx;
-  transition: all 0.2s ease;
+  gap: 16rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  background: #fff;
+  border: 2rpx solid transparent;
 }
 
-.plan-card:last-child {
-  margin-bottom: 0;
+.plan-card:active {
+  border-color: #E94560;
 }
 
 .plan-card.selected {
   border-color: #E94560;
-  background: #FFF5F7;
+  background: #FFF5F6;
 }
 
-.plan-card.disabled {
-  opacity: 0.5;
+.check-icon {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: #E94560;
+  color: #fff;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
 .plan-icon-wrapper {
-  width: 80rpx;
-  height: 80rpx;
+  width: 64rpx;
+  height: 64rpx;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36rpx;
+  font-size: 28rpx;
+}
+
+.free-bg {
+  background: #F3F4F6;
+}
+
+.basic-bg {
+  background: #E3F2FD;
+}
+
+.free-tag {
+  font-size: 16rpx;
+  font-weight: 700;
+  color: #6B7280;
 }
 
 .plan-details {
@@ -94,99 +130,90 @@
 }
 
 .plan-card-name {
-  font-size: 28rpx;
+  font-size: 26rpx;
   font-weight: 600;
   color: #212529;
   margin-bottom: 6rpx;
 }
 
 .plan-card-desc {
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #6C757D;
 }
 
-.plan-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.plan-tag {
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
 }
 
-.plan-amount {
+.plan-tag.downgrade {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.plan-tag.upgrade {
+  background: #DBEAFE;
+  color: #2563EB;
+}
+
+.notice-card {
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.downgrade-card {
+  background: #FFF3E0;
+}
+
+.upgrade-card {
+  background: #E8F5E9;
+}
+
+.notice-header {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 12rpx;
+}
+
+.notice-icon {
+  font-size: 24rpx;
+}
+
+.notice-title {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #D97706;
+}
+
+.upgrade-card .notice-title {
+  color: #166534;
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.notice-list text {
+  font-size: 22rpx;
+  color: #6C757D;
+  line-height: 1.5;
+}
+
+.confirm-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #E94560;
+  color: #fff;
+  border-radius: 44rpx;
   font-size: 28rpx;
   font-weight: 600;
-}
-
-/* 警告卡片 */
-.warning-card {
-  background: #FFF3E0;
-  border-radius: 20rpx;
-  padding: 24rpx;
-  margin-bottom: 24rpx;
-}
-
-.warning-title {
-  font-size: 26rpx;
-  font-weight: 700;
-  color: #F57C00;
-  margin-bottom: 12rpx;
-}
-
-.warning-text {
-  font-size: 24rpx;
-  color: #6C757D;
-  line-height: 1.8;
-  display: flex;
-  flex-direction: column;
-  gap: 8rpx;
-}
-
-/* 成功卡片 */
-.success-card {
-  background: #E8F5E9;
-  border-radius: 20rpx;
-  padding: 24rpx;
-  margin-bottom: 24rpx;
-}
-
-.success-title {
-  font-size: 26rpx;
-  font-weight: 700;
-  color: #2E7D32;
-  margin-bottom: 12rpx;
-}
-
-.success-text {
-  font-size: 24rpx;
-  color: #6C757D;
-  line-height: 1.8;
-  display: flex;
-  flex-direction: column;
-  gap: 8rpx;
-}
-
-/* 按钮 */
-.btn {
-  width: 100%;
-  height: 96rpx;
-  line-height: 96rpx;
-  border-radius: 48rpx;
-  font-size: 32rpx;
-  font-weight: 600;
-  text-align: center;
   border: none;
-  outline: none;
-}
-
-.btn-primary {
-  background: #E94560;
-  color: #FFFFFF;
-}
-
-.btn-primary[disabled] {
-  background: #E9ECEF;
-  color: #ADB5BD;
-}
-
-.btn-block {
-  width: 100%;
+  margin-top: 8rpx;
 }

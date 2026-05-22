@@ -55,7 +55,7 @@
     <!-- 操作按钮 -->
     <view class="action-btns">
       <button class="btn btn-outline" bindtap="goChangePlan">🔄 变更方案</button>
-      <button class="btn btn-outline btn-danger" bindtap="goCancelSubscription">🚫 取消续费</button>
+      <button wx:if="{{subscription.showCancelButton}}" class="btn btn-outline btn-danger" bindtap="goCancelSubscription">🚫 取消续费</button>
     </view>
 
     <!-- 支付历史 -->

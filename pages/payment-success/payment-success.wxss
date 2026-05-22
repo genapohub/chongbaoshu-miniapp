@@ -1,0 +1,232 @@
+.container {
+  min-height: 100vh;
+  background: #F5F5F5;
+}
+
+.navbar {
+  background: #E94560;
+  padding-top: 44px;
+  padding-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+}
+
+.navbar-left {
+  width: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-back {
+  font-size: 48rpx;
+  color: #fff;
+  font-weight: 300;
+}
+
+.navbar-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.navbar-right {
+  width: 80rpx;
+}
+
+.page-content {
+  padding: 60rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-icon {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background: #34D399;
+  color: #fff;
+  font-size: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.success-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 16rpx;
+}
+
+.success-desc {
+  font-size: 28rpx;
+  color: #6C757D;
+  margin-bottom: 40rpx;
+}
+
+.plan-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.plan-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+
+.plan-info {
+  flex: 1;
+}
+
+.plan-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #212529;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.plan-desc {
+  font-size: 24rpx;
+  color: #6C757D;
+}
+
+.order-detail {
+  width: 100%;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 28rpx;
+  color: #6C757D;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #212529;
+}
+
+.detail-value.primary {
+  color: #E94560;
+  font-weight: 600;
+}
+
+.detail-value.success {
+  color: #34D399;
+  font-weight: 600;
+}
+
+.tips-section {
+  width: 100%;
+  background: #E8F5E9;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 30rpx;
+}
+
+.tips-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #166534;
+  margin-bottom: 16rpx;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.tips-list text {
+  font-size: 24rpx;
+  color: #15803D;
+  line-height: 1.6;
+}
+
+.invite-card {
+  width: 100%;
+  background: #E8F5E9;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invite-icon {
+  font-size: 48rpx;
+  margin-bottom: 16rpx;
+}
+
+.invite-content {
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.invite-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 10rpx;
+}
+
+.invite-desc {
+  font-size: 24rpx;
+  color: #15803D;
+}
+
+.invite-btn {
+  background: #10B981;
+  color: #fff;
+  border-radius: 40rpx;
+  padding: 20rpx 60rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+}
+
+.start-btn {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: #E94560;
+  color: #fff;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+}

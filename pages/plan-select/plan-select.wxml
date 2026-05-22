@@ -1,0 +1,53 @@
+<view class="container">
+  <view class="page-content">
+    <view class="plans-section">
+      <view
+        wx:for="{{plans}}"
+        wx:key="tier"
+        class="plan-card {{selectedTier === item.tier ? 'selected' : ''}} {{item.tier === currentTier ? 'disabled' : ''}}"
+        bindtap="selectPlan"
+        data-tier="{{item.tier}}"
+      >
+        <view class="popular-badge" wx:if="{{item.isPopular}}">推荐</view>
+        <view class="plan-header">
+          <view class="plan-icon-wrapper" style="background: {{item.iconBg}}">{{item.icon}}</view>
+          <view class="plan-name">{{item.name}}</view>
+          <view class="plan-price">
+            <text class="price-value">¥{{item.price}}</text>
+            <text class="price-unit">/月</text>
+          </view>
+        </view>
+        <view class="plan-desc">{{item.desc}}</view>
+        <view wx:if="{{item.yearlyPrice}}" class="yearly-price">
+          年付 ¥{{item.yearlyPrice}}/月
+          <view class="save-tag">省¥{{item.yearlySave}}</view>
+        </view>
+        <view wx:if="{{item.tier === currentTier}}" class="current-tag">当前方案</view>
+      </view>
+    </view>
+
+    <view class="features-section">
+      <view class="features-title">📊 功能对比</view>
+      <scroll-view scroll-x class="features-scroll">
+        <view class="features-table">
+          <view class="feature-row header">
+            <view class="feature-cell">功能</view>
+            <view class="feature-cell">免费</view>
+            <view class="feature-cell">基础版</view>
+            <view class="feature-cell">Pro</view>
+          </view>
+          <view wx:for="{{features}}" wx:key="name" class="feature-row">
+            <view class="feature-cell">{{item.name}}</view>
+            <view class="feature-cell">{{item.free}}</view>
+            <view class="feature-cell">{{item.basic}}</view>
+            <view class="feature-cell">{{item.pro}}</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <button class="confirm-btn" bindtap="confirmChange" disabled="{{!selectedTier || selectedTier === currentTier}}">
+      确认变更
+    </button>
+  </view>
+</view>

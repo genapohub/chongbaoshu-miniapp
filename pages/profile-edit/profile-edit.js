@@ -248,7 +248,9 @@ Page({
           wechat: formData.wechat,
         };
 
-        await api.put('/auth/profile', data);
+        const result = await api.put('/auth/profile', data);
+        getApp().globalData.userInfo = result;
+        wx.setStorageSync('userInfo', result);
         wx.showToast({ title: '保存成功', icon: 'success' });
         setTimeout(() => {
           wx.navigateBack({ delta: 1 });

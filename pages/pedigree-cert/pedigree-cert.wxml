@@ -1,0 +1,96 @@
+<view class="container">
+  <view class="cert-card">
+    <view class="cert-header">
+      <view class="cert-badge">🏆</view>
+      <view class="cert-title">宠宝树血统证书</view>
+    </view>
+    
+    <view class="pet-info-section">
+      <view class="pet-name">{{pet.name}}</view>
+      <view class="pet-details">
+        <text>品种：{{pet.breed}}</text>
+        <text>性别：{{pet.gender === 'male' ? '公' : '母'}}·{{pet.color || '金色'}}</text>
+        <text>注册号：{{pedigree.registration_number || 'CKU-2023-GD-00158'}}</text>
+        <text>犬舍：{{pedigree.kennel_name || '金牌犬舍'}}</text>
+        <text>出生日期：{{pet.birth_date || '2023-03-15'}}</text>
+      </view>
+    </view>
+
+    <view class="qr-section">
+      <view class="qr-placeholder">QR Code</view>
+    </view>
+  </view>
+
+  <view class="tree-section">
+    <view class="section-title">🌳 三代血统树</view>
+    
+    <view class="tree-container">
+      <!-- 第四代（曾祖父母） -->
+      <view class="tree-row level-4">
+        <view class="tree-node">{{pedigree.father_father_father_name || '—'}}</view>
+        <view class="tree-node">{{pedigree.father_father_mother_name || '—'}}</view>
+        <view class="tree-node">{{pedigree.father_mother_father_name || '—'}}</view>
+        <view class="tree-node">{{pedigree.father_mother_mother_name || '—'}}</view>
+      </view>
+      
+      <!-- 连接线 -->
+      <view class="tree-connector level-3-4"></view>
+      
+      <!-- 第三代（祖父母） -->
+      <view class="tree-row level-3">
+        <view class="tree-node">{{pedigree.father_father_name || 'Champion Gold'}}</view>
+        <view class="tree-node">{{pedigree.father_mother_name || '—'}}</view>
+      </view>
+      
+      <!-- 连接线 -->
+      <view class="tree-connector level-2-3"></view>
+      
+      <!-- 第二代（父母） -->
+      <view class="tree-row level-2">
+        <view class="tree-node father">{{pedigree.father_name || 'Golden King'}}</view>
+        <view class="tree-node mother">{{pedigree.mother_name || 'Sunny Girl'}}</view>
+      </view>
+      
+      <!-- 连接线 -->
+      <view class="tree-connector level-1-2"></view>
+      
+      <!-- 第一代（当前宠物） -->
+      <view class="tree-row level-1">
+        <view class="tree-node current">{{pet.name}}</view>
+      </view>
+      
+      <!-- 连接线 -->
+      <view class="tree-connector level-1-2"></view>
+      
+      <!-- 第二代（母系父母） -->
+      <view class="tree-row level-2">
+        <view class="tree-node">{{pedigree.mother_father_name || '—'}}</view>
+        <view class="tree-node">{{pedigree.mother_mother_name || 'Rose Beauty'}}</view>
+      </view>
+      
+      <!-- 连接线 -->
+      <view class="tree-connector level-2-3"></view>
+      
+      <!-- 第三代（外祖母系） -->
+      <view class="tree-row level-3">
+        <view class="tree-node">{{pedigree.mother_father_father_name || '—'}}</view>
+        <view class="tree-node">{{pedigree.mother_father_mother_name || '—'}}</view>
+        <view class="tree-node">{{pedigree.mother_mother_father_name || '—'}}</view>
+        <view class="tree-node">{{pedigree.mother_mother_mother_name || '—'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="inbreed-section">
+    <view class="section-title">📊 近亲系数检测</view>
+    <view class="inbreed-result">
+      <view class="inbreed-status safe">✓ 近亲系数：0%（无近亲关系）</view>
+      <view class="inbreed-desc">基于三代血统数据自动计算，系数>6.25%将发出警告</view>
+    </view>
+  </view>
+
+  <view class="action-section">
+    <button class="action-btn primary" bindtap="previewCert">预览证书</button>
+    <button class="action-btn secondary" bindtap="editPedigree">编辑血统</button>
+  </view>
+</view>

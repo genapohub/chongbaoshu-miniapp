@@ -1,0 +1,109 @@
+<view class="container">
+  <view class="navbar">
+    <view class="navbar-left" bindtap="goBack">
+      <text class="navbar-back">‹</text>
+    </view>
+    <view class="navbar-title">确认支付</view>
+    <view class="navbar-right"></view>
+  </view>
+
+  <view class="page-content">
+    <view class="order-summary">
+      <view class="section-header">
+        <text class="section-icon">📋</text>
+        <text class="section-title">订单摘要</text>
+      </view>
+      <view class="plan-card">
+        <view class="plan-icon" style="background: {{plan.iconBg}}">{{plan.icon}}</view>
+        <view class="plan-details">
+          <text class="plan-name">{{plan.name}}</text>
+          <text class="plan-desc">{{plan.desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="subscription-period">
+      <view class="section-header">
+        <text class="section-icon">📅</text>
+        <text class="section-title">订阅周期</text>
+      </view>
+      <view class="period-options">
+        <view 
+          class="period-option {{period === 'monthly' ? 'active' : ''}}"
+          data-period="monthly"
+          bindtap="selectPeriod"
+        >
+          <text class="period-label">月付</text>
+          <text class="period-price">¥{{monthlyPrice}}</text>
+        </view>
+        <view 
+          class="period-option {{period === 'yearly' ? 'active' : ''}}"
+          data-period="yearly"
+          bindtap="selectPeriod"
+        >
+          <text class="period-label">年付</text>
+          <text class="period-price">¥{{yearlyPrice}}</text>
+          <text class="period-discount">省¥{{yearlySave}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="price-details">
+      <view class="section-header">
+        <text class="section-icon">💰</text>
+        <text class="section-title">价格明细</text>
+      </view>
+      <view class="price-row">
+        <text class="price-label">{{plan.name}}{{period === 'yearly' ? '年付' : '月付'}}</text>
+        <text class="price-value">¥{{period === 'yearly' ? (monthlyPrice * 12) : monthlyPrice}}</text>
+      </view>
+      <view class="price-row" wx:if="{{yearlySave > 0 && period === 'yearly'}}">
+        <text class="price-label">年付优惠</text>
+        <text class="price-discount">-¥{{yearlySave}}</text>
+      </view>
+      <view class="price-divider"></view>
+      <view class="price-row total">
+        <text class="price-label">应付金额</text>
+        <text class="price-total">¥{{totalAmount}}</text>
+      </view>
+      <view class="price-note">
+        <text>折合 ¥{{monthlyEquivalent}}/月，到期后自动续费 ¥{{monthlyPrice}}/月</text>
+      </view>
+    </view>
+
+    <view class="payment-method">
+      <view class="section-header">
+        <text class="section-icon">💳</text>
+        <text class="section-title">支付方式</text>
+      </view>
+      <view class="method-option active">
+        <text class="method-icon">💬</text>
+        <text class="method-name">微信支付</text>
+        <view class="method-radio">
+          <view class="radio-inner checked"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="agree-checkbox" bindtap="toggleAgree">
+      <view class="checkbox {{agreed ? 'checked' : ''}}">
+        <text wx:if="{{agreed}}">✓</text>
+      </view>
+      <text class="agree-text">订阅即表示同意《服务条款》和《隐私政策》，到期将自动续费</text>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bar-left">
+      <text class="bar-label">应付金额</text>
+      <text class="bar-amount">¥{{totalAmount}}</text>
+    </view>
+    <button 
+      class="bar-btn" 
+      bindtap="confirmPay"
+      disabled="{{!agreed}}"
+    >
+      确认支付 ¥{{totalAmount}}
+    </button>
+  </view>
+</view>
