@@ -2,6 +2,7 @@ var api = require('../../utils/api.js');
 
 Page({
   data: {
+    loading: false,
     formData: {
       name: '',
       species: '',
@@ -228,7 +229,10 @@ Page({
 
   submitForm: function() {
     var that = this;
+    if (that.data.loading) return;
     if (!that.validateForm()) return;
+
+    that.setData({ loading: true });
 
     var formData = that.data.formData;
     var avatarPath = formData.avatar;
@@ -251,7 +255,7 @@ Page({
 
     if (avatarPath) {
       wx.uploadFile({
-        url: 'http://localhost:3001/api/pets',
+        url: getApp().globalData.baseUrl + '/pets',
         filePath: avatarPath,
         name: 'avatar',
         formData: uploadData,
@@ -271,13 +275,13 @@ Page({
               wx.showToast({ title: result.detail || '添加失败', icon: 'none' });
             }
           } catch (e) {
-            console.error('解析响应失败:', e);
             wx.showToast({ title: '添加失败', icon: 'none' });
           }
+          that.setData({ loading: false });
         },
         fail: function(error) {
-          console.error('上传失败:', error);
           wx.showToast({ title: '上传失败', icon: 'none' });
+          that.setData({ loading: false });
         }
       });
     } else {
@@ -287,8 +291,9 @@ Page({
           wx.navigateBack({ delta: 1 });
         }, 1500);
       }).catch(function(error) {
-        console.error('添加宠物失败:', error);
         wx.showToast({ title: '添加失败', icon: 'none' });
+      }).finally(function() {
+        that.setData({ loading: false });
       });
     }
   },

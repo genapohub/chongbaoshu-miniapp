@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: #F7F8FA;
+  background: #F8F9FA;
   padding-bottom: env(safe-area-inset-bottom);
 }
 

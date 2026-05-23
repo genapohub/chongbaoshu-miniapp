@@ -3,8 +3,16 @@
   结构：升级引导条 → 订阅状态卡片 → 数据概览 → 今日提醒 → 快捷入口 → 最近动态
 -->
 <view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-wrapper">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 已登录 - 主要内容 -->
+  <view wx:elif="{{userInfo}}">
   <!-- 升级引导条（免费用户显示） -->
-  <view wx:if="{{userInfo && subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
+  <view wx:if="{{subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
     <view class="upgrade-content">
       <text class="upgrade-icon">✨</text>
       <text class="upgrade-text">升级Pro，解锁血统证书与无限宠物</text>
@@ -13,7 +21,7 @@
   </view>
 
   <!-- 订阅状态卡片 -->
-  <view wx:if="{{userInfo}}" class="sub-status-card">
+  <view class="sub-status-card">
     <text class="ssc-label">当前方案</text>
     <text class="ssc-plan">{{subscriptionPlan}}</text>
     <view class="ssc-meta">
@@ -24,7 +32,7 @@
   </view>
 
   <!-- 数据概览 -->
-  <view wx:if="{{userInfo}}" class="data-overview">
+  <view class="data-overview">
     <view class="data-card primary">
       <text class="data-num">{{petCount}}</text>
       <text class="data-label">宠物</text>
@@ -40,7 +48,7 @@
   </view>
 
   <!-- 今日提醒 -->
-  <view wx:if="{{userInfo}}" class="card">
+  <view class="card">
     <text class="card-title">🔔 今日提醒</text>
     <view wx:for="{{reminders}}" wx:key="id" class="reminder-row">
       <view class="reminder-dot" style="background: {{item.color}}"></view>
@@ -53,7 +61,7 @@
   </view>
 
   <!-- 快捷入口 -->
-  <view wx:if="{{userInfo}}" class="card">
+  <view class="card">
     <text class="card-title">⚡ 快捷入口</text>
     <view class="quick-entry">
       <view class="quick-item" bindtap="goAddPet">
@@ -77,7 +85,7 @@
   </view>
 
   <!-- 最近动态 -->
-  <view wx:if="{{userInfo && recentActivities.length > 0}}" class="card">
+  <view wx:if="{{recentActivities.length > 0}}" class="card">
     <text class="card-title">🕐 最近动态</text>
     <view wx:for="{{recentActivities}}" wx:key="index" class="activity-row">
       <text class="activity-text">{{item.text}}</text>
@@ -86,7 +94,7 @@
   </view>
 
   <!-- 未登录状态 -->
-  <view wx:if="{{!userInfo}}" class="login-state">
+  <view wx:elif="{{!userInfo && !loading}}" class="login-state">
     <view class="login-icon">🐾</view>
     <text class="login-title">宠宝树</text>
     <text class="login-subtitle">记录宠物成长的每一刻</text>

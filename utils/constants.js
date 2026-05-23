@@ -68,6 +68,54 @@ const SUBSCRIPTION_PLANS = {
   pro: { name: 'Pro 专业版', price: 149, period: '月付' },
 };
 
+// 订阅方案完整信息（含月付/年付价格，用于 plan-select / payment-confirm / change-plan）
+const PLAN_DETAILS = {
+  free: {
+    tier: 'free',
+    name: '免费版',
+    desc: '3只宠物 · 基础功能',
+    icon: '🔷',
+    iconBg: '#F3F4F6',
+    monthlyPrice: 0,
+    yearlyPrice: 0,
+    yearlySave: 0,
+  },
+  basic: {
+    tier: 'basic',
+    name: '基础版',
+    desc: '100只宠物 · 数据导出 · 优先提醒',
+    icon: '⭐',
+    iconBg: '#E3F2FD',
+    monthlyPrice: 49,
+    yearlyPrice: 39,
+    yearlySave: 120,
+  },
+  pro: {
+    tier: 'pro',
+    name: 'Pro 专业版',
+    desc: '无限宠物 · 血统证书 · 专属客服',
+    icon: '💎',
+    iconBg: '#FFE4E8',
+    monthlyPrice: 149,
+    yearlyPrice: 119,
+    yearlySave: 360,
+    isPopular: true,
+  },
+};
+
+// 功能对比表（用于 plan-select / subscribe / change-plan）
+const PLAN_FEATURES = [
+  { name: '宠物数量', free: '3只', basic: '100只', pro: '无限' },
+  { name: '照片/宠物', free: '3张', basic: '10张', pro: '20张' },
+  { name: '配种记录', free: '3条', basic: '无限', pro: '无限' },
+  { name: '健康档案', free: '✓', basic: '✓', pro: '✓' },
+  { name: '数据导出', free: '✗', basic: '✓', pro: '✓' },
+  { name: '血统证书', free: '✗', basic: '✗', pro: '✓' },
+  { name: '近亲检测', free: '✗', basic: '✓', pro: '✓' },
+  { name: '优先提醒', free: '✗', basic: '✓', pro: '✓' },
+  { name: '专属客服', free: '✗', basic: '✗', pro: '✓' },
+];
+
 // 主题色
 const THEME = {
   primary: '#E94560',
@@ -102,6 +150,8 @@ module.exports = {
   DEWORM_TYPE,
   SUBSCRIPTION_TIER,
   SUBSCRIPTION_PLANS,
+  PLAN_DETAILS,
+  PLAN_FEATURES,
   THEME,
   formatDate,
 };

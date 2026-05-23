@@ -147,4 +147,12 @@ Page({
       that.setData({ loading: false });
     });
   },
+
+  openTerms: function() {
+    wx.navigateTo({ url: '/pages/webview/webview?type=terms' });
+  },
+
+  openPrivacy: function() {
+    wx.navigateTo({ url: '/pages/webview/webview?type=privacy' });
+  },
 });

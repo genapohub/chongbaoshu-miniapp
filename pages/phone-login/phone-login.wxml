@@ -59,9 +59,9 @@
 
     <view class="terms">
       登录即表示同意
-      <text class="link">《用户协议》</text>
+      <text class="link" bindtap="openTerms">《用户协议》</text>
       和
-      <text class="link">《隐私政策》</text>
+      <text class="link" bindtap="openPrivacy">《隐私政策》</text>
     </view>
 
     <view class="dev-hint" wx:if="{{devMode}}">

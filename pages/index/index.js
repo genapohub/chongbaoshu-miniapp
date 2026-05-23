@@ -27,11 +27,7 @@ Page({
   },
 
   onPullDownRefresh() {
-    var that = this;
-    that.loadData();
-    setTimeout(function() {
-      wx.stopPullDownRefresh();
-    }, 1000);
+    this.loadData();
   },
 
   loadData() {
@@ -120,10 +116,9 @@ Page({
         return a.priority - b.priority;
       });
 
-      var activities = [
-        { text: '豆豆的疫苗记录已更新', time: '2小时前' },
-        { text: '新增配种记录：小白 × 大黄', time: '昨天' },
-      ];
+      var activities = dashboard && dashboard.data && dashboard.data.recentActivities
+        ? dashboard.data.recentActivities
+        : [];
 
       function formatLimit(value) {
         if (value === 'unlimited' || value >= 999999) {
@@ -151,9 +146,10 @@ Page({
         recentActivities: activities,
         loading: false,
       });
+      wx.stopPullDownRefresh();
     }).catch(function(err) {
-      console.error('首页加载失败:', err);
       that.setData({ loading: false });
+      wx.stopPullDownRefresh();
     });
   },
 

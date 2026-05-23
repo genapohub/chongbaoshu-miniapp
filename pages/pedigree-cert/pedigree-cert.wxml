@@ -10,9 +10,9 @@
       <view class="pet-details">
         <text>品种：{{pet.breed}}</text>
         <text>性别：{{pet.gender === 'male' ? '公' : '母'}}·{{pet.color || '金色'}}</text>
-        <text>注册号：{{pedigree.registration_number || 'CKU-2023-GD-00158'}}</text>
-        <text>犬舍：{{pedigree.kennel_name || '金牌犬舍'}}</text>
-        <text>出生日期：{{pet.birth_date || '2023-03-15'}}</text>
+        <text>注册号：{{pedigree.registration_number || '—'}}</text>
+        <text>犬舍：{{pedigree.kennel_name || '—'}}</text>
+        <text>出生日期：{{pet.birth_date || '—'}}</text>
       </view>
     </view>
 
@@ -38,7 +38,7 @@
       
       <!-- 第三代（祖父母） -->
       <view class="tree-row level-3">
-        <view class="tree-node">{{pedigree.father_father_name || 'Champion Gold'}}</view>
+        <view class="tree-node">{{pedigree.father_father_name || '—'}}</view>
         <view class="tree-node">{{pedigree.father_mother_name || '—'}}</view>
       </view>
       
@@ -47,8 +47,8 @@
       
       <!-- 第二代（父母） -->
       <view class="tree-row level-2">
-        <view class="tree-node father">{{pedigree.father_name || 'Golden King'}}</view>
-        <view class="tree-node mother">{{pedigree.mother_name || 'Sunny Girl'}}</view>
+        <view class="tree-node father">{{pedigree.father_name || '—'}}</view>
+        <view class="tree-node mother">{{pedigree.mother_name || '—'}}</view>
       </view>
       
       <!-- 连接线 -->
@@ -65,7 +65,7 @@
       <!-- 第二代（母系父母） -->
       <view class="tree-row level-2">
         <view class="tree-node">{{pedigree.mother_father_name || '—'}}</view>
-        <view class="tree-node">{{pedigree.mother_mother_name || 'Rose Beauty'}}</view>
+        <view class="tree-node">{{pedigree.mother_mother_name || '—'}}</view>
       </view>
       
       <!-- 连接线 -->
@@ -84,7 +84,12 @@
   <view class="inbreed-section">
     <view class="section-title">📊 近亲系数检测</view>
     <view class="inbreed-result">
-      <view class="inbreed-status safe">✓ 近亲系数：0%（无近亲关系）</view>
+      <view class="inbreed-status {{pedigree.inbreed_coefficient !== null && pedigree.inbreed_coefficient > 6.25 ? 'warning' : 'safe'}}">
+        {{pedigree.inbreed_coefficient !== null ? '✓ 近亲系数：' + pedigree.inbreed_coefficient + '%' : '近亲系数：暂无数据'}}
+        {{pedigree.inbreed_coefficient !== null && pedigree.inbreed_coefficient === 0 ? '（无近亲关系）' : ''}}
+        {{pedigree.inbreed_coefficient !== null && pedigree.inbreed_coefficient > 0 && pedigree.inbreed_coefficient <= 6.25 ? '（低风险）' : ''}}
+        {{pedigree.inbreed_coefficient !== null && pedigree.inbreed_coefficient > 6.25 ? '⚠️ 高风险！建议避免近亲繁殖' : ''}}
+      </view>
       <view class="inbreed-desc">基于三代血统数据自动计算，系数>6.25%将发出警告</view>
     </view>
   </view>

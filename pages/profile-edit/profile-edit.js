@@ -197,7 +197,7 @@ Page({
 
     if (isNewLogo) {
       wx.uploadFile({
-        url: 'http://localhost:3001/api/auth/profile',
+        url: getApp().globalData.baseUrl + '/auth/profile',
         filePath: formData.kennel_logo,
         name: 'kennel_logo',
         formData: {

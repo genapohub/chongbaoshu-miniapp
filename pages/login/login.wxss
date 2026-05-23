@@ -67,3 +67,8 @@
   color: rgba(255, 255, 255, 0.5);
   margin-top: 48rpx;
 }
+
+.login-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
+}

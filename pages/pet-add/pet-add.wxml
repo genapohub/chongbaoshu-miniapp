@@ -135,7 +135,7 @@
 
   <!-- 提交按钮 -->
   <view class="submit-section">
-    <view class="btn-primary" bindtap="submitForm">保存宠物</view>
+    <view class="btn-primary {{loading ? 'disabled' : ''}}" bindtap="submitForm">{{loading ? '保存中...' : '保存宠物'}}</view>
   </view>
 </view>
 

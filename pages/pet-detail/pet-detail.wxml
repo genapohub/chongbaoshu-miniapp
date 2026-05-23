@@ -3,8 +3,14 @@
   结构：头部信息 → 4Tab切换（概览/繁育/健康/血统）→ 各Tab内容
 -->
 <view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-wrapper">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
   <!-- 头部信息 -->
-  <view class="pet-header">
+  <view wx:elif="{{pet.name}}" class="pet-header">
     <view class="pet-avatar">
       <image wx:if="{{pet.avatar}}" src="{{pet.avatar}}" mode="aspectFill" class="avatar-img" />
       <view wx:else class="avatar-placeholder">{{pet.speciesIcon}}</view>

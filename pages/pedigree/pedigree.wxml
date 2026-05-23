@@ -49,7 +49,7 @@
           bindtap="selectPet"
         >
           <view class="pet-avatar">
-            <image wx:if="{{item.avatar}}" src="{{item.avatar}}" mode="aspectFill" class="avatar-img" />
+            <image wx:if="{{item.avatar}}" src="{{item.avatar}}" mode="aspectFill" lazy-load class="avatar-img" />
             <view wx:else class="avatar-placeholder">{{item.species === 'dog' ? '🐕' : '🐈'}}</view>
           </view>
           <view class="pet-info">

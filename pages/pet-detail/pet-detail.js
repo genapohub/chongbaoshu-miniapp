@@ -8,6 +8,8 @@ var authUtils = require('../../utils/auth');
 Page({
   data: {
     petId: null,
+    loading: true,
+    needRefresh: false,
     pet: {},
     currentTab: 'overview',
     tabs: [
@@ -31,8 +33,9 @@ Page({
   },
 
   onShow: function() {
-    if (this.data.petId) {
+    if (this.data.petId && this.data.needRefresh) {
       this.loadData();
+      this.setData({ needRefresh: false });
     }
   },
 
@@ -40,6 +43,7 @@ Page({
     var that = this;
     var petId = that.data.petId;
     if (!petId) return;
+    that.setData({ loading: true });
 
     Promise.all([
       api.get('/pets/' + petId),
@@ -177,8 +181,9 @@ Page({
         });
       }
     }).catch(function(err) {
-      console.error('加载宠物详情失败:', err);
+      wx.showToast({ title: '加载失败', icon: 'none' });
     }).finally(function() {
+      that.setData({ loading: false });
       that._loaded = true;
     });
   },
@@ -312,19 +317,23 @@ Page({
 
   goBreedingDetail(e) {
     const id = e.currentTarget.dataset.id;
+    this.setData({ needRefresh: true });
     wx.navigateTo({ url: `/pages/breeding-detail/breeding-detail?id=${id}` });
   },
 
   goHealthDetail(e) {
     const id = e.currentTarget.dataset.id;
+    this.setData({ needRefresh: true });
     wx.navigateTo({ url: `/pages/health-detail/health-detail?id=${id}` });
   },
 
   goAddBreeding() {
+    this.setData({ needRefresh: true });
     wx.navigateTo({ url: `/pages/breeding-add/breeding-add?pet_id=${this.data.petId}` });
   },
 
   goAddHealth() {
+    this.setData({ needRefresh: true });
     wx.navigateTo({ url: `/pages/health-add/health-add?pet_id=${this.data.petId}` });
   },
 
@@ -337,6 +346,7 @@ Page({
   },
 
   goEdit() {
+    this.setData({ needRefresh: true });
     wx.navigateTo({ url: `/pages/pet-edit/pet-edit?id=${this.data.petId}` });
   },
 

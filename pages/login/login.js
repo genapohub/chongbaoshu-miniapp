@@ -41,4 +41,12 @@ Page({
   skipLogin: function() {
     wx.switchTab({ url: '/pages/index/index' });
   },
+
+  openTerms: function() {
+    wx.navigateTo({ url: '/pages/webview/webview?type=terms' });
+  },
+
+  openPrivacy: function() {
+    wx.navigateTo({ url: '/pages/webview/webview?type=privacy' });
+  },
 });

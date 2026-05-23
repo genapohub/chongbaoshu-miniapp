@@ -24,7 +24,8 @@
     "pages/invite-redeem/invite-redeem",
     "pages/feedback/feedback",
     "pages/payment-confirm/payment-confirm",
-    "pages/payment-success/payment-success"
+    "pages/payment-success/payment-success",
+    "pages/webview/webview"
   ],
   "window": {
     "navigationBarBackgroundColor": "#E94560",

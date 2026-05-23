@@ -1,4 +1,5 @@
 const api = require('../../utils/api');
+const constants = require('../../utils/constants');
 
 Page({
   data: {
@@ -16,6 +17,7 @@ Page({
     monthlyEquivalent: 0,
     agreed: false,
     tier: '',
+    loading: false,
   },
 
   onLoad(options) {
@@ -26,37 +28,7 @@ Page({
   },
 
   loadPlanInfo(tier) {
-    const plans = {
-      free: {
-        name: '免费版',
-        desc: '3只宠物 · 基础功能',
-        icon: '🔷',
-        iconBg: '#E8F5E9',
-        monthlyPrice: 0,
-        yearlyPrice: 0,
-        yearlySave: 0,
-      },
-      basic: {
-        name: '基础版',
-        desc: '100只宠物 · 数据导出 · 优先提醒',
-        icon: '⭐',
-        iconBg: '#E3F2FD',
-        monthlyPrice: 49,
-        yearlyPrice: 39,
-        yearlySave: 120,
-      },
-      pro: {
-        name: 'Pro 专业版',
-        desc: '无限宠物 · 血统证书 · 专属客服',
-        icon: '💎',
-        iconBg: '#FFE4E8',
-        monthlyPrice: 149,
-        yearlyPrice: 119,
-        yearlySave: 360,
-      },
-    };
-
-    const planInfo = plans[tier] || plans.pro;
+    const planInfo = constants.PLAN_DETAILS[tier] || constants.PLAN_DETAILS.pro;
     this.setData({
       plan: {
         name: planInfo.name,
@@ -107,14 +79,61 @@ Page({
   },
 
   confirmPay() {
+    if (this.data.loading) return;
     if (!this.data.agreed) {
       wx.showToast({ title: '请先同意服务条款', icon: 'none' });
       return;
     }
 
-    // 直接跳转到支付成功页面
-    wx.redirectTo({
-      url: `/pages/payment-success/payment-success?tier=${this.data.tier}&period=${this.data.period}`
-    });
+    const { tier, period, totalAmount } = this.data;
+
+    if (totalAmount === 0) {
+      wx.redirectTo({
+        url: `/pages/payment-success/payment-success?tier=${tier}&period=${period}`
+      });
+      return;
+    }
+
+    this.setData({ loading: true });
+    wx.showLoading({ title: '支付中...', mask: true });
+
+    api.post('/subscriptions/create-order', {
+      tier: tier,
+      period: period,
+    }).then(function(orderRes) {
+      wx.hideLoading();
+
+      if (!orderRes || !orderRes.timeStamp) {
+        wx.showToast({ title: '创建订单失败', icon: 'none' });
+        return;
+      }
+
+      wx.requestPayment({
+        timeStamp: orderRes.timeStamp,
+        nonceStr: orderRes.nonceStr,
+        package: orderRes.package,
+        signType: orderRes.signType || 'MD5',
+        paySign: orderRes.paySign,
+        success: function() {
+          wx.redirectTo({
+            url: `/pages/payment-success/payment-success?tier=${tier}&period=${period}`
+          });
+        },
+        fail: function(err) {
+          if (err.errMsg && err.errMsg.indexOf('cancel') > -1) {
+            wx.showToast({ title: '支付已取消', icon: 'none' });
+          } else {
+            wx.showToast({ title: '支付失败', icon: 'none' });
+          }
+        },
+        complete: function() {
+          this.setData({ loading: false });
+        }.bind(this),
+      });
+    }.bind(this)).catch(function() {
+      wx.hideLoading();
+      wx.showToast({ title: '创建订单失败', icon: 'none' });
+      this.setData({ loading: false });
+    }.bind(this));
   },
 });

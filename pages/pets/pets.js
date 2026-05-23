@@ -268,7 +268,7 @@ Page({
   onTouchEnd(e) {
     var data = this.data;
     var touchStartX = data.touchStartX;
-    var touchEndX = data.touchEndX;
+    var touchEndX = e.changedTouches[0].clientX;
     var currentTouchId = data.currentTouchId;
     var isLongPress = data.isLongPress;
     var diff = touchStartX - touchEndX;

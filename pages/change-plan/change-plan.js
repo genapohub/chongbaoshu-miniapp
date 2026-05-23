@@ -4,6 +4,7 @@ Page({
   data: {
     currentTier: 'free',
     currentPlan: { name: '免费版', icon: '🔷' },
+    currentPeriodEnd: '',
     selectedTier: '',
     isDowngrade: false,
     isUpgrade: false,
@@ -43,6 +44,7 @@ Page({
   async loadCurrentTier() {
     try {
       const profile = await api.get('/auth/profile').catch(() => null);
+      const subscription = await api.get('/subscriptions/current').catch(() => null);
       
       if (profile && profile.subscription_tier) {
         const currentTier = profile.subscription_tier;
@@ -62,9 +64,15 @@ Page({
           pro: 'Pro 专业版',
         };
 
+        var periodEnd = '';
+        if (subscription && subscription.current_period_end) {
+          periodEnd = subscription.current_period_end.split('T')[0];
+        }
+
         this.setData({
           currentTier: currentTier,
           currentPlan: { name: planNames[currentTier] || '免费版', icon: planIcons[currentTier] },
+          currentPeriodEnd: periodEnd,
         });
       }
     } catch (err) {

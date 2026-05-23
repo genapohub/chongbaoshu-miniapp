@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: #F7F8FA;
+  background: #F8F9FA;
   padding: 24rpx;
   padding-bottom: 60rpx;
 }
@@ -155,4 +155,13 @@
 
 .pro-locked {
   opacity: 0.7;
+}
+
+.coming-soon {
+  font-size: 20rpx;
+  color: #9CA3AF;
+  background: #F3F4F6;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  margin-left: 8rpx;
 }

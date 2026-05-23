@@ -136,7 +136,7 @@
 
 .login-btn {
   height: 96rpx;
-  border-radius: 48rpx;
+  border-radius: 16rpx;
   background: #E9ECEF;
   color: #ADB5BD;
   font-size: 32rpx;

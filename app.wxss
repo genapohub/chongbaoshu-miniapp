@@ -31,7 +31,7 @@ page {
 .btn-primary {
   background-color: #E94560;
   color: #FFFFFF;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   font-size: 32rpx;
   font-weight: 600;
   text-align: center;
@@ -47,12 +47,17 @@ page {
   opacity: 0.85;
 }
 
+.btn-primary.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 /* 次要按钮 */
 .btn-secondary {
   background-color: #FFFFFF;
   color: #E94560;
   border: 2rpx solid #E94560;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   font-size: 28rpx;
   text-align: center;
   padding: 20rpx 0;
@@ -66,7 +71,7 @@ page {
 .btn-danger {
   background-color: #FF6B6B;
   color: #FFFFFF;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   font-size: 28rpx;
   text-align: center;
   padding: 20rpx 0;

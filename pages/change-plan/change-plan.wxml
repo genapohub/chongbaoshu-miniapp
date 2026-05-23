@@ -37,7 +37,7 @@
         <text class="notice-title">降级须知</text>
       </view>
       <view class="notice-list">
-        <text>• 降级将在当前周期结束后生效（2027-05-16）</text>
+        <text>• 降级将在当前周期结束后生效{{currentPeriodEnd ? '（' + currentPeriodEnd + '）' : ''}}</text>
         <text>• 超出限额的宠物数据将保留但不可新增</text>
         <text>• Pro专属功能（血统证书等）将不可访问</text>
         <text>• 剩余天数的差价不退还</text>
@@ -50,7 +50,6 @@
         <text class="notice-title">升级规则</text>
       </view>
       <view class="notice-list">
-        <text>• 升级立即生效</text>
         <text>• 升级立即生效</text>
         <text>• 按剩余天数计算差价</text>
         <text>• Pro功能即时解锁</text>

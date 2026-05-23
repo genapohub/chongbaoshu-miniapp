@@ -92,12 +92,13 @@
       />
     </view>
     <view class="setting-item">
-      <text class="setting-label">短信通知</text>
+      <text class="setting-label">短信通知<text class="coming-soon">即将上线</text></text>
       <switch
         checked="{{settings.notify_sms}}"
-        color="#E94560"
+        color="#E8E8E8"
         bindchange="onSwitchChange"
         data-field="notify_sms"
+        disabled
       />
     </view>
   </view>

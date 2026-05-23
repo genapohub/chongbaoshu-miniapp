@@ -53,6 +53,7 @@
             src="{{item.avatar}}"
             mode="aspectFill"
             class="avatar-img"
+            lazy-load
           />
           <view wx:else class="avatar-placeholder">{{item.speciesIcon}}</view>
         </view>

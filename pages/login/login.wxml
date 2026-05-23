@@ -18,5 +18,5 @@
   
   <text class="login-skip" bindtap="skipLogin">跳过登录</text>
   
-  <text class="login-terms">登录即同意《用户协议》和《隐私政策》</text>
+  <text class="login-terms">登录即同意<text class="login-link" bindtap="openTerms">《用户协议》</text>和<text class="login-link" bindtap="openPrivacy">《隐私政策》</text></text>
 </view>

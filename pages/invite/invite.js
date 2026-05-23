@@ -76,15 +76,25 @@ Page({
         page: this.data.page,
         pageSize: this.data.pageSize,
       })
-      const newRecords = res.list || []
+      const rawRecords = res.list || []
+      const newRecords = rawRecords.map(function(item) {
+        var nickname = item.invitee_nickname || '新用户'
+        return {
+          ...item,
+          avatarText: nickname.charAt(0),
+          formattedDate: formatDate(item.redeemed_at || item.created_at),
+          statusBadge: item.status === 'redeemed' ? '已注册' : '待注册',
+          statusClass: item.status === 'redeemed' ? 'badge-success' : 'badge-default',
+        }
+      })
       this.setData({
         records: this.data.page === 1 ? newRecords : [...this.data.records, ...newRecords],
         total: res.total,
         page: this.data.page + 1,
-        hasMore: newRecords.length >= this.data.pageSize,
+        hasMore: rawRecords.length >= this.data.pageSize,
       })
     } catch (err) {
-      console.error('获取记录失败', err)
+      wx.showToast({ title: '加载失败', icon: 'none' })
     } finally {
       this.setData({ loading: false })
     }

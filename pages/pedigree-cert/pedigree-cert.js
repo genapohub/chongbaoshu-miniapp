@@ -54,6 +54,7 @@ Page({
           registration_number: pedigreeData.registration_number || '',
           kennel_name: pedigreeData.kennel_name || '',
           color: pedigreeData.color || pet.color || '',
+          inbreed_coefficient: pedigreeData.inbreed_coefficient || null,
           // 父亲
           father_name: pedigreeData.father_name || '—',
           father_breed: pedigreeData.father_breed || '',

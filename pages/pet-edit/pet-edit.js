@@ -6,6 +6,7 @@ var api = require('../../utils/api.js');
 Page({
   data: {
     petId: null,
+    loading: false,
     formData: {
       name: '',
       species: '',
@@ -273,13 +274,16 @@ Page({
 
   submitForm: function() {
     var that = this;
+    if (that.data.loading) return;
     if (!that.validateForm()) return;
+
+    that.setData({ loading: true });
 
     var petId = that.data.petId;
     var formData = that.data.formData;
     var selectedTags = that.data.selectedTags;
 
-    var data = {
+    var uploadData = {
       name: formData.name,
       species: formData.species,
       breed: formData.breed || null,
@@ -291,18 +295,69 @@ Page({
       father_breed: formData.father_breed || null,
       mother_name: formData.mother_name || null,
       mother_breed: formData.mother_breed || null,
-      tags: selectedTags.length > 0 ? selectedTags : null,
+      tags: selectedTags.length > 0 ? selectedTags.join(',') : null,
     };
 
-    api.put('/pets/' + petId, data).then(function() {
-      wx.showToast({ title: '修改成功', icon: 'success' });
+    var avatarPath = formData.avatar;
+    var isNewAvatar = avatarPath && !avatarPath.startsWith('http');
 
-      setTimeout(function() {
-        wx.navigateBack({ delta: 1 });
-      }, 1500);
-    }).catch(function(error) {
-      console.error('修改宠物失败:', error);
-      wx.showToast({ title: '修改失败', icon: 'none' });
-    });
+    if (isNewAvatar) {
+      wx.uploadFile({
+        url: getApp().globalData.baseUrl + '/pets/' + petId,
+        filePath: avatarPath,
+        name: 'avatar',
+        formData: uploadData,
+        method: 'PUT',
+        header: {
+          'Authorization': 'Bearer ' + getApp().globalData.token,
+        },
+        success: function(res) {
+          try {
+            var result = JSON.parse(res.data);
+            if (result.code === 0) {
+              wx.showToast({ title: '修改成功', icon: 'success' });
+              setTimeout(function() {
+                wx.navigateBack({ delta: 1 });
+              }, 1500);
+            } else {
+              wx.showToast({ title: result.detail || '修改失败', icon: 'none' });
+            }
+          } catch (e) {
+            wx.showToast({ title: '修改失败', icon: 'none' });
+          }
+          that.setData({ loading: false });
+        },
+        fail: function() {
+          wx.showToast({ title: '上传失败', icon: 'none' });
+          that.setData({ loading: false });
+        },
+      });
+    } else {
+      var apiData = {
+        name: formData.name,
+        species: formData.species,
+        breed: formData.breed || null,
+        gender: formData.gender || null,
+        birth_date: formData.birth_date || null,
+        color: formData.color || null,
+        chip_no: formData.chip_no || null,
+        father_name: formData.father_name || null,
+        father_breed: formData.father_breed || null,
+        mother_name: formData.mother_name || null,
+        mother_breed: formData.mother_breed || null,
+        tags: selectedTags.length > 0 ? selectedTags : null,
+      };
+
+      api.put('/pets/' + petId, apiData).then(function() {
+        wx.showToast({ title: '修改成功', icon: 'success' });
+        setTimeout(function() {
+          wx.navigateBack({ delta: 1 });
+        }, 1500);
+      }).catch(function() {
+        wx.showToast({ title: '修改失败', icon: 'none' });
+      }).finally(function() {
+        that.setData({ loading: false });
+      });
+    }
   },
 });
