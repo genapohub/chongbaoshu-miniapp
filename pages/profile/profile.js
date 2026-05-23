@@ -91,7 +91,7 @@ Page({
         avatarUrl = baseUrl + avatarUrl;
       }
       var displayAvatar = kennelLogo || avatarUrl || '';
-      var displayName = userInfo.kennel_name || userInfo.nickname || '';
+      var displayName = userInfo.kennel_name || userInfo.phone || '';
 
       that.setData({
         userInfo: userInfo,

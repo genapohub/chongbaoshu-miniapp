@@ -102,12 +102,28 @@
         <input class="input-field" placeholder="请输入父亲品种" value="{{formData.father_breed}}" bindinput="onInputChange" data-field="father_breed" />
       </view>
       <view class="form-item">
+        <text class="form-label">祖父名称（父系）</text>
+        <input class="input-field" placeholder="请输入祖父名称" value="{{formData.grandfather_p_name}}" bindinput="onInputChange" data-field="grandfather_p_name" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">祖母名称（父系）</text>
+        <input class="input-field" placeholder="请输入祖母名称" value="{{formData.grandmother_p_name}}" bindinput="onInputChange" data-field="grandmother_p_name" />
+      </view>
+      <view class="form-item">
         <text class="form-label">母亲名称</text>
         <input class="input-field" placeholder="请输入母亲名称" value="{{formData.mother_name}}" bindinput="onInputChange" data-field="mother_name" />
       </view>
       <view class="form-item">
         <text class="form-label">母亲品种</text>
         <input class="input-field" placeholder="请输入母亲品种" value="{{formData.mother_breed}}" bindinput="onInputChange" data-field="mother_breed" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">外祖父名称（母系）</text>
+        <input class="input-field" placeholder="请输入外祖父名称" value="{{formData.grandfather_m_name}}" bindinput="onInputChange" data-field="grandfather_m_name" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">外祖母名称（母系）</text>
+        <input class="input-field" placeholder="请输入外祖母名称" value="{{formData.grandmother_m_name}}" bindinput="onInputChange" data-field="grandmother_m_name" />
       </view>
     </view>
   </view>

@@ -14,7 +14,7 @@ App({
     // 正式版/体验版 → 生产域名，开发版 → 本地调试
     baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
       ? 'https://api.chongbaoshu.com/api'
-      : 'http://localhost:3001/api',
+      : 'http://localhost:3000/api',
   },
 
   /**

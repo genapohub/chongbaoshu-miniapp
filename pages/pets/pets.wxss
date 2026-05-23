@@ -44,9 +44,12 @@
 }
 
 .filter-tab {
-  padding: 10rpx 24rpx;
-  border-radius: 32rpx;
-  font-size: 24rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 32rpx;
+  border-radius: 48rpx;
+  font-size: 26rpx;
   background: #fff;
   color: #6B7280;
   border: 2rpx solid #E5E7EB;
@@ -58,6 +61,15 @@
   background: #E94560;
   color: #fff;
   border-color: #E94560;
+}
+
+.filter-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.filter-label {
+  font-size: 26rpx;
 }
 
 /* 宠物列表 */

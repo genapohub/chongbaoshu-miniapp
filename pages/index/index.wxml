@@ -94,6 +94,8 @@
   </view>
 
   <!-- 未登录状态 -->
+  </view>
+
   <view wx:elif="{{!userInfo && !loading}}" class="login-state">
     <view class="login-icon">🐾</view>
     <text class="login-title">宠宝树</text>

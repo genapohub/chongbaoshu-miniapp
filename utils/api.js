@@ -33,6 +33,7 @@ function request(options) {
       method,
       data,
       header,
+      timeout: 15000,
       success: (res) => {
         if (loading) wx.hideLoading();
 
@@ -83,6 +84,7 @@ function request(options) {
       },
       fail: (err) => {
         if (loading) wx.hideLoading();
+        console.warn('[API] request fail:', method, url, err.errMsg);
         wx.showToast({
           title: '网络异常，请重试',
           icon: 'none',

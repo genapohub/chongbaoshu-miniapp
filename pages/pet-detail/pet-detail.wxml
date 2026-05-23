@@ -79,7 +79,7 @@
         </view>
         <view wx:if="{{canAddPhoto}}" class="photo-add" bindtap="addPhoto">＋</view>
       </view>
-      <view class="form-hint">免费版每只3张，Pro每只20张</view>
+      <view class="form-hint">免费版每只3张，基础版每只10张，Pro版每只20张</view>
     </view>
   </view>
 

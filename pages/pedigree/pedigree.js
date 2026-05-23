@@ -1,4 +1,5 @@
 const api = require('../../utils/api');
+const constants = require('../../utils/constants');
 
 Page({
   data: {
@@ -25,15 +26,20 @@ Page({
       const pets = petsRes.list || [];
       const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
 
-      const petList = pets.map(pet => ({
-        id: pet.id,
-        name: pet.name,
-        avatar: pet.avatar_photo ? baseUrl + pet.avatar_photo : '',
-        breed: pet.breed || '',
-        species: pet.species,
-        gender: pet.gender,
-        status: pet.status,
-      }));
+      const petList = pets.map(pet => {
+        const speciesInfo = constants.SPECIES[pet.species];
+        return {
+          id: pet.id,
+          name: pet.name,
+          avatar: pet.avatar_photo ? baseUrl + pet.avatar_photo : '',
+          breed: pet.breed || '',
+          species: pet.species,
+          speciesLabel: speciesInfo ? speciesInfo.label : pet.species,
+          speciesIcon: speciesInfo ? speciesInfo.icon : '🐾',
+          gender: pet.gender,
+          status: pet.status,
+        };
+      });
 
       that.setData({
         pets: petList,

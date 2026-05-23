@@ -2,7 +2,7 @@
  * 邀请好友页 - 逻辑
  */
 const api = require('../../utils/api')
-const { formatDate } = require('../../utils/constants')
+const { formatDate, formatDateTime } = require('../../utils/constants')
 const app = getApp()
 
 Page({
@@ -82,7 +82,7 @@ Page({
         return {
           ...item,
           avatarText: nickname.charAt(0),
-          formattedDate: formatDate(item.redeemed_at || item.created_at),
+          formattedDate: formatDateTime(item.redeemed_at || item.created_at),
           statusBadge: item.status === 'redeemed' ? '已注册' : '待注册',
           statusClass: item.status === 'redeemed' ? 'badge-success' : 'badge-default',
         }

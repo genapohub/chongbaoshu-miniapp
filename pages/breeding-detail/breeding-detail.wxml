@@ -20,7 +20,7 @@
       </view>
       <view class="info-row">
         <text class="info-label">配种方式</text>
-        <text class="info-value">{{breeding.mating_method || '-'}}</text>
+        <text class="info-value">{{breeding.mating_method_text || '-'}}</text>
       </view>
       <view class="info-row">
         <text class="info-label">预产期</text>

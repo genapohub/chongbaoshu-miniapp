@@ -34,8 +34,8 @@ Page({
   onLoad: function(options) {
     wx.setNavigationBarTitle({ title: '添加配种' });
     if (options && options.pet_id) {
-      this.setData({ motherPetId: options.pet_id });
-      this.loadPetInfo(options.pet_id, 'mother');
+      // 先加载宠物信息，根据性别自动分配母/父角色
+      this.loadPetInfo(options.pet_id, 'auto');
     }
     this.checkCanSubmit();
   },
@@ -49,7 +49,13 @@ Page({
         var avatar = data.avatar_photo ? baseUrl + data.avatar_photo : '';
         var gender = data.gender || 'female';
         
-        if (gender === 'female') {
+        // type='auto' 时根据宠物性别自动分配角色
+        var assignAs = type;
+        if (type === 'auto') {
+          assignAs = gender === 'female' ? 'mother' : 'father';
+        }
+
+        if (assignAs === 'mother') {
           that.setData({
             motherPetId: petId,
             motherPetName: data.name,
@@ -57,7 +63,6 @@ Page({
             motherPetAvatar: avatar,
             motherDisabled: true,
           });
-          // 如果已经选了父宠，自动检测近亲
           if (that.data.fatherPetId) {
             that.checkInbreeding();
           }
@@ -69,7 +74,6 @@ Page({
             fatherPetAvatar: avatar,
             fatherDisabled: true,
           });
-          // 如果已经选了母宠，自动检测近亲
           if (that.data.motherPetId) {
             that.checkInbreeding();
           }
@@ -279,6 +283,7 @@ Page({
     try {
       const data = {
         pet_id: parseInt(this.data.motherPetId),
+        father_id: this.data.fatherPetId ? parseInt(this.data.fatherPetId) : null,
         mate_name: this.data.fatherPetName,
         mating_date: this.data.formData.breed_date,
         mating_method: this.data.formData.breed_method === 'natural' ? 'natural' : 'artificial',

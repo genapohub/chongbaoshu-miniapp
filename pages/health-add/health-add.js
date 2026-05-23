@@ -22,6 +22,7 @@ Page({
     nextDateInfo: '',
     notesLength: 0,
     canSubmit: false,
+    roundError: '',
     loading: false,
     vaccineTypes: ['狂犬疫苗', '犬瘟热', '细小疫苗', '猫三联', '猫五联'],
     vaccineIntervals: {
@@ -47,7 +48,7 @@ Page({
       this.setData({ petId: options.pet_id });
       this.loadPetName(options.pet_id);
     }
-    this.checkCanSubmit();
+    this.recalcSubmit();
   },
 
   loadPetName: function(petId) {
@@ -100,173 +101,166 @@ Page({
     var dataset = e.currentTarget.dataset;
     var id = dataset.id;
     var name = dataset.name;
+    var formData = this.data.formData;
     this.setData({
       petId: id,
       petName: name,
       showPetPicker: false,
+      canSubmit: this._calcCanSubmit(this.data.currentType, formData),
     });
-    this.checkCanSubmit();
   },
 
-  switchType(e) {
-    const type = e.currentTarget.dataset.type;
+  switchType: function(e) {
+    var type = e.currentTarget.dataset.type;
+    var newFormData = {
+      vaccine_type: '',
+      vaccine_round: '',
+      deworm_type: '',
+      deworm_type_display: '',
+      medicine_name: '',
+      record_date: '',
+      dosage: '',
+      batch_no: '',
+      vet_hospital: '',
+      description: '',
+      notes: '',
+    };
     this.setData({
       currentType: type,
-      formData: {
-        vaccine_type: '',
-        vaccine_round: '',
-        deworm_type: '',
-        deworm_type_display: '',
-        medicine_name: '',
-        record_date: '',
-        dosage: '',
-        batch_no: '',
-        vet_hospital: '',
-        description: '',
-        notes: '',
-      },
+      formData: newFormData,
       nextDate: '',
+      nextDateInfo: '',
       notesLength: 0,
+      roundError: '',
+      canSubmit: false,
     });
-    this.checkCanSubmit();
   },
 
-  onInputChange(e) {
-    const field = e.currentTarget.dataset.field;
-    const value = e.detail.value;
+  onInputChange: function(e) {
+    var field = e.currentTarget.dataset.field;
+    var value = e.detail.value;
+    var formData = this.data.formData;
+    formData[field] = value;
+    var canSubmit = this._calcCanSubmit(this.data.currentType, formData);
+
+    // 针次实时校验提示
+    var roundError = '';
+    if (field === 'vaccine_round' && value) {
+      var round = parseInt(value, 10);
+      if (isNaN(round) || round < 1 || round > 10) {
+        roundError = '针次请输入1-10的数字';
+      }
+    }
+
     this.setData({
-      [`formData.${field}`]: value,
+      formData: formData,
+      canSubmit: canSubmit,
+      roundError: roundError,
     });
-    this.checkCanSubmit();
   },
 
-  onNotesInput(e) {
-    const value = e.detail.value;
+  onNotesInput: function(e) {
+    var value = e.detail.value;
     this.setData({
       'formData.notes': value,
       notesLength: value ? value.length : 0,
     });
   },
 
-  onDateChange(e) {
-    this.setData({
-      'formData.record_date': e.detail.value,
-    });
-    this.calculateNextDate();
-    this.checkCanSubmit();
+  onDateChange: function(e) {
+    var formData = this.data.formData;
+    formData.record_date = e.detail.value;
+    var canSubmit = this._calcCanSubmit(this.data.currentType, formData);
+    var updateObj = {
+      formData: formData,
+      canSubmit: canSubmit,
+    };
+    // 计算下次日期
+    var nextResult = this._calcNextDate(this.data.currentType, formData);
+    if (nextResult) {
+      updateObj.nextDate = nextResult.nextDate;
+      updateObj.nextDateInfo = nextResult.nextDateInfo;
+    } else {
+      updateObj.nextDate = '';
+      updateObj.nextDateInfo = '';
+    }
+    this.setData(updateObj);
   },
 
-  showVaccinePickerFn() {
+  showVaccinePickerFn: function() {
     this.setData({ showVaccinePicker: true });
   },
 
-  hideVaccinePicker() {
+  hideVaccinePicker: function() {
     this.setData({ showVaccinePicker: false });
   },
 
-  selectVaccine(e) {
-    const value = e.currentTarget.dataset.value;
-    this.setData({
-      'formData.vaccine_type': value,
+  selectVaccine: function(e) {
+    var value = e.currentTarget.dataset.value;
+    var formData = this.data.formData;
+    formData.vaccine_type = value;
+    var canSubmit = this._calcCanSubmit(this.data.currentType, formData);
+    var updateObj = {
+      formData: formData,
       showVaccinePicker: false,
-    });
-    this.calculateNextDate();
-    this.checkCanSubmit();
+      canSubmit: canSubmit,
+    };
+    var nextResult = this._calcNextDate(this.data.currentType, formData);
+    if (nextResult) {
+      updateObj.nextDate = nextResult.nextDate;
+      updateObj.nextDateInfo = nextResult.nextDateInfo;
+    } else {
+      updateObj.nextDate = '';
+      updateObj.nextDateInfo = '';
+    }
+    this.setData(updateObj);
   },
 
-  showDewormPickerFn() {
+  showDewormPickerFn: function() {
     this.setData({ showDewormPicker: true });
   },
 
-  hideDewormPicker() {
+  hideDewormPicker: function() {
     this.setData({ showDewormPicker: false });
   },
 
-  selectDeworm(e) {
-    const value = e.currentTarget.dataset.value;
-    const method = this.data.dewormTypes.find(m => m.value === value);
-    this.setData({
-      'formData.deworm_type': value,
-      'formData.deworm_type_display': method ? method.label : '',
+  selectDeworm: function(e) {
+    var value = e.currentTarget.dataset.value;
+    var method = null;
+    for (var i = 0; i < this.data.dewormTypes.length; i++) {
+      if (this.data.dewormTypes[i].value === value) {
+        method = this.data.dewormTypes[i];
+        break;
+      }
+    }
+    var formData = this.data.formData;
+    formData.deworm_type = value;
+    formData.deworm_type_display = method ? method.label : '';
+    var updateObj = {
+      formData: formData,
       showDewormPicker: false,
-    });
-    this.calculateNextDate();
-    this.checkCanSubmit();
-  },
-
-  stopPropagation() {},
-
-  calculateNextDate() {
-    const { currentType, formData, vaccineIntervals, dewormTypes } = this.data;
-    const { record_date, vaccine_type, deworm_type } = formData;
-
-    if (!record_date) {
-      this.setData({ nextDate: '', nextDateInfo: '' });
-      return;
-    }
-
-    const date = new Date(record_date);
-    if (isNaN(date.getTime())) {
-      this.setData({ nextDate: '', nextDateInfo: '' });
-      return;
-    }
-
-    let days = 0;
-    let intervalText = '';
-    let typeName = '';
-
-    if (currentType === 'vaccine') {
-      if (!vaccine_type) {
-        this.setData({ nextDate: '', nextDateInfo: '' });
-        return;
-      }
-      const interval = vaccineIntervals[vaccine_type] || { days: 365, text: '间隔1年' };
-      days = interval.days;
-      intervalText = interval.text;
-      typeName = vaccine_type;
-    } else if (currentType === 'deworm') {
-      if (!deworm_type) {
-        this.setData({ nextDate: '', nextDateInfo: '' });
-        return;
-      }
-      const dewormType = dewormTypes.find(d => d.value === deworm_type);
-      if (dewormType) {
-        days = dewormType.interval.days;
-        intervalText = dewormType.interval.text;
-        typeName = dewormType.label;
-      }
+      canSubmit: this._calcCanSubmit(this.data.currentType, formData),
+    };
+    var nextResult = this._calcNextDate(this.data.currentType, formData);
+    if (nextResult) {
+      updateObj.nextDate = nextResult.nextDate;
+      updateObj.nextDateInfo = nextResult.nextDateInfo;
     } else {
-      this.setData({ nextDate: '', nextDateInfo: '' });
-      return;
+      updateObj.nextDate = '';
+      updateObj.nextDateInfo = '';
     }
-
-    if (days > 0) {
-      const nextDateObj = new Date(date.getTime());
-      nextDateObj.setDate(nextDateObj.getDate() + days);
-      const year = nextDateObj.getFullYear();
-      const month = String(nextDateObj.getMonth() + 1).padStart(2, '0');
-      const day = String(nextDateObj.getDate()).padStart(2, '0');
-      const nextDateStr = `${year}-${month}-${day}`;
-      
-      let infoText = '';
-      if (currentType === 'vaccine') {
-        infoText = `${nextDateStr}（${typeName}${intervalText}）`;
-      } else if (currentType === 'deworm') {
-        infoText = `${nextDateStr}（${typeName}驱虫${intervalText}）`;
-      }
-      
-      this.setData({ nextDate: nextDateStr, nextDateInfo: infoText });
-    }
+    this.setData(updateObj);
   },
 
-  checkCanSubmit() {
-    const { currentType, formData } = this.data;
-    let canSubmit = false;
+  stopPropagation: function() {},
 
+  // 纯函数：根据 type 和 formData 计算是否可提交，不依赖 this.data
+  _calcCanSubmit: function(currentType, formData) {
+    var canSubmit = false;
     if (currentType === 'vaccine') {
       canSubmit = !!(formData.vaccine_type && formData.vaccine_round && formData.record_date);
-      if (formData.vaccine_round) {
-        const round = parseInt(formData.vaccine_round, 10);
+      if (canSubmit && formData.vaccine_round) {
+        var round = parseInt(formData.vaccine_round, 10);
         if (isNaN(round) || round < 1 || round > 10) {
           canSubmit = false;
         }
@@ -276,8 +270,78 @@ Page({
     } else if (currentType === 'other') {
       canSubmit = !!(formData.record_date && formData.description);
     }
+    return canSubmit;
+  },
 
-    this.setData({ canSubmit });
+  // 纯函数：计算下次日期，返回 { nextDate, nextDateInfo } 或 null
+  _calcNextDate: function(currentType, formData) {
+    var record_date = formData.record_date;
+    var vaccine_type = formData.vaccine_type;
+    var deworm_type = formData.deworm_type;
+    var vaccineIntervals = this.data.vaccineIntervals;
+    var dewormTypes = this.data.dewormTypes;
+
+    if (!record_date) return null;
+
+    var date = new Date(record_date);
+    if (isNaN(date.getTime())) return null;
+
+    var days = 0;
+    var intervalText = '';
+    var typeName = '';
+
+    if (currentType === 'vaccine') {
+      if (!vaccine_type) return null;
+      var interval = vaccineIntervals[vaccine_type] || { days: 365, text: '间隔1年' };
+      days = interval.days;
+      intervalText = interval.text;
+      typeName = vaccine_type;
+    } else if (currentType === 'deworm') {
+      if (!deworm_type) return null;
+      var dewormType = null;
+      for (var i = 0; i < dewormTypes.length; i++) {
+        if (dewormTypes[i].value === deworm_type) {
+          dewormType = dewormTypes[i];
+          break;
+        }
+      }
+      if (dewormType) {
+        days = dewormType.interval.days;
+        intervalText = dewormType.interval.text;
+        typeName = dewormType.label;
+      }
+    } else {
+      return null;
+    }
+
+    if (days > 0) {
+      var nextDateObj = new Date(date.getTime());
+      nextDateObj.setDate(nextDateObj.getDate() + days);
+      var year = nextDateObj.getFullYear();
+      var month = (nextDateObj.getMonth() + 1);
+      if (month < 10) month = '0' + month;
+      var day = nextDateObj.getDate();
+      if (day < 10) day = '0' + day;
+      var nextDateStr = year + '-' + month + '-' + day;
+
+      var infoText = '';
+      if (currentType === 'vaccine') {
+        infoText = nextDateStr + '（' + typeName + intervalText + '）';
+      } else if (currentType === 'deworm') {
+        infoText = nextDateStr + '（' + typeName + '驱虫' + intervalText + '）';
+      }
+
+      return { nextDate: nextDateStr, nextDateInfo: infoText };
+    }
+    return null;
+  },
+
+  // 保留旧方法名作为兼容入口
+  recalcSubmit: function() {
+    var canSubmit = this._calcCanSubmit(this.data.currentType, this.data.formData);
+    if (this.data.canSubmit !== canSubmit) {
+      this.setData({ canSubmit: canSubmit });
+    }
   },
 
   submitForm: function() {

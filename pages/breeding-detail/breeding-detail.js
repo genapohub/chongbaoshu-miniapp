@@ -36,6 +36,7 @@ Page({
           due_date: breeding.due_date?.split('T')[0] || '',
           ultrasound_date: breeding.ultrasound_date?.split('T')[0] || '',
           delivery_date: breeding.delivery_date?.split('T')[0] || '',
+          mating_method_text: this.getMatingMethodText(breeding.mating_method),
         },
         statusText: this.getStatusText(breeding.status),
         statusType: this.getStatusType(breeding.status),
@@ -56,6 +57,14 @@ Page({
       failed: '未成功',
     };
     return map[status] || status;
+  },
+
+  getMatingMethodText(method) {
+    const map = {
+      natural: '自然配种',
+      artificial: '人工授精',
+    };
+    return map[method] || method || '-';
   },
 
   getStatusType(status) {

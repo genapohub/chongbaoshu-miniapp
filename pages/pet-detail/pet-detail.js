@@ -116,9 +116,20 @@ Page({
         if (rec.mating_date) {
           date = rec.mating_date.split('T')[0];
         }
+        // 根据当前宠物性别展示配种对象
+        var breedingName = '';
+        var motherName = rec.mother_name || '';
+        var fatherName = rec.father_name || rec.mate_name || '';
+        if (motherName && fatherName) {
+          breedingName = motherName + ' × ' + fatherName;
+        } else if (motherName) {
+          breedingName = motherName;
+        } else if (fatherName) {
+          breedingName = fatherName;
+        }
         breedingRecords.push({
           id: rec.id,
-          name: rec.mate_name ? pet.name + ' × ' + rec.mate_name : pet.name,
+          name: breedingName,
           date: date,
           status: that.getBreedingStatus(rec.status),
           statusType: that.getBreedingStatusType(rec.status),
@@ -130,11 +141,14 @@ Page({
       var healthList = healthRes.list || [];
       for (var k = 0; k < healthList.length; k++) {
         var rec = healthList[k];
-        var name = rec.name;
+        var name = rec.name || '';
         if (rec.type === 'vaccine') {
-          name = rec.vaccine_name + '疫苗';
+          name = (rec.vaccine_name || rec.vaccine_type || '未知') + '疫苗';
         } else if (rec.type === 'deworm') {
-          name = (rec.deworm_type === 'internal' ? '体内' : '体外') + '驱虫';
+          var dewormLabel = rec.deworm_type === 'internal' ? '体内' : (rec.deworm_type === 'external' ? '体外' : '');
+          name = dewormLabel + '驱虫';
+        } else if (!name && rec.description) {
+          name = rec.description;
         }
         var date = '';
         if (rec.record_date) {
@@ -222,11 +236,14 @@ Page({
       var healthList = healthRes.list || [];
       for (var j = 0; j < healthList.length; j++) {
         var rec = healthList[j];
-        var name = rec.name;
+        var name = rec.name || '';
         if (rec.type === 'vaccine') {
-          name = rec.vaccine_name + '疫苗';
+          name = (rec.vaccine_name || rec.vaccine_type || '未知') + '疫苗';
         } else if (rec.type === 'deworm') {
-          name = (rec.deworm_type === 'internal' ? '体内' : '体外') + '驱虫';
+          var dewormLabel = rec.deworm_type === 'internal' ? '体内' : (rec.deworm_type === 'external' ? '体外' : '');
+          name = dewormLabel + '驱虫';
+        } else if (!name && rec.description) {
+          name = rec.description;
         }
         var date = '';
         if (rec.record_date) {

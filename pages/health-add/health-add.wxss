@@ -291,3 +291,14 @@
   color: #999;
   margin-top: 4rpx;
 }
+
+.input-error {
+  border-color: #E94560 !important;
+}
+
+.field-error {
+  display: block;
+  font-size: 24rpx;
+  color: #E94560;
+  margin-top: 8rpx;
+}

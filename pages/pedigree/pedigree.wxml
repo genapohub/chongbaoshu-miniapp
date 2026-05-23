@@ -50,11 +50,11 @@
         >
           <view class="pet-avatar">
             <image wx:if="{{item.avatar}}" src="{{item.avatar}}" mode="aspectFill" lazy-load class="avatar-img" />
-            <view wx:else class="avatar-placeholder">{{item.species === 'dog' ? '🐕' : '🐈'}}</view>
+            <view wx:else class="avatar-placeholder">{{item.speciesIcon}}</view>
           </view>
           <view class="pet-info">
             <view class="pet-name">{{item.name}}</view>
-            <view class="pet-desc">{{item.breed || item.species}}</view>
+            <view class="pet-desc">{{item.breed || item.speciesLabel}}</view>
           </view>
           <view class="pet-arrow">›</view>
         </view>

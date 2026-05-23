@@ -52,7 +52,7 @@ Page({
       var tier = usage && usage.tier ? usage.tier : 'free';
       var planNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
 
-      var upcomingReminders = dashboard && dashboard.data && dashboard.data.upcomingReminders ? dashboard.data.upcomingReminders : [];
+      var upcomingReminders = dashboard && dashboard.upcomingReminders ? dashboard.upcomingReminders : [];
       var healthReminders = [];
       for (var i = 0; i < upcomingReminders.length; i++) {
         var r = upcomingReminders[i];
@@ -95,7 +95,7 @@ Page({
         });
       }
 
-      var dueBreedings = dashboard && dashboard.data && dashboard.data.dueBreedings ? dashboard.data.dueBreedings : [];
+      var dueBreedings = dashboard && dashboard.dueBreedings ? dashboard.dueBreedings : [];
       var dueReminders = [];
       for (var j = 0; j < dueBreedings.length; j++) {
         var r = dueBreedings[j];
@@ -116,8 +116,8 @@ Page({
         return a.priority - b.priority;
       });
 
-      var activities = dashboard && dashboard.data && dashboard.data.recentActivities
-        ? dashboard.data.recentActivities
+      var activities = dashboard && dashboard.recentActivities
+        ? dashboard.recentActivities
         : [];
 
       function formatLimit(value) {
@@ -131,7 +131,7 @@ Page({
       var maxPets = limits && limits.maxPets ? formatLimit(limits.maxPets) : 3;
       var breedingCount = usage && usage.usage && usage.usage.breedingCount ? usage.usage.breedingCount : 0;
       var maxBreedingRecords = limits && limits.maxBreedingRecords ? formatLimit(limits.maxBreedingRecords) : 3;
-      var breedingInProgressCount = dashboard && dashboard.data && dashboard.data.stats && dashboard.data.stats.breedingCount ? dashboard.data.stats.breedingCount : 0;
+      var breedingInProgressCount = dashboard && dashboard.stats && dashboard.stats.breedingCount ? dashboard.stats.breedingCount : 0;
 
       that.setData({
         subscriptionTier: tier,
