@@ -9,6 +9,14 @@ Page({
     countdown: 60,
     canLogin: false,
     loading: false,
+    devMode: false,
+  },
+
+  onLoad: function() {
+    // 开发环境下显示快捷登录提示
+    var baseUrl = app.globalData.baseUrl;
+    var isDev = baseUrl.indexOf('localhost') !== -1;
+    this.setData({ devMode: isDev });
   },
 
   goBack: function() {
