@@ -46,13 +46,14 @@
     <view wx:if="{{records.length > 0}}" class="record-list">
       <view class="record-item" wx:for="{{records}}" wx:key="id">
         <view class="record-avatar">
-          <text class="avatar-text">{{getFirstChar(item.invitee_nickname || '新用户')}}</text>
+          <image wx:if="{{item.invitee_avatar}}" class="avatar-img" src="{{item.invitee_avatar}}" mode="aspectFill" />
+          <text wx:else class="avatar-text">{{getFirstChar(item.invitee_nickname || '新用户')}}</text>
         </view>
         <view class="record-info">
           <view class="record-name">{{item.invitee_nickname || '新用户'}}</view>
           <view class="record-time">{{formatDate(item.redeemed_at || item.created_at)}}</view>
         </view>
-        <view class="record-badge">+7天Pro</view>
+        <view class="record-badge {{getStatusClass(item.status)}}">{{getStatusBadge(item.status)}}</view>
       </view>
     </view>
 

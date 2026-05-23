@@ -38,7 +38,7 @@
     </view>
 
     <!-- Pro用户：正常显示宠物选择 -->
-    <view class="pro-content">
+    <view wx:if="{{isPro}}" class="pro-content">
       <view class="section-title">选择宠物查看血统证书</view>
       <view class="pet-list">
         <view 

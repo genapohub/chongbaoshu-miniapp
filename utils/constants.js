@@ -64,7 +64,7 @@ const SUBSCRIPTION_TIER = {
 // 订阅方案（用于订阅管理页面显示）
 const SUBSCRIPTION_PLANS = {
   free: { name: '免费版', price: 0, period: '永久' },
-  basic: { name: 'Basic 基础版', price: 49, period: '月付' },
+  basic: { name: '基础版', price: 49, period: '月付' },
   pro: { name: 'Pro 专业版', price: 149, period: '月付' },
 };
 
@@ -85,7 +85,7 @@ const THEME = {
 
 // 格式化日期
 function formatDate(dateStr) {
-  if (!dateStr) return '-';
+  if (!dateStr) return '';
   const date = new Date(dateStr);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');

@@ -1,8 +1,8 @@
 /**
  * 邀请好友页 - 逻辑
- * 功能：展示邀请码、邀请统计、邀请记录列表
  */
 const api = require('../../utils/api')
+const { formatDate } = require('../../utils/constants')
 const app = getApp()
 
 Page({
@@ -46,7 +46,6 @@ Page({
     }
   },
 
-  /** 获取邀请码 */
   async loadInviteCode() {
     try {
       const res = await api.get('/invite/code')
@@ -59,7 +58,6 @@ Page({
     }
   },
 
-  /** 获取邀请统计 */
   async loadStats() {
     try {
       const res = await api.get('/invite/stats')
@@ -69,7 +67,6 @@ Page({
     }
   },
 
-  /** 获取邀请记录 */
   async loadRecords() {
     if (this.data.loading) return
     this.setData({ loading: true })
@@ -93,7 +90,6 @@ Page({
     }
   },
 
-  /** 复制邀请码 */
   onCopyCode() {
     wx.setClipboardData({
       data: this.data.inviteCode,
@@ -103,7 +99,6 @@ Page({
     })
   },
 
-  /** 分享邀请 */
   onShareAppMessage() {
     return {
       title: `我在用宠宝树管理宠物，输入邀请码 ${this.data.inviteCode} 即可获得7天Pro体验`,
@@ -111,22 +106,22 @@ Page({
     }
   },
 
-  /** 跳转兑换页 */
   onGoRedeem() {
     wx.navigateTo({ url: '/pages/invite-redeem/invite-redeem' })
   },
 
-  /** 获取字符串首字符 */
   getFirstChar(str) {
     return str ? str.charAt(0) : '?';
   },
 
-  /** 格式化日期 */
-  formatDate(dateStr) {
-    if (!dateStr) return '';
-    const date = new Date(dateStr);
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${month}-${day} 注册`;
+  getStatusBadge(status) {
+    if (status === 'redeemed') {
+      return '已注册';
+    }
+    return '待注册';
+  },
+
+  getStatusClass(status) {
+    return status === 'redeemed' ? 'badge-success' : 'badge-default';
   },
 })

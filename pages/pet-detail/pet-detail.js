@@ -54,24 +54,17 @@ Page({
       var pedigreeRes = results[3];
       var limitsRes = results[4];
 
-      console.log('petRes:', petRes);
-
       var pet = petRes.data || petRes;
       var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
-      console.log('baseUrl:', baseUrl);
       var rawPhotos = pet.photos || [];
-      console.log('rawPhotos:', rawPhotos);
       var photos = [];
       for (var i = 0; i < rawPhotos.length; i++) {
         var p = rawPhotos[i];
         var url = baseUrl + p.photo_url;
-        console.log('photo ' + i + ': ' + p.photo_url + ' -> ' + url);
         photos.push(url);
       }
       var avatarPhoto = pet.avatar_photo || '';
       var avatar = avatarPhoto ? baseUrl + avatarPhoto : '';
-      console.log('avatar_photo:', avatarPhoto);
-      console.log('avatar:', avatar);
 
       var speciesInfo = constants.SPECIES[pet.species];
       var speciesLabel = speciesInfo && speciesInfo.label ? speciesInfo.label : pet.species;

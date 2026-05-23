@@ -38,46 +38,52 @@ Page({
       const paymentData = await api.get('/subscriptions/payments').catch(() => null);
 
       let startDate = '-';
-      let endDate = '-';
-      let autoRenew = false;
-      let planName = '免费版';
-      let billingCycle = 'monthly';
-      let tier = 'free';
+    let endDate = '-';
+    let autoRenew = false;
+    let planName = '免费版';
+    let billingCycle = 'monthly';
+    let tier = 'free';
+    let showCancelButton = false;
 
-      if (profile) {
-        tier = profile.subscription_tier || 'free';
-        const planInfo = SUBSCRIPTION_PLANS[tier] || SUBSCRIPTION_PLANS.free;
-        planName = planInfo.name;
+    if (profile) {
+      tier = profile.subscription_tier || 'free';
+      const planInfo = SUBSCRIPTION_PLANS[tier] || SUBSCRIPTION_PLANS.free;
+      planName = planInfo.name;
 
-        if (profile.subscription_expire) {
-          endDate = formatDate(profile.subscription_expire);
-        }
-
-        if (profile.created_at) {
-          startDate = formatDate(profile.created_at);
-        }
-
-        if (tier !== 'free') {
-          autoRenew = true;
-        }
+      if (profile.subscription_expire) {
+        endDate = formatDate(profile.subscription_expire);
       }
 
-      if (limits) {
-        const maxPets = limits.max_pets === 'unlimited' ? '无限' : (limits.max_pets || 3);
-        const maxBreeding = limits.limits?.maxBreedingRecords === 'unlimited' ? '无限' : (limits.limits?.maxBreedingRecords || 3);
-        const maxPhotos = limits.limits?.maxPhotosPerPet === 'unlimited' ? '无限' : (limits.limits?.maxPhotosPerPet || 3);
-        const petCount = limits.current_pets || 0;
-        const petPercent = limits.max_pets === 'unlimited' ? 0 : (limits.max_pets > 0 ? Math.min(petCount / limits.max_pets * 100, 100) : 0);
+      if (profile.created_at) {
+        startDate = formatDate(profile.created_at);
+      }
 
-        this.setData({
-          subscription: {
-            planName,
-            billingCycle,
-            startDate,
-            endDate,
-            autoRenew,
-            showCancelButton: tier !== 'free',
-          },
+      // 只有付费订阅才显示自动续费和取消按钮
+      const subscriptionSource = profile.subscription_source;
+      if (tier !== 'free' && subscriptionSource === 'paid') {
+        autoRenew = true;
+        showCancelButton = true;
+      }
+    }
+
+    if (limits) {
+      const isUnlimited = (val) => val === 'unlimited' || val >= 999999;
+      
+      const maxPets = isUnlimited(limits.maxPets) ? '无限' : (limits.maxPets || 3);
+      const maxBreeding = isUnlimited(limits.limits?.maxBreedingRecords) ? '无限' : (limits.limits?.maxBreedingRecords || 3);
+      const maxPhotos = isUnlimited(limits.limits?.maxPhotosPerPet) ? '无限' : (limits.limits?.maxPhotosPerPet || 3);
+      const petCount = limits.currentPets || 0;
+      const petPercent = isUnlimited(limits.maxPets) ? 0 : (limits.maxPets > 0 ? Math.min(petCount / limits.maxPets * 100, 100) : 0);
+
+      this.setData({
+        subscription: {
+          planName,
+          billingCycle,
+          startDate,
+          endDate,
+          autoRenew,
+          showCancelButton,
+        },
           usage: {
             petCount,
             maxPets,

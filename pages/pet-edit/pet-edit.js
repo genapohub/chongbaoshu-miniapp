@@ -48,13 +48,9 @@ Page({
     if (!petId) return;
 
     api.get('/pets/' + petId).then(function(petRes) {
-      console.log('=== Pet Edit API Response ===');
-      console.log('petRes:', petRes);
-
       var pet = petRes.data || petRes;
 
       var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
-      console.log('edit baseUrl:', baseUrl);
       var birthDate = pet.birth_date ? pet.birth_date.split('T')[0] : '';
       
       var speciesOptions = that.data.speciesOptions;
@@ -70,7 +66,6 @@ Page({
       if (pet.avatar_photo) {
         avatarUrl = baseUrl + pet.avatar_photo;
       }
-      console.log('edit avatarUrl:', avatarUrl);
 
       var tags = pet.tags || [];
       var selectedTagsIndex = {};

@@ -28,7 +28,7 @@
         <view class="hot-badge">热门</view>
         <view class="plan-icon-wrapper basic-bg">⭐</view>
         <view class="plan-details">
-          <view class="plan-card-name">Basic</view>
+          <view class="plan-card-name">基础版</view>
           <view class="plan-card-desc">100只宠物 · 数据导出 · 优先提醒</view>
         </view>
         <view class="plan-price">
@@ -67,7 +67,7 @@
           <view class="comparison-row header-row">
             <view class="comparison-cell feature-cell">功能</view>
             <view class="comparison-cell tier-cell">免费</view>
-            <view class="comparison-cell tier-cell">Basic</view>
+            <view class="comparison-cell tier-cell">基础版</view>
             <view class="comparison-cell tier-cell">Pro</view>
           </view>
           <view class="comparison-row">

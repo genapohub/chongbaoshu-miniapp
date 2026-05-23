@@ -101,7 +101,7 @@
         </view>
         <view class="limit-modal-plans">
           <view class="limit-plan {{selectedPlan === 'basic' ? 'selected' : ''}}" data-plan="basic" bindtap="selectPlan">
-            <view class="limit-plan-name">Basic</view>
+            <view class="limit-plan-name">基础版</view>
             <view class="limit-plan-price">¥49</view>
             <view class="limit-plan-period">/月 · 100只</view>
             <view class="limit-plan-check" wx:if="{{selectedPlan === 'basic'}}">✓</view>

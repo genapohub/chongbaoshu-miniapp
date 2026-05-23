@@ -4,7 +4,7 @@
  */
 const api = require('../../utils/api');
 const constants = require('../../utils/constants');
-const { formatDate, daysFromNow } = require('../../utils/auth');
+const { daysFromNow } = require('../../utils/auth');
 
 Page({
   data: {

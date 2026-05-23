@@ -43,14 +43,11 @@ Page({
   async loadCurrentTier() {
     try {
       const profile = await api.get('/auth/profile').catch(() => null);
-      console.log('Profile API response:', profile);
       
       if (profile && profile.subscription_tier) {
         const currentTier = profile.subscription_tier;
-        console.log('Profile returned tier:', currentTier);
         const validTiers = ['free', 'basic', 'pro'];
         if (!validTiers.includes(currentTier)) {
-          console.warn('Invalid tier from API, using default');
           return;
         }
         const planIcons = {
@@ -69,12 +66,9 @@ Page({
           currentTier: currentTier,
           currentPlan: { name: planNames[currentTier] || '免费版', icon: planIcons[currentTier] },
         });
-      } else {
-        console.log('Profile response is empty or no subscription_tier field, keeping default');
       }
     } catch (err) {
-      console.error('加载订阅等级失败:', err);
-      console.log('Keeping default currentTier: free');
+      // 加载失败，使用默认 free 等级
     } finally {
       this.updateAvailablePlans();
     }
@@ -99,16 +93,12 @@ Page({
       });
     
     this.setData({ availablePlans });
-    console.log('Available plans:', availablePlans);
   },
 
   selectPlan(e) {
-    console.log('selectPlan called', e);
     const tier = e.currentTarget.dataset.tier;
-    console.log('tier:', tier, 'currentTier:', this.data.currentTier);
     
     if (tier === this.data.currentTier) {
-      console.log('same tier, returning');
       return;
     }
     
@@ -121,7 +111,6 @@ Page({
       isDowngrade: newIndex < currentIndex,
       isUpgrade: newIndex > currentIndex,
     });
-    console.log('selectedTier set to:', tier);
     const tierNames = {
       free: '免费版',
       basic: '基础版',

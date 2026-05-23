@@ -10,7 +10,11 @@ App({
   globalData: {
     userInfo: null,
     token: null,
-    baseUrl: 'http://localhost:3001/api',  // Python FastAPI后端
+    // 根据小程序环境自动切换 API 地址
+    // 正式版/体验版 → 生产域名，开发版 → 本地调试
+    baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
+      ? 'https://api.chongbaoshu.com/api'
+      : 'http://localhost:3001/api',
   },
 
   /**

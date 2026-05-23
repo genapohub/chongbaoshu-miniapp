@@ -2,6 +2,7 @@
  * 认证工具
  */
 const app = getApp();
+const { formatDate } = require('./constants');
 
 /**
  * 检查登录态，未登录跳转登录页
@@ -13,18 +14,6 @@ function checkAuth() {
   }
   wx.navigateTo({ url: '/pages/login/login' });
   return false;
-}
-
-/**
- * 格式化日期
- */
-function formatDate(dateStr) {
-  if (!dateStr) return '';
-  const date = new Date(dateStr);
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
 }
 
 /**

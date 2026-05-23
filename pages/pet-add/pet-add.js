@@ -41,7 +41,7 @@ Page({
   },
 
   onLoad: function(options) {
-    console.log('Add Pet Page loaded:', options);
+    // Page loaded
   },
 
   onInputChange: function(e) {
@@ -130,7 +130,6 @@ Page({
 
   toggleTag: function(e) {
     var tag = e.currentTarget.dataset.tag;
-    console.log('点击标签:', tag);
 
     var selectedTagsIndex = {};
     var oldIndex = this.data.selectedTagsIndex;
@@ -159,7 +158,6 @@ Page({
     }
 
     this.setData({ selectedTagsIndex: selectedTagsIndex, selectedTags: selectedTags });
-    console.log('当前选中标签:', selectedTags);
   },
 
   onNewTagInput: function(e) {
