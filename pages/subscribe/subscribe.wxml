@@ -52,9 +52,9 @@
         </view>
         <view class="plan-price">
           <text class="price-symbol">¥</text>
-          <text class="price-num">119</text>
+          <text class="price-num">149</text>
           <text class="price-unit">/月</text>
-          <view class="yearly-discount">年付¥99/月 · 省¥240</view>
+          <view class="yearly-discount">年付¥119/月 · 省¥360</view>
         </view>
         <view wx:if="{{selectedPlan === 'pro'}}" class="check-icon">✓</view>
       </view>

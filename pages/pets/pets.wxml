@@ -101,7 +101,7 @@
           </view>
           <view class="limit-plan {{selectedPlan === 'pro' ? 'selected' : ''}}" data-plan="pro" bindtap="selectPlan">
             <view class="limit-plan-name">Pro</view>
-            <view class="limit-plan-price">¥119</view>
+            <view class="limit-plan-price">¥149</view>
             <view class="limit-plan-period">/月 · 无限</view>
             <view class="limit-plan-check" wx:if="{{selectedPlan === 'pro'}}">✓</view>
           </view>

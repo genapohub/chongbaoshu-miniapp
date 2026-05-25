@@ -10,7 +10,7 @@ Page({
     tier: '',
     period: 'yearly',
     periodText: '年付',
-    totalAmount: '119.00',
+    totalAmount: '0.00',
     nextBillingDate: '',
     loading: false,
   },
@@ -67,7 +67,8 @@ Page({
 
     const planInfo = plans[tier] || plans.pro;
     const period = this.data.period;
-    const amount = period === 'monthly' ? planInfo.monthlyAmount : planInfo.yearlyAmount;
+    // 月付显示月价，年付显示年总价（月价×12）
+    const amount = period === 'monthly' ? planInfo.monthlyAmount : (parseFloat(planInfo.yearlyAmount) * 12).toFixed(2);
     
     this.setData({
       planName: planInfo.name,

@@ -63,7 +63,7 @@ Page({
     let totalAmount, monthlyEquivalent;
 
     if (period === 'yearly') {
-      totalAmount = yearlyPrice * 12 - (yearlySave || 0);
+      totalAmount = yearlyPrice * 12;
       monthlyEquivalent = yearlyPrice;
     } else {
       totalAmount = monthlyPrice;

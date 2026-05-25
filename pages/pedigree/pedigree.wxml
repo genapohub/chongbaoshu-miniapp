@@ -30,7 +30,7 @@
         <view class="upgrade-plan">
           <view class="plan-info">
             <text class="plan-name">Pro 专业版</text>
-            <text class="plan-price">¥119/月</text>
+            <text class="plan-price">¥149/月</text>
           </view>
         </view>
         <view class="upgrade-btn" bindtap="goUpgrade">立即升级</view>
@@ -126,7 +126,7 @@
         </view>
         <view class="plan-price">
           <text class="price-symbol">¥</text>
-          <text class="price-num">119</text>
+          <text class="price-num">149</text>
           <text class="price-unit">/月</text>
         </view>
       </view>

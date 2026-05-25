@@ -28,7 +28,7 @@ Page({
         desc: '无限宠物 · 血统证书',
         icon: '💎',
         iconBg: '#FFE4E8',
-        price: '119',
+        price: '149',
         period: '月',
       },
     ],
