@@ -6,7 +6,7 @@
   <view class="card breeding-card">
     <view class="card-header">
       <view class="card-title">💕 繁育记录</view>
-      <view class="badge badge-{{statusType}}">{{statusText}}</view>
+      <status-badge type="{{statusType}}" label="{{statusText}}" />
     </view>
 
     <view class="breeding-info">

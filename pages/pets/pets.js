@@ -43,23 +43,23 @@ Page({
   },
 
   loadPets() {
-    var that = this;
+    const that = this;
     that.setData({ loading: true });
     api.get('/pets', { page: 1, pageSize: 100 }).then(function(res) {
-      var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
-      var data = res.data || res;
-      var list = data.list || [];
-      var allPetList = [];
-      for (var i = 0; i < list.length; i++) {
-        var pet = list[i];
-        var speciesInfo = constants.SPECIES[pet.species];
-        var genderInfo = constants.GENDER[pet.gender];
-        var speciesLabel = speciesInfo && speciesInfo.label ? speciesInfo.label : pet.species;
-        var speciesIcon = speciesInfo && speciesInfo.icon ? speciesInfo.icon : '🐾';
-        var genderLabel = genderInfo && genderInfo.label ? genderInfo.label : '';
-        var avatar = pet.avatar_photo ? baseUrl + pet.avatar_photo : '';
-        var item = {};
-        for (var key in pet) {
+      const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+      const data = res.data || res;
+      const list = data.list || [];
+      const allPetList = [];
+      for (let i = 0; i < list.length; i++) {
+        const pet = list[i];
+        const speciesInfo = constants.SPECIES[pet.species];
+        const genderInfo = constants.GENDER[pet.gender];
+        const speciesLabel = speciesInfo && speciesInfo.label ? speciesInfo.label : pet.species;
+        const speciesIcon = speciesInfo && speciesInfo.icon ? speciesInfo.icon : '🐾';
+        const genderLabel = genderInfo && genderInfo.label ? genderInfo.label : '';
+        const avatar = pet.avatar_photo ? baseUrl + pet.avatar_photo : '';
+        const item = {};
+        for (let key in pet) {
           item[key] = pet[key];
         }
         item.speciesLabel = speciesLabel;
@@ -71,7 +71,7 @@ Page({
         allPetList.push(item);
       }
 
-      var filteredList = that.filterPets(allPetList, that.data.currentFilter, that.data.searchKeyword);
+      const filteredList = that.filterPets(allPetList, that.data.currentFilter, that.data.searchKeyword);
 
       that.setData({
         allPetList: allPetList,
@@ -86,11 +86,11 @@ Page({
   },
 
   filterPets(petList, filter, keyword) {
-    var result = petList.slice();
+    const result = petList.slice();
 
     if (filter !== 'all') {
-      var filtered1 = [];
-      for (var i = 0; i < result.length; i++) {
+      const filtered1 = [];
+      for (let i = 0; i < result.length; i++) {
         if (result[i].species === filter) {
           filtered1.push(result[i]);
         }
@@ -99,12 +99,12 @@ Page({
     }
 
     if (keyword) {
-      var kw = keyword.toLowerCase();
-      var filtered2 = [];
-      for (var j = 0; j < result.length; j++) {
-        var pet = result[j];
-        var nameMatch = pet.name.toLowerCase().indexOf(kw) !== -1;
-        var breedMatch = pet.breed && pet.breed.toLowerCase().indexOf(kw) !== -1;
+      const kw = keyword.toLowerCase();
+      const filtered2 = [];
+      for (let j = 0; j < result.length; j++) {
+        const pet = result[j];
+        const nameMatch = pet.name.toLowerCase().indexOf(kw) !== -1;
+        const breedMatch = pet.breed && pet.breed.toLowerCase().indexOf(kw) !== -1;
         if (nameMatch || breedMatch) {
           filtered2.push(pet);
         }
@@ -116,16 +116,16 @@ Page({
   },
 
   loadLimits() {
-    var that = this;
+    const that = this;
     api.get('/auth/limits').then(function(res) {
       if (res) {
-        var data = res.data || res;
-        var tier = data.tier || 'free';
-        var tierNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
-        var tierName = tierNames[tier] || '免费版';
-        var maxPets = data.maxPets || data.max_pets || 3;
-        var currentPets = data.currentPets || data.current_pets || 0;
-        var showLimitHint = false;
+        const data = res.data || res;
+        const tier = data.tier || 'free';
+        const tierNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
+        const tierName = tierNames[tier] || '免费版';
+        const maxPets = data.maxPets || data.max_pets || 3;
+        const currentPets = data.currentPets || data.current_pets || 0;
+        let showLimitHint = false;
         if (maxPets && currentPets >= maxPets) {
           showLimitHint = true;
         }
@@ -204,7 +204,7 @@ Page({
   },
 
   selectPlan(e) {
-    var plan = e.currentTarget.dataset.plan;
+    const plan = e.currentTarget.dataset.plan;
     this.setData({ selectedPlan: plan });
   },
 
@@ -227,55 +227,51 @@ Page({
   },
 
   onTouchMove(e) {
-    var data = this.data;
-    var touchStartX = data.touchStartX;
-    var touchStartTime = data.touchStartTime;
-    var isLongPress = data.isLongPress;
-    var currentTouchId = data.currentTouchId;
-    var currentX = e.touches[0].clientX;
-    var diff = touchStartX - currentX;
-    var touchDuration = Date.now() - touchStartTime;
-    
+    const data = this.data;
+    const touchStartX = data.touchStartX;
+    const touchStartTime = data.touchStartTime;
+    const isLongPress = data.isLongPress;
+    const currentTouchId = data.currentTouchId;
+    const currentX = e.touches[0].clientX;
+    const diff = touchStartX - currentX;
+    const touchDuration = Date.now() - touchStartTime;
+
     if (!isLongPress && touchDuration > 200 && diff > 10) {
       this.setData({ isLongPress: true });
       isLongPress = true;
     }
-    
+
     if (isLongPress) {
-      var deleteBtnWidth = 160;
-      var translateX = Math.max(-deleteBtnWidth, Math.min(0, -diff));
-      var petList = data.petList;
-      var index = -1;
-      for (var i = 0; i < petList.length; i++) {
+      const deleteBtnWidth = 160;
+      const translateX = Math.max(-deleteBtnWidth, Math.min(0, -diff));
+      const petList = data.petList;
+      let index = -1;
+      for (let i = 0; i < petList.length; i++) {
         if (petList[i].id === currentTouchId) {
           index = i;
           break;
         }
       }
+      // 使用路径更新，避免替换整个列表
       if (index !== -1) {
-        var updatedList = petList.slice();
-        var updatedItem = {};
-        for (var key in updatedList[index]) {
-          updatedItem[key] = updatedList[index][key];
-        }
-        updatedItem.translateX = translateX;
-        updatedList[index] = updatedItem;
-        this.setData({ petList: updatedList });
+        const updateObj = {};
+        updateObj['petList[' + index + '].translateX'] = translateX;
+        this.setData(updateObj);
       }
     }
   },
 
   onTouchEnd(e) {
-    var data = this.data;
-    var touchStartX = data.touchStartX;
-    var touchEndX = e.changedTouches[0].clientX;
-    var currentTouchId = data.currentTouchId;
-    var isLongPress = data.isLongPress;
-    var diff = touchStartX - touchEndX;
-    var deleteBtnWidth = 160;
-    var petList = data.petList;
-    var index = -1;
-    for (var i = 0; i < petList.length; i++) {
+    const data = this.data;
+    const touchStartX = data.touchStartX;
+    const touchEndX = e.changedTouches[0].clientX;
+    const currentTouchId = data.currentTouchId;
+    const isLongPress = data.isLongPress;
+    const diff = touchStartX - touchEndX;
+    const deleteBtnWidth = 160;
+    const petList = data.petList;
+    let index = -1;
+    for (let i = 0; i < petList.length; i++) {
       if (petList[i].id === currentTouchId) {
         index = i;
         break;
@@ -283,26 +279,21 @@ Page({
     }
 
     if (index !== -1) {
-      var updatedList = petList.slice();
-      var updatedItem = {};
-      for (var key in updatedList[index]) {
-        updatedItem[key] = updatedList[index][key];
-      }
-      if (isLongPress && diff > 30) {
-        updatedItem.translateX = -deleteBtnWidth;
-      } else {
-        updatedItem.translateX = 0;
-      }
-      updatedList[index] = updatedItem;
-      this.setData({ 
-        petList: updatedList,
+      // 使用路径更新 translateX，避免替换整个列表
+      const updateObj = {
         isLongPress: false,
         touchStartX: 0,
         touchEndX: 0,
         touchStartTime: 0,
-      });
+      };
+      if (isLongPress && diff > 30) {
+        updateObj['petList[' + index + '].translateX'] = -deleteBtnWidth;
+      } else {
+        updateObj['petList[' + index + '].translateX'] = 0;
+      }
+      this.setData(updateObj);
     } else {
-      this.setData({ 
+      this.setData({
         isLongPress: false,
         touchStartX: 0,
         touchEndX: 0,
@@ -312,8 +303,8 @@ Page({
   },
 
   getPetIndex(id) {
-    var petList = this.data.petList;
-    for (var i = 0; i < petList.length; i++) {
+    const petList = this.data.petList;
+    for (let i = 0; i < petList.length; i++) {
       if (petList[i].id === id) {
         return i;
       }
@@ -322,22 +313,18 @@ Page({
   },
 
   deletePet(e) {
-    var pet = e.currentTarget.dataset.pet;
+    const pet = e.currentTarget.dataset.pet;
     this.setData({ 
       deletingPet: pet, 
       showDeleteModal: true 
     });
     
-    var index = this.getPetIndex(pet.id);
+    const index = this.getPetIndex(pet.id);
     if (index !== -1) {
-      var petList = this.data.petList.slice();
-      var updatedItem = {};
-      for (var key in petList[index]) {
-        updatedItem[key] = petList[index][key];
-      }
-      updatedItem.translateX = 0;
-      petList[index] = updatedItem;
-      this.setData({ petList: petList });
+      // 使用路径更新，避免替换整个列表
+      const updateObj = {};
+      updateObj['petList[' + index + '].translateX'] = 0;
+      this.setData(updateObj);
     }
   },
 
@@ -346,8 +333,8 @@ Page({
   },
 
   confirmDelete: function() {
-    var that = this;
-    var deletingPet = that.data.deletingPet;
+    const that = this;
+    const deletingPet = that.data.deletingPet;
     api.del('/pets/' + deletingPet.id, null, { loading: false }).then(function() {
       wx.showToast({ title: '删除成功', icon: 'success' });
       that.setData({ showDeleteModal: false });
@@ -356,11 +343,11 @@ Page({
         that.loadLimits();
       }, 1000);
     }).catch(function(err) {
-      var hasBreedingMsg = false;
+      let hasBreedingMsg = false;
       if (err && err.response && err.response.data && err.response.data.message) {
         hasBreedingMsg = err.response.data.message.indexOf('繁育') !== -1;
       }
-      var is404 = false;
+      let is404 = false;
       if (err && err.response && err.response.status === 404) {
         is404 = true;
       }

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "繁育详情",
-  "usingComponents": {}
+  "usingComponents": {
+    "status-badge": "/components/status-badge/status-badge"
+  }
 }

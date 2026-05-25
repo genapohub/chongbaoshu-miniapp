@@ -4,17 +4,11 @@
 -->
 <view class="container">
   <!-- 加载状态 -->
-  <view wx:if="{{loading}}" class="loading-wrapper">
-    <view class="loading-spinner"></view>
-    <text class="loading-text">加载中...</text>
-  </view>
+  <loading-spinner wx:if="{{loading}}" />
 
   <!-- 头部信息 -->
   <view wx:elif="{{pet.name}}" class="pet-header">
-    <view class="pet-avatar">
-      <image wx:if="{{pet.avatar}}" src="{{pet.avatar}}" mode="aspectFill" class="avatar-img" />
-      <view wx:else class="avatar-placeholder">{{pet.speciesIcon}}</view>
-    </view>
+    <pet-avatar src="{{pet.avatar}}" icon="{{pet.speciesIcon}}" size="lg" radius="16rpx" />
     <view class="pet-info">
       <text class="pet-name">{{pet.name}}</text>
       <text class="pet-desc">{{pet.speciesLabel}} · {{pet.genderLabel}} · {{pet.age}}</text>
@@ -41,30 +35,12 @@
   <!-- 概览Tab -->
   <view wx:if="{{currentTab === 'overview'}}" class="tab-content">
     <view class="card">
-      <view class="field">
-        <text class="field-label">物种</text>
-        <text class="field-value">{{pet.speciesLabel}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">品种</text>
-        <text class="field-value">{{pet.breed || '-'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">性别</text>
-        <text class="field-value">{{pet.genderLabel}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">出生日期</text>
-        <text class="field-value">{{pet.birthDate || '-'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">毛色</text>
-        <text class="field-value">{{pet.color || '-'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">芯片号</text>
-        <text class="field-value">{{pet.chipNo || '-'}}</text>
-      </view>
+      <field-row label="物种" value="{{pet.speciesLabel}}" />
+      <field-row label="品种" value="{{pet.breed}}" />
+      <field-row label="性别" value="{{pet.genderLabel}}" />
+      <field-row label="出生日期" value="{{pet.birthDate}}" />
+      <field-row label="毛色" value="{{pet.color}}" />
+      <field-row label="芯片号" value="{{pet.chipNo}}" />
     </view>
 
     <view class="card photo-card">
@@ -75,7 +51,7 @@
       </view>
       <view class="photo-grid">
         <view wx:for="{{pet.photos}}" wx:key="index" class="photo-item">
-          <image src="{{item}}" mode="aspectFill" class="photo-img" />
+          <image src="{{item}}" mode="aspectFill" class="photo-img" lazy-load />
         </view>
         <view wx:if="{{canAddPhoto}}" class="photo-add" bindtap="addPhoto">＋</view>
       </view>
@@ -92,7 +68,7 @@
           <text class="breeding-name">{{item.name}}</text>
           <text class="breeding-date">{{item.date}}</text>
         </view>
-        <view class="badge badge-{{item.statusType}}">{{item.status}}</view>
+        <status-badge type="{{item.statusType}}" label="{{item.status}}" />
       </view>
       <view wx:if="{{breedingRecords.length === 0}}" class="empty-card">暂无繁育记录</view>
     </view>
@@ -107,7 +83,7 @@
         <view class="health-info">
           <view class="health-header">
             <text class="health-name">{{item.name}}</text>
-            <view class="badge badge-{{item.statusType}}">{{item.status}}</view>
+            <status-badge type="{{item.statusType}}" label="{{item.status}}" />
           </view>
           <text class="health-date">{{item.date}} · 下次：{{item.nextDate}}</text>
         </view>
@@ -121,46 +97,16 @@
   <view wx:if="{{currentTab === 'pedigree'}}" class="tab-content">
     <view class="card">
       <view class="card-title">📜 血统信息 <text class="pro-tag">PRO</text></view>
-      <view class="field">
-        <text class="field-label">注册名</text>
-        <text class="field-value">{{isPro ? pedigree.regName : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">注册号</text>
-        <text class="field-value">{{isPro ? pedigree.regNo : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">犬舍名</text>
-        <text class="field-value">{{isPro ? pedigree.kennel : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">毛色(血统)</text>
-        <text class="field-value">{{isPro ? pedigree.color : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">父亲</text>
-        <text class="field-value">{{isPro ? pedigree.father : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">母亲</text>
-        <text class="field-value">{{isPro ? pedigree.mother : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">父方祖父</text>
-        <text class="field-value">{{isPro ? pedigree.fatherFather : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">父方祖母</text>
-        <text class="field-value">{{isPro ? pedigree.fatherMother : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">母方祖父</text>
-        <text class="field-value">{{isPro ? pedigree.motherFather : '—'}}</text>
-      </view>
-      <view class="field">
-        <text class="field-label">母方祖母</text>
-        <text class="field-value">{{isPro ? pedigree.motherMother : '—'}}</text>
-      </view>
+      <field-row label="注册名" value="{{isPro ? pedigree.regName : ''}}" empty="—" />
+      <field-row label="注册号" value="{{isPro ? pedigree.regNo : ''}}" empty="—" />
+      <field-row label="犬舍名" value="{{isPro ? pedigree.kennel : ''}}" empty="—" />
+      <field-row label="毛色(血统)" value="{{isPro ? pedigree.color : ''}}" empty="—" />
+      <field-row label="父亲" value="{{isPro ? pedigree.father : ''}}" empty="—" />
+      <field-row label="母亲" value="{{isPro ? pedigree.mother : ''}}" empty="—" />
+      <field-row label="父方祖父" value="{{isPro ? pedigree.fatherFather : ''}}" empty="—" />
+      <field-row label="父方祖母" value="{{isPro ? pedigree.fatherMother : ''}}" empty="—" />
+      <field-row label="母方祖父" value="{{isPro ? pedigree.motherFather : ''}}" empty="—" />
+      <field-row label="母方祖母" value="{{isPro ? pedigree.motherMother : ''}}" empty="—" />
     </view>
     <view class="btn btn-outline btn-block" bindtap="goPedigreeCert">查看血统证书 →</view>
   </view>

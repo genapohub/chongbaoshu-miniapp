@@ -1,0 +1,6 @@
+<!-- 状态徽章组件
+  Properties:
+    type  {String} - badge 颜色类型：green / orange / purple / red / gray
+    label {String} - 显示文本
+-->
+<view wx:if="{{label}}" class="badge badge-{{type || 'gray'}}">{{label}}</view>

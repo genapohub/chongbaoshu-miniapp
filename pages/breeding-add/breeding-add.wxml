@@ -4,7 +4,7 @@
       <text class="form-label">母犬</text>
       <view class="picker-wrap pet-picker {{motherDisabled ? 'disabled' : ''}}" bindtap="{{motherDisabled ? '' : 'showMotherPicker'}}">
         <view class="pet-display">
-          <image wx:if="{{motherPetName && motherPetAvatar}}" class="pet-avatar-small" src="{{motherPetAvatar}}" mode="aspectFill" />
+          <image wx:if="{{motherPetName && motherPetAvatar}}" class="pet-avatar-small" src="{{motherPetAvatar}}" mode="aspectFill" lazy-load />
           <view wx:if="{{motherPetName && !motherPetAvatar}}" class="pet-avatar-small placeholder">
             <text class="avatar-text">{{motherPetName.charAt(0)}}</text>
           </view>
@@ -21,7 +21,7 @@
       <text class="form-label">公犬</text>
       <view class="picker-wrap pet-picker {{fatherDisabled ? 'disabled' : ''}}" bindtap="{{fatherDisabled ? '' : 'showFatherPicker'}}">
         <view class="pet-display">
-          <image wx:if="{{fatherPetName && fatherPetAvatar}}" class="pet-avatar-small" src="{{fatherPetAvatar}}" mode="aspectFill" />
+          <image wx:if="{{fatherPetName && fatherPetAvatar}}" class="pet-avatar-small" src="{{fatherPetAvatar}}" mode="aspectFill" lazy-load />
           <view wx:if="{{fatherPetName && !fatherPetAvatar}}" class="pet-avatar-small placeholder">
             <text class="avatar-text">{{fatherPetName.charAt(0)}}</text>
           </view>
@@ -98,13 +98,12 @@
 
     <view class="form-item">
       <text class="form-label">备注</text>
-      <textarea 
-        class="textarea-field" 
-        placeholder="输入备注信息..." 
-        value="{{formData.notes}}" 
-        bindinput="onNotesInput"
-        maxlength="500"
-      ></textarea>
+      <notes-textarea
+        value="{{formData.notes}}"
+        placeholder="输入备注信息..."
+        maxlength="{{500}}"
+        bind:input="onNotesInput"
+      />
     </view>
   </view>
 
@@ -136,7 +135,7 @@
         data-breed="{{item.breed}}"
         data-avatar="{{item.avatar_photo}}"
       >
-        <image wx:if="{{item.avatar_photo}}" class="pet-avatar" src="{{item.avatar_photo}}" mode="aspectFill" />
+        <image wx:if="{{item.avatar_photo}}" class="pet-avatar" src="{{item.avatar_photo}}" mode="aspectFill" lazy-load />
         <view wx:else class="pet-avatar placeholder">
           <text class="avatar-text">{{item.name ? item.name.charAt(0) : '?'}}</text>
         </view>
@@ -169,7 +168,7 @@
         data-breed="{{item.breed}}"
         data-avatar="{{item.avatar_photo}}"
       >
-        <image wx:if="{{item.avatar_photo}}" class="pet-avatar" src="{{item.avatar_photo}}" mode="aspectFill" />
+        <image wx:if="{{item.avatar_photo}}" class="pet-avatar" src="{{item.avatar_photo}}" mode="aspectFill" lazy-load />
         <view wx:else class="pet-avatar placeholder">
           <text class="avatar-text">{{item.name ? item.name.charAt(0) : '?'}}</text>
         </view>

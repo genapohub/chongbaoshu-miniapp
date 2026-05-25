@@ -1,0 +1,8 @@
+<!-- 加载中组件
+  Properties:
+    text {String} - 提示文字，默认"加载中..."
+-->
+<view class="loading-wrapper">
+  <view class="loading-spinner"></view>
+  <text class="loading-text">{{text || '加载中...'}}</text>
+</view>

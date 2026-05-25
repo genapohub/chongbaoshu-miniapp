@@ -48,20 +48,11 @@
         bindtouchend="onTouchEnd"
         style="transform: translateX({{item.translateX || 0}}rpx);"
       >
-        <view class="pet-avatar">
-          <image
-            wx:if="{{item.avatar}}"
-            src="{{item.avatar}}"
-            mode="aspectFill"
-            class="avatar-img"
-            lazy-load
-          />
-          <view wx:else class="avatar-placeholder">{{item.speciesIcon}}</view>
-        </view>
+        <pet-avatar src="{{item.avatar}}" icon="{{item.speciesIcon}}" size="md" />
         <view class="pet-info">
           <view class="pet-name-row">
             <text class="pet-name">{{item.name}}</text>
-            <view wx:if="{{item.statusBadge}}" class="badge badge-{{item.statusBadge.type}}">{{item.statusBadge.label}}</view>
+            <status-badge wx:if="{{item.statusBadge}}" type="{{item.statusBadge.type}}" label="{{item.statusBadge.label}}" />
           </view>
           <text class="pet-desc">{{item.speciesLabel}} · {{item.genderLabel}} · {{item.age}}</text>
         </view>
@@ -122,10 +113,7 @@
   </view>
 
   <!-- 空状态 -->
-  <view wx:if="{{petList.length === 0 && !loading}}" class="empty-state">
-    <text class="empty-icon">🐾</text>
-    <text class="empty-text">还没有宠物，点击下方添加</text>
-  </view>
+  <empty-state wx:if="{{petList.length === 0 && !loading}}" icon="🐾" text="还没有宠物，点击下方添加" />
 
   <!-- 删除确认弹窗 -->
   <view wx:if="{{showDeleteModal}}" class="delete-modal-overlay" bindtap="cancelDelete">

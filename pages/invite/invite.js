@@ -2,6 +2,7 @@
  * 邀请好友页 - 逻辑
  */
 const api = require('../../utils/api')
+const analytics = require('../../utils/analytics')
 const { formatDate, formatDateTime } = require('../../utils/constants')
 const app = getApp()
 
@@ -53,6 +54,9 @@ Page({
         inviteCode: res.invite_code || '',
         inviteUrl: res.invite_url || '',
       })
+
+      // 埋点：获取邀请码成功
+      analytics.inviteCodeGet()
     } catch (err) {
       console.error('获取邀请码失败', err)
     }
@@ -78,7 +82,7 @@ Page({
       })
       const rawRecords = res.list || []
       const newRecords = rawRecords.map(function(item) {
-        var nickname = item.invitee_nickname || '新用户'
+        const nickname = item.invitee_nickname || '新用户'
         return {
           ...item,
           avatarText: nickname.charAt(0),
@@ -110,6 +114,9 @@ Page({
   },
 
   onShareAppMessage() {
+    // 埋点：分享邀请
+    analytics.inviteShare('miniapp')
+
     return {
       title: `我在用宠宝树管理宠物，输入邀请码 ${this.data.inviteCode} 即可获得7天Pro体验`,
       path: `/pages/invite-redeem/invite-redeem?code=${this.data.inviteCode}`,

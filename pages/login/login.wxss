@@ -46,8 +46,8 @@
 }
 
 .login-wechat {
-  background: #07C160;
-  color: #fff;
+  background: #FFF;
+  color: #E94560;
 }
 
 .login-phone {

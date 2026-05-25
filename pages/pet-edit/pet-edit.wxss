@@ -1,4 +1,4 @@
-/* P5 编辑宠物页面样式 - 按设计稿一比一复刻 */
+/* P5 编辑宠物页面样式 - 页面特有样式，通用样式已提取到 app.wxss */
 
 .container {
   min-height: 100vh;
@@ -6,51 +6,7 @@
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* 卡片 */
-.card {
-  background: #fff;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  margin: 20rpx;
-}
-
-.card-title {
-  font-size: 30rpx;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 24rpx;
-}
-
-/* 表单区域 */
-.form-section {
-  padding: 16rpx 0;
-}
-
-.form-item {
-  margin-bottom: 24rpx;
-}
-
-.form-item:last-child {
-  margin-bottom: 0;
-}
-
-.form-label {
-  display: block;
-  font-size: 28rpx;
-  color: #333;
-  margin-bottom: 12rpx;
-  font-weight: 500;
-}
-
 /* 输入框 */
-.input-field {
-  background: #F8F9FA;
-  border-radius: 12rpx;
-  padding: 20rpx 24rpx;
-  font-size: 28rpx;
-  color: #333;
-}
-
 .input-field.small {
   padding: 16rpx 20rpx;
   font-size: 26rpx;
@@ -91,30 +47,6 @@
   font-size: 22rpx;
 }
 
-/* 选择器包装 */
-.picker-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #F8F9FA;
-  border-radius: 12rpx;
-  padding: 20rpx 24rpx;
-  font-size: 28rpx;
-}
-
-.picker-value {
-  color: #333;
-}
-
-.picker-value:empty {
-  color: #999;
-}
-
-.picker-arrow {
-  color: #999;
-  font-size: 36rpx;
-}
-
 /* 性别选择 */
 .gender-options {
   display: flex;
@@ -140,12 +72,6 @@
 }
 
 /* 血统信息区域 */
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .toggle-arrow {
   font-size: 36rpx;
   color: #999;
@@ -200,92 +126,4 @@
   font-size: 26rpx;
 }
 
-/* 提交区域 */
-.submit-section {
-  padding: 24rpx;
-  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-}
-
-.btn-primary {
-  background: #E94560;
-  color: #FFFFFF;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  text-align: center;
-  font-size: 30rpx;
-  font-weight: 600;
-}
-
-/* 物种选择弹窗 */
-.picker-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: flex-end;
-  z-index: 1000;
-}
-
-.picker-content {
-  width: 100%;
-  background: #FFFFFF;
-  border-radius: 24rpx 24rpx 0 0;
-  max-height: 70vh;
-  overflow: hidden;
-}
-
-.picker-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 32rpx;
-  border-bottom: 1rpx solid #EEEEEE;
-}
-
-.picker-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #333;
-}
-
-.picker-close {
-  font-size: 48rpx;
-  color: #999;
-  line-height: 1;
-}
-
-.picker-list {
-  max-height: 50vh;
-}
-
-.picker-item {
-  display: flex;
-  align-items: center;
-  padding: 28rpx 32rpx;
-  border-bottom: 1rpx solid #F5F5F5;
-}
-
-.picker-item:last-child {
-  border-bottom: none;
-}
-
-.picker-item.selected {
-  background: #FFF0F3;
-}
-
-.picker-item-icon {
-  font-size: 40rpx;
-  margin-right: 20rpx;
-}
-
-.picker-item-text {
-  font-size: 30rpx;
-  color: #333;
-}
-
-.picker-item.selected .picker-item-text {
-  color: #E94560;
-}
+/* 物种选择弹窗已提取为 picker-modal 组件 */

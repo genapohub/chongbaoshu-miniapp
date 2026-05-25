@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "pet-edit"
+  "navigationBarTitleText": "编辑宠物",
+  "usingComponents": {
+    "picker-modal": "/components/picker-modal/picker-modal"
+  }
 }

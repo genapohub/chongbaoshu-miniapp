@@ -1,105 +1,139 @@
 /**
  * API 请求封装
  * 统一处理 token、错误码、loading
+ * 安全增强：GET 请求失败重试 + confirmDel 便捷方法
+ * 监控增强：埋点 + Sentry 面包屑 + 异常捕获
  */
 const app = getApp();
+const analytics = require('./analytics');
+const sentry = require('./sentry');
 
 /**
- * 通用请求方法
+ * 通用请求方法（含 GET 请求失败重试机制）
  */
 function request(options) {
-  return new Promise(function(resolve, reject) {
-    var url = options.url;
-    var method = options.method || 'GET';
-    var data = options.data;
-    var loading = options.loading !== undefined ? options.loading : true;
-    var loadingText = options.loadingText || '加载中...';
+  // GET 请求最多重试 2 次，其他请求不重试
+  const maxRetries = options.method === 'GET' ? 2 : 0;
+  let retryCount = 0;
 
-    if (loading) {
-      wx.showLoading({ title: loadingText, mask: true });
-    }
+  function doRequest() {
+    return new Promise(function(resolve, reject) {
+      const url = options.url;
+      const method = options.method || 'GET';
+      const data = options.data;
+      const loading = options.loading !== undefined ? options.loading : true;
+      const loadingText = options.loadingText || '加载中...';
 
-    const header = {
-      'Content-Type': 'application/json',
-    };
+      // 监控：记录请求开始时间
+      const startTime = Date.now();
 
-    // 携带 token
-    if (app.globalData.token) {
-      header.Authorization = `Bearer ${app.globalData.token}`;
-    }
+      if (loading) {
+        wx.showLoading({ title: loadingText, mask: true });
+      }
 
-    wx.request({
-      url: `${app.globalData.baseUrl}${url}`,
-      method,
-      data,
-      header,
-      timeout: 15000,
-      success: (res) => {
-        if (loading) wx.hideLoading();
+      const header = {
+        'Content-Type': 'application/json',
+      };
 
-        const responseData = res.data;
+      // 携带 token
+      if (app.globalData.token) {
+        header.Authorization = `Bearer ${app.globalData.token}`;
+      }
 
-        // 成功
-        if (responseData.code === 0) {
-          resolve(responseData.data);
-          return;
-        }
+      // 监控：发送前添加 Sentry 面包屑
+      sentry.addBreadcrumb('api', `${method} ${url}`);
 
-        // 未登录
-        if (responseData.code === 1002) {
-          wx.removeStorageSync('token');
-          app.globalData.token = null;
-          wx.showToast({ title: '请先登录', icon: 'none' });
-          setTimeout(() => {
-            wx.reLaunch({ url: '/pages/login/login' });
-          }, 1500);
-          reject(responseData);
-          return;
-        }
+      wx.request({
+        url: `${app.globalData.baseUrl}${url}`,
+        method,
+        data,
+        header,
+        timeout: 15000,
+        success: (res) => {
+          if (loading) wx.hideLoading();
 
-        // 限额弹窗
-        if (responseData.code === 2001) {
-          wx.showModal({
-            title: '已达上限',
-            content: responseData.message,
-            confirmText: '升级订阅',
-            cancelText: '知道了',
-            success: (modalRes) => {
-              if (modalRes.confirm) {
-                wx.navigateTo({ url: '/pages/subscription/subscription' });
-              }
-            },
+          const responseData = res.data;
+
+          // 成功
+          if (responseData.code === 0) {
+            resolve(responseData.data);
+            return;
+          }
+
+          // 监控：业务错误上报
+          const duration = Date.now() - startTime;
+          analytics.apiError(url, responseData.code, responseData.message);
+          sentry.addBreadcrumb('api_error', `${url} → code:${responseData.code}`, { duration: duration });
+
+          // 未登录
+          if (responseData.code === 1002) {
+            wx.removeStorageSync('token');
+            app.globalData.token = null;
+            wx.showToast({ title: '请先登录', icon: 'none' });
+            setTimeout(() => {
+              wx.reLaunch({ url: '/pages/login/login' });
+            }, 1500);
+            reject(responseData);
+            return;
+          }
+
+          // 限额弹窗
+          if (responseData.code === 2001) {
+            wx.showModal({
+              title: '已达上限',
+              content: responseData.message,
+              confirmText: '升级订阅',
+              cancelText: '知道了',
+              success: (modalRes) => {
+                if (modalRes.confirm) {
+                  wx.navigateTo({ url: '/pages/subscription/subscription' });
+                }
+              },
+            });
+            reject(responseData);
+            return;
+          }
+
+          // 其他错误
+          wx.showToast({
+            title: responseData.message || '请求失败',
+            icon: 'none',
+            duration: 2000,
           });
           reject(responseData);
-          return;
-        }
+        },
+        fail: (err) => {
+          if (loading) wx.hideLoading();
 
-        // 其他错误
-        wx.showToast({
-          title: responseData.message || '请求失败',
-          icon: 'none',
-          duration: 2000,
-        });
-        reject(responseData);
-      },
-      fail: (err) => {
-        if (loading) wx.hideLoading();
-        console.warn('[API] request fail:', method, url, err.errMsg);
-        wx.showToast({
-          title: '网络异常，请重试',
-          icon: 'none',
-        });
-        reject(err);
-      },
+          // 监控：网络错误上报
+          const duration = Date.now() - startTime;
+          analytics.apiError(url, 'NETWORK_ERROR', err.errMsg);
+          sentry.captureException(new Error(err.errMsg), { api_path: url, method: method });
+
+          // GET 请求重试逻辑
+          if (retryCount < maxRetries) {
+            retryCount++;
+            doRequest().then(resolve).catch(reject);
+          } else {
+            wx.showToast({
+              title: '网络异常，请重试',
+              icon: 'none',
+            });
+            reject(err);
+          }
+        },
+      });
     });
-  });
+  }
+
+  return doRequest();
 }
 
 // 便捷方法
 function get(url, data, options) {
   options = options || {};
-  var params = { url: url, method: 'GET', data: data };
-  for (var key in options) {
+  const params = { url: url, method: 'GET', data: data };
+  for (let key in options) {
     params[key] = options[key];
   }
   return request(params);
@@ -107,8 +141,8 @@ function get(url, data, options) {
 
 function post(url, data, options) {
   options = options || {};
-  var params = { url: url, method: 'POST', data: data };
-  for (var key in options) {
+  const params = { url: url, method: 'POST', data: data };
+  for (let key in options) {
     params[key] = options[key];
   }
   return request(params);
@@ -116,8 +150,8 @@ function post(url, data, options) {
 
 function put(url, data, options) {
   options = options || {};
-  var params = { url: url, method: 'PUT', data: data };
-  for (var key in options) {
+  const params = { url: url, method: 'PUT', data: data };
+  for (let key in options) {
     params[key] = options[key];
   }
   return request(params);
@@ -125,11 +159,35 @@ function put(url, data, options) {
 
 function del(url, data, options) {
   options = options || {};
-  var params = { url: url, method: 'DELETE', data: data };
-  for (var key in options) {
+  const params = { url: url, method: 'DELETE', data: data };
+  for (let key in options) {
     params[key] = options[key];
   }
   return request(params);
+}
+
+/**
+ * 删除确认便捷方法
+ * 弹出确认弹窗后再执行删除请求
+ * @param {string} url - 请求路径
+ * @param {object} data - 请求数据
+ * @param {object} options - 请求选项
+ * @returns {Promise} 删除结果
+ */
+function confirmDel(url, data, options) {
+  return new Promise(function(resolve, reject) {
+    wx.showModal({
+      title: '确认删除',
+      content: '删除后无法恢复，确定要删除吗？',
+      success: function(res) {
+        if (res.confirm) {
+          del(url, data, options).then(resolve).catch(reject);
+        } else {
+          reject({ cancelled: true });
+        }
+      },
+    });
+  });
 }
 
 module.exports = {
@@ -138,4 +196,5 @@ module.exports = {
   post,
   put,
   del,
+  confirmDel,
 };

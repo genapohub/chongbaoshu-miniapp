@@ -97,23 +97,7 @@
   color: #999;
 }
 
-.textarea-field {
-  width: 100%;
-  min-height: 200rpx;
-  background: #F8F9FA;
-  border-radius: 12rpx;
-  padding: 24rpx;
-  font-size: 28rpx;
-  color: #212529;
-  box-sizing: border-box;
-}
-
-.textarea-counter {
-  text-align: right;
-  font-size: 24rpx;
-  color: #ADB5BD;
-  margin-top: 12rpx;
-}
+/* textarea 已提取为 notes-textarea 组件 */
 
 .next-date-card {
   background: #EBF5FF;

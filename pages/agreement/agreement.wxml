@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="header">
+    <text class="title">{{title}}</text>
+    <text class="update-time">更新时间：{{updateTime}}</text>
+  </view>
+
+  <scroll-view scroll-y class="content" enhanced show-scrollbar="{{false}}">
+    <rich-text nodes="{{content}}"></rich-text>
+  </scroll-view>
+
+  <view class="footer">
+    <view wx:if="{{showConfirm}}" class="confirm-bar">
+      <checkbox checked="{{agreed}}" bindchange="onCheckChange" color="#10B981" />
+      <text class="confirm-text">我已阅读并同意{{title}}</text>
+    </view>
+    <view wx:if="{{showConfirm}}" class="btn-primary {{!agreed ? 'disabled' : ''}}" bindtap="onConfirm">
+      同意并继续
+    </view>
+  </view>
+</view>

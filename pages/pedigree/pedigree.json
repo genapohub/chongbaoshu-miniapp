@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "pedigree"
+  "navigationBarTitleText": "pedigree",
+  "usingComponents": {
+    "pet-avatar": "/components/pet-avatar/pet-avatar"
+  }
 }

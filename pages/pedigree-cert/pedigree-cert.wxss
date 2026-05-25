@@ -176,11 +176,386 @@
 }
 
 .action-btn.primary {
-  background: linear-gradient(135deg, #E11D48 0%, #BE185D 100%);
+  background: linear-gradient(135deg, #E94560 0%, #C23151 100%);
   color: #FFFFFF;
 }
 
 .action-btn.secondary {
   background: #F5F5F5;
   color: #333;
+}
+
+/* ========== 证书预览模态层 ========== */
+
+.cert-preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.cert-preview-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 预览卡片容器 */
+.cert-preview-card {
+  width: 640rpx;
+  max-height: 90vh;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 40rpx 24rpx 24rpx;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* 关闭按钮 */
+.preview-close {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #999;
+  z-index: 1;
+}
+
+/* 证书卡片（金色风格） */
+.preview-cert {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFFDF5 30%, #FFFFFF 60%, #FFF8E1 100%);
+  border: 4rpx solid #D4A853;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx 28rpx;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8rpx 32rpx rgba(212, 168, 83, 0.2);
+}
+
+.preview-seal {
+  font-size: 72rpx;
+  margin-bottom: 8rpx;
+}
+
+.preview-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #8B6914;
+  margin-bottom: 16rpx;
+  letter-spacing: 4rpx;
+}
+
+.preview-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.preview-divider {
+  width: 120rpx;
+  height: 2rpx;
+  background: #D4A853;
+  margin: 16rpx auto 20rpx;
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* QR 码区 */
+.preview-qr {
+  margin: 24rpx auto 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-code-box {
+  width: 140rpx;
+  height: 140rpx;
+  background: #F5F5F5;
+  border-radius: 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-icon {
+  font-size: 48rpx;
+  color: #333;
+}
+
+.qr-label {
+  font-size: 20rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.preview-cert-no {
+  font-size: 20rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+/* 操作按钮 */
+.preview-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.preview-btn {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-btn {
+  background: linear-gradient(135deg, #E94560 0%, #C23151 100%);
+  color: #FFFFFF;
+}
+
+.download-btn {
+  background: #F5F5F5;
+  color: #333;
+}
+
+/* 分享渠道 */
+.preview-share-channels {
+  display: flex;
+  justify-content: center;
+  gap: 60rpx;
+  margin-top: 24rpx;
+}
+
+.share-channel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.channel-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+
+.wx-icon {
+  background: #E8F8EE;
+}
+
+.moment-icon {
+  background: #E3F2FD;
+}
+
+.link-icon {
+  background: #F3E8FF;
+}
+
+.channel-label {
+  font-size: 20rpx;
+  color: #666;
+}
+
+/* 底部提示 */
+.preview-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 20rpx;
+  padding-bottom: 8rpx;
+}
+
+/* ========== 编辑血统信息模态层 ========== */
+
+.edit-pedigree-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.edit-pedigree-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 编辑卡片容器（底部弹出） */
+.edit-pedigree-card {
+  width: 100%;
+  max-height: 85vh;
+  background: #FFFFFF;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 32rpx 32rpx 24rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 关闭按钮 */
+.edit-close {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #999;
+  z-index: 1;
+}
+
+/* 标题区 */
+.edit-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+  padding-right: 60rpx;
+}
+
+.edit-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.edit-pro-tag {
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #E94560 0%, #C23151 100%);
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+/* 滚动区域 */
+.edit-scroll {
+  flex: 1;
+  max-height: 60vh;
+}
+
+/* 分组区 */
+.edit-section {
+  background: #F9FAFB;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.edit-section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+/* 字段行 */
+.edit-field {
+  margin-bottom: 16rpx;
+}
+
+.edit-field:last-child {
+  margin-bottom: 0;
+}
+
+.edit-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.edit-required {
+  color: #E94560;
+  font-weight: bold;
+}
+
+.edit-input {
+  width: 100%;
+  height: 80rpx;
+  background: #FFFFFF;
+  border: 2rpx solid #E5E7EB;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.edit-input:focus {
+  border-color: #E94560;
+}
+
+/* 操作按钮 */
+.edit-actions {
+  margin-top: 24rpx;
+}
+
+.edit-save-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #E94560 0%, #C23151 100%);
+  color: #FFFFFF;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-save-btn.disabled {
+  opacity: 0.6;
+}
+
+/* 底部提示 */
+.edit-hint {
+  text-align: center;
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 16rpx;
+  padding-bottom: 8rpx;
 }

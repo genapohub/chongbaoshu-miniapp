@@ -1,0 +1,27 @@
+<view class="picker-modal {{show ? 'show' : ''}}" catchtap="onMaskTap">
+  <view class="picker-content" catchtap="onContentTap">
+    <view class="picker-header">
+      <text class="picker-title">{{title}}</text>
+      <view class="picker-close" catchtap="onClose">
+        <text>✕</text>
+      </view>
+    </view>
+    <scroll-view class="picker-list" scroll-y>
+      <view
+        class="picker-item {{item.value === selectedValue ? 'active' : ''}}"
+        wx:for="{{items}}"
+        wx:key="value"
+        data-value="{{item.value}}"
+        data-index="{{index}}"
+        catchtap="onSelect"
+      >
+        <text class="picker-item-icon" wx:if="{{item.icon}}">{{item.icon}}</text>
+        <text class="picker-item-label">{{item.label}}</text>
+        <text class="picker-item-check" wx:if="{{item.value === selectedValue}}">✓</text>
+      </view>
+    </scroll-view>
+    <view class="picker-empty" wx:if="{{!items || items.length === 0}}">
+      <text>暂无选项</text>
+    </view>
+  </view>
+</view>

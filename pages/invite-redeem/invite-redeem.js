@@ -3,6 +3,7 @@
  * 功能：输入邀请码兑换，双方各得7天Pro
  */
 const api = require('../../utils/api')
+const analytics = require('../../utils/analytics')
 const app = getApp()
 
 Page({
@@ -61,6 +62,16 @@ Page({
         status: 'success',
         rewardDays: res.reward_days || 7,
       })
+
+      // 埋点：兑换邀请码成功（inviter_id 脱敏：取前4位+***）
+      const inviterId = res.inviter_id || ''
+      const maskedInviterId = inviterId.length > 4
+        ? inviterId.substring(0, 4) + '***'
+        : inviterId
+      analytics.inviteRedeem(maskedInviterId)
+
+      // 埋点：邀请奖励到账（兑换者 is_inviter=false）
+      analytics.inviteReward('pro_days', false)
     } catch (err) {
       const msg = err.message || '邀请码无效'
       this.setData({

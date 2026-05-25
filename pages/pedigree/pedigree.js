@@ -1,5 +1,6 @@
 const api = require('../../utils/api');
 const constants = require('../../utils/constants');
+const analytics = require('../../utils/analytics');
 
 Page({
   data: {
@@ -60,6 +61,9 @@ Page({
       wx.showToast({ title: '请先升级Pro版', icon: 'none' });
       return;
     }
+    // 埋点：查看血统证书
+    analytics.pedigreeView(petId, '3');
+
     wx.navigateTo({ url: '/pages/pedigree-cert/pedigree-cert?pet_id=' + petId });
   },
 

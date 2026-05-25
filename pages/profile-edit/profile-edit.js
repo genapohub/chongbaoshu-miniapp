@@ -1,4 +1,5 @@
 const api = require('../../utils/api.js');
+const validate = require('../../utils/validate');
 
 Page({
   data: {
@@ -186,9 +187,40 @@ Page({
       return;
     }
     if (this.data.loading) return;
+
+    // 表单校验
+    const formData = this.data.formData;
+    const kennelName = (formData.kennel_name || '').trim();
+
+    // 宠舍名称长度 + XSS 校验
+    if (!kennelName) {
+      wx.showToast({ title: '请填写宠舍名称', icon: 'none' });
+      return;
+    }
+    if (kennelName.length > 50) {
+      wx.showToast({ title: '宠舍名称最多50个字符', icon: 'none' });
+      return;
+    }
+    if (validate.hasXSS(kennelName)) {
+      wx.showToast({ title: '宠舍名称包含非法字符', icon: 'none' });
+      return;
+    }
+
+    // 微信号校验
+    if (formData.wechat && formData.wechat.length > 30) {
+      wx.showToast({ title: '微信号最多30个字符', icon: 'none' });
+      return;
+    }
+
+    // 手机号格式校验
+    if (formData.phone && !validate.isValidPhone(formData.phone)) {
+      wx.showToast({ title: '手机号格式不正确', icon: 'none' });
+      return;
+    }
+
     this.setData({ loading: true });
 
-    const { formData, breedTags } = this.data;
+    const { breedTags } = this.data;
     const regionStr = formData.region.join(' ');
     const kennelAddress = (regionStr + ' ' + formData.address).trim();
 
@@ -201,19 +233,19 @@ Page({
         filePath: formData.kennel_logo,
         name: 'kennel_logo',
         formData: {
-          kennel_name: formData.kennel_name,
-          kennel_address: kennelAddress,
-          kennel_intro: formData.kennel_intro,
+          kennel_name: validate.sanitize(formData.kennel_name),
+          kennel_address: validate.sanitize(kennelAddress),
+          kennel_intro: validate.sanitize(formData.kennel_intro || ''),
           main_breeds: JSON.stringify(breedTags),
           phone: formData.phone,
-          wechat: formData.wechat,
+          wechat: validate.sanitize(formData.wechat || ''),
         },
         header: {
           'Authorization': 'Bearer ' + getApp().globalData.token
         },
         success: function(res) {
             try {
-              var result = JSON.parse(res.data);
+              const result = JSON.parse(res.data);
               if (result.code === 0) {
                 getApp().globalData.userInfo = result.data;
                 wx.setStorageSync('userInfo', result.data);
@@ -240,12 +272,12 @@ Page({
     } else {
       try {
         const data = {
-          kennel_name: formData.kennel_name,
-          kennel_address: kennelAddress,
-          kennel_intro: formData.kennel_intro,
+          kennel_name: validate.sanitize(formData.kennel_name),
+          kennel_address: validate.sanitize(kennelAddress),
+          kennel_intro: validate.sanitize(formData.kennel_intro || ''),
           main_breeds: JSON.stringify(breedTags),
           phone: formData.phone,
-          wechat: formData.wechat,
+          wechat: validate.sanitize(formData.wechat || ''),
         };
 
         const result = await api.put('/auth/profile', data);

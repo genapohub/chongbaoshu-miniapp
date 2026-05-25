@@ -7,7 +7,7 @@
 
 /* 顶部横幅 */
 .banner {
-  background: linear-gradient(135deg, #00C9A7, #00B894);
+  background: linear-gradient(135deg, #E94560, #FD79A8);
   padding: 60rpx 30rpx 50rpx;
   text-align: center;
 }

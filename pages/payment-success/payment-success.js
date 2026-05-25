@@ -1,4 +1,5 @@
 const api = require('../../utils/api');
+const sentry = require('../../utils/sentry');
 
 Page({
   data: {
@@ -16,7 +17,10 @@ Page({
 
   onLoad(options) {
     this.setData({ loading: true });
-    
+
+    // 监控：添加支付成功页面导航面包屑
+    sentry.addBreadcrumb('navigation', 'payment_success');
+
     if (options.period) {
       this.setData({ 
         period: options.period,

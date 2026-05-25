@@ -1,5 +1,7 @@
 const api = require('../../utils/api');
 const constants = require('../../utils/constants');
+const analytics = require('../../utils/analytics');
+const app = getApp();
 
 Page({
   data: {
@@ -10,8 +12,8 @@ Page({
   },
 
   onLoad(options) {
-    var plans = ['free', 'basic', 'pro'].map(function(tier) {
-      var p = constants.PLAN_DETAILS[tier];
+    const plans = ['free', 'basic', 'pro'].map(function(tier) {
+      const p = constants.PLAN_DETAILS[tier];
       return {
         tier: tier,
         name: p.name,
@@ -32,6 +34,13 @@ Page({
     this.loadCurrentTier();
   },
 
+  onShow() {
+    // 埋点：进入付费页面
+    const userInfo = app.globalData.userInfo || {};
+    const currentPlan = userInfo.subscription_tier || this.data.currentTier || 'free';
+    analytics.payEntry('upgrade', currentPlan);
+  },
+
   async loadCurrentTier() {
     try {
       const res = await api.get('/auth/limits');
@@ -46,6 +55,10 @@ Page({
   selectPlan(e) {
     const tier = e.currentTarget.dataset.tier;
     this.setData({ selectedTier: tier });
+
+    // 埋点：选择套餐
+    const planInfo = constants.PLAN_DETAILS[tier] || {};
+    analytics.payPlanSelect(tier, planInfo.name || tier, String(planInfo.monthlyPrice || 0));
   },
 
   confirmChange() {

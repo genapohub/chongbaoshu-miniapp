@@ -1,4 +1,5 @@
-var api = require('../../utils/api');
+const api = require('../../utils/api');
+const analytics = require('../../utils/analytics');
 
 Page({
   data: {
@@ -41,16 +42,16 @@ Page({
   },
 
   loadPetInfo: function(petId, type) {
-    var that = this;
-    var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+    const that = this;
+    const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
     api.get('/pets/' + petId).then(function(res) {
       if (res) {
-        var data = res.data || res;
-        var avatar = data.avatar_photo ? baseUrl + data.avatar_photo : '';
-        var gender = data.gender || 'female';
+        const data = res.data || res;
+        const avatar = data.avatar_photo ? baseUrl + data.avatar_photo : '';
+        const gender = data.gender || 'female';
         
         // type='auto' 时根据宠物性别自动分配角色
-        var assignAs = type;
+        const assignAs = type;
         if (type === 'auto') {
           assignAs = gender === 'female' ? 'mother' : 'father';
         }
@@ -104,26 +105,26 @@ Page({
   },
 
   loadPetList: function(gender) {
-    var that = this;
-    var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
-    var url = '/pets?page=1&pageSize=100';
+    const that = this;
+    const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+    const url = '/pets?page=1&pageSize=100';
     if (gender === 'female') {
       url += '&status=active';
     }
     api.get(url).then(function(res) {
-      var pets = [];
+      const pets = [];
       if (res) {
-        var data = res.data || res;
+        const data = res.data || res;
         if (data.list) {
           pets = data.list;
         } else if (Array.isArray(data)) {
           pets = data;
         }
       }
-      var filtered = [];
-      for (var i = 0; i < pets.length; i++) {
+      const filtered = [];
+      for (let i = 0; i < pets.length; i++) {
         if (pets[i].gender === gender) {
-          var pet = pets[i];
+          const pet = pets[i];
           if (pet.avatar_photo) {
             pet.avatar_photo = baseUrl + pet.avatar_photo;
           }
@@ -141,11 +142,11 @@ Page({
   },
 
   selectMother: function(e) {
-    var dataset = e.currentTarget.dataset;
-    var id = dataset.id;
-    var name = dataset.name;
-    var breed = dataset.breed;
-    var avatar = dataset.avatar;
+    const dataset = e.currentTarget.dataset;
+    const id = dataset.id;
+    const name = dataset.name;
+    const breed = dataset.breed;
+    const avatar = dataset.avatar;
     this.setData({
       motherPetId: id,
       motherPetName: name,
@@ -157,11 +158,11 @@ Page({
   },
 
   selectFather: function(e) {
-    var dataset = e.currentTarget.dataset;
-    var id = dataset.id;
-    var name = dataset.name;
-    var breed = dataset.breed;
-    var avatar = dataset.avatar;
+    const dataset = e.currentTarget.dataset;
+    const id = dataset.id;
+    const name = dataset.name;
+    const breed = dataset.breed;
+    const avatar = dataset.avatar;
     this.setData({
       fatherPetId: id,
       fatherPetName: name,
@@ -178,7 +179,7 @@ Page({
   },
 
   checkInbreeding: function() {
-    var that = this;
+    const that = this;
     if (!this.data.motherPetId || !this.data.fatherPetId) {
       this.setData({ inbreedingResult: null });
       return;
@@ -293,6 +294,10 @@ Page({
       };
 
       await api.post('/breeding', data);
+
+      // 埋点：添加配种成功
+      const hasPhoto = !!this.data.motherPetAvatar;
+      analytics.matingAdd(this.data.motherPetBreed || 'unknown', hasPhoto);
 
       wx.showToast({
         title: '添加成功',

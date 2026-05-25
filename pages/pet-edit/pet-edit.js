@@ -1,7 +1,8 @@
 /**
- * P5 编辑宠物页面 - 按设计稿一比一复刻
+ * P5 编辑宠物页面 - 组件化重构版
  */
-var api = require('../../utils/api.js');
+const api = require('../../utils/api.js');
+const formHelpers = require('../../utils/form-helpers');
 
 Page({
   data: {
@@ -28,13 +29,7 @@ Page({
     speciesDisplay: {},
     showPedigree: false,
     showSpeciesPicker: false,
-    speciesOptions: [
-      { value: 'dog', label: '犬', icon: '🐕' },
-      { value: 'cat', label: '猫', icon: '🐱' },
-      { value: 'bird', label: '鸟', icon: '🐦' },
-      { value: 'rabbit', label: '兔', icon: '🐰' },
-      { value: 'other', label: '其他', icon: '🐾' },
-    ],
+    speciesOptions: formHelpers.getSpeciesOptions(),
     availableTags: ['纯种', '繁育', '赛级', '家养', '活泼', '温顺'],
     customTags: [],
     selectedTags: [],
@@ -48,33 +43,25 @@ Page({
   },
 
   loadPetData: function() {
-    var that = this;
-    var petId = that.data.petId;
+    const that = this;
+    const petId = that.data.petId;
     if (!petId) return;
 
     api.get('/pets/' + petId).then(function(petRes) {
-      var pet = petRes.data || petRes;
+      const pet = petRes.data || petRes;
+      const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+      const birthDate = pet.birth_date ? pet.birth_date.split('T')[0] : '';
 
-      var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
-      var birthDate = pet.birth_date ? pet.birth_date.split('T')[0] : '';
-      
-      var speciesOptions = that.data.speciesOptions;
-      var speciesDisplay = {};
-      for (var i = 0; i < speciesOptions.length; i++) {
-        if (speciesOptions[i].value === pet.species) {
-          speciesDisplay = speciesOptions[i];
-          break;
-        }
-      }
+      const speciesDisplay = formHelpers.findSpeciesDisplay(that.data.speciesOptions, pet.species);
 
-      var avatarUrl = '';
+      let avatarUrl = '';
       if (pet.avatar_photo) {
         avatarUrl = baseUrl + pet.avatar_photo;
       }
 
-      var tags = pet.tags || [];
-      var selectedTagsIndex = {};
-      for (var j = 0; j < tags.length; j++) {
+      const tags = pet.tags || [];
+      const selectedTagsIndex = {};
+      for (let j = 0; j < tags.length; j++) {
         selectedTagsIndex[tags[j]] = true;
       }
 
@@ -101,36 +88,17 @@ Page({
         selectedTags: tags,
         selectedTagsIndex: selectedTagsIndex,
       });
-    }).catch(function(error) {
-      console.error('加载宠物数据失败:', error);
+    }).catch(function() {
       wx.showToast({ title: '加载失败', icon: 'none' });
     });
   },
 
   onInputChange: function(e) {
-    var field = e.currentTarget.dataset.field;
-    var value = e.detail.value;
-    var obj = {};
-    obj['formData.' + field] = value;
-    this.setData(obj);
+    formHelpers.onInputChange(this, e);
   },
 
   chooseAvatar: function() {
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function(res) {
-        var tempFilePath = res.tempFilePaths[0];
-        that.setData({
-          'formData.avatar': tempFilePath,
-        });
-      },
-      fail: function() {
-        wx.showToast({ title: '选择图片失败', icon: 'none' });
-      },
-    });
+    formHelpers.chooseAvatar(this);
   },
 
   showSpeciesPicker: function() {
@@ -141,158 +109,68 @@ Page({
     this.setData({ showSpeciesPicker: false });
   },
 
-  stopPropagation: function() {},
-
-  selectSpecies: function(e) {
-    var value = e.currentTarget.dataset.value;
-    var speciesOptions = this.data.speciesOptions;
-    var speciesOption = {};
-    for (var i = 0; i < speciesOptions.length; i++) {
-      if (speciesOptions[i].value === value) {
-        speciesOption = speciesOptions[i];
-        break;
-      }
-    }
-
+  onSpeciesSelect: function(e) {
     this.setData({
-      'formData.species': value,
-      speciesDisplay: speciesOption,
+      'formData.species': e.detail.value,
+      speciesDisplay: e.detail.item,
       showSpeciesPicker: false,
     });
   },
 
   selectGender: function(e) {
-    var gender = e.currentTarget.dataset.gender;
-    var currentGender = this.data.formData.gender;
-    var newGender = currentGender === gender ? '' : gender;
+    const gender = e.currentTarget.dataset.gender;
     this.setData({
-      'formData.gender': newGender,
+      'formData.gender': this.data.formData.gender === gender ? '' : gender,
     });
   },
 
   onBirthDateChange: function(e) {
-    this.setData({
-      'formData.birth_date': e.detail.value,
-    });
+    this.setData({ 'formData.birth_date': e.detail.value });
   },
 
   togglePedigree: function() {
-    this.setData({
-      showPedigree: !this.data.showPedigree,
-    });
+    this.setData({ showPedigree: !this.data.showPedigree });
   },
 
   toggleTag: function(e) {
-    var tag = e.currentTarget.dataset.tag;
-
-    var selectedTagsIndex = {};
-    var oldIndex = this.data.selectedTagsIndex;
-    var oldKeys = Object.keys(oldIndex);
-    for (var i = 0; i < oldKeys.length; i++) {
-      var key = oldKeys[i];
-      selectedTagsIndex[key] = oldIndex[key];
-    }
-
-    var selectedTags = this.data.selectedTags.slice();
-
-    if (selectedTagsIndex[tag]) {
-      delete selectedTagsIndex[tag];
-      var index = selectedTags.indexOf(tag);
-      if (index > -1) {
-        selectedTags.splice(index, 1);
-      }
-    } else {
-      if (selectedTags.length < 5) {
-        selectedTagsIndex[tag] = true;
-        selectedTags.push(tag);
-      } else {
-        wx.showToast({ title: '最多选择5个标签', icon: 'none' });
-        return;
-      }
-    }
-
-    this.setData({ selectedTagsIndex: selectedTagsIndex, selectedTags: selectedTags });
+    const result = formHelpers.toggleTag(
+      this.data.selectedTagsIndex, this.data.selectedTags, e.currentTarget.dataset.tag
+    );
+    if (result) this.setData(result);
   },
 
   onNewTagInput: function(e) {
-    this.setData({
-      newTag: e.detail.value,
-    });
+    this.setData({ newTag: e.detail.value });
   },
 
   addCustomTag: function() {
-    var newTag = this.data.newTag.trim();
-    if (!newTag) {
-      wx.showToast({ title: '请输入标签内容', icon: 'none' });
-      return;
+    const result = formHelpers.addCustomTag(
+      this.data.selectedTagsIndex, this.data.selectedTags,
+      this.data.customTags, this.data.newTag
+    );
+    if (result) {
+      this.setData(result);
+      wx.showToast({ title: '添加成功', icon: 'success' });
     }
-    if (this.data.selectedTags.length >= 5) {
-      wx.showToast({ title: '最多选择5个标签', icon: 'none' });
-      return;
-    }
-    var hasTag = false;
-    for (var i = 0; i < this.data.selectedTags.length; i++) {
-      if (this.data.selectedTags[i] === newTag) {
-        hasTag = true;
-        break;
-      }
-    }
-    if (hasTag) {
-      wx.showToast({ title: '标签已存在', icon: 'none' });
-      return;
-    }
-
-    var customTags = this.data.customTags.slice();
-    customTags.push(newTag);
-
-    var selectedTagsIndex = {};
-    var oldIndex = this.data.selectedTagsIndex;
-    var oldKeys = Object.keys(oldIndex);
-    for (var j = 0; j < oldKeys.length; j++) {
-      var key = oldKeys[j];
-      selectedTagsIndex[key] = oldIndex[key];
-    }
-    selectedTagsIndex[newTag] = true;
-
-    var selectedTags = this.data.selectedTags.slice();
-    selectedTags.push(newTag);
-
-    this.setData({ 
-      customTags: customTags, 
-      selectedTagsIndex: selectedTagsIndex, 
-      selectedTags: selectedTags, 
-      newTag: '' 
-    });
-    wx.showToast({ title: '添加成功', icon: 'success' });
   },
 
   validateForm: function() {
-    var name = this.data.formData.name;
-    var species = this.data.formData.species;
-    if (!name.trim()) {
-      wx.showToast({ title: '请输入宠物名称', icon: 'none' });
-      return false;
-    }
-    if (!species) {
-      wx.showToast({ title: '请选择物种', icon: 'none' });
-      return false;
-    }
-    return true;
+    return formHelpers.validatePetForm(this.data.formData);
   },
 
   submitForm: function() {
-    var that = this;
+    const that = this;
     if (that.data.loading) return;
     if (!that.validateForm()) return;
 
     that.setData({ loading: true });
 
-    var petId = that.data.petId;
-    var formData = that.data.formData;
-    var selectedTags = that.data.selectedTags;
+    const petId = that.data.petId;
+    const formData = that.data.formData;
+    const selectedTags = that.data.selectedTags;
 
-    var uploadData = {
-      name: formData.name,
+    const uploadData = {
+      name: formData.name.trim(),
       species: formData.species,
       breed: formData.breed || null,
       gender: formData.gender || null,
@@ -310,8 +188,8 @@ Page({
       tags: selectedTags.length > 0 ? selectedTags.join(',') : null,
     };
 
-    var avatarPath = formData.avatar;
-    var isNewAvatar = avatarPath && !avatarPath.startsWith('http');
+    const avatarPath = formData.avatar;
+    const isNewAvatar = avatarPath && !avatarPath.startsWith('http');
 
     if (isNewAvatar) {
       wx.uploadFile({
@@ -325,7 +203,7 @@ Page({
         },
         success: function(res) {
           try {
-            var result = JSON.parse(res.data);
+            const result = JSON.parse(res.data);
             if (result.code === 0) {
               wx.showToast({ title: '修改成功', icon: 'success' });
               setTimeout(function() {
@@ -345,8 +223,8 @@ Page({
         },
       });
     } else {
-      var apiData = {
-        name: formData.name,
+      const apiData = {
+        name: formData.name.trim(),
         species: formData.species,
         breed: formData.breed || null,
         gender: formData.gender || null,

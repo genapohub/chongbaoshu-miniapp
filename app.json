@@ -25,7 +25,8 @@
     "pages/feedback/feedback",
     "pages/payment-confirm/payment-confirm",
     "pages/payment-success/payment-success",
-    "pages/webview/webview"
+    "pages/webview/webview",
+    "pages/agreement/agreement"
   ],
   "window": {
     "navigationBarBackgroundColor": "#E94560",

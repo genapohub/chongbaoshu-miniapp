@@ -1,5 +1,9 @@
 {
   "navigationBarTitleText": "添加健康记录",
   "navigationBarBackgroundColor": "#E94560",
-  "navigationBarTextStyle": "white"
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "picker-modal": "/components/picker-modal/picker-modal",
+    "notes-textarea": "/components/notes-textarea/notes-textarea"
+  }
 }

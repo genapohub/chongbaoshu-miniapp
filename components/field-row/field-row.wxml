@@ -1,0 +1,10 @@
+<!-- 字段行组件
+  Properties:
+    label {String} - 左侧标签，如"品种"
+    value {String} - 右侧值
+    empty {String} - value 为空时的占位符，默认"-"
+-->
+<view class="field">
+  <text class="field-label">{{label}}</text>
+  <text class="field-value">{{value || empty || '-'}}</text>
+</view>

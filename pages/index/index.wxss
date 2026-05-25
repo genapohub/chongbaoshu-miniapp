@@ -1,4 +1,4 @@
-/* P1 工作台首页样式 - 按设计稿一比一复刻 */
+/* P1 工作台首页样式 */
 
 /* 容器 */
 .container {
@@ -6,34 +6,6 @@
   padding-bottom: 120rpx;
   min-height: 100vh;
   background: #F8F9FA;
-}
-
-/* 加载状态 */
-.loading-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 200rpx 40rpx;
-}
-
-.loading-spinner {
-  width: 64rpx;
-  height: 64rpx;
-  border: 4rpx solid #E8E8E8;
-  border-top-color: #E94560;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.loading-text {
-  margin-top: 24rpx;
-  font-size: 26rpx;
-  color: #9CA3AF;
 }
 
 /* 升级引导条 */
@@ -155,12 +127,12 @@
   display: block;
 }
 
-/* 今日提醒 */
+/* ===== 待办提醒 ===== */
 .reminder-row {
   display: flex;
   align-items: center;
-  gap: 16rpx;
-  padding: 16rpx 0;
+  gap: 20rpx;
+  padding: 20rpx 0;
   border-bottom: 1rpx solid #F3F4F6;
 }
 
@@ -168,32 +140,74 @@
   border-bottom: none;
 }
 
-.reminder-dot {
-  width: 12rpx;
-  height: 12rpx;
-  border-radius: 50%;
+.reminder-row-hover {
+  background: #F9FAFB;
+  border-radius: 12rpx;
+}
+
+.reminder-icon-wrap {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.reminder-text {
+.reminder-icon-text {
+  font-size: 32rpx;
+}
+
+.reminder-content {
   flex: 1;
-  font-size: 26rpx;
+  min-width: 0;
+}
+
+.reminder-top {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.reminder-pet-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1F2937;
 }
 
 .reminder-badge {
-  padding: 6rpx 16rpx;
+  padding: 4rpx 14rpx;
   border-radius: 20rpx;
-  font-size: 22rpx;
+  font-size: 20rpx;
   font-weight: 600;
   flex-shrink: 0;
 }
 
-.empty-state {
-  text-align: center;
-  padding: 40rpx;
+.reminder-bottom {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 6rpx;
 }
 
-/* 快捷入口 */
+.reminder-type-text {
+  font-size: 24rpx;
+  color: #6B7280;
+}
+
+.reminder-date-hint {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.reminder-arrow {
+  font-size: 32rpx;
+  color: #D1D5DB;
+  flex-shrink: 0;
+}
+
+/* ===== 快捷入口 ===== */
 .quick-entry {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -256,9 +270,12 @@
   letter-spacing: 1rpx;
 }
 
-/* 最近动态 */
+/* ===== 最近动态 ===== */
 .activity-row {
-  padding: 12rpx 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  padding: 16rpx 0;
   border-bottom: 1rpx solid #F3F4F6;
 }
 
@@ -266,9 +283,31 @@
   border-bottom: none;
 }
 
+.activity-icon-wrap {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 14rpx;
+  background: #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.activity-icon-text {
+  font-size: 28rpx;
+}
+
+.activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .activity-text {
   font-size: 26rpx;
+  color: #1F2937;
   display: block;
+  line-height: 1.5;
 }
 
 .activity-time {
@@ -316,15 +355,4 @@
   font-weight: 600;
   text-align: center;
   margin-top: 48rpx;
-}
-
-/* 通用样式 */
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
 }

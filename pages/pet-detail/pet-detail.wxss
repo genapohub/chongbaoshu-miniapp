@@ -215,21 +215,6 @@
   color: #6B7280;
 }
 
-.pro-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4rpx;
-  background: linear-gradient(135deg, #E94560, #FD79A8);
-  color: #fff;
-  padding: 2rpx 12rpx;
-  border-radius: 8rpx;
-  font-size: 18rpx;
-  font-weight: 700;
-  letter-spacing: 1rpx;
-  vertical-align: middle;
-  margin-left: 8rpx;
-}
-
 /* 照片网格 */
 .photo-grid {
   display: grid;

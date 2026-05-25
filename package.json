@@ -1,0 +1,7 @@
+{
+  "name": "chongbaoshu-miniapp",
+  "version": "1.0.0",
+  "dependencies": {
+    "@sentry/miniprogram": "^8.0.0"
+  }
+}

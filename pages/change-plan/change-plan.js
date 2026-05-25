@@ -64,7 +64,7 @@ Page({
           pro: 'Pro 专业版',
         };
 
-        var periodEnd = '';
+        let periodEnd = '';
         if (subscription && subscription.current_period_end) {
           periodEnd = subscription.current_period_end.split('T')[0];
         }

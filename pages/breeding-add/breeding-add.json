@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "breeding-add"
+  "navigationBarTitleText": "添加配种",
+  "usingComponents": {
+    "notes-textarea": "/components/notes-textarea/notes-textarea"
+  }
 }

@@ -1,5 +1,7 @@
 const api = require('../../utils/api');
 const constants = require('../../utils/constants');
+const analytics = require('../../utils/analytics');
+const sentry = require('../../utils/sentry');
 
 Page({
   data: {
@@ -24,6 +26,10 @@ Page({
     this.setData({ period: 'yearly' });
     if (options.tier) {
       this.loadPlanInfo(options.tier);
+
+      // 埋点：确认支付页
+      const planInfo = constants.PLAN_DETAILS[options.tier] || constants.PLAN_DETAILS.pro;
+      analytics.payConfirm(options.tier, String(planInfo.yearlyPrice));
     }
   },
 
@@ -85,6 +91,7 @@ Page({
       return;
     }
 
+    const self = this;
     const { tier, period, totalAmount } = this.data;
 
     if (totalAmount === 0) {
@@ -115,11 +122,20 @@ Page({
         signType: orderRes.signType || 'MD5',
         paySign: orderRes.paySign,
         success: function() {
+          // 埋点：支付成功
+          analytics.paySuccess(tier, String(period === 'yearly' ? self.data.yearlyPrice : self.data.monthlyPrice), 'wechat');
+
           wx.redirectTo({
             url: `/pages/payment-success/payment-success?tier=${tier}&period=${period}`
           });
         },
         fail: function(err) {
+          // 埋点：支付失败
+          const failReason = (err.errMsg && err.errMsg.indexOf('cancel') > -1)
+            ? 'user_cancel'
+            : 'pay_error';
+          analytics.payFail(tier, failReason);
+
           if (err.errMsg && err.errMsg.indexOf('cancel') > -1) {
             wx.showToast({ title: '支付已取消', icon: 'none' });
           } else {
@@ -130,8 +146,12 @@ Page({
           this.setData({ loading: false });
         }.bind(this),
       });
-    }.bind(this)).catch(function() {
+    }.bind(this)).catch(function(err) {
       wx.hideLoading();
+
+      // 监控：捕获支付网络请求异常
+      sentry.captureException(err, { flow: 'payment' });
+
       wx.showToast({ title: '创建订单失败', icon: 'none' });
       this.setData({ loading: false });
     }.bind(this));

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "添加宠物"
+  "navigationBarTitleText": "添加宠物",
+  "usingComponents": {
+    "picker-modal": "/components/picker-modal/picker-modal"
+  }
 }

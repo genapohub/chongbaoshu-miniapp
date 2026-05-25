@@ -10,7 +10,7 @@
       <view class="pet-details">
         <text>品种：{{pet.breed}}</text>
         <text>性别：{{pet.gender === 'male' ? '公' : '母'}}·{{pet.color || '金色'}}</text>
-        <text>注册号：{{pedigree.registration_number || '—'}}</text>
+        <text>平台认证编号：{{pedigree.platformCertNo || '—'}}</text>
         <text>犬舍：{{pedigree.kennel_name || '—'}}</text>
         <text>出生日期：{{pet.birth_date || '—'}}</text>
       </view>
@@ -99,3 +99,127 @@
     <button class="action-btn secondary" bindtap="editPedigree">编辑血统</button>
   </view>
 </view>
+
+<!-- 编辑血统信息模态层 -->
+<view class="edit-pedigree-overlay {{showEditPedigree ? 'show' : ''}}" bindtap="hideEditPedigree">
+  <view class="edit-pedigree-card" catchtap="noop">
+    <!-- 关闭按钮 -->
+    <view class="edit-close" bindtap="hideEditPedigree">✕</view>
+
+    <!-- 标题 -->
+    <view class="edit-header">
+      <text class="edit-title">填写血统信息</text>
+      <view class="edit-pro-tag">PRO</view>
+    </view>
+
+    <scroll-view class="edit-scroll" scroll-y>
+      <!-- 父系 -->
+      <view class="edit-section">
+        <view class="edit-section-title">♂ 父系</view>
+        <view class="edit-field">
+          <text class="edit-label">父亲 <text class="edit-required">*</text></text>
+          <input class="edit-input" placeholder="注册名" value="{{editFormData.father_name}}" data-field="father_name" bindinput="onEditInput" />
+        </view>
+        <view class="edit-field">
+          <text class="edit-label">父亲品种</text>
+          <input class="edit-input" placeholder="选填" value="{{editFormData.father_breed}}" data-field="father_breed" bindinput="onEditInput" />
+        </view>
+        <view class="edit-field">
+          <text class="edit-label">父方祖父</text>
+          <input class="edit-input" placeholder="选填" value="{{editFormData.grandfather_p_name}}" data-field="grandfather_p_name" bindinput="onEditInput" />
+        </view>
+        <view class="edit-field">
+          <text class="edit-label">父方祖母</text>
+          <input class="edit-input" placeholder="选填" value="{{editFormData.grandmother_p_name}}" data-field="grandmother_p_name" bindinput="onEditInput" />
+        </view>
+      </view>
+
+      <!-- 母系 -->
+      <view class="edit-section">
+        <view class="edit-section-title">♀ 母系</view>
+        <view class="edit-field">
+          <text class="edit-label">母亲 <text class="edit-required">*</text></text>
+          <input class="edit-input" placeholder="注册名" value="{{editFormData.mother_name}}" data-field="mother_name" bindinput="onEditInput" />
+        </view>
+        <view class="edit-field">
+          <text class="edit-label">母亲品种</text>
+          <input class="edit-input" placeholder="选填" value="{{editFormData.mother_breed}}" data-field="mother_breed" bindinput="onEditInput" />
+        </view>
+        <view class="edit-field">
+          <text class="edit-label">母方祖父</text>
+          <input class="edit-input" placeholder="选填" value="{{editFormData.grandfather_m_name}}" data-field="grandfather_m_name" bindinput="onEditInput" />
+        </view>
+        <view class="edit-field">
+          <text class="edit-label">母方祖母</text>
+          <input class="edit-input" placeholder="选填" value="{{editFormData.grandmother_m_name}}" data-field="grandmother_m_name" bindinput="onEditInput" />
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 保存按钮 -->
+    <view class="edit-actions">
+      <button class="edit-save-btn {{savingPedigree ? 'disabled' : ''}}" bindtap="savePedigree" disabled="{{savingPedigree}}">
+        {{savingPedigree ? '保存中...' : '保存血统信息'}}
+      </button>
+    </view>
+    <view class="edit-hint">保存后可在血统证书页查看3代血统树</view>
+  </view>
+</view>
+
+<!-- 证书预览全屏模态层 -->
+<view class="cert-preview-overlay {{showCertPreview ? 'show' : ''}}" bindtap="hideCertPreview">
+  <view class="cert-preview-card" catchtap="noop">
+    <!-- 关闭按钮 -->
+    <view class="preview-close" bindtap="hideCertPreview">✕</view>
+
+    <!-- 证书卡片（金色风格） -->
+    <view class="preview-cert">
+      <view class="preview-seal">🏅</view>
+      <view class="preview-title">宠宝树 血统证书</view>
+      <view class="preview-name">{{certPreviewData.petName}}</view>
+      <view class="preview-divider"></view>
+      <view class="preview-info">
+        <text>{{certPreviewData.breed}} · {{certPreviewData.gender}} · {{certPreviewData.color}}</text>
+        <text>平台认证编号：{{certPreviewData.platformCertNo}}</text>
+        <text>犬舍：{{certPreviewData.kennelName}}</text>
+        <text>出生日：{{certPreviewData.birthDate}}</text>
+        <text>父：{{certPreviewData.fatherName}} · 母：{{certPreviewData.motherName}}</text>
+      </view>
+      <view class="preview-qr">
+        <view class="qr-code-box">
+          <view class="qr-icon">▣</view>
+          <text class="qr-label">扫码验证真伪</text>
+        </view>
+      </view>
+      <view class="preview-cert-no">证书编号：{{certPreviewData.certNo}}</view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="preview-actions">
+      <button class="preview-btn share-btn" open-type="share">📤 分享</button>
+      <button class="preview-btn download-btn" bindtap="downloadCert">📥 下载图片</button>
+    </view>
+
+    <!-- 分享渠道 -->
+    <view class="preview-share-channels">
+      <view class="share-channel">
+        <view class="channel-icon wx-icon">💬</view>
+        <text class="channel-label">微信好友</text>
+      </view>
+      <view class="share-channel">
+        <view class="channel-icon moment-icon">🔄</view>
+        <text class="channel-label">朋友圈</text>
+      </view>
+      <view class="share-channel" bindtap="copyCertLink">
+        <view class="channel-icon link-icon">🔗</view>
+        <text class="channel-label">复制链接</text>
+      </view>
+    </view>
+
+    <!-- 底部提示 -->
+    <view class="preview-tip">本证书为宠宝树平台认证，非CKU/AKC官方注册证书</view>
+  </view>
+</view>
+
+<!-- 隐藏的离屏 Canvas（用于下载证书图片） -->
+<canvas type="2d" id="certPreviewCanvas" style="position:fixed;left:-9999px;top:-9999px;width:600px;height:780px;"></canvas>

@@ -1,7 +1,7 @@
 /**
  * P21 我的页面 - 按设计稿一比一复刻
  */
-var api = require('../../utils/api');
+const api = require('../../utils/api');
 
 Page({
   data: {
@@ -24,8 +24,8 @@ Page({
   },
 
   loadProfile: function() {
-    var that = this;
-    var app = getApp();
+    const that = this;
+    const app = getApp();
 
     that.setData({ loading: true });
 
@@ -40,15 +40,15 @@ Page({
       api.get('/auth/dashboard').catch(function() { return null; }),
       api.get('/invite/stats').catch(function() { return null; }),
     ]).then(function(results) {
-      var profile = results[0];
-      var subscription = results[1];
-      var dashboard = results[2];
-      var inviteStats = results[3];
+      const profile = results[0];
+      const subscription = results[1];
+      const dashboard = results[2];
+      const inviteStats = results[3];
 
-      var planNames = { free: '免费版', basic: '基础版', pro: 'Pro 专业版' };
-      var tier = subscription && subscription.tier ? subscription.tier : 'free';
+      const planNames = { free: '免费版', basic: '基础版', pro: 'Pro 专业版' };
+      const tier = subscription && subscription.tier ? subscription.tier : 'free';
 
-      var userInfo = {};
+      let userInfo = {};
       if (app.globalData.userInfo) {
         userInfo = app.globalData.userInfo;
       }
@@ -56,42 +56,42 @@ Page({
         userInfo = Object.assign({}, userInfo, profile);
       }
 
-      var petCount = 0;
+      let petCount = 0;
       if (dashboard && dashboard.stats && dashboard.stats.petCount) {
         petCount = dashboard.stats.petCount;
       }
 
-      var breedingCount = 0;
+      let breedingCount = 0;
       if (dashboard && dashboard.stats && dashboard.stats.breedingCount) {
         breedingCount = dashboard.stats.breedingCount;
       }
 
-      var inviteCount = 0;
+      let inviteCount = 0;
       if (inviteStats && inviteStats.inviteCount) {
         inviteCount = inviteStats.inviteCount;
       }
 
-      var expireDate = '';
+      let expireDate = '';
       if (subscription && subscription.expires_at) {
         expireDate = subscription.expires_at.split('T')[0];
       }
 
-      var isAutoRenew = true;
+      let isAutoRenew = true;
       if (subscription && subscription.auto_renew === false) {
         isAutoRenew = false;
       }
 
-      var baseUrl = getApp().globalData.baseUrl.replace('/api', '');
-      var kennelLogo = userInfo.kennel_logo;
+      const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+      let kennelLogo = userInfo.kennel_logo;
       if (kennelLogo && !kennelLogo.startsWith('http')) {
         kennelLogo = baseUrl + kennelLogo;
       }
-      var avatarUrl = userInfo.avatar_url;
+      let avatarUrl = userInfo.avatar_url;
       if (avatarUrl && !avatarUrl.startsWith('http')) {
         avatarUrl = baseUrl + avatarUrl;
       }
-      var displayAvatar = kennelLogo || avatarUrl || '';
-      var displayName = userInfo.kennel_name || userInfo.phone || '';
+      const displayAvatar = kennelLogo || avatarUrl || '';
+      const displayName = userInfo.kennel_name || userInfo.phone || '';
 
       that.setData({
         userInfo: userInfo,
@@ -114,7 +114,7 @@ Page({
   },
 
   goMenu: function(e) {
-    var url = e.currentTarget.dataset.url;
+    const url = e.currentTarget.dataset.url;
     wx.navigateTo({ url: url });
   },
 
@@ -135,7 +135,7 @@ Page({
   },
 
   onLogout: function() {
-    var that = this;
+    const that = this;
     wx.showModal({
       title: '确认退出',
       content: '退出后需要重新登录',

@@ -1,3 +1,9 @@
 {
-  "navigationBarTitleText": "pet-detail"
+  "navigationBarTitleText": "宠物详情",
+  "usingComponents": {
+    "status-badge": "/components/status-badge/status-badge",
+    "pet-avatar": "/components/pet-avatar/pet-avatar",
+    "loading-spinner": "/components/loading-spinner/loading-spinner",
+    "field-row": "/components/field-row/field-row"
+  }
 }

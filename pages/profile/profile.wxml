@@ -6,7 +6,7 @@
   <!-- 头部 -->
   <view class="profile-header">
     <view class="profile-avatar">
-      <image wx:if="{{displayAvatar}}" src="{{displayAvatar}}" mode="aspectFill" class="avatar-img" />
+      <image wx:if="{{displayAvatar}}" src="{{displayAvatar}}" mode="aspectFill" class="avatar-img" lazy-load />
       <view wx:else class="avatar-placeholder">👤</view>
     </view>
     <text class="profile-name">{{displayName || '未设置昵称'}}</text>

@@ -1,5 +1,5 @@
 <!--
-  添加宠物页面 - 按设计稿复刻
+  添加宠物页面 - 组件化重构版
   结构：头像上传 → 基本信息 → 血统信息 → 标签 → 提交按钮
 -->
 <view class="container">
@@ -8,7 +8,7 @@
     <view class="form-section">
       <text class="form-label">宠物头像</text>
       <view class="avatar-upload" bindtap="chooseAvatar">
-        <image wx:if="{{formData.avatar}}" src="{{formData.avatar}}" class="avatar-img" mode="aspectFill" />
+        <image wx:if="{{formData.avatar}}" src="{{formData.avatar}}" class="avatar-img" mode="aspectFill" lazy-load />
         <view wx:else class="avatar-placeholder">
           <text class="avatar-icon">📷</text>
           <text class="avatar-text">点击上传</text>
@@ -155,20 +155,12 @@
   </view>
 </view>
 
-<!-- 物种选择弹窗 -->
-<view wx:if="{{showSpeciesPicker}}" class="picker-modal" bindtap="hideSpeciesPicker">
-  <view class="picker-content" catchtap="stopPropagation">
-    <view class="picker-header">
-      <text class="picker-title">选择物种</text>
-      <text class="picker-close" bindtap="hideSpeciesPicker">×</text>
-    </view>
-    <scroll-view scroll-y class="picker-list">
-      <view wx:for="{{speciesOptions}}" wx:key="value"
-            class="picker-item {{formData.species === item.value ? 'selected' : ''}}"
-            bindtap="selectSpecies" data-value="{{item.value}}">
-        <text class="picker-item-icon">{{item.icon}}</text>
-        <text class="picker-item-text">{{item.label}}</text>
-      </view>
-    </scroll-view>
-  </view>
-</view>
+<!-- 物种选择弹窗（使用 picker-modal 组件） -->
+<picker-modal
+  title="选择物种"
+  items="{{speciesOptions}}"
+  selectedValue="{{formData.species}}"
+  show="{{showSpeciesPicker}}"
+  bind:select="onSpeciesSelect"
+  bind:close="hideSpeciesPicker"
+/>

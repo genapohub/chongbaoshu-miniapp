@@ -4,8 +4,8 @@ Page({
   },
 
   onLoad(options) {
-    var type = options.type || 'terms';
-    var urls = {
+    const type = options.type || 'terms';
+    const urls = {
       terms: 'https://api.chongbaoshu.com/terms.html',
       privacy: 'https://api.chongbaoshu.com/privacy.html',
     };

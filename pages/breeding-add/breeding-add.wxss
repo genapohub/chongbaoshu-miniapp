@@ -197,16 +197,7 @@
   color: #333;
 }
 
-.textarea-field {
-  width: 100%;
-  height: 160rpx;
-  padding: 20rpx;
-  background: #F8F9FA;
-  border-radius: 12rpx;
-  font-size: 28rpx;
-  color: #333;
-  box-sizing: border-box;
-}
+/* textarea 已提取为 notes-textarea 组件 */
 
 .submit-section {
   position: fixed;

@@ -144,7 +144,7 @@
 
 .period-discount {
   font-size: 22rpx;
-  color: #34D399;
+  color: #E94560;
   display: block;
   margin-top: 4rpx;
 }
@@ -190,12 +190,12 @@
 
 .coupon-check {
   font-size: 28rpx;
-  color: #34D399;
+  color: #E94560;
 }
 
 .coupon-text {
   font-size: 24rpx;
-  color: #34D399;
+  color: #E94560;
 }
 
 .price-details {

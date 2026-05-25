@@ -1,0 +1,21 @@
+.notes-textarea {
+  position: relative;
+}
+
+.notes-input {
+  width: 100%;
+  min-height: 160rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+  background: #F8F9FA;
+  border-radius: 12rpx;
+}
+
+.notes-counter {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}

@@ -1,5 +1,6 @@
-var api = require('../../utils/api');
-var app = getApp();
+const api = require('../../utils/api');
+const analytics = require('../../utils/analytics');
+const app = getApp();
 
 Page({
   data: {
@@ -14,8 +15,8 @@ Page({
 
   onLoad: function() {
     // 开发环境下显示快捷登录提示
-    var baseUrl = app.globalData.baseUrl;
-    var isDev = baseUrl.indexOf('localhost') !== -1;
+    const baseUrl = app.globalData.baseUrl;
+    const isDev = baseUrl.indexOf('localhost') !== -1;
     this.setData({ devMode: isDev });
   },
 
@@ -24,28 +25,28 @@ Page({
   },
 
   onPhoneInput: function(e) {
-    var phone = e.detail.value;
+    const phone = e.detail.value;
     this.setData({ phone: phone });
     this.checkCanLogin();
   },
 
   onCodeInput: function(e) {
-    var code = e.detail.value;
+    const code = e.detail.value;
     this.setData({ code: code });
     this.checkCanLogin();
   },
 
   checkCanLogin: function() {
-    var phone = this.data.phone;
-    var code = this.data.code;
-    var canLogin = phone.length === 11 && code.length === 6;
+    const phone = this.data.phone;
+    const code = this.data.code;
+    const canLogin = phone.length === 11 && code.length === 6;
     this.setData({ canLogin: canLogin });
   },
 
   sendCode: function() {
     if (this.data.counting) return;
 
-    var phone = this.data.phone.trim();
+    const phone = this.data.phone.trim();
     if (!phone) {
       wx.showToast({ title: '请输入手机号', icon: 'none' });
       return;
@@ -60,7 +61,7 @@ Page({
   },
 
   sendVerificationCode: function(phone) {
-    var that = this;
+    const that = this;
     wx.showLoading({ title: '发送中...', mask: true });
 
     api.post('/auth/send-code', { phone: phone }).then(function() {
@@ -78,16 +79,18 @@ Page({
   },
 
   startCountdown: function() {
-    var that = this;
+    const that = this;
     that.setData({
       counting: true,
       countdown: 60,
     });
 
-    var timer = setInterval(function() {
-      var countdown = that.data.countdown - 1;
+    // 将 timer 挂载到页面实例，确保 onUnload 可清理
+    that._timer = setInterval(function() {
+      const countdown = that.data.countdown - 1;
       if (countdown <= 0) {
-        clearInterval(timer);
+        clearInterval(that._timer);
+        that._timer = null;
         that.setData({
           counting: false,
           countdown: 60,
@@ -98,12 +101,20 @@ Page({
     }, 1000);
   },
 
+  onUnload: function() {
+    // 页面卸载时清理倒计时定时器，防止内存泄漏
+    if (this._timer) {
+      clearInterval(this._timer);
+      this._timer = null;
+    }
+  },
+
   onLogin: function() {
-    var that = this;
+    const that = this;
     if (!that.data.canLogin || that.data.loading) return;
 
-    var phone = that.data.phone;
-    var code = that.data.code;
+    const phone = that.data.phone;
+    const code = that.data.code;
 
     if (!/^1[3-9]\d{9}$/.test(phone)) {
       wx.showToast({ title: '手机号格式不正确', icon: 'none' });
@@ -117,6 +128,9 @@ Page({
 
     that.setData({ loading: true });
 
+    // 埋点：手机号授权步骤
+    analytics.registerPhoneAuth();
+
     api.post('/auth/phone-login', { phone: phone, code: code }).then(function(res) {
       if (res.token) {
         wx.setStorageSync('token', res.token);
@@ -127,6 +141,10 @@ Page({
         wx.setStorageSync('userInfo', res.user);
         app.globalData.userInfo = res.user;
       }
+
+      // 埋点：手机号登录成功
+      const isNew = res.isNew || false;
+      analytics.registerSuccess('phone', isNew);
 
       if (res.isNew) {
         wx.showToast({ title: '欢迎加入宠宝树！', icon: 'success' });

@@ -1,0 +1,73 @@
+/* empty-state 组件样式 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 40rpx;
+}
+
+.empty-icon-wrap {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28rpx;
+}
+
+.empty-empty .empty-icon-wrap {
+  background: #F3F4F6;
+}
+
+.empty-error .empty-icon-wrap {
+  background: #FEF2F2;
+}
+
+.empty-network .empty-icon-wrap {
+  background: #FFF7ED;
+}
+
+.empty-no-pet .empty-icon-wrap {
+  background: #F0FDF4;
+}
+
+.empty-no-record .empty-icon-wrap {
+  background: #EFF6FF;
+}
+
+.empty-icon {
+  font-size: 72rpx;
+}
+
+.empty-img {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+}
+
+.empty-sub-text {
+  font-size: 26rpx;
+  color: #9CA3AF;
+  margin-bottom: 32rpx;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.empty-action {
+  padding: 16rpx 48rpx;
+  background: linear-gradient(135deg, #E94560, #FD79A8);
+  border-radius: 44rpx;
+}
+
+.empty-action-text {
+  font-size: 28rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}

@@ -4,7 +4,7 @@
       <text class="form-label">Logo</text>
       <view class="logo-upload-wrap">
         <view class="logo-upload" bindtap="chooseLogo">
-          <image wx:if="{{formData.kennel_logo}}" src="{{formData.kennel_logo}}" class="logo-img" mode="aspectFill" />
+          <image wx:if="{{formData.kennel_logo}}" src="{{formData.kennel_logo}}" class="logo-img" mode="aspectFill" lazy-load />
           <view wx:else class="logo-placeholder">
             <text class="logo-icon">📷</text>
             <text class="logo-text">点击上传</text>
