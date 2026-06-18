@@ -10,7 +10,7 @@ Page({
     tier: '',
     period: 'yearly',
     periodText: '年付',
-    totalAmount: '0.00',
+    totalAmount: '119.00',
     nextBillingDate: '',
     loading: false,
   },
@@ -42,7 +42,7 @@ Page({
       free: {
         name: '免费版',
         desc: '3只宠物 · 基础功能',
-        icon: '🔷',
+        icon: 'paw',
         iconBg: '#E8F5E9',
         monthlyAmount: '0.00',
         yearlyAmount: '0.00',
@@ -50,7 +50,7 @@ Page({
       basic: {
         name: '基础版',
         desc: '100只宠物 · 数据导出 · 优先提醒',
-        icon: '⭐',
+        icon: 'star',
         iconBg: '#E3F2FD',
         monthlyAmount: '49.00',
         yearlyAmount: '39.00',
@@ -58,7 +58,7 @@ Page({
       pro: {
         name: 'Pro 专业版',
         desc: '无限宠物 · 血统证书 · 专属客服',
-        icon: '💎',
+        icon: 'diamond',
         iconBg: '#FFE4E8',
         monthlyAmount: '149.00',
         yearlyAmount: '119.00',
@@ -67,8 +67,7 @@ Page({
 
     const planInfo = plans[tier] || plans.pro;
     const period = this.data.period;
-    // 月付显示月价，年付显示年总价（月价×12）
-    const amount = period === 'monthly' ? planInfo.monthlyAmount : (parseFloat(planInfo.yearlyAmount) * 12).toFixed(2);
+    const amount = period === 'monthly' ? planInfo.monthlyAmount : planInfo.yearlyAmount;
     
     this.setData({
       planName: planInfo.name,

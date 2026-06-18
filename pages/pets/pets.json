@@ -4,6 +4,7 @@
   "usingComponents": {
     "status-badge": "/components/status-badge/status-badge",
     "pet-avatar": "/components/pet-avatar/pet-avatar",
-    "empty-state": "/components/empty-state/empty-state"
+    "empty-state": "/components/empty-state/empty-state",
+    "icon": "../../components/icon/icon"
   }
 }

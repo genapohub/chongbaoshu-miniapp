@@ -19,15 +19,9 @@ Page({
   },
 
   calculateExpireDate() {
-    // 根据订阅周期计算过期日期：月付+30天，年付+365天
-    // 优先从全局数据获取订阅信息，默认按月付30天
-    const app = getApp();
-    const subscriptionCycle = (app.globalData && app.globalData.subscriptionCycle) || 'monthly';
-    const days = subscriptionCycle === 'yearly' ? 365 : 30;
-
     const now = new Date();
     const expire = new Date(now);
-    expire.setDate(expire.getDate() + days);
+    expire.setDate(expire.getDate() + 30);
     
     const year = expire.getFullYear();
     const month = String(expire.getMonth() + 1).padStart(2, '0');

@@ -13,13 +13,21 @@
 
   <view wx:if="{{currentType === 'vaccine'}}">
     <view class="card">
-      <view class="card-title">💉 疫苗信息</view>
+      <view class="card-title"><icon name="syringe" size="36" color="#2D9CDB" /><text>疫苗信息</text></view>
+
+      <view class="form-item">
+        <text class="form-label">宠物 *</text>
+        <view class="picker-wrap" bindtap="showPetPicker">
+          <text class="picker-value {{petName ? '' : 'placeholder'}}">{{petName || '请选择宠物'}}</text>
+          <icon name="chevron-right" size="28" color="#C0C4CC" />
+        </view>
+      </view>
 
       <view class="form-item">
         <text class="form-label">疫苗类型 *</text>
         <view class="picker-wrap" bindtap="showVaccinePickerFn">
           <text class="picker-value {{formData.vaccine_type ? '' : 'placeholder'}}">{{formData.vaccine_type || '请选择疫苗类型'}}</text>
-          <text class="picker-arrow">›</text>
+          <icon name="chevron-right" size="28" color="#C0C4CC" />
         </view>
       </view>
 
@@ -34,7 +42,7 @@
         <picker mode="date" value="{{formData.record_date}}" bindchange="onDateChange">
           <view class="picker-wrap">
             <text class="picker-value {{formData.record_date ? '' : 'placeholder'}}">{{formData.record_date || '请选择日期'}}</text>
-            <text class="picker-arrow">›</text>
+            <icon name="chevron-right" size="28" color="#C0C4CC" />
           </view>
         </picker>
       </view>
@@ -56,7 +64,7 @@
     </view>
 
     <view class="card">
-      <view class="card-title">📝 备注</view>
+      <view class="card-title"><icon name="clipboard" size="36" color="#646A73" /><text>备注</text></view>
       <notes-textarea
         value="{{formData.notes}}"
         placeholder="请输入备注信息（选填）"
@@ -68,13 +76,21 @@
 
   <view wx:if="{{currentType === 'deworm'}}">
     <view class="card">
-      <view class="card-title">🐛 驱虫信息</view>
+      <view class="card-title"><icon name="bug" size="36" color="#2BA471" /><text>驱虫信息</text></view>
+
+      <view class="form-item">
+        <text class="form-label">宠物 *</text>
+        <view class="picker-wrap" bindtap="showPetPicker">
+          <text class="picker-value {{petName ? '' : 'placeholder'}}">{{petName || '请选择宠物'}}</text>
+          <icon name="chevron-right" size="28" color="#C0C4CC" />
+        </view>
+      </view>
 
       <view class="form-item">
         <text class="form-label">驱虫类型 *</text>
         <view class="picker-wrap" bindtap="showDewormPickerFn">
           <text class="picker-value {{formData.deworm_type_display ? '' : 'placeholder'}}">{{formData.deworm_type_display || '请选择驱虫类型'}}</text>
-          <text class="picker-arrow">›</text>
+          <icon name="chevron-right" size="28" color="#C0C4CC" />
         </view>
       </view>
 
@@ -88,7 +104,7 @@
         <picker mode="date" value="{{formData.record_date}}" bindchange="onDateChange">
           <view class="picker-wrap">
             <text class="picker-value {{formData.record_date ? '' : 'placeholder'}}">{{formData.record_date || '请选择日期'}}</text>
-            <text class="picker-arrow">›</text>
+            <icon name="chevron-right" size="28" color="#C0C4CC" />
           </view>
         </picker>
       </view>
@@ -110,7 +126,7 @@
     </view>
 
     <view class="card">
-      <view class="card-title">📝 备注</view>
+      <view class="card-title"><icon name="clipboard" size="36" color="#646A73" /><text>备注</text></view>
       <notes-textarea
         value="{{formData.notes}}"
         placeholder="请输入备注信息（选填）"
@@ -122,14 +138,22 @@
 
   <view wx:if="{{currentType === 'other'}}">
     <view class="card">
-      <view class="card-title">📋 其他记录</view>
+      <view class="card-title"><icon name="clipboard" size="36" color="#646A73" /><text>其他记录</text></view>
+
+      <view class="form-item">
+        <text class="form-label">宠物 *</text>
+        <view class="picker-wrap" bindtap="showPetPicker">
+          <text class="picker-value {{petName ? '' : 'placeholder'}}">{{petName || '请选择宠物'}}</text>
+          <icon name="chevron-right" size="28" color="#C0C4CC" />
+        </view>
+      </view>
 
       <view class="form-item">
         <text class="form-label">日期 *</text>
         <picker mode="date" value="{{formData.record_date}}" bindchange="onDateChange">
           <view class="picker-wrap">
             <text class="picker-value {{formData.record_date ? '' : 'placeholder'}}">{{formData.record_date || '请选择日期'}}</text>
-            <text class="picker-arrow">›</text>
+            <icon name="chevron-right" size="28" color="#C0C4CC" />
           </view>
         </picker>
       </view>
@@ -141,7 +165,7 @@
     </view>
 
     <view class="card">
-      <view class="card-title">📝 备注</view>
+      <view class="card-title"><icon name="clipboard" size="36" color="#646A73" /><text>备注</text></view>
       <notes-textarea
         value="{{formData.notes}}"
         placeholder="请输入备注信息（选填）"
@@ -184,11 +208,12 @@
   <view class="picker-content" catchtap="stopPropagation">
     <view class="picker-header">
       <text class="picker-title">选择宠物</text>
-      <text class="picker-close" bindtap="hidePetPicker">×</text>
+      <icon name="close" size="36" color="#8F959E" class="picker-close" bindtap="hidePetPicker" />
     </view>
     <scroll-view scroll-y class="picker-list">
       <view wx:if="{{petList.length === 0}}" class="picker-empty">
-        <text>暂无宠物，请先添加宠物</text>
+        <text>还没有添加小可爱，
+点下方 + 开始记录，请先记下第一只小家伙</text>
       </view>
       <view
         wx:for="{{petList}}"

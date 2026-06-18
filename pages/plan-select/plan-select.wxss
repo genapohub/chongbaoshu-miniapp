@@ -23,7 +23,7 @@
 }
 
 .plan-card.selected {
-  border-color: #E94560;
+  border-color: #4A8C5C;
 }
 
 .plan-card.disabled {
@@ -34,7 +34,7 @@
   position: absolute;
   top: -12rpx;
   right: 20rpx;
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   font-size: 20rpx;
   font-weight: 600;
@@ -74,7 +74,7 @@
 .price-value {
   font-size: 32rpx;
   font-weight: 700;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .price-unit {
@@ -94,12 +94,12 @@
   align-items: center;
   gap: 8rpx;
   font-size: 22rpx;
-  color: #059669;
+  color: #3D8B37;
 }
 
 .save-tag {
-  background: #D1FAE5;
-  color: #059669;
+  background: #E8F8F0;
+  color: #3D8B37;
   font-size: 18rpx;
   font-weight: 600;
   padding: 4rpx 10rpx;
@@ -157,7 +157,7 @@
   text-align: center;
   font-size: 24rpx;
   color: #212529;
-  border-bottom: 1rpx solid #F3F4F6;
+  border-bottom: 1rpx solid #EDEDEF;
 }
 
 .feature-row.header .feature-cell {
@@ -174,7 +174,7 @@
   width: 100%;
   height: 92rpx;
   line-height: 92rpx;
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   border-radius: 46rpx;
   font-size: 30rpx;

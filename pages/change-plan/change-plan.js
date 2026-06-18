@@ -3,7 +3,7 @@ const api = require('../../utils/api');
 Page({
   data: {
     currentTier: 'free',
-    currentPlan: { name: '免费版', icon: '🔷' },
+    currentPlan: { name: '免费版', icon: 'paw' },
     currentPeriodEnd: '',
     selectedTier: '',
     isDowngrade: false,
@@ -14,21 +14,21 @@ Page({
         tier: 'free',
         name: '免费版',
         desc: '3只宠物 · 基础功能',
-        icon: '🔷',
+        icon: 'paw',
         iconBg: '#F3F4F6',
       },
       basic: {
         tier: 'basic',
         name: '基础版',
         desc: '100只宠物 · 数据导出',
-        icon: '⭐',
+        icon: 'star',
         iconBg: '#E3F2FD',
       },
       pro: {
         tier: 'pro',
         name: 'Pro 专业版',
         desc: '无限宠物 · 血统证书',
-        icon: '💎',
+        icon: 'diamond',
         iconBg: '#FFE4E8',
       },
     },
@@ -53,9 +53,9 @@ Page({
           return;
         }
         const planIcons = {
-          free: '🔷',
-          basic: '⭐',
-          pro: '💎',
+          free: 'paw',
+          basic: 'star',
+          pro: 'diamond',
         };
         
         const planNames = {

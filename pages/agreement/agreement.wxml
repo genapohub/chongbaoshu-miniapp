@@ -10,7 +10,7 @@
 
   <view class="footer">
     <view wx:if="{{showConfirm}}" class="confirm-bar">
-      <checkbox checked="{{agreed}}" bindchange="onCheckChange" color="#10B981" />
+      <checkbox checked="{{agreed}}" bindchange="onCheckChange" color="#2BA471" />
       <text class="confirm-text">我已阅读并同意{{title}}</text>
     </view>
     <view wx:if="{{showConfirm}}" class="btn-primary {{!agreed ? 'disabled' : ''}}" bindtap="onConfirm">

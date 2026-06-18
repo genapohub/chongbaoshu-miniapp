@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "手机号登录",
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": { "icon": "../../components/icon/icon" }
 }

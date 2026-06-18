@@ -1,0 +1,37 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="circleBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A8C5C"/>
+      <stop offset="100%" stop-color="#3D6B4B"/>
+    </linearGradient>
+    <linearGradient id="pawAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4914A"/>
+      <stop offset="100%" stop-color="#C07830"/>
+    </linearGradient>
+  </defs>
+  
+  <circle cx="256" cy="256" r="240" fill="url(#circleBg)"/>
+  <circle cx="256" cy="256" r="200" fill="none" stroke="white" stroke-width="3" opacity="0.15"/>
+  <circle cx="256" cy="256" r="215" fill="none" stroke="white" stroke-width="1" opacity="0.08"/>
+  
+  <!-- 主肉垫 -->
+  <ellipse cx="256" cy="295" rx="62" ry="52" fill="white" opacity="0.92"/>
+  
+  <!-- 上排四趾 -->
+  <ellipse cx="200" cy="228" rx="28" ry="33" fill="white" opacity="0.92"/>
+  <ellipse cx="250" cy="200" rx="27" ry="31" fill="white" opacity="0.92"/>
+  <ellipse cx="296" cy="200" rx="27" ry="31" fill="white" opacity="0.92"/>
+  <ellipse cx="345" cy="228" rx="28" ry="33" fill="white" opacity="0.92"/>
+  
+  <!-- 爪印内色 -->
+  <ellipse cx="256" cy="295" rx="45" ry="38" fill="url(#pawAccent)" opacity="0.3"/>
+  <ellipse cx="200" cy="228" rx="20" ry="23" fill="url(#pawAccent)" opacity="0.25"/>
+  <ellipse cx="250" cy="200" rx="18" ry="21" fill="url(#pawAccent)" opacity="0.25"/>
+  <ellipse cx="296" cy="200" rx="18" ry="21" fill="url(#pawAccent)" opacity="0.25"/>
+  <ellipse cx="345" cy="228" rx="20" ry="23" fill="url(#pawAccent)" opacity="0.25"/>
+  
+  <!-- 装饰圆点 -->
+  <circle cx="180" cy="330" r="6" fill="white" opacity="0.25"/>
+  <circle cx="332" cy="330" r="6" fill="white" opacity="0.25"/>
+  <circle cx="256" cy="385" r="5" fill="white" opacity="0.25"/>
+</svg>

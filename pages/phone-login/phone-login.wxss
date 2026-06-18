@@ -120,7 +120,7 @@
 
 .send-code-btn {
   padding: 16rpx 32rpx;
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
   border-radius: 12rpx;
   color: #ffffff;
   font-size: 26rpx;
@@ -151,7 +151,7 @@
 }
 
 .login-btn.active {
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
   color: #ffffff;
 }
 
@@ -168,7 +168,7 @@
 }
 
 .terms .link {
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .dev-hint {

@@ -7,7 +7,7 @@
 
 /* 顶部横幅 */
 .banner {
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
   padding: 60rpx 30rpx 50rpx;
   text-align: center;
 }
@@ -40,7 +40,7 @@
 
 .card-label {
   font-size: 26rpx;
-  color: #9CA3AF;
+  color: #948F89;
   text-align: center;
   margin-bottom: 20rpx;
 }
@@ -48,7 +48,7 @@
 .invite-code {
   font-size: 56rpx;
   font-weight: 700;
-  color: #E94560;
+  color: #4A8C5C;
   text-align: center;
   letter-spacing: 8rpx;
   font-family: 'Courier New', monospace;
@@ -67,15 +67,15 @@
   border-radius: 44rpx;
   font-size: 28rpx;
   font-weight: 500;
-  border: 2rpx solid #E94560;
+  border: 2rpx solid #4A8C5C;
   margin: 0;
   padding: 0;
   background: #fff;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .btn-share {
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   border: none;
 }
@@ -103,7 +103,7 @@
 
 .stat-item .stat-label {
   font-size: 24rpx;
-  color: #9CA3AF;
+  color: #948F89;
   margin-top: 6rpx;
 }
 
@@ -124,7 +124,7 @@
 
 .reward-label {
   font-size: 26rpx;
-  color: #9CA3AF;
+  color: #948F89;
   margin-bottom: 12rpx;
 }
 
@@ -137,7 +137,7 @@
 
 .reward-hint {
   font-size: 24rpx;
-  color: #9CA3AF;
+  color: #948F89;
 }
 
 /* 邀请记录 */
@@ -174,7 +174,7 @@
   display: flex;
   align-items: center;
   padding: 24rpx 0;
-  border-bottom: 1rpx solid #F3F4F6;
+  border-bottom: 1rpx solid #EDEDEF;
 }
 
 .record-item:last-child {
@@ -185,7 +185,7 @@
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
-  background: #FCE7F3;
+  background: #E1EAFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,12 +212,12 @@
 .record-name {
   font-size: 30rpx;
   font-weight: 600;
-  color: #1F2937;
+  color: #2D2A26;
 }
 
 .record-time {
   font-size: 26rpx;
-  color: #9CA3AF;
+  color: #948F89;
   margin-top: 8rpx;
 }
 
@@ -230,13 +230,13 @@
 }
 
 .record-badge.badge-success {
-  background: #D1FAE5;
-  color: #059669;
+  background: #E8F8F0;
+  color: #3D8B37;
 }
 
 .record-badge.badge-default {
   background: #F3F4F6;
-  color: #6B7280;
+  color: #5E5953;
 }
 
 /* 空状态 */
@@ -252,13 +252,13 @@
 
 .empty-state .empty-text {
   font-size: 28rpx;
-  color: #9CA3AF;
+  color: #948F89;
   margin-bottom: 8rpx;
 }
 
 .empty-state .empty-hint {
   font-size: 24rpx;
-  color: #D1D5DB;
+  color: #C0C4CC;
 }
 
 /* 加载更多 */
@@ -266,5 +266,5 @@
   text-align: center;
   padding: 20rpx;
   font-size: 24rpx;
-  color: #9CA3AF;
+  color: #948F89;
 }

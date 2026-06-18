@@ -10,6 +10,14 @@ Page({
     loading: false,
     showCertPreview: false,
     certPreviewData: {},
+    certStatus: '',
+    issueDate: '',
+    shareCount: 0,
+    hasCertificate: false,
+    revokeReason: '',
+    revokedAt: '',
+    showRevokeModal: false,
+    revokeModalReason: '',
     showEditPedigree: false,
     editFormData: {
       father_name: '',
@@ -126,10 +134,10 @@ Page({
 
   getSpeciesIcon(species) {
     const icons = {
-      dog: '🐕',
-      cat: '🐈',
+      dog: 'dog',
+      cat: 'cat',
     };
-    return icons[species] || '🐾';
+    return icons[species] || 'paw';
   },
 
   previewAvatar() {
@@ -150,22 +158,17 @@ Page({
       wx.showLoading({ title: '分配认证编号...' });
       api.post('/pets/' + that.data.petId + '/assign-cert-no').then(function (res) {
         wx.hideLoading();
-        // 更新 pedigree 中的 platformCertNo
         pedigree.platformCertNo = res.platform_cert_no;
-        that.setData({
-          pedigree: pedigree,
-        });
+        that.setData({ pedigree: pedigree });
         that._showCertPreview();
       }).catch(function (err) {
         wx.hideLoading();
         console.error('分配认证编号失败:', err);
-        // 失败时仍展示预览，编号显示"未分配"
         that._showCertPreview();
       });
       return;
     }
 
-    // 非 Pro 用户直接展示预览
     that._showCertPreview();
   },
 
@@ -205,6 +208,269 @@ Page({
         motherName: pedigree.mother_name || '—',
         certNo: certNo,
       }
+    });
+
+    this.loadCertificateInfo();
+  },
+
+  loadCertificateInfo() {
+    const that = this;
+    api.get('/pets/' + that.data.petId + '/certificates').then(function(res) {
+      if (res && res.data && res.data.length > 0) {
+        const cert = res.data[0];
+        that.setData({
+          certStatus: cert.status || '',
+          issueDate: cert.issue_date ? cert.issue_date.split('T')[0] : '',
+          shareCount: cert.share_count || 0,
+          hasCertificate: true,
+          revokeReason: cert.revoke_reason || '',
+          revokedAt: cert.revoked_at ? cert.revoked_at.split('T')[0] : '',
+        });
+      } else {
+        if (that.data.isPro) {
+          that.autoCreateAndIssueCertificate();
+        } else {
+          that.setData({
+            certStatus: '',
+            issueDate: '',
+            shareCount: 0,
+            hasCertificate: false,
+            revokeReason: '',
+            revokedAt: '',
+          });
+        }
+      }
+    }).catch(function(err) {
+      console.error('获取证书列表失败:', err);
+      if (that.data.isPro) {
+        that.autoCreateAndIssueCertificate();
+      } else {
+        that.setData({
+          certStatus: '',
+          issueDate: '',
+          shareCount: 0,
+          hasCertificate: false,
+          revokeReason: '',
+          revokedAt: '',
+        });
+      }
+    });
+  },
+
+  autoCreateAndIssueCertificate() {
+    const that = this;
+    wx.showLoading({ title: '生成证书...' });
+
+    const petId = parseInt(that.data.petId, 10);
+    api.post('/pets/' + petId + '/certificates', {
+      pet_id: petId,
+      generation: 3,
+    }).then(function(createRes) {
+      if (!createRes) {
+        wx.hideLoading();
+        wx.showToast({ title: '证书创建失败', icon: 'none' });
+        that.setData({
+          certStatus: '',
+          issueDate: '',
+          shareCount: 0,
+          hasCertificate: false,
+        });
+        return;
+      }
+
+      const certId = createRes.id;
+      api.put('/certificates/' + certId + '/issue').then(function(issueRes) {
+        wx.hideLoading();
+        if (issueRes) {
+          const now = new Date();
+          const issueDate = now.toISOString().split('T')[0];
+          that.setData({
+            certStatus: 'issued',
+            issueDate: issueDate,
+            shareCount: 0,
+            hasCertificate: true,
+          });
+        } else {
+          wx.showToast({ title: '证书签发失败', icon: 'none' });
+          that.setData({
+            certStatus: 'draft',
+            issueDate: '',
+            shareCount: 0,
+            hasCertificate: true,
+          });
+        }
+      }).catch(function(err) {
+        wx.hideLoading();
+        console.error('签发证书失败:', err);
+        wx.showToast({ title: '证书签发失败', icon: 'none' });
+        that.setData({
+          certStatus: 'draft',
+          issueDate: '',
+          shareCount: 0,
+          hasCertificate: true,
+        });
+      });
+    }).catch(function(err) {
+      wx.hideLoading();
+      console.error('创建证书失败:', err);
+      wx.showToast({ title: '证书创建失败', icon: 'none' });
+      that.setData({
+        certStatus: '',
+        issueDate: '',
+        shareCount: 0,
+        hasCertificate: false,
+      });
+    });
+  },
+
+  createCertificate() {
+    const that = this;
+    wx.showLoading({ title: '创建中...' });
+    api.post('/pets/' + that.data.petId + '/certificates', {
+      generation: 3,
+    }).then(function(res) {
+      wx.hideLoading();
+      if (res && res.code === 0) {
+        wx.showToast({ title: '证书创建成功', icon: 'success' });
+        that.loadCertificateInfo();
+      } else {
+        wx.showToast({ title: res.message || '创建失败', icon: 'none' });
+      }
+    }).catch(function(err) {
+      wx.hideLoading();
+      console.error('创建证书失败:', err);
+      wx.showToast({ title: '创建失败', icon: 'none' });
+    });
+  },
+
+  issueCertificate() {
+    const that = this;
+    api.get('/pets/' + that.data.petId + '/certificates').then(function(res) {
+      if (!res || !res.data || res.data.length === 0) {
+        wx.showToast({ title: '未找到证书', icon: 'none' });
+        return;
+      }
+
+      const certId = res.data[0].id;
+      wx.showLoading({ title: '签发中...' });
+
+      api.put('/certificates/' + certId + '/issue').then(function(res) {
+        wx.hideLoading();
+        if (res && res.code === 0) {
+          wx.showToast({ title: '证书签发成功', icon: 'success' });
+          that.setData({
+            certStatus: 'issued',
+            issueDate: new Date().toISOString().split('T')[0],
+          });
+        } else {
+          wx.showToast({ title: res.message || '签发失败', icon: 'none' });
+        }
+      }).catch(function(err) {
+        wx.hideLoading();
+        console.error('签发证书失败:', err);
+        wx.showToast({ title: '签发失败', icon: 'none' });
+      });
+    }).catch(function(err) {
+      console.error('获取证书列表失败:', err);
+      wx.showToast({ title: '获取证书信息失败', icon: 'none' });
+    });
+  },
+
+  showRevokeConfirm() {
+    this.setData({
+      showRevokeModal: true,
+      revokeModalReason: '',
+    });
+  },
+
+  hideRevokeModal() {
+    this.setData({
+      showRevokeModal: false,
+      revokeModalReason: '',
+    });
+  },
+
+  onRevokeReasonInput(e) {
+    this.setData({
+      revokeModalReason: e.detail.value,
+    });
+  },
+
+  confirmRevoke() {
+    const that = this;
+    if (!that.data.revokeModalReason.trim()) {
+      wx.showToast({ title: '请输入撤销原因', icon: 'none' });
+      return;
+    }
+
+    api.get('/pets/' + that.data.petId + '/certificates').then(function(res) {
+      if (!res || res.length === 0) {
+        wx.showToast({ title: '未找到证书', icon: 'none' });
+        return;
+      }
+
+      const certId = res[0].id;
+      wx.showLoading({ title: '撤销中...' });
+
+      api.put('/certificates/' + certId + '/revoke', {
+        reason: that.data.revokeModalReason.trim(),
+      }).then(function() {
+        wx.hideLoading();
+        wx.showToast({ title: '证书已撤销', icon: 'success' });
+        that.setData({
+          certStatus: 'revoked',
+          showRevokeModal: false,
+          revokeModalReason: '',
+          revokeReason: that.data.revokeModalReason.trim(),
+          revokedAt: new Date().toISOString().split('T')[0],
+        });
+      }).catch(function(err) {
+        wx.hideLoading();
+        console.error('撤销证书失败:', err);
+        wx.showToast({ title: '撤销失败', icon: 'none' });
+      });
+    }).catch(function(err) {
+      console.error('获取证书列表失败:', err);
+      wx.showToast({ title: '获取证书信息失败', icon: 'none' });
+    });
+  },
+
+  reissueCertificate() {
+    const that = this;
+    wx.showLoading({ title: '重新签发中...' });
+
+    api.get('/pets/' + that.data.petId + '/certificates').then(function(res) {
+      if (!res || !res.data || res.data.length === 0) {
+        wx.hideLoading();
+        wx.showToast({ title: '未找到证书', icon: 'none' });
+        return;
+      }
+
+      const certId = res.data[0].id;
+      api.put('/certificates/' + certId + '/issue').then(function(issueRes) {
+        wx.hideLoading();
+        if (issueRes) {
+          const now = new Date();
+          const issueDate = now.toISOString().split('T')[0];
+          wx.showToast({ title: '证书重新签发成功', icon: 'success' });
+          that.setData({
+            certStatus: 'issued',
+            issueDate: issueDate,
+            revokeReason: '',
+            revokedAt: '',
+          });
+        } else {
+          wx.showToast({ title: '重新签发失败', icon: 'none' });
+        }
+      }).catch(function(err) {
+        wx.hideLoading();
+        console.error('重新签发证书失败:', err);
+        wx.showToast({ title: '重新签发失败', icon: 'none' });
+      });
+    }).catch(function(err) {
+      wx.hideLoading();
+      console.error('获取证书列表失败:', err);
+      wx.showToast({ title: '获取证书信息失败', icon: 'none' });
     });
   },
 
@@ -262,10 +528,10 @@ Page({
       ctx.lineWidth = 4;
       ctx.strokeRect(2, 2, cardWidth - 4, cardHeight - 4);
 
-      // 奖章图标（emoji 渲染）
+      // 奖章图标
       ctx.font = '60px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('🏅', cardWidth / 2, 90);
+      ctx.fillText('★', cardWidth / 2, 90);
 
       // 标题
       ctx.font = 'bold 28px sans-serif';

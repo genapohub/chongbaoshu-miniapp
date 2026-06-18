@@ -1,9 +1,9 @@
-<!-- 宠物头像组件
+<!-- 宠物头像组件 (飞书风格)
   Properties:
-    src    {String} - 图片 URL，为空时显示 emoji placeholder
-    icon   {String} - placeholder 时显示的 emoji（如 🐕）
-    size   {String} - 尺寸：sm(64rpx) / md(104rpx, 默认) / lg(112rpx)
-    radius {String} - 圆角值，默认 '16rpx'
+    src    {String} - 图片 URL
+    icon   {String} - placeholder 图标名称
+    size   {String} - 尺寸：sm(64rpx) / md(104rpx) / lg(112rpx)
+    radius {String} - 圆角，默认 16rpx
 -->
 <view class="pet-avatar size-{{size || 'md'}}" style="border-radius: {{radius || '16rpx'}}">
   <image
@@ -11,9 +11,11 @@
     src="{{src}}"
     mode="aspectFill"
     class="avatar-img"
-    lazy-load
     style="border-radius: {{radius || '16rpx'}}"
+    lazy-load
     binderror="onImgError"
   />
-  <view wx:else class="avatar-placeholder">{{icon || '🐾'}}</view>
+  <view wx:else class="avatar-placeholder">
+    <icon name="{{icon || 'paw'}}" size="{{placeholderSize}}" color="#8F959E" />
+  </view>
 </view>

@@ -7,12 +7,12 @@ Page({
     statusText: '',
     statusType: 'gray',
     statusOptions: [
-      { value: 'mated', label: '已配种', desc: '记录配种日期', icon: '💕' },
-      { value: 'pregnant', label: '已怀孕', desc: '确认受孕状态', icon: '🤰' },
-      { value: 'ultrasound_confirmed', label: '孕检确认', desc: 'B超检查确认', icon: '🔬' },
-      { value: 'delivered', label: '已分娩', desc: '记录分娩信息', icon: '👶' },
-      { value: 'weaned', label: '已断奶', desc: '幼崽断奶完成', icon: '🍼' },
-      { value: 'failed', label: '未成功', desc: '繁育未成功', icon: '❌' },
+      { value: 'mated', label: '已配种', desc: '记录配种日期', iconName: 'heart', iconColor: '#D4534A' },
+      { value: 'pregnant', label: '已怀孕', desc: '确认受孕状态', iconName: 'pregnant', iconColor: '#F97316' },
+      { value: 'ultrasound_confirmed', label: '孕检确认', desc: 'B超检查确认', iconName: 'activity-heart', iconColor: '#5B9E8C' },
+      { value: 'delivered', label: '已分娩', desc: '记录分娩信息', iconName: 'celebration', iconColor: '#3D8B37' },
+      { value: 'weaned', label: '已断奶', desc: '幼崽断奶完成', iconName: 'sparkle', iconColor: '#8B5CF6' },
+      { value: 'failed', label: '未成功', desc: '繁育未成功', iconName: 'ban', iconColor: '#8F959E' },
     ],
   },
 

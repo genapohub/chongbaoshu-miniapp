@@ -2,7 +2,7 @@
 
 .container {
   min-height: 100vh;
-  background: #F8F9FA;
+  background: #F6F4F0;
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #F8F9FA;
+  background: #F6F4F0;
 }
 
 .avatar-img {
@@ -35,7 +35,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: #948F89;
 }
 
 .avatar-icon {
@@ -57,24 +57,24 @@
   flex: 1;
   text-align: center;
   padding: 20rpx 0;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border-radius: 12rpx;
   font-size: 28rpx;
-  color: #666;
+  color: #5E5953;
   border: 2rpx solid transparent;
   transition: all 0.2s;
 }
 
 .gender-option.active {
-  background: #FFF0F3;
-  color: #E94560;
-  border-color: #E94560;
+  background: #E8F0FE;
+  color: #4A8C5C;
+  border-color: #4A8C5C;
 }
 
 /* 血统信息区域 */
 .toggle-arrow {
   font-size: 36rpx;
-  color: #999;
+  color: #948F89;
 }
 
 .pedigree-section {
@@ -93,18 +93,18 @@
 
 .tag-option {
   padding: 12rpx 24rpx;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border-radius: 24rpx;
   font-size: 26rpx;
-  color: #666;
+  color: #5E5953;
   border: 2rpx solid transparent;
   transition: all 0.2s;
 }
 
 .tag-option.selected {
-  background: #FFF0F3;
-  color: #E94560;
-  border-color: #E94560;
+  background: #E8F0FE;
+  color: #4A8C5C;
+  border-color: #4A8C5C;
 }
 
 /* 添加标签行 */
@@ -120,7 +120,7 @@
 
 .btn-add-tag {
   padding: 16rpx 32rpx;
-  background: #E94560;
+  background: #4A8C5C;
   color: #FFFFFF;
   border-radius: 12rpx;
   font-size: 26rpx;

@@ -1,0 +1,10 @@
+<!-- 飞书风格 SVG 图标组件
+  Properties: name / size / color / bg / radius
+  支持两种模式：纯图标 和 圆形背景图标
+-->
+<block>
+<view wx:if="{{hasBg}}" class="icon-bg" style="width:{{size}}rpx;height:{{size}}rpx;background:{{bg}};border-radius:{{radius}};">
+  <image class="icon-img" src="{{iconSrc}}" style="width:{{size * 0.55}}rpx;height:{{size * 0.55}}rpx;" mode="aspectFit" />
+</view>
+<image wx:else class="icon-img" src="{{iconSrc}}" style="width:{{size}}rpx;height:{{size}}rpx;" mode="aspectFit" />
+</block>

@@ -1,0 +1,55 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3D6B4B"/>
+      <stop offset="100%" stop-color="#4A8C5C"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4914A"/>
+      <stop offset="100%" stop-color="#E8B86D"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  
+  <g transform="translate(256, 300)">
+    <!-- 树干 -->
+    <path d="M-28 -20 L-18 -80 Q-16 -90 0 -92 Q16 -90 18 -80 L28 -20 Q30 -10 25 0 L-25 0 Q-30 -10 -28 -20Z" fill="white" opacity="0.95"/>
+    <!-- 树冠 左 -->
+    <ellipse cx="-70" cy="-100" rx="60" ry="55" fill="white" opacity="0.9"/>
+    <!-- 树冠 右 -->
+    <ellipse cx="70" cy="-100" rx="60" ry="55" fill="white" opacity="0.9"/>
+    <!-- 树冠 上 -->
+    <ellipse cx="0" cy="-150" rx="55" ry="50" fill="white" opacity="0.95"/>
+    
+    <!-- 爪印 左上 -->
+    <g transform="translate(-70,-100)">
+      <ellipse cx="0" cy="4" rx="16" ry="13" fill="url(#accent)"/>
+      <circle cx="-10" cy="-7" r="8" fill="url(#accent)"/>
+      <circle cx="10" cy="-7" r="8" fill="url(#accent)"/>
+    </g>
+    <!-- 爪印 右上 -->
+    <g transform="translate(70,-100)">
+      <ellipse cx="0" cy="4" rx="16" ry="13" fill="url(#accent)"/>
+      <circle cx="-10" cy="-7" r="8" fill="url(#accent)"/>
+      <circle cx="10" cy="-7" r="8" fill="url(#accent)"/>
+    </g>
+    <!-- 爪印 顶部 -->
+    <g transform="translate(0,-150)">
+      <ellipse cx="0" cy="4" rx="18" ry="14" fill="url(#accent)"/>
+      <circle cx="-12" cy="-8" r="9" fill="url(#accent)"/>
+      <circle cx="12" cy="-8" r="9" fill="url(#accent)"/>
+    </g>
+    
+    <!-- 根须 -->
+    <path d="M-20 0 Q-30 30 -40 50" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+    <path d="M20 0 Q30 30 40 50" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+    <path d="M0 0 Q0 25 0 45" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  </g>
+  
+  <!-- 装饰星光 -->
+  <circle cx="420" cy="90" r="6" fill="white" opacity="0.3"/>
+  <circle cx="440" cy="120" r="4" fill="white" opacity="0.2"/>
+  <circle cx="400" cy="130" r="3" fill="white" opacity="0.25"/>
+  <circle cx="90" cy="400" r="5" fill="white" opacity="0.2"/>
+  <circle cx="70" cy="380" r="3" fill="white" opacity="0.3"/>
+</svg>

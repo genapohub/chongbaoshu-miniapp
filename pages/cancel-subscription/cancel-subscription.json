@@ -1,4 +1,4 @@
 {
   "navigationBarTitleText": "取消自动续费",
-  "usingComponents": {}
+  "usingComponents": { "icon": "../../components/icon/icon" }
 }

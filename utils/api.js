@@ -183,7 +183,7 @@ function confirmDel(url, data, options) {
         if (res.confirm) {
           del(url, data, options).then(resolve).catch(reject);
         } else {
-          reject({ cancelled: true });
+          reject(new Error('CANCELLED'));
         }
       },
     });

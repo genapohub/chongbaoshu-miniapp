@@ -1,19 +1,13 @@
-<!-- 空状态组件
+<!-- 空状态组件 (飞书风格)
   Properties:
-    icon {String} - 展示的 emoji/icon，默认 🐾
-    text {String} - 提示文字，默认"暂无数据"
-    type {String} - 类型: empty(默认) | error | network | no-pet | no-record
+    icon {String} - 图标名称（飞书图标），默认根据 type 自动匹配
+    text {String} - 提示文字
+    type {String} - empty | error | network | no-pet | no-record
     actionText {String} - 操作按钮文案
 -->
 <view class="empty-state empty-{{type || 'empty'}}">
   <view class="empty-icon-wrap">
-    <image
-      wx:if="{{type === 'error' || type === 'network'}}"
-      class="empty-img"
-      src="/assets/icons/{{type === 'error' ? 'error.png' : 'network.png'}}"
-      mode="aspectFit"
-    />
-    <text wx:else class="empty-icon">{{computedIcon}}</text>
+    <icon name="{{computedIcon}}" size="72" color="{{computedIconColor}}" />
   </view>
   <text class="empty-text">{{text || computedText}}</text>
   <text wx:if="{{subText}}" class="empty-sub-text">{{subText}}</text>

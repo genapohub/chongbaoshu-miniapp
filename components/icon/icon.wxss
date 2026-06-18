@@ -1,0 +1,14 @@
+/* 飞书风格图标组件样式 */
+
+.icon-img {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.icon-bg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

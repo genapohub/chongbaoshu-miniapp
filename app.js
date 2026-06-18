@@ -19,10 +19,14 @@ App({
     // 页面来源路径，用于 pageView 埋点追踪页面跳转来源
     prevPagePath: '',
     // 根据小程序环境自动切换 API 地址
-    // 正式版/体验版 → 生产域名，开发版 → 本地调试
+    // 正式版/体验版 → 生产域名，开发版 → 本地 Mac IP（微信开发者工具需用局域网 IP）
     baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? 'https://api.chongbaoshu.com/api'
+      ? 'https://api.chongbaoshu.cn/api'
       : 'http://localhost:3000/api',
+    // 静态资源 base URL，不含 /api 后缀，用于图片等资源
+    staticBaseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
+      ? 'https://api.chongbaoshu.cn'
+      : 'http://localhost:3000',
   },
 
   /**

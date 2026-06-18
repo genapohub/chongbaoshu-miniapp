@@ -3,7 +3,7 @@
     <view class="picker-header">
       <text class="picker-title">{{title}}</text>
       <view class="picker-close" catchtap="onClose">
-        <text>✕</text>
+        <icon name="close" size="36" color="#8F959E" />
       </view>
     </view>
     <scroll-view class="picker-list" scroll-y>
@@ -15,9 +15,9 @@
         data-index="{{index}}"
         catchtap="onSelect"
       >
-        <text class="picker-item-icon" wx:if="{{item.icon}}">{{item.icon}}</text>
-        <text class="picker-item-label">{{item.label}}</text>
-        <text class="picker-item-check" wx:if="{{item.value === selectedValue}}">✓</text>
+        <icon wx:if="{{item.icon}}" name="{{item.icon}}" size="40" color="{{item.value === selectedValue ? '#3370FF' : '#646A73'}}" />
+        <text class="picker-item-label" style="{{item.icon ? 'margin-left:20rpx' : ''}}">{{item.label}}</text>
+        <icon wx:if="{{item.value === selectedValue}}" name="check" size="32" color="#3370FF" />
       </view>
     </scroll-view>
     <view class="picker-empty" wx:if="{{!items || items.length === 0}}">

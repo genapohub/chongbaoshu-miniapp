@@ -35,7 +35,7 @@
       bindtap="onSubmit"
       disabled="{{loading}}"
     >
-      {{loading ? '提交中...' : '提交反馈'}}
+      {{loading ? '提交中...' : '告诉我们你的想法'}}
     </button>
   </view>
 </view>

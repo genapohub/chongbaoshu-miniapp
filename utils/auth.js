@@ -2,6 +2,7 @@
  * 认证工具
  */
 const app = getApp();
+// formatDate is re-exported from constants.js for convenience
 const { formatDate } = require('./constants');
 
 /**
@@ -45,9 +46,48 @@ function calcAge(birthDate) {
   return `${months}个月`;
 }
 
+/**
+ * 格式化提醒日期文案（如"今天"、"明天"、"3天后"）
+ */
+function formatReminderDate(dateStr) {
+  if (!dateStr) return '';
+  var days = daysFromNow(dateStr);
+  if (days === 0) return '今天';
+  if (days === 1) return '明天';
+  if (days > 1 && days <= 7) return days + '天后';
+  if (days < 0) return '已过期' + Math.abs(days) + '天';
+  var d = new Date(dateStr);
+  return (d.getMonth() + 1) + '月' + d.getDate() + '日';
+}
+
+/**
+ * 相对时间格式化（"刚刚"、"5分钟前"、"昨天"等）
+ */
+function timeAgo(dateStr) {
+  if (!dateStr) return '';
+  var now = Date.now();
+  var date = new Date(dateStr);
+  var diff = now - date.getTime();
+  if (diff < 0) return '刚刚';
+
+  var seconds = Math.floor(diff / 1000);
+  var minutes = Math.floor(seconds / 60);
+  var hours = Math.floor(minutes / 60);
+  var days = Math.floor(hours / 24);
+
+  if (seconds < 60) return '刚刚';
+  if (minutes < 60) return minutes + '分钟前';
+  if (hours < 24) return hours + '小时前';
+  if (days === 1) return '昨天';
+  if (days < 7) return days + '天前';
+  return formatDate(dateStr);
+}
+
 module.exports = {
   checkAuth,
   formatDate,
   daysFromNow,
   calcAge,
+  formatReminderDate,
+  timeAgo,
 };

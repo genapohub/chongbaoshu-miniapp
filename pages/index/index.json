@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "loading-spinner": "/components/loading-spinner/loading-spinner",
-    "empty-state": "/components/empty-state/empty-state"
+    "empty-state": "/components/empty-state/empty-state",
+    "icon": "../../components/icon/icon"
   }
 }

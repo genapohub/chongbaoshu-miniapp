@@ -1,3 +1,5 @@
+/* notes-textarea — 飞书风格备注输入 */
+
 .notes-textarea {
   position: relative;
 }
@@ -7,15 +9,21 @@
   min-height: 160rpx;
   padding: 20rpx;
   font-size: 28rpx;
-  color: #333;
+  color: #2D2A26;
   box-sizing: border-box;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border-radius: 12rpx;
+  border: 2rpx solid transparent;
+  transition: border-color 0.2s;
+}
+.notes-input:focus {
+  border-color: #4A8C5C;
+  background: #FFF;
 }
 
 .notes-counter {
   text-align: right;
   font-size: 24rpx;
-  color: #999;
+  color: #948F89;
   margin-top: 8rpx;
 }

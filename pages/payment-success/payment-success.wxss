@@ -4,7 +4,7 @@
 }
 
 .navbar {
-  background: #E94560;
+  background: #4A8C5C;
   padding-top: 44px;
   padding-bottom: 16rpx;
   display: flex;
@@ -47,7 +47,7 @@
   width: 140rpx;
   height: 140rpx;
   border-radius: 50%;
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
   color: #fff;
   font-size: 80rpx;
   display: flex;
@@ -122,7 +122,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 16rpx 0;
-  border-bottom: 1rpx solid #F0F0F0;
+  border-bottom: 1rpx solid #EDEDEF;
 }
 
 .detail-row:last-child {
@@ -140,18 +140,18 @@
 }
 
 .detail-value.primary {
-  color: #E94560;
+  color: #4A8C5C;
   font-weight: 600;
 }
 
 .detail-value.success {
-  color: #E94560;
+  color: #4A8C5C;
   font-weight: 600;
 }
 
 .tips-section {
   width: 100%;
-  background: #FFF0F3;
+  background: #E8F0FE;
   border-radius: 16rpx;
   padding: 24rpx;
   margin-bottom: 30rpx;
@@ -160,7 +160,7 @@
 .tips-title {
   font-size: 26rpx;
   font-weight: 600;
-  color: #C23151;
+  color: #245BDB;
   margin-bottom: 16rpx;
 }
 
@@ -178,7 +178,7 @@
 
 .invite-card {
   width: 100%;
-  background: #FFF0F3;
+  background: #E8F0FE;
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 30rpx;
@@ -200,7 +200,7 @@
 .invite-title {
   font-size: 30rpx;
   font-weight: 700;
-  color: #C23151;
+  color: #245BDB;
   margin-bottom: 10rpx;
 }
 
@@ -210,7 +210,7 @@
 }
 
 .invite-btn {
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   border-radius: 40rpx;
   padding: 20rpx 60rpx;
@@ -223,7 +223,7 @@
   width: 100%;
   height: 96rpx;
   line-height: 96rpx;
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   border-radius: 48rpx;
   font-size: 32rpx;

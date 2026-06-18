@@ -17,6 +17,8 @@ Page({
     expireDate: '',
     isAutoRenew: false,
     loading: false,
+    showLoginGuide: false,
+    isLoggedIn: false,
   },
 
   onShow: function() {
@@ -30,9 +32,13 @@ Page({
     that.setData({ loading: true });
 
     if (!app.globalData.token) {
-      that.setData({ loading: false });
+      that.setData({ 
+        loading: false,
+        isLoggedIn: false,
+      });
       return;
     }
+    that.setData({ isLoggedIn: true });
 
     Promise.all([
       api.get('/auth/profile').catch(function() { return null; }),
@@ -114,15 +120,30 @@ Page({
   },
 
   goMenu: function(e) {
+    const app = getApp();
+    if (!app.globalData.token) {
+      this.setData({ showLoginGuide: true });
+      return;
+    }
     const url = e.currentTarget.dataset.url;
     wx.navigateTo({ url: url });
   },
 
   goSubscription: function() {
+    const app = getApp();
+    if (!app.globalData.token) {
+      this.setData({ showLoginGuide: true });
+      return;
+    }
     wx.navigateTo({ url: '/pages/subscription/subscription' });
   },
 
   goFeedback: function() {
+    const app = getApp();
+    if (!app.globalData.token) {
+      this.setData({ showLoginGuide: true });
+      return;
+    }
     wx.navigateTo({ url: '/pages/feedback/feedback' });
   },
 
@@ -146,4 +167,19 @@ Page({
       },
     });
   },
+
+  goLogin: function() {
+    wx.navigateTo({ url: '/pages/login/login' });
+  },
+
+  goLoginFromGuide: function() {
+    this.setData({ showLoginGuide: false });
+    wx.navigateTo({ url: '/pages/login/login' });
+  },
+
+  hideLoginGuide: function() {
+    this.setData({ showLoginGuide: false });
+  },
+
+  stopPropagation: function() {},
 });

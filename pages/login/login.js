@@ -58,10 +58,10 @@ Page({
   },
 
   openTerms: function() {
-    wx.navigateTo({ url: '/pages/webview/webview?type=terms' });
+    wx.navigateTo({ url: '/pages/agreement/agreement?type=user-agreement' });
   },
 
   openPrivacy: function() {
-    wx.navigateTo({ url: '/pages/webview/webview?type=privacy' });
+    wx.navigateTo({ url: '/pages/agreement/agreement?type=privacy-policy' });
   },
 });

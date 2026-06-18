@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: #F8F9FA;
+  background: #F6F4F0;
   padding: 24rpx;
   padding-bottom: 60rpx;
 }
@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 24rpx 28rpx;
-  border-bottom: 1rpx solid #F3F4F6;
+  border-bottom: 1rpx solid #EDEDEF;
 }
 
 .setting-item:last-child {
@@ -44,7 +44,7 @@
 
 .setting-label {
   font-size: 28rpx;
-  color: #333;
+  color: #2D2A26;
 }
 
 .setting-right {
@@ -54,13 +54,13 @@
 
 .setting-value {
   font-size: 28rpx;
-  color: #9CA3AF;
+  color: #948F89;
   margin-right: 8rpx;
 }
 
 .setting-arrow {
   font-size: 28rpx;
-  color: #9CA3AF;
+  color: #948F89;
 }
 
 .picker-modal {
@@ -94,12 +94,12 @@
 .picker-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #333;
+  color: #2D2A26;
 }
 
 .picker-close {
   font-size: 48rpx;
-  color: #999;
+  color: #948F89;
   line-height: 1;
 }
 
@@ -124,11 +124,11 @@
 
 .picker-item-text {
   font-size: 30rpx;
-  color: #333;
+  color: #2D2A26;
 }
 
 .picker-item.selected .picker-item-text {
-  color: #E94560;
+  color: #4A8C5C;
   font-weight: 600;
 }
 
@@ -159,7 +159,7 @@
 
 .coming-soon {
   font-size: 20rpx;
-  color: #9CA3AF;
+  color: #948F89;
   background: #F3F4F6;
   padding: 2rpx 10rpx;
   border-radius: 6rpx;

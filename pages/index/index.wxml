@@ -6,26 +6,38 @@
   <!-- 加载状态 -->
   <loading-spinner wx:if="{{loading}}" />
 
-  <!-- 已登录 - 主要内容 -->
-  <view wx:elif="{{userInfo}}">
-  <!-- 升级引导条（免费用户显示） -->
-  <view wx:if="{{subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
+  <!-- 已登录/游客模式 - 主要内容（游客也可浏览） -->
+  <view wx:elif="{{!loading}}">
+  <!-- 升级引导条（免费用户显示，游客不显示） -->
+  <view wx:if="{{userInfo && subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
     <view class="upgrade-content">
-      <text class="upgrade-icon">✨</text>
+      <icon name="sparkle" size="40" color="#F7BA1E" />
       <text class="upgrade-text">升级Pro，解锁血统证书与无限宠物</text>
     </view>
-    <text class="upgrade-arrow">›</text>
+    <icon name="chevron-right" size="28" color="#C0C4CC" />
   </view>
 
-  <!-- 订阅状态卡片 -->
-  <view class="sub-status-card">
+  <!-- 订阅状态卡片（已登录） -->
+  <view wx:if="{{userInfo}}" class="sub-status-card">
     <text class="ssc-label">当前方案</text>
     <text class="ssc-plan">{{subscriptionPlan}}</text>
     <view class="ssc-meta">
       <text>宠物 {{petCount}}/{{maxPets}}</text>
       <text>配种记录 {{breedingCount}}/{{maxBreedingRecords}}</text>
-      <text class="ssc-upgrade" bindtap="goSubscription">升级 ›</text>
+      <view class="ssc-upgrade" bindtap="goSubscription"><text>升级 </text><icon name="chevron-right" size="24" color="#C0C4CC" /></view>
     </view>
+  </view>
+
+  <!-- 游客引导卡片（未登录） -->
+  <view wx:else class="sub-status-card guest-card" bindtap="goLogin">
+    <view class="guest-card-content">
+      <icon name="paw" size="40" color="#4A8C5C" />
+      <view class="guest-card-text">
+        <text class="guest-card-title">登录解锁全部功能</text>
+        <text class="guest-card-desc">记下第一只小家伙、记录健康、管理繁育</text>
+      </view>
+    </view>
+    <icon name="chevron-right" size="28" color="#C0C4CC" />
   </view>
 
   <!-- 数据概览 -->
@@ -46,7 +58,10 @@
 
   <!-- 待办提醒 -->
   <view class="card">
-    <text class="card-title">🔔 待办提醒</text>
+    <view class="card-title">
+      <icon name="bell" size="36" color="#4A8C5C" />
+      <text>待办提醒</text>
+    </view>
     <view wx:if="{{reminders.length > 0}}">
       <view
         wx:for="{{reminders}}"
@@ -57,7 +72,7 @@
         data-item="{{item}}"
       >
         <view class="reminder-icon-wrap" style="background: {{item.badgeBg}}">
-          <text class="reminder-icon-text">{{item.icon}}</text>
+          <icon name="{{item.icon}}" size="36" color="#FFFFFF" />
         </view>
         <view class="reminder-content">
           <view class="reminder-top">
@@ -69,7 +84,7 @@
             <text class="reminder-date-hint" style="color: {{item.color}}">{{item.dateHint}}</text>
           </view>
         </view>
-        <text class="reminder-arrow">›</text>
+        <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
     </view>
     <empty-state
@@ -82,23 +97,26 @@
 
   <!-- 快捷入口 -->
   <view class="card">
-    <text class="card-title">⚡ 快捷入口</text>
+    <view class="card-title">
+      <icon name="lightning" size="36" color="#4A8C5C" />
+      <text>快捷入口</text>
+    </view>
     <view class="quick-entry">
       <view class="quick-item" bindtap="goAddPet">
-        <view class="quick-icon primary">🐾</view>
-        <text class="quick-label">添加宠物</text>
+        <view class="quick-icon" style="background:#EDF4EF"><icon name="pet-add" size="36" color="#4A8C5C" /></view>
+        <text class="quick-label">记下第一只小家伙</text>
       </view>
       <view class="quick-item" bindtap="goAddBreeding">
-        <view class="quick-icon orange">💕</view>
+        <view class="quick-icon" style="background:#FDF3E5"><icon name="breeding-new" size="36" color="#D4914A" /></view>
         <text class="quick-label">添加配种</text>
       </view>
       <view class="quick-item" bindtap="goAddHealth">
-        <view class="quick-icon green">💉</view>
+        <view class="quick-icon" style="background:#EDF7EC"><icon name="health-shield" size="36" color="#3D8B37" /></view>
         <text class="quick-label">健康记录</text>
       </view>
       <view class="quick-item pro-item" bindtap="goPedigree">
         <view class="pro-badge">PRO</view>
-        <view class="quick-icon purple">📜</view>
+        <view class="quick-icon" style="background:#EDF4EF"><icon name="cert-tree" size="36" color="#4A8C5C" /></view>
         <text class="quick-label">血统证书</text>
       </view>
     </view>
@@ -106,7 +124,10 @@
 
   <!-- 最近动态 -->
   <view class="card">
-    <text class="card-title">🕐 最近动态</text>
+    <view class="card-title">
+      <icon name="clock" size="36" color="#646A73" />
+      <text>最近动态</text>
+    </view>
     <view wx:if="{{recentActivities.length > 0}}">
       <view
         wx:for="{{recentActivities}}"
@@ -114,7 +135,7 @@
         class="activity-row"
       >
         <view class="activity-icon-wrap">
-          <text class="activity-icon-text">{{item.icon}}</text>
+          <icon name="{{item.icon}}" size="32" color="{{item.iconColor}}" />
         </view>
         <view class="activity-content">
           <text class="activity-text">{{item.text}}</text>
@@ -126,17 +147,20 @@
       wx:else
       type="no-record"
       text="暂无动态"
-      subText="添加宠物或记录后，动态会显示在这里"
+      subText="记下第一只小家伙或记录后，动态会显示在这里"
     />
   </view>
 
-  <!-- 未登录状态 -->
-  </view>
+  <!-- 未登录且已加载完成时，不显示单独的登录状态页面，上方游客可浏览的布局已覆盖 -->
 
-  <view wx:elif="{{!userInfo && !loading}}" class="login-state">
-    <view class="login-icon">🐾</view>
-    <text class="login-title">宠宝树</text>
-    <text class="login-subtitle">记录宠物成长的每一刻</text>
-    <view class="btn-primary" bindtap="goLogin">立即登录</view>
+  <!-- 登录引导弹窗 -->
+  <view wx:if="{{showLoginGuide}}" class="login-guide-mask" bindtap="hideLoginGuide">
+    <view class="login-guide-modal" catchtap="stopPropagation">
+      <icon name="lock" size="48" color="#8F959E" />
+      <text class="login-guide-title">登录后即可使用</text>
+      <view class="login-guide-btn primary" bindtap="goLoginFromGuide">立即登录</view>
+      <view class="login-guide-btn secondary" bindtap="hideLoginGuide">稍后再说</view>
+    </view>
   </view>
+  </view> <!-- 关闭 wx:elif -->
 </view>

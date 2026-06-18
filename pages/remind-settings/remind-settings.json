@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "提醒设置",
-  "navigationBarBackgroundColor": "#E94560",
-  "navigationBarTextStyle": "white"
+  "navigationBarBackgroundColor": "#3370FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": { "icon": "../../components/icon/icon" }
 }

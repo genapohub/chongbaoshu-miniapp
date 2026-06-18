@@ -1,4 +1,4 @@
 {
-  "usingComponents": {},
+  "usingComponents": { "icon": "../../components/icon/icon" },
   "navigationBarTitleText": "血统证书"
 }

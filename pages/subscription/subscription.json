@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "订阅管理"
+  "navigationBarTitleText": "订阅管理",
+  "usingComponents": { "icon": "../../components/icon/icon" }
 }

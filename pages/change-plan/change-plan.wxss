@@ -80,11 +80,11 @@
 }
 
 .plan-card:active {
-  border-color: #E94560;
+  border-color: #4A8C5C;
 }
 
 .plan-card.selected {
-  border-color: #E94560;
+  border-color: #4A8C5C;
   background: #FFF5F6;
 }
 
@@ -92,7 +92,7 @@
   width: 40rpx;
   height: 40rpx;
   border-radius: 50%;
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   font-size: 24rpx;
   display: flex;
@@ -122,7 +122,7 @@
 .free-tag {
   font-size: 16rpx;
   font-weight: 700;
-  color: #6B7280;
+  color: #5E5953;
 }
 
 .plan-details {
@@ -149,8 +149,8 @@
 }
 
 .plan-tag.downgrade {
-  background: #D1FAE5;
-  color: #059669;
+  background: #E8F8F0;
+  color: #3D8B37;
 }
 
 .plan-tag.upgrade {
@@ -186,7 +186,7 @@
 .notice-title {
   font-size: 24rpx;
   font-weight: 600;
-  color: #D97706;
+  color: #D99006;
 }
 
 .upgrade-card .notice-title {
@@ -209,7 +209,7 @@
   width: 100%;
   height: 88rpx;
   line-height: 88rpx;
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   border-radius: 44rpx;
   font-size: 28rpx;

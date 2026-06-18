@@ -3,7 +3,7 @@
 
   <!-- 顶部横幅 -->
   <view class="banner">
-    <view class="banner-icon">🎁</view>
+    <view class="banner-icon"><icon name="gift" size="36" color="#F54A45" /></view>
     <view class="banner-title">邀请好友，双方各得7天Pro</view>
     <view class="banner-subtitle">每成功邀请1人注册，额外获得7天Pro会员</view>
   </view>
@@ -11,7 +11,7 @@
   <!-- 邀请码卡片 -->
   <view class="code-card">
     <view class="card-label">我的邀请码</view>
-    <view class="invite-code">{{inviteCode || '加载中...'}}</view>
+    <view class="invite-code">{{inviteCode || '正在准备...'}}</view>
     <view class="btn-row">
       <button class="btn-copy" bindtap="onCopyCode">复制邀请码</button>
       <button class="btn-share" open-type="share">分享给好友</button>
@@ -39,7 +39,7 @@
   <!-- 邀请记录 -->
   <view class="records-section">
     <view class="section-header">
-      <text class="section-icon">📋</text>
+      <view class="section-icon"><icon name="clipboard" size="36" color="#646A73" /></view>
       <text class="section-title">邀请记录</text>
     </view>
 
@@ -58,11 +58,11 @@
     </view>
 
     <view class="empty-state" wx:elif="{{!loading}}">
-      <view class="empty-icon">🔗</view>
+      <view class="empty-icon"><icon name="share" size="32" color="#3370FF" /></view>
       <view class="empty-text">还没有邀请记录</view>
       <view class="empty-hint">快去邀请好友吧</view>
     </view>
-    <view class="load-more" wx:if="{{loading}}">加载中...</view>
+    <view class="load-more" wx:if="{{loading}}">正在准备...</view>
     <view class="load-more" wx:elif="{{!hasMore && records.length > 0}}">没有更多了</view>
   </view>
 </view>

@@ -1,0 +1,51 @@
+<svg width="800" height="300" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="treeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4A8C5C"/>
+      <stop offset="100%" stop-color="#3D6B4B"/>
+    </linearGradient>
+    <linearGradient id="pawGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4914A"/>
+      <stop offset="100%" stop-color="#C07830"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 图标 -->
+  <g transform="translate(60, 30) scale(0.95)">
+    <path d="M-26 -10 C-30 -40 -24 -70 -22 -85 C-20 -95 -10 -100 0 -102 C10 -100 20 -95 22 -85 C24 -70 30 -40 26 -10 C28 5 20 15 0 18 C-20 15 -28 5 -26 -10Z" fill="url(#treeGrad)"/>
+    <ellipse cx="-75" cy="-105" rx="62" ry="56" fill="url(#treeGrad)"/>
+    <ellipse cx="75" cy="-105" rx="62" ry="56" fill="url(#treeGrad)"/>
+    <ellipse cx="0" cy="-160" rx="58" ry="52" fill="url(#treeGrad)"/>
+    <ellipse cx="-65" cy="-115" rx="25" ry="18" fill="white" opacity="0.1"/>
+    <ellipse cx="65" cy="-115" rx="25" ry="18" fill="white" opacity="0.1"/>
+    <ellipse cx="0" cy="-170" rx="22" ry="16" fill="white" opacity="0.1"/>
+    
+    <g transform="translate(-75,-105)">
+      <ellipse cx="0" cy="4" rx="16" ry="13" fill="url(#pawGrad)"/>
+      <circle cx="-10" cy="-7" r="8" fill="url(#pawGrad)"/>
+      <circle cx="10" cy="-7" r="8" fill="url(#pawGrad)"/>
+    </g>
+    <g transform="translate(75,-105)">
+      <ellipse cx="0" cy="4" rx="16" ry="13" fill="url(#pawGrad)"/>
+      <circle cx="-10" cy="-7" r="8" fill="url(#pawGrad)"/>
+      <circle cx="10" cy="-7" r="8" fill="url(#pawGrad)"/>
+    </g>
+    <g transform="translate(0,-160)">
+      <ellipse cx="0" cy="3" rx="18" ry="14" fill="url(#pawGrad)"/>
+      <circle cx="-12" cy="-8" r="9" fill="url(#pawGrad)"/>
+      <circle cx="12" cy="-8" r="9" fill="url(#pawGrad)"/>
+    </g>
+  </g>
+  
+  <!-- 中文品牌名 -->
+  <text x="300" y="145" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif" font-size="68" font-weight="800" fill="#4A8C5C" letter-spacing="8">宠宝树</text>
+  
+  <!-- 英文副标题 -->
+  <text x="304" y="178" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="600" fill="#5E5953" letter-spacing="10">PET FAMILY TREE</text>
+  
+  <!-- 装饰线 -->
+  <line x1="300" y1="196" x2="540" y2="196" stroke="#D4914A" stroke-width="2" opacity="0.6"/>
+  
+  <!-- 标签语 -->
+  <text x="304" y="218" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="14" fill="#948F89" letter-spacing="3">繁育全链路管理工具</text>
+</svg>

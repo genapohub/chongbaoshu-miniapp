@@ -129,7 +129,7 @@ Page({
         species: pet.species,
         breed: pet.breed,
         speciesLabel: (speciesInfo && speciesInfo.label) || pet.species,
-        speciesIcon: (speciesInfo && speciesInfo.icon) || '🐾',
+        speciesIcon: (speciesInfo && speciesInfo.icon) || 'paw',
         gender: pet.gender,
         genderLabel: (genderInfo && genderInfo.label) || '',
         age: authUtils.calcAge(pet.birth_date),
@@ -280,9 +280,8 @@ Page({
   },
 
   goHealthDetail(e) {
-    const id = e.currentTarget.dataset.id;
     this.setData({ needRefresh: true });
-    wx.navigateTo({ url: `/pages/health-detail/health-detail?id=${id}` });
+    wx.navigateTo({ url: `/pages/health-detail/health-detail?pet_id=${this.data.petId}` });
   },
 
   goAddBreeding() {

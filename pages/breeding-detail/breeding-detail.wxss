@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: #F8F9FA;
+  background: #F6F4F0;
   padding: 24rpx;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .due-date {
-  color: #E94560;
+  color: #4A8C5C;
   font-weight: 600;
 }
 
@@ -88,7 +88,7 @@
   align-items: center;
   gap: 20rpx;
   padding: 24rpx;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border-radius: 16rpx;
   border: 2rpx solid transparent;
   transition: all 0.2s ease;
@@ -96,7 +96,7 @@
 
 .status-item.current {
   background: #FFF5F7;
-  border-color: #E94560;
+  border-color: #4A8C5C;
 }
 
 .status-item.disabled {
@@ -115,7 +115,7 @@
 }
 
 .status-item.current .status-icon {
-  background: #E94560;
+  background: #4A8C5C;
   color: #FFFFFF;
 }
 
@@ -138,7 +138,7 @@
 
 .status-check {
   font-size: 32rpx;
-  color: #E94560;
+  color: #4A8C5C;
   font-weight: 700;
 }
 
@@ -199,8 +199,8 @@
 
 .btn-outline {
   background: #FFFFFF;
-  color: #E94560;
-  border: 2rpx solid #E94560;
+  color: #4A8C5C;
+  border: 2rpx solid #4A8C5C;
 }
 
 .btn-danger {

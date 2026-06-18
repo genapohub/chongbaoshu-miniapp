@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText": "",
   "navigationBarBackgroundColor": "#FFFFFF",
-  "usingComponents": {}
+  "usingComponents": { "icon": "../../components/icon/icon" }
 }

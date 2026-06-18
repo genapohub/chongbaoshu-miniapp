@@ -2,12 +2,12 @@
 
 .container {
   min-height: 100vh;
-  background: #F8F9FA;
+  background: #F6F4F0;
 }
 
 /* 头部 */
 .profile-header {
-  background: linear-gradient(135deg, #E94560, #C73650);
+  background: linear-gradient(135deg, #4A8C5C, #245BDB);
   padding: 48rpx 24rpx;
   text-align: center;
   color: #fff;
@@ -44,7 +44,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4rpx;
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
   color: #fff;
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
@@ -86,7 +86,7 @@
 
 /* 订阅状态卡片 */
 .sub-status-card {
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
   border-radius: 24rpx;
   padding: 28rpx;
   color: #fff;
@@ -128,7 +128,7 @@
 /* 卡片 */
 .card {
   background: #fff;
-  border-radius: 16rpx;
+  border-radius: var(--radius);
   padding: 8rpx 0;
   margin-bottom: 20rpx;
   box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.06);
@@ -139,7 +139,7 @@
   display: flex;
   align-items: center;
   padding: 24rpx 28rpx;
-  border-bottom: 1rpx solid #F3F4F6;
+  border-bottom: 1rpx solid #EDEDEF;
 }
 
 .menu-item:last-child {
@@ -157,7 +157,7 @@
 }
 
 .menu-tag {
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
   color: #fff;
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
@@ -168,7 +168,7 @@
 }
 
 .menu-arrow {
-  color: #9CA3AF;
+  color: #948F89;
   font-size: 28rpx;
 }
 
@@ -177,7 +177,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16rpx;
+  border-radius: var(--radius);
   padding: 16rpx 32rpx;
   font-size: 26rpx;
   font-weight: 600;
@@ -196,7 +196,73 @@
 }
 
 .logout-btn {
+  border-radius: var(--radius-s);
+  font-weight: 500;
+  letter-spacing: 2rpx;
   background: #F3F4F6;
-  color: #EB5757;
+  color: #D4534A;
   margin-top: 8rpx;
+}
+
+/* 登录引导弹窗 */
+.login-guide-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.login-guide-modal {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 48rpx;
+  text-align: center;
+}
+
+.login-guide-icon {
+  font-size: 80rpx;
+  margin-bottom: 24rpx;
+}
+
+.login-guide-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #2D2A26;
+  margin-bottom: 16rpx;
+}
+
+.login-guide-desc {
+  display: block;
+  font-size: 28rpx;
+  color: #5E5953;
+  line-height: 1.6;
+  margin-bottom: 40rpx;
+}
+
+.login-guide-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.login-guide-btn.primary {
+  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
+  color: #fff;
+}
+
+.login-guide-btn.secondary {
+  background: #F3F4F6;
+  color: #5E5953;
 }

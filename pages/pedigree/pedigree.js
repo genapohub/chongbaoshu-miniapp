@@ -36,7 +36,7 @@ Page({
           breed: pet.breed || '',
           species: pet.species,
           speciesLabel: speciesInfo ? speciesInfo.label : pet.species,
-          speciesIcon: speciesInfo ? speciesInfo.icon : '🐾',
+          speciesIcon: speciesInfo ? speciesInfo.icon : 'paw',
           gender: pet.gender,
           status: pet.status,
         };

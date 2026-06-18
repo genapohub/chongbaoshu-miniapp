@@ -13,9 +13,9 @@ Page({
     currentFilter: 'all',
     filterTabs: [
       { key: 'all', label: '全部', icon: '' },
-      { key: 'dog', label: '犬', icon: '🐕' },
-      { key: 'cat', label: '猫', icon: '🐈' },
-      { key: 'bird', label: '鸟', icon: '🐦' },
+      { key: 'dog', label: '犬', icon: 'dog' },
+      { key: 'cat', label: '猫', icon: 'cat' },
+      { key: 'bird', label: '鸟', icon: 'bird' },
     ],
     loading: true,
     petCount: 0,
@@ -32,12 +32,28 @@ Page({
     showDeleteModal: false,
     showCannotDeleteModal: false,
     deletingPet: null,
+    showLoginGuide: false,
+    userInfo: null,
   },
 
   onShow() {
     const app = getApp();
     this.setData({ fromBreeding: app.globalData.fromBreeding || false });
     app.globalData.fromBreeding = false;
+
+    // 游客模式：不跳转登录页，显示空列表
+    if (!app.globalData.token) {
+      this.setData({
+        loading: false,
+        userInfo: null,
+        petList: [],
+        allPetList: [],
+        petCount: 0,
+      });
+      return;
+    }
+
+    this.setData({ userInfo: app.globalData.userInfo });
     this.loadPets();
     this.loadLimits();
   },
@@ -46,7 +62,7 @@ Page({
     const that = this;
     that.setData({ loading: true });
     api.get('/pets', { page: 1, pageSize: 100 }).then(function(res) {
-      const baseUrl = getApp().globalData.baseUrl.replace('/api', '');
+      const baseUrl = getApp().globalData.staticBaseUrl || getApp().globalData.baseUrl.replace('/api', '');
       const data = res.data || res;
       const list = data.list || [];
       const allPetList = [];
@@ -55,7 +71,7 @@ Page({
         const speciesInfo = constants.SPECIES[pet.species];
         const genderInfo = constants.GENDER[pet.gender];
         const speciesLabel = speciesInfo && speciesInfo.label ? speciesInfo.label : pet.species;
-        const speciesIcon = speciesInfo && speciesInfo.icon ? speciesInfo.icon : '🐾';
+        const speciesIcon = speciesInfo && speciesInfo.icon ? speciesInfo.icon : 'paw';
         const genderLabel = genderInfo && genderInfo.label ? genderInfo.label : '';
         const avatar = pet.avatar_photo ? baseUrl + pet.avatar_photo : '';
         const item = {};
@@ -86,30 +102,21 @@ Page({
   },
 
   filterPets(petList, filter, keyword) {
-    const result = petList.slice();
+    var result = petList.slice();
 
     if (filter !== 'all') {
-      const filtered1 = [];
-      for (let i = 0; i < result.length; i++) {
-        if (result[i].species === filter) {
-          filtered1.push(result[i]);
-        }
-      }
-      result = filtered1;
+      result = result.filter(function(pet) {
+        return pet.species === filter;
+      });
     }
 
     if (keyword) {
-      const kw = keyword.toLowerCase();
-      const filtered2 = [];
-      for (let j = 0; j < result.length; j++) {
-        const pet = result[j];
-        const nameMatch = pet.name.toLowerCase().indexOf(kw) !== -1;
-        const breedMatch = pet.breed && pet.breed.toLowerCase().indexOf(kw) !== -1;
-        if (nameMatch || breedMatch) {
-          filtered2.push(pet);
-        }
-      }
-      result = filtered2;
+      var kw = keyword.toLowerCase();
+      result = result.filter(function(pet) {
+        var nameMatch = pet.name.toLowerCase().indexOf(kw) !== -1;
+        var breedMatch = pet.breed && pet.breed.toLowerCase().indexOf(kw) !== -1;
+        return nameMatch || breedMatch;
+      });
     }
 
     return result;
@@ -173,12 +180,36 @@ Page({
     });
   },
 
-  goAddPet() {
-    if (this.data.showLimitHint) {
-      this.setData({ showLimitModal: true });
-    } else {
-      wx.navigateTo({ url: '/pages/pet-add/pet-add' });
+  // 检查是否登录，未登录弹引导
+  requireLogin(callback) {
+    const app = getApp();
+    if (!app.globalData.token) {
+      this.setData({ showLoginGuide: true });
+      return;
     }
+    callback && callback();
+  },
+
+  // 隐藏登录引导弹窗
+  hideLoginGuide() {
+    this.setData({ showLoginGuide: false });
+  },
+
+  // 从登录引导弹窗跳转登录
+  goLoginFromGuide() {
+    this.setData({ showLoginGuide: false });
+    wx.navigateTo({ url: '/pages/login/login' });
+  },
+
+  goAddPet() {
+    const that = this;
+    that.requireLogin(function() {
+      if (that.data.showLimitHint) {
+        that.setData({ showLimitModal: true });
+      } else {
+        wx.navigateTo({ url: '/pages/pet-add/pet-add' });
+      }
+    });
   },
 
   goPetDetail(e) {

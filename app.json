@@ -10,6 +10,7 @@
     "pages/breeding-add/breeding-add",
     "pages/breeding-detail/breeding-detail",
     "pages/health-add/health-add",
+    "pages/health-detail/health-detail",
     "pages/pedigree/pedigree",
     "pages/pedigree-cert/pedigree-cert",
     "pages/subscribe/subscribe",
@@ -29,15 +30,15 @@
     "pages/agreement/agreement"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#E94560",
+    "navigationBarBackgroundColor": "#4A8C5C",
     "navigationBarTitleText": "宠宝树",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#F8F9FA",
+    "backgroundColor": "#F6F4F0",
     "backgroundTextStyle": "light"
   },
   "tabBar": {
-    "color": "#9CA3AF",
-    "selectedColor": "#E94560",
+    "color": "#948F89",
+    "selectedColor": "#4A8C5C",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "list": [
@@ -62,5 +63,10 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "__usePrivacyCheck__": true,
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseAddress"
+  ]
 }

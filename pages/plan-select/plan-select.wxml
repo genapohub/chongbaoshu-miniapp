@@ -10,7 +10,7 @@
       >
         <view class="popular-badge" wx:if="{{item.isPopular}}">推荐</view>
         <view class="plan-header">
-          <view class="plan-icon-wrapper" style="background: {{item.iconBg}}">{{item.icon}}</view>
+          <view class="plan-icon-wrapper" style="background: {{item.iconBg}}"><icon name="{{item.icon}}" size="36" color="#FFFFFF" /></view>
           <view class="plan-name">{{item.name}}</view>
           <view class="plan-price">
             <text class="price-value">¥{{item.price}}</text>
@@ -27,7 +27,7 @@
     </view>
 
     <view class="features-section">
-      <view class="features-title">📊 功能对比</view>
+      <view class="features-title"><icon name="chart" size="36" color="#3370FF" /> 功能对比</view>
       <scroll-view scroll-x class="features-scroll">
         <view class="features-table">
           <view class="feature-row header">

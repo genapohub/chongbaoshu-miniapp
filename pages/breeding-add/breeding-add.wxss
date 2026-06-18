@@ -18,13 +18,13 @@
 
 .form-item.required .form-label::before {
   content: '*';
-  color: #E94560;
+  color: #4A8C5C;
   margin-right: 8rpx;
 }
 
 .form-label {
   font-size: 28rpx;
-  color: #333;
+  color: #2D2A26;
   margin-bottom: 16rpx;
   display: block;
 }
@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20rpx;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border-radius: 12rpx;
 }
 
@@ -66,42 +66,42 @@
 }
 
 .pet-picker.disabled {
-  background: #F0F0F0;
+  background: #EDEDEF;
 }
 
 .pet-picker.disabled .pet-text {
-  color: #999;
+  color: #948F89;
 }
 
 .pet-text {
   font-size: 30rpx;
-  color: #333;
+  color: #2D2A26;
 }
 
 .pet-text.placeholder {
-  color: #999;
+  color: #948F89;
 }
 
 .pet-detail {
   font-size: 26rpx;
-  color: #999;
+  color: #948F89;
   margin-left: 8rpx;
 }
 
 .picker-arrow {
   font-size: 24rpx;
-  color: #999;
+  color: #948F89;
 }
 
 .error-tip {
   margin-top: 12rpx;
   font-size: 24rpx;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .date-picker {
   padding: 20rpx;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border-radius: 12rpx;
 }
 
@@ -130,7 +130,7 @@
 
 .due-date-label {
   font-size: 28rpx;
-  color: #333;
+  color: #2D2A26;
 }
 
 .due-date-value {
@@ -141,7 +141,7 @@
 
 .due-date-note {
   font-size: 24rpx;
-  color: #666;
+  color: #5E5953;
   line-height: 1.5;
 }
 
@@ -157,13 +157,13 @@
   border-radius: 12rpx;
   border: 2rpx solid #E0E0E0;
   font-size: 28rpx;
-  color: #666;
+  color: #5E5953;
 }
 
 .method-option.active {
-  border-color: #E94560;
+  border-color: #4A8C5C;
   background: #FFF5F7;
-  color: #E94560;
+  color: #4A8C5C;
   font-weight: 600;
 }
 
@@ -182,19 +182,19 @@
   align-items: center;
   justify-content: center;
   font-size: 36rpx;
-  color: #666;
+  color: #5E5953;
 }
 
 .count-btn.plus {
-  border-color: #E94560;
+  border-color: #4A8C5C;
   background: #FFF5F7;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .count-value {
   font-size: 32rpx;
   font-weight: 600;
-  color: #333;
+  color: #2D2A26;
 }
 
 /* textarea 已提取为 notes-textarea 组件 */
@@ -227,13 +227,13 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #E94560, #E94560);
+  background: linear-gradient(135deg, #4A8C5C, #4A8C5C);
   color: #FFFFFF;
 }
 
 .btn-primary[disabled] {
   background: #DDDDDD;
-  color: #999;
+  color: #948F89;
 }
 
 .picker-modal {
@@ -267,12 +267,12 @@
 .picker-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #333;
+  color: #2D2A26;
 }
 
 .picker-close {
   font-size: 48rpx;
-  color: #999;
+  color: #948F89;
   line-height: 1;
 }
 
@@ -283,7 +283,7 @@
 .picker-empty {
   padding: 80rpx 32rpx;
   text-align: center;
-  color: #999;
+  color: #948F89;
   font-size: 28rpx;
 }
 
@@ -322,7 +322,7 @@
 .avatar-text {
   font-size: 32rpx;
   font-weight: 600;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .pet-info {
@@ -334,12 +334,12 @@
 .pet-name {
   font-size: 30rpx;
   font-weight: 500;
-  color: #333;
+  color: #2D2A26;
 }
 
 .pet-breed {
   font-size: 24rpx;
-  color: #999;
+  color: #948F89;
   margin-top: 4rpx;
 }
 
@@ -378,7 +378,7 @@
 .inbreeding-title {
   font-size: 28rpx;
   font-weight: 600;
-  color: #333;
+  color: #2D2A26;
 }
 
 .inbreeding-result.warning .inbreeding-title {
@@ -391,6 +391,6 @@
 
 .inbreeding-message {
   font-size: 26rpx;
-  color: #666;
+  color: #5E5953;
   line-height: 1.5;
 }

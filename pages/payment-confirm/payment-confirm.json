@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "确认支付",
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": { "icon": "../../components/icon/icon" }
 }

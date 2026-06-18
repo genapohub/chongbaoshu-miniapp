@@ -1,4 +1,5 @@
-/* empty-state 组件样式 */
+/* empty-state — 飞书风格 */
+
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -16,45 +17,22 @@
   margin-bottom: 28rpx;
 }
 
-.empty-empty .empty-icon-wrap {
-  background: #F3F4F6;
-}
-
-.empty-error .empty-icon-wrap {
-  background: #FEF2F2;
-}
-
-.empty-network .empty-icon-wrap {
-  background: #FFF7ED;
-}
-
-.empty-no-pet .empty-icon-wrap {
-  background: #F0FDF4;
-}
-
-.empty-no-record .empty-icon-wrap {
-  background: #EFF6FF;
-}
-
-.empty-icon {
-  font-size: 72rpx;
-}
-
-.empty-img {
-  width: 80rpx;
-  height: 80rpx;
-}
+.empty-empty     .empty-icon-wrap { background: #F6F4F0; }
+.empty-error     .empty-icon-wrap { background: #FEF0EF; }
+.empty-network   .empty-icon-wrap { background: #FFF8E1; }
+.empty-no-pet    .empty-icon-wrap { background: #E8F0FE; }
+.empty-no-record .empty-icon-wrap { background: #F6F4F0; }
 
 .empty-text {
   font-size: 30rpx;
-  color: #374151;
+  color: #2D2A26;
   font-weight: 500;
   margin-bottom: 8rpx;
 }
 
 .empty-sub-text {
   font-size: 26rpx;
-  color: #9CA3AF;
+  color: #948F89;
   margin-bottom: 32rpx;
   line-height: 1.5;
   text-align: center;
@@ -62,9 +40,10 @@
 
 .empty-action {
   padding: 16rpx 48rpx;
-  background: linear-gradient(135deg, #E94560, #FD79A8);
+  background: #4A8C5C;
   border-radius: 44rpx;
 }
+.empty-action:active { opacity: 0.85; }
 
 .empty-action-text {
   font-size: 28rpx;

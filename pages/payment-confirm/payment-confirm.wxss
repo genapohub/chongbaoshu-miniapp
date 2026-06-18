@@ -4,7 +4,7 @@
 }
 
 .navbar {
-  background: #E94560;
+  background: #4A8C5C;
   padding-top: 44px;
   padding-bottom: 16rpx;
   display: flex;
@@ -118,14 +118,14 @@
   padding: 24rpx;
   border-radius: 16rpx;
   text-align: center;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border: 2rpx solid transparent;
   transition: all 0.3s;
 }
 
 .period-option.active {
   background: #FFEEF0;
-  border-color: #E94560;
+  border-color: #4A8C5C;
 }
 
 .period-label {
@@ -138,13 +138,13 @@
 .period-price {
   font-size: 36rpx;
   font-weight: 700;
-  color: #E94560;
+  color: #4A8C5C;
   display: block;
 }
 
 .period-discount {
   font-size: 22rpx;
-  color: #E94560;
+  color: #4A8C5C;
   display: block;
   margin-top: 4rpx;
 }
@@ -165,7 +165,7 @@
   flex: 1;
   height: 80rpx;
   padding: 0 20rpx;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border-radius: 40rpx;
   font-size: 28rpx;
 }
@@ -174,7 +174,7 @@
   width: 160rpx;
   height: 80rpx;
   line-height: 80rpx;
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   border-radius: 40rpx;
   font-size: 28rpx;
@@ -190,12 +190,12 @@
 
 .coupon-check {
   font-size: 28rpx;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .coupon-text {
   font-size: 24rpx;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .price-details {
@@ -224,7 +224,7 @@
 
 .price-discount {
   font-size: 26rpx;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .price-divider {
@@ -242,7 +242,7 @@
 .price-total {
   font-size: 36rpx;
   font-weight: 700;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .price-note {
@@ -267,7 +267,7 @@
   padding: 24rpx;
   border-radius: 16rpx;
   margin-bottom: 12rpx;
-  background: #F8F9FA;
+  background: #F6F4F0;
   border: 2rpx solid transparent;
 }
 
@@ -276,7 +276,7 @@
 }
 
 .method-option.active {
-  border-color: #E94560;
+  border-color: #4A8C5C;
   background: #FFEEF0;
 }
 
@@ -309,7 +309,7 @@
 }
 
 .radio-inner.checked {
-  background: #E94560;
+  background: #4A8C5C;
 }
 
 .agree-checkbox {
@@ -333,8 +333,8 @@
 }
 
 .checkbox.checked {
-  background: #E94560;
-  border-color: #E94560;
+  background: #4A8C5C;
+  border-color: #4A8C5C;
 }
 
 .agree-text {
@@ -371,14 +371,14 @@
 .bar-amount {
   font-size: 36rpx;
   font-weight: 700;
-  color: #E94560;
+  color: #4A8C5C;
 }
 
 .bar-btn {
   flex: 1;
   height: 88rpx;
   line-height: 88rpx;
-  background: #E94560;
+  background: #4A8C5C;
   color: #fff;
   border-radius: 44rpx;
   font-size: 30rpx;

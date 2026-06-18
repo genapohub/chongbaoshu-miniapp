@@ -17,7 +17,7 @@
           <text class="price-symbol">¥</text>
           <text class="price-num">0</text>
         </view>
-        <view wx:if="{{selectedPlan === 'free'}}" class="check-icon">✓</view>
+        <view wx:if="{{selectedPlan === 'free'}}" class="check-icon"><icon name="check" size="36" color="#2BA471" /></view>
       </view>
 
       <view
@@ -26,7 +26,7 @@
         data-tier="basic"
       >
         <view class="hot-badge">热门</view>
-        <view class="plan-icon-wrapper basic-bg">⭐</view>
+        <view class="plan-icon-wrapper basic-bg"><icon name="star" size="40" color="#F7BA1E" /></view>
         <view class="plan-details">
           <view class="plan-card-name">基础版</view>
           <view class="plan-card-desc">100只宠物 · 数据导出 · 优先提醒</view>
@@ -37,7 +37,7 @@
           <text class="price-unit">/月</text>
           <view class="yearly-discount">年付¥39/月 · 省¥120</view>
         </view>
-        <view wx:if="{{selectedPlan === 'basic'}}" class="check-icon">✓</view>
+        <view wx:if="{{selectedPlan === 'basic'}}" class="check-icon"><icon name="check" size="36" color="#2BA471" /></view>
       </view>
 
       <view
@@ -45,18 +45,18 @@
         catchtap="selectPlan"
         data-tier="pro"
       >
-        <view class="plan-icon-wrapper pro-bg">💎</view>
+        <view class="plan-icon-wrapper pro-bg"><icon name="diamond" size="40" color="#3370FF" /></view>
         <view class="plan-details">
           <view class="plan-card-name">Pro 专业版</view>
           <view class="plan-card-desc">无限宠物 · 血统证书 · 专属客服</view>
         </view>
         <view class="plan-price">
           <text class="price-symbol">¥</text>
-          <text class="price-num">149</text>
+          <text class="price-num">119</text>
           <text class="price-unit">/月</text>
-          <view class="yearly-discount">年付¥119/月 · 省¥360</view>
+          <view class="yearly-discount">年付¥99/月 · 省¥240</view>
         </view>
-        <view wx:if="{{selectedPlan === 'pro'}}" class="check-icon">✓</view>
+        <view wx:if="{{selectedPlan === 'pro'}}" class="check-icon"><icon name="check" size="36" color="#2BA471" /></view>
       </view>
     </view>
 
@@ -90,39 +90,39 @@
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">健康档案</view>
-            <view class="comparison-cell check">✓</view>
-            <view class="comparison-cell check">✓</view>
-            <view class="comparison-cell check">✓</view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">数据导出</view>
-            <view class="comparison-cell cross">×</view>
-            <view class="comparison-cell check">✓</view>
-            <view class="comparison-cell check">✓</view>
+            <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">血统证书</view>
-            <view class="comparison-cell cross">×</view>
-            <view class="comparison-cell cross">×</view>
-            <view class="comparison-cell check">✓</view>
+            <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
+            <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">近亲检测</view>
-            <view class="comparison-cell cross">×</view>
-            <view class="comparison-cell check">✓</view>
-            <view class="comparison-cell check">✓</view>
+            <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">优先提醒</view>
-            <view class="comparison-cell cross">×</view>
-            <view class="comparison-cell check">✓</view>
-            <view class="comparison-cell check">✓</view>
+            <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">专属客服</view>
-            <view class="comparison-cell cross">×</view>
-            <view class="comparison-cell cross">×</view>
-            <view class="comparison-cell check">✓</view>
+            <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
+            <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
           </view>
         </view>
       </scroll-view>

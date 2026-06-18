@@ -1,4 +1,4 @@
 {
   "navigationBarTitleText": "变更方案",
-  "usingComponents": {}
+  "usingComponents": { "icon": "../../components/icon/icon" }
 }

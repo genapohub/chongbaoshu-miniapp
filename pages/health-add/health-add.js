@@ -126,7 +126,7 @@ Page({
       const petId = record.pet_id || null;
       const petName = record.pet_name || '';
 
-      const canSubmit = that._calcCanSubmit(currentType, formData);
+      const canSubmit = that._calcCanSubmit(currentType, formData, petId);
 
       that.setData({
         petId: petId,
@@ -198,7 +198,7 @@ Page({
       petId: id,
       petName: name,
       showPetPicker: false,
-      canSubmit: this._calcCanSubmit(this.data.currentType, formData),
+      canSubmit: this._calcCanSubmit(this.data.currentType, formData, id),
     });
   },
 
@@ -232,7 +232,7 @@ Page({
     const value = e.detail.value;
     const formData = this.data.formData;
     formData[field] = value;
-    const canSubmit = this._calcCanSubmit(this.data.currentType, formData);
+    const canSubmit = this._calcCanSubmit(this.data.currentType, formData, this.data.petId);
 
     // 针次实时校验提示
     let roundError = '';
@@ -260,7 +260,7 @@ Page({
   onDateChange: function(e) {
     const formData = this.data.formData;
     formData.record_date = e.detail.value;
-    const canSubmit = this._calcCanSubmit(this.data.currentType, formData);
+    const canSubmit = this._calcCanSubmit(this.data.currentType, formData, this.data.petId);
     const updateObj = {
       formData: formData,
       canSubmit: canSubmit,
@@ -289,7 +289,7 @@ Page({
     const value = e.detail.value;
     const formData = this.data.formData;
     formData.vaccine_type = value;
-    const canSubmit = this._calcCanSubmit(this.data.currentType, formData);
+    const canSubmit = this._calcCanSubmit(this.data.currentType, formData, this.data.petId);
     const updateObj = {
       formData: formData,
       showVaccinePicker: false,
@@ -329,7 +329,7 @@ Page({
     const updateObj = {
       formData: formData,
       showDewormPicker: false,
-      canSubmit: this._calcCanSubmit(this.data.currentType, formData),
+      canSubmit: this._calcCanSubmit(this.data.currentType, formData, this.data.petId),
     };
     const nextResult = this._calcNextDate(this.data.currentType, formData);
     if (nextResult) {
@@ -342,9 +342,11 @@ Page({
     this.setData(updateObj);
   },
 
-  // 纯函数：根据 type 和 formData 计算是否可提交，不依赖 this.data
-  _calcCanSubmit: function(currentType, formData) {
+  _calcCanSubmit: function(currentType, formData, petId) {
     let canSubmit = false;
+    if (!petId) {
+      return false;
+    }
     if (currentType === 'vaccine') {
       canSubmit = !!(formData.vaccine_type && formData.vaccine_round && formData.record_date);
       if (canSubmit && formData.vaccine_round) {

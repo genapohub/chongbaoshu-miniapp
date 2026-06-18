@@ -10,10 +10,10 @@
           </view>
           <view class="pet-text-wrap">
             <text class="pet-text">{{motherPetName || '请选择母犬'}}</text>
-            <text wx:if="{{motherPetName}}" class="pet-detail">（{{motherPetBreed}}·♀）</text>
+            <text wx:if="{{motherPetName}}" class="pet-detail">（{{motherPetBreed}}·<text>♀</text>）</text>
           </view>
         </view>
-        <text wx:if="{{!motherDisabled}}" class="picker-arrow">▼</text>
+        <icon name="chevron-down" size="28" color="#8F959E" />
       </view>
     </view>
 
@@ -27,19 +27,22 @@
           </view>
           <view class="pet-text-wrap">
             <text class="pet-text {{!fatherPetName ? 'placeholder' : ''}}">{{fatherPetName || '选择公犬'}}</text>
-            <text wx:if="{{fatherPetName}}" class="pet-detail">（{{fatherPetBreed}}·♂）</text>
+            <text wx:if="{{fatherPetName}}" class="pet-detail">（{{fatherPetBreed}}·<text>♂</text>）</text>
           </view>
         </view>
-        <text wx:if="{{!fatherDisabled}}" class="picker-arrow">▼</text>
+        <icon name="chevron-down" size="28" color="#8F959E" />
       </view>
       <view wx:if="{{!fatherPetId && showFatherError}}" class="error-tip">
-        <text>⚠️ 请选择公犬</text>
+        <view><icon name="warning" size="24" color="#F7BA1E" /><text>请选择公犬</text></view>
       </view>
     </view>
 
     <!-- 近亲检测结果 -->
     <view wx:if="{{inbreedingResult}}" class="inbreeding-result {{inbreedingResult.is_inbreeding ? 'warning' : 'success'}}">
-      <text class="inbreeding-icon">{{inbreedingResult.is_inbreeding ? '⚠️' : '✅'}}</text>
+      <view class="inbreeding-icon">
+        <icon wx:if="{{inbreedingResult.is_inbreeding}}" name="warning" size="36" color="#F7BA1E" />
+        <icon wx:else name="check" size="28" color="#2BA471" />
+      </view>
       <view class="inbreeding-text">
         <text class="inbreeding-title">{{inbreedingResult.is_inbreeding ? '近亲检测警告' : '近亲检测通过'}}</text>
         <text class="inbreeding-message">{{inbreedingResult.message}}</text>
@@ -51,14 +54,14 @@
       <picker mode="date" value="{{formData.breed_date}}" bindchange="onDateChange">
         <view class="picker-wrap date-picker">
           <text class="picker-value">{{formData.breed_date || '请选择日期'}}</text>
-          <text class="date-icon">📅</text>
+          <icon name="clock" size="28" color="#8F959E" />
         </view>
       </picker>
     </view>
 
     <view class="due-date-card">
       <view class="due-date-main">
-        <text class="due-date-icon">📅</text>
+        <icon name="clock" size="28" color="#646A73" />
         <text class="due-date-label">预计预产期：</text>
         <text class="due-date-value">{{dueDate || '--'}}</text>
       </view>
@@ -87,11 +90,11 @@
       <text class="form-label">配种次数</text>
       <view class="count-control">
         <view class="count-btn" bindtap="decreaseCount">
-          <text>−</text>
+          <icon name="minus" size="28" color="#3370FF" />
         </view>
         <text class="count-value">{{formData.breed_count}}</text>
         <view class="count-btn plus" bindtap="increaseCount">
-          <text>+</text>
+          <icon name="plus" size="28" color="#3370FF" />
         </view>
       </view>
     </view>
@@ -119,11 +122,11 @@
   <view class="picker-content" catchtap="stopPropagation">
     <view class="picker-header">
       <text class="picker-title">选择母犬</text>
-      <text class="picker-close" bindtap="hideMotherPicker">×</text>
+      <icon name="close" size="36" color="#8F959E" class="picker-close" bindtap="hideMotherPicker" />
     </view>
     <scroll-view scroll-y class="picker-list">
       <view wx:if="{{motherPetList.length === 0}}" class="picker-empty">
-        <text>暂无母犬，请先添加宠物</text>
+        <text>暂无母犬，请先记下第一只小家伙</text>
       </view>
       <view
         wx:for="{{motherPetList}}"
@@ -141,7 +144,7 @@
         </view>
         <view class="pet-info">
           <text class="pet-name">{{item.name}}</text>
-          <text class="pet-breed">{{item.breed || '未知品种'}}·♀</text>
+          <text class="pet-breed">{{item.breed || '未知品种'}}·<text>♀</text></text>
         </view>
       </view>
     </scroll-view>
@@ -152,11 +155,11 @@
   <view class="picker-content" catchtap="stopPropagation">
     <view class="picker-header">
       <text class="picker-title">选择公犬</text>
-      <text class="picker-close" bindtap="hideFatherPicker">×</text>
+      <icon name="close" size="36" color="#8F959E" class="picker-close" bindtap="hideFatherPicker" />
     </view>
     <scroll-view scroll-y class="picker-list">
       <view wx:if="{{fatherPetList.length === 0}}" class="picker-empty">
-        <text>暂无公犬，请先添加宠物</text>
+        <text>暂无公犬，请先记下第一只小家伙</text>
       </view>
       <view
         wx:for="{{fatherPetList}}"
@@ -174,7 +177,7 @@
         </view>
         <view class="pet-info">
           <text class="pet-name">{{item.name}}</text>
-          <text class="pet-breed">{{item.breed || '未知品种'}}·♂</text>
+          <text class="pet-breed">{{item.breed || '未知品种'}}·<text>♂</text></text>
         </view>
       </view>
     </scroll-view>

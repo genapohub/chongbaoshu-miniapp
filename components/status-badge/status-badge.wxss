@@ -1,35 +1,19 @@
-/* status-badge 组件样式 */
+/* status-badge — 飞书风格状态徽章 */
+
 .badge {
   display: inline-flex;
   align-items: center;
   padding: 4rpx 14rpx;
-  border-radius: 20rpx;
-  font-size: 20rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
   font-weight: 600;
   white-space: nowrap;
+  gap: 6rpx;
 }
 
-.badge-green {
-  background: #D1FAE5;
-  color: #059669;
-}
-
-.badge-orange {
-  background: #FEF3C7;
-  color: #D97706;
-}
-
-.badge-purple {
-  background: #EDE9FE;
-  color: #7C3AED;
-}
-
-.badge-red {
-  background: #FEE2E2;
-  color: #DC2626;
-}
-
-.badge-gray {
-  background: #F3F4F6;
-  color: #6B7280;
-}
+.badge-green  { background: #E8F8F0; color: #3D8B37; }
+.badge-orange { background: #FFF8E1; color: #E0903C; }
+.badge-purple { background: #F0E8FE; color: #8B5CF6; }
+.badge-red    { background: #FEF0EF; color: #D4534A; }
+.badge-blue   { background: #E8F0FE; color: #4A8C5C; }
+.badge-gray   { background: #F6F4F0; color: #5E5953; }
