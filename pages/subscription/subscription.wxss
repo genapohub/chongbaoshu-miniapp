@@ -9,7 +9,7 @@
 
 /* 当前方案卡片 */
 .sub-status-card {
-  background: linear-gradient(135deg, #4A8C5C, #245BDB);
+  background: var(--green);
   border-radius: 24rpx;
   padding: 32rpx;
   color: #fff;
@@ -112,7 +112,7 @@
 }
 
 .fill-blue {
-  background: #3B82F6;
+  background: var(--green);
 }
 
 .fill-red {

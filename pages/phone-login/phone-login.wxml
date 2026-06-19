@@ -4,7 +4,7 @@
 <view class="phone-login-page">
   <view class="header">
     <view class="back-btn" bindtap="goBack">
-      <icon name="arrow-left" size="36" color="#3370FF" />
+      <icon name="arrow-left" size="36" color="#4A8C5C" />
     </view>
     <view class="header-title">手机号登录</view>
   </view>

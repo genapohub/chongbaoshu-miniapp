@@ -15,9 +15,9 @@
         data-index="{{index}}"
         catchtap="onSelect"
       >
-        <icon wx:if="{{item.icon}}" name="{{item.icon}}" size="40" color="{{item.value === selectedValue ? '#3370FF' : '#646A73'}}" />
+        <icon wx:if="{{item.icon}}" name="{{item.icon}}" size="40" color="{{item.value === selectedValue ? '#4A8C5C' : '#646A73'}}" />
         <text class="picker-item-label" style="{{item.icon ? 'margin-left:20rpx' : ''}}">{{item.label}}</text>
-        <icon wx:if="{{item.value === selectedValue}}" name="check" size="32" color="#3370FF" />
+        <icon wx:if="{{item.value === selectedValue}}" name="check" size="32" color="#4A8C5C" />
       </view>
     </scroll-view>
     <view class="picker-empty" wx:if="{{!items || items.length === 0}}">

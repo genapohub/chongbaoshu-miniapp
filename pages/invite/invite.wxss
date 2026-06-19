@@ -7,7 +7,7 @@
 
 /* 顶部横幅 */
 .banner {
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
+  background: var(--green);
   padding: 60rpx 30rpx 50rpx;
   text-align: center;
 }
@@ -116,7 +116,7 @@
 /* 累计奖励 */
 .reward-section {
   margin: 24rpx 30rpx;
-  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+  background: var(--bg);
   border-radius: 20rpx;
   padding: 36rpx;
   text-align: center;

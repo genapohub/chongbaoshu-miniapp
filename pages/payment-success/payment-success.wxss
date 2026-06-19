@@ -47,7 +47,7 @@
   width: 140rpx;
   height: 140rpx;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
+  background: var(--green);
   color: #fff;
   font-size: 80rpx;
   display: flex;
@@ -160,7 +160,7 @@
 .tips-title {
   font-size: 26rpx;
   font-weight: 600;
-  color: #245BDB;
+  color: var(--green);
   margin-bottom: 16rpx;
 }
 
@@ -200,7 +200,7 @@
 .invite-title {
   font-size: 30rpx;
   font-weight: 700;
-  color: #245BDB;
+  color: var(--green);
   margin-bottom: 10rpx;
 }
 

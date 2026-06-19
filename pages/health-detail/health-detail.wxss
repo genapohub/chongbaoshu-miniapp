@@ -30,7 +30,7 @@ page {
 }
 
 .reminder-section {
-  background: linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%);
+  background: #FDEDEC;
   border-radius: 20rpx;
   padding: 24rpx;
   margin-bottom: 24rpx;
@@ -212,9 +212,9 @@ page {
 }
 
 .vaccine-btn {
-  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  background: var(--red);
 }
 
 .deworm-btn {
-  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  background: var(--amber);
 }

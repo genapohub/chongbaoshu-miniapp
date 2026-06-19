@@ -15,7 +15,7 @@
       <view class="pet-status">{{pet.statusLabel}}</view>
     </view>
     <view class="edit-btn" bindtap="goEdit">
-      <icon name="edit" size="36" color="#3370FF" />
+      <icon name="edit" size="36" color="#4A8C5C" />
     </view>
   </view>
 

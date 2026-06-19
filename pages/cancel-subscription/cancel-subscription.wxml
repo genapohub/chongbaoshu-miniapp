@@ -32,7 +32,7 @@
           bindtap="selectReason"
           data-id="{{item.id}}"
         >
-          <radio checked="{{selectedReason === item.id}}" color="#3370FF" />
+          <radio checked="{{selectedReason === item.id}}" color="#4A8C5C" />
           <text class="reason-text">{{item.text}}</text>
         </view>
       </view>

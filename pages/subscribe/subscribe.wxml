@@ -45,7 +45,7 @@
         catchtap="selectPlan"
         data-tier="pro"
       >
-        <view class="plan-icon-wrapper pro-bg"><icon name="diamond" size="40" color="#3370FF" /></view>
+        <view class="plan-icon-wrapper pro-bg"><icon name="diamond" size="40" color="#4A8C5C" /></view>
         <view class="plan-details">
           <view class="plan-card-name">Pro 专业版</view>
           <view class="plan-card-desc">无限宠物 · 血统证书 · 专属客服</view>

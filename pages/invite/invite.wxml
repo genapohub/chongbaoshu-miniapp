@@ -58,7 +58,7 @@
     </view>
 
     <view class="empty-state" wx:elif="{{!loading}}">
-      <view class="empty-icon"><icon name="share" size="32" color="#3370FF" /></view>
+      <view class="empty-icon"><icon name="share" size="32" color="#4A8C5C" /></view>
       <view class="empty-text">还没有邀请记录</view>
       <view class="empty-hint">快去邀请好友吧</view>
     </view>

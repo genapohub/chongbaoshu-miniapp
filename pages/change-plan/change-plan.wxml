@@ -15,7 +15,7 @@
         wx:for="{{availablePlans}}"
         wx:key="tier"
         class="plan-card"
-        style="border-color: {{selectedTier === item.tier ? '#3370FF' : 'transparent'}}; background: {{selectedTier === item.tier ? '#E8F0FE' : '#fff'}};"
+        style="border-color: {{selectedTier === item.tier ? '#4A8C5C' : 'transparent'}}; background: {{selectedTier === item.tier ? '#E8F0FE' : '#fff'}};"
         catchtap="selectPlan"
         data-tier="{{item.tier}}"
       >

@@ -56,7 +56,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #FFE4E1, #FFC0CB);
+  background: #FDEDEC;
 }
 
 .pet-text-wrap {
@@ -227,7 +227,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #4A8C5C, #4A8C5C);
+  background: var(--green);
   color: #FFFFFF;
 }
 
@@ -316,7 +316,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #FFE4E1, #FFC0CB);
+  background: #FDEDEC;
 }
 
 .avatar-text {

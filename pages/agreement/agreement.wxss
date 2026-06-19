@@ -57,7 +57,7 @@
   height: 88rpx;
   line-height: 88rpx;
   text-align: center;
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
+  background: var(--green);
   border-radius: 44rpx;
   font-size: 32rpx;
   font-weight: 600;

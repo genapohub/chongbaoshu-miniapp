@@ -3,7 +3,7 @@
 .error-text { font-size: 28rpx; color: #E34D59; margin-top: 24rpx; }
 
 .cert-card { background: #FFF; border-radius: 16rpx; overflow: hidden; box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.06); }
-.cert-badge { display: flex; align-items: center; justify-content: center; padding: 32rpx; background: linear-gradient(135deg, #4A8C5C, #2BA471); gap: 12rpx; }
+.cert-badge { display: flex; align-items: center; justify-content: center; padding: 32rpx; background: var(--green); gap: 12rpx; }
 .badge-text { color: #FFF; font-size: 28rpx; font-weight: 600; }
 
 .cert-body { padding: 32rpx; }

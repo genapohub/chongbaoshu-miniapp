@@ -20,7 +20,7 @@
       <text class="setting-label">到期提醒</text>
       <switch
         checked="{{settings.remind_vaccine}}"
-        color="#3370FF"
+        color="#4A8C5C"
         bindchange="onSwitchChange"
         data-field="remind_vaccine"
       />
@@ -79,7 +79,7 @@
       <text class="setting-label">到期提醒</text>
       <switch
         checked="{{settings.remind_deworm}}"
-        color="#3370FF"
+        color="#4A8C5C"
         bindchange="onSwitchChange"
         data-field="remind_deworm"
       />
@@ -138,7 +138,7 @@
       <text class="setting-label">预产期提醒</text>
       <switch
         checked="{{settings.remind_due}}"
-        color="#3370FF"
+        color="#4A8C5C"
         bindchange="onSwitchChange"
         data-field="remind_due"
       />
@@ -197,7 +197,7 @@
       <text class="setting-label">站内通知</text>
       <switch
         checked="{{settings.notify_in_app}}"
-        color="#3370FF"
+        color="#4A8C5C"
         bindchange="onSwitchChange"
         data-field="notify_in_app"
       />
@@ -212,7 +212,7 @@
       <text class="setting-label">微信推送</text>
       <switch
         checked="{{settings.notify_wechat}}"
-        color="#3370FF"
+        color="#4A8C5C"
         bindchange="onSwitchChange"
         data-field="notify_wechat"
       />
@@ -254,7 +254,7 @@
     <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
     <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
   </view>
-    <view class="pro-icon"><icon name="diamond" size="36" color="#3370FF" /></view>
+    <view class="pro-icon"><icon name="diamond" size="36" color="#4A8C5C" /></view>
     <text class="pro-text">Pro专属：自定义提醒时间 + 多渠道通知（微信+短信）</text>
 
   <view class="card subscribe-card">

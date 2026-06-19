@@ -90,11 +90,11 @@
       <text class="form-label">配种次数</text>
       <view class="count-control">
         <view class="count-btn" bindtap="decreaseCount">
-          <icon name="minus" size="28" color="#3370FF" />
+          <icon name="minus" size="28" color="#4A8C5C" />
         </view>
         <text class="count-value">{{formData.breed_count}}</text>
         <view class="count-btn plus" bindtap="increaseCount">
-          <icon name="plus" size="28" color="#3370FF" />
+          <icon name="plus" size="28" color="#4A8C5C" />
         </view>
       </view>
     </view>

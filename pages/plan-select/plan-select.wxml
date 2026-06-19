@@ -27,7 +27,7 @@
     </view>
 
     <view class="features-section">
-      <view class="features-title"><icon name="chart" size="36" color="#3370FF" /> 功能对比</view>
+      <view class="features-title"><icon name="chart" size="36" color="#4A8C5C" /> 功能对比</view>
       <scroll-view scroll-x class="features-scroll">
         <view class="features-table">
           <view class="feature-row header">

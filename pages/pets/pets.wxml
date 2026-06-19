@@ -79,7 +79,7 @@
   <view wx:if="{{showLimitModal}}" class="limit-modal-overlay" bindtap="hideLimitModal">
     <view class="limit-modal" catchtap="stopPropagation">
       <view class="limit-modal-header">
-        <icon name="paw" size="40" color="#3370FF" />
+        <icon name="paw" size="40" color="#4A8C5C" />
         <view class="limit-modal-title">宠物数量已达上限</view>
         <view class="limit-modal-subtitle">免费版最多管理{{maxPets}}只宠物</view>
       </view>

@@ -35,7 +35,7 @@
         <text class="ssc-label">当前方案</text>
         <text class="ssc-plan">{{subscriptionPlan}}</text>
       </view>
-      <view class="btn btn-sm ssc-btn" bindtap="goSubscription"><text>管理 </text><icon name="chevron-right" size="24" color="#3370FF" /></view>
+      <view class="btn btn-sm ssc-btn" bindtap="goSubscription"><text>管理 </text><icon name="chevron-right" size="24" color="#4A8C5C" /></view>
     </view>
     <view class="ssc-meta">
       <text>到期：{{expireDate || '永久'}}</text>
@@ -45,12 +45,12 @@
     <!-- 菜单列表 -->
     <view class="card menu-card">
       <view class="menu-item" bindtap="goMenu" data-url="/pages/profile-edit/profile-edit">
-        <icon name="home" size="36" color="#3370FF" />
+        <icon name="home" size="36" color="#4A8C5C" />
         <text class="menu-text">宠舍信息</text>
         <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
       <view class="menu-item" bindtap="goMenu" data-url="/pages/remind-settings/remind-settings">
-        <icon name="bell" size="36" color="#3370FF" />
+        <icon name="bell" size="36" color="#4A8C5C" />
         <text class="menu-text">提醒设置</text>
         <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
@@ -65,12 +65,12 @@
         <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
       <view class="menu-item" bindtap="goMenu" data-url="/pages/subscription/subscription">
-        <icon name="diamond" size="36" color="#3370FF" />
+        <icon name="diamond" size="36" color="#4A8C5C" />
         <text class="menu-text">订阅管理</text>
         <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
       <view class="menu-item" bindtap="goFeedback">
-        <icon name="chat" size="36" color="#3370FF" />
+        <icon name="chat" size="36" color="#4A8C5C" />
         <text class="menu-text">意见反馈</text>
         <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
