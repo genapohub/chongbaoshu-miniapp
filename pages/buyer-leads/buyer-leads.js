@@ -15,7 +15,7 @@ Page({
   loadLeads() {
     this.setData({ loading: true });
     const status = this.data.currentTab === 'all' ? '' : this.data.currentTab;
-    get(`/api/buyer-leads?status=${status}`).then(res => {
+    get(`/buyer-leads?status=${status}`).then(res => {
       if (res.code === 0) {
         this.setData({ leads: res.data.list, loading: false });
       }
@@ -29,7 +29,7 @@ Page({
 
   quickFollow(e) {
     const id = e.currentTarget.dataset.id;
-    put(`/api/buyer-leads/${id}/follow`, {}).then(() => {
+    put(`/buyer-leads/${id}/follow`, {}).then(() => {
       wx.showToast({ title: '已记录跟进', icon: 'success' });
       this.loadLeads();
     });
