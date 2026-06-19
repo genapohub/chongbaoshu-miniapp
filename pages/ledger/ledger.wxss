@@ -1,21 +1,21 @@
-.container { background: var(--bg); min-height: 100vh; padding-bottom: 120rpx; }
-.summary-card { background: var(--surface); margin: 24rpx; border-radius: var(--radius); padding: 32rpx; box-shadow: var(--shadow); }
+.container { background: var(--bg); min-height: 100vh; padding-bottom: 160rpx; }
+.summary-card { background: var(--surface); margin: 28rpx; border-radius: var(--radius); padding: 36rpx; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
 .summary-row { display: flex; }
 .summary-item { flex: 1; text-align: center; }
 .s-label { font-size: 24rpx; color: var(--text3); }
-.s-amount { font-size: 36rpx; font-weight: 700; margin-top: 8rpx; display: block; }
+.s-amount { font-size: 38rpx; font-weight: 700; margin-top: 10rpx; display: block; }
 .summary-item.income .s-amount { color: var(--green); }
 .summary-item.expense .s-amount { color: var(--red); }
-.tabs { display: flex; background: var(--surface); margin: 0 24rpx; border-radius: var(--radius); overflow: hidden; }
-.tab { flex: 1; text-align: center; padding: 20rpx; font-size: 26rpx; color: var(--text3); }
+.tabs { display: flex; background: var(--surface); margin: 0 28rpx; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+.tab { flex: 1; text-align: center; padding: 22rpx; font-size: 26rpx; color: var(--text3); }
 .tab.active { background: var(--green); color: #fff; font-weight: 600; }
-.entry-list { padding: 16rpx 24rpx; }
-.entry-card { background: var(--surface); border-radius: var(--radius); padding: 24rpx; margin-bottom: 12rpx; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
+.entry-list { padding: 20rpx 28rpx; }
+.entry-card { background: var(--surface); border-radius: var(--radius); padding: 28rpx; margin-bottom: 14rpx; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
 .entry-category { font-size: 28rpx; font-weight: 600; }
 .entry-date { font-size: 22rpx; color: var(--text3); margin-top: 4rpx; }
 .entry-desc { font-size: 24rpx; color: var(--text3); margin-top: 4rpx; }
 .amount-income { font-size: 32rpx; font-weight: 700; color: var(--green); }
 .amount-expense { font-size: 32rpx; font-weight: 700; color: var(--red); }
-.empty { text-align: center; padding: 120rpx 0; }
+.empty { text-align: center; padding: 180rpx 0; }
 .empty-text { font-size: 28rpx; color: var(--text3); }
-.fab { position: fixed; right: 32rpx; bottom: 120rpx; width: 96rpx; height: 96rpx; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; box-shadow: 0 8rpx 24rpx rgba(74,140,92,0.4); }
+.fab { position: fixed; right: 32rpx; bottom: 160rpx; width: 104rpx; height: 104rpx; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; box-shadow: 0 12rpx 32rpx rgba(74,140,92,0.35); }
