@@ -151,7 +151,6 @@ Page({
       wx.showToast({ title: '保存失败', icon: 'none' });
     }
   },
-});
 
   subscribeMessages() {
     // 微信模板消息订阅授权
@@ -171,3 +170,4 @@ Page({
       },
     });
   },
+});
