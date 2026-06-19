@@ -3,7 +3,7 @@
   <view wx:if="{{loading}}" class="loading">加载中...</view>
   <view wx:elif="{{litters.length===0}}" class="empty"><icon name="baby" size="80" color="#C0C4CC"/><text class="empty-text">暂无同窝记录</text><text class="empty-desc">在繁育记录中标记"已分娩"时自动创建</text></view>
   <view wx:else class="list">
-    <view wx:for="{{litters}}" wx:key="id" class="card" bindtap="goDetail" data-id="{{item.id}}">
+    <view wx:for="{{litters}}" wx:key="id" class="card" data-id="{{item.id}}">
       <view class="card-top">
         <text class="card-mother">母：{{item.mother_name||'?'}}</text>
         <text class="card-father" wx:if="{{item.father_name}}">父：{{item.father_name}}</text>

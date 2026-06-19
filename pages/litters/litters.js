@@ -1,2 +1,36 @@
-const { get, post } = require('../../utils/api');
-Page({data:{litters:[],loading:true},onShow(){this.load()},load(){this.setData({loading:true});get('/litters').then(r=>{if(r.code===0)this.setData({litters:r.data.list,loading:false})}).catch(()=>this.setData({loading:false}))},goDetail(e){const id=e.currentTarget.dataset.id;wx.navigateTo({url:`/pages/litter-detail/litter-detail?id=${id}`})},batchAdd(e){const id=e.currentTarget.dataset.id;post(`/litters/${id}/puppies/batch`,{}).then(r=>{wx.showToast({title:r.message||'完成',icon:'success'});this.load()})}});
+var api = require('../../utils/api');
+var get = api.get;
+var post = api.post;
+
+Page({
+  data: {
+    litters: [],
+    loading: true
+  },
+
+  onShow: function () {
+    this.loadLitters();
+  },
+
+  loadLitters: function () {
+    var that = this;
+    this.setData({ loading: true });
+    get('/litters').then(function (res) {
+      if (res.code === 0) {
+        that.setData({ litters: res.data.list, loading: false });
+      }
+    }).catch(function () {
+      that.setData({ loading: false });
+    });
+  },
+
+
+  batchAdd: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    post('/litters/' + id + '/puppies/batch', {}).then(function (res) {
+      wx.showToast({ title: res.message || '已完成', icon: 'success' });
+      that.loadLitters();
+    });
+  }
+});

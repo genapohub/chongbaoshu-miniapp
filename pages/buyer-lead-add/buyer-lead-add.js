@@ -1,2 +1,98 @@
-const { get, post, put } = require('../../utils/api');
-Page({data:{id:null,form:{buyer_name:'',buyer_wechat:'',buyer_phone:'',budget:'',notes:'',pet_id:null},saving:false,pets:[]},onLoad(o){if(o.id){this.setData({id:o.id});this.loadLead(o.id)}this.loadPets()},loadPets(){get('/pets').then(r=>{if(r.code===0)this.setData({pets:r.data.list})})},loadLead(id){get(`/buyer-leads/${id}`).then(r=>{if(r.code===0){const d=r.data;this.setData({form:{buyer_name:d.buyer_name||'',buyer_wechat:d.buyer_wechat||'',buyer_phone:d.buyer_phone||'',budget:d.budget||'',notes:d.notes||'',pet_id:d.pet_id}}})}})},onInput(e){const f=e.currentTarget.dataset.field;this.setData({[`form.${f}`]:e.detail.value})},selectPet(e){const idx=e.detail.value;this.setData({'form.pet_id':this.data.pets[idx]?.id})},save(){if(!this.data.form.buyer_name.trim()){wx.showToast({title:'请输入买家名称',icon:'none'});return}this.setData({saving:true});const d=this.data.form;const url=this.data.id?`/buyer-leads/${this.data.id}`:'/buyer-leads';const m=this.data.id?put:post;m(url,{buyer_name:d.buyer_name,buyer_wechat:d.buyer_wechat||null,buyer_phone:d.buyer_phone||null,budget:d.budget||null,notes:d.notes||null,pet_id:d.pet_id||null}).then(r=>{wx.showToast({title:'已保存',icon:'success'});setTimeout(()=>wx.navigateBack(),500)}).catch(()=>{wx.showToast({title:'保存失败',icon:'none'});this.setData({saving:false})})}});
+var api = require('../../utils/api');
+var get = api.get;
+var post = api.post;
+var put = api.put;
+
+Page({
+  data: {
+    id: null,
+    form: {
+      buyer_name: '',
+      buyer_wechat: '',
+      buyer_phone: '',
+      budget: '',
+      notes: '',
+      pet_id: null
+    },
+    saving: false,
+    pets: []
+  },
+
+  onLoad: function (options) {
+    if (options.id) {
+      this.setData({ id: options.id });
+      this.loadLead(options.id);
+    }
+    this.loadPets();
+  },
+
+  loadPets: function () {
+    var that = this;
+    get('/pets').then(function (res) {
+      if (res.code === 0) {
+        that.setData({ pets: res.data.list });
+      }
+    });
+  },
+
+  loadLead: function (id) {
+    var that = this;
+    get('/buyer-leads/' + id).then(function (res) {
+      if (res.code === 0) {
+        var d = res.data;
+        that.setData({
+          form: {
+            buyer_name: d.buyer_name || '',
+            buyer_wechat: d.buyer_wechat || '',
+            buyer_phone: d.buyer_phone || '',
+            budget: d.budget || '',
+            notes: d.notes || '',
+            pet_id: d.pet_id || null
+          }
+        });
+      }
+    });
+  },
+
+  onInput: function (e) {
+    var field = e.currentTarget.dataset.field;
+    var obj = {};
+    obj['form.' + field] = e.detail.value;
+    this.setData(obj);
+  },
+
+  save: function () {
+    var that = this;
+    var form = this.data.form;
+
+    if (!form.buyer_name.trim()) {
+      wx.showToast({ title: '请输入买家名称', icon: 'none' });
+      return;
+    }
+
+    this.setData({ saving: true });
+
+    var url = this.data.id
+      ? '/buyer-leads/' + this.data.id
+      : '/buyer-leads';
+
+    var method = this.data.id ? put : post;
+
+    method(url, {
+      buyer_name: form.buyer_name,
+      buyer_wechat: form.buyer_wechat || null,
+      buyer_phone: form.buyer_phone || null,
+      budget: form.budget || null,
+      notes: form.notes || null,
+      pet_id: form.pet_id || null
+    }).then(function () {
+      wx.showToast({ title: '已保存', icon: 'success' });
+      setTimeout(function () {
+        wx.navigateBack();
+      }, 500);
+    }).catch(function () {
+      wx.showToast({ title: '保存失败', icon: 'none' });
+      that.setData({ saving: false });
+    });
+  }
+});
