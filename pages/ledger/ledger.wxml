@@ -14,7 +14,7 @@
   </view>
 
   <view wx:if="{{entries.length===0}}" class="empty">
-    <text class="empty-text">暂无记录</text>
+    <text class="empty-text">记录第一笔收入或支出</text>
   </view>
 
   <view wx:else class="entry-list">

@@ -113,8 +113,14 @@
     </view>
   </view>
 
-  <!-- 空状态 -->
-  <empty-state wx:if="{{petList.length === 0 && !loading}}" icon="paw" text="{{!userInfo ? '登录后即可管理宠物' : '还没有宠物，点击下方添加'}}" />
+  
+  <view wx:elif="{{error}}" class="error-state">
+    <text class="error-text">加载失败，请检查网络</text>
+    <view class="error-retry" bindtap="loadPets">重试</view>
+  </view>
+
+<!-- 空状态 -->
+  <empty-state wx:if="{{petList.length === 0 && !loading}}" icon="paw" text="{{!userInfo ? '登录后即可管理宠物' : '还没有宠物，添加第一只吧，点击下方添加'}}" />
 
   <!-- 登录引导弹窗 -->
   <view wx:if="{{showLoginGuide}}" class="login-guide-mask" bindtap="hideLoginGuide">

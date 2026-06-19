@@ -6,6 +6,7 @@ Page({
     sales: [],
     summary: null,
     loading: true,
+    error: false,
   },
 
   onLoad(options) {
@@ -14,7 +15,8 @@ Page({
   },
 
   loadData() {
-    this.setData({ loading: true });
+    this.setData({ loading: true,
+    error: false });
     Promise.all([
       get('/pet-sales'),
       get('/pet-sales/summary'),
@@ -24,6 +26,6 @@ Page({
         summary: summaryRes.code === 0 ? summaryRes.data : null,
         loading: false,
       });
-    }).catch(() => this.setData({ loading: false }));
+    }).catch(() => this.setData({ error: true, loading: false }));
   },
 });

@@ -6,6 +6,7 @@ Page({
     leads: [],
     currentTab: 'all',
     loading: true,
+    error: false,
   },
 
   onShow() {
@@ -13,13 +14,14 @@ Page({
   },
 
   loadLeads() {
-    this.setData({ loading: true });
+    this.setData({ loading: true,
+    error: false });
     const status = this.data.currentTab === 'all' ? '' : this.data.currentTab;
     get(`/buyer-leads?status=${status}`).then(res => {
       if (res.code === 0) {
         this.setData({ leads: res.data.list, loading: false });
       }
-    }).catch(() => this.setData({ loading: false }));
+    }).catch(() => this.setData({ error: true, loading: false }));
   },
 
   switchTab(e) {

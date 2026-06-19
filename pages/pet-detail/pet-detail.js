@@ -20,6 +20,7 @@ Page({
   data: {
     petId: null,
     loading: true,
+    error: false,
     needRefresh: false,
     pet: {},
     currentTab: 'overview',
@@ -154,7 +155,8 @@ Page({
     const that = this;
     const petId = that.data.petId;
     if (!petId) return;
-    that.setData({ loading: true });
+    that.setData({ loading: true,
+    error: false });
 
     Promise.all([
       api.get('/pets/' + petId),
@@ -209,7 +211,7 @@ Page({
     }).catch(function(err) {
       wx.showToast({ title: '加载失败', icon: 'none' });
     }).finally(function() {
-      that.setData({ loading: false });
+      that.setData({ error: true, loading: false });
       that._loaded = true;
     });
   },

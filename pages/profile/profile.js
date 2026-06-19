@@ -29,7 +29,8 @@ Page({
     const that = this;
     const app = getApp();
 
-    that.setData({ loading: true });
+    that.setData({ loading: true,
+    error: false });
 
     if (!app.globalData.token) {
       that.setData({ 
@@ -115,7 +116,7 @@ Page({
       });
     }).catch(function(err) {
       console.error('加载个人信息失败:', err);
-      that.setData({ loading: false });
+      that.setData({ error: true, loading: false });
     });
   },
 

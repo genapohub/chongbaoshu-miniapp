@@ -5,7 +5,8 @@ var post = api.post;
 Page({
   data: {
     litters: [],
-    loading: true
+    loading: true,
+    error: false
   },
 
   onShow: function () {
@@ -14,13 +15,14 @@ Page({
 
   loadLitters: function () {
     var that = this;
-    this.setData({ loading: true });
+    this.setData({ loading: true,
+    error: false });
     get('/litters').then(function (res) {
       if (res.code === 0) {
         that.setData({ litters: res.data.list, loading: false });
       }
     }).catch(function () {
-      that.setData({ loading: false });
+      that.setData({ error: true, loading: false });
     });
   },
 

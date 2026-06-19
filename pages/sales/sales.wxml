@@ -10,9 +10,17 @@
 
   <view wx:if="{{loading}}" class="loading">加载中...</view>
 
+  <!-- 错误状态 -->
+  <view wx:elif="{{error}}" class="error-state">
+    <icon name="warning" size="72" color="#E0903C" />
+    <text class="error-text">加载失败，请检查网络</text>
+    <view class="error-retry" bindtap="loadData">点击重试</view>
+  </view>
+
   <view wx:elif="{{sales.length === 0}}" class="empty">
     <icon name="money" size="80" color="#C0C4CC" />
-    <text class="empty-text">暂无销售记录</text>
+    <text class="empty-text">暂无销售记录
+成交后自动出现在这里</text>
   </view>
 
   <view wx:else class="sale-list">

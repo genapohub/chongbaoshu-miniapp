@@ -18,6 +18,7 @@ Page({
       { key: 'bird', label: '鸟', icon: 'bird' },
     ],
     loading: true,
+    error: false,
     petCount: 0,
     maxPets: 3,
     showLimitHint: false,
@@ -60,7 +61,8 @@ Page({
 
   loadPets() {
     const that = this;
-    that.setData({ loading: true });
+    that.setData({ loading: true,
+    error: false });
     api.get('/pets', { page: 1, pageSize: 100 }).then(function(res) {
       const baseUrl = getApp().globalData.staticBaseUrl || getApp().globalData.baseUrl.replace('/api', '');
       const data = res.data || res;
@@ -97,7 +99,7 @@ Page({
       });
     }).catch(function(err) {
       console.error('加载宠物列表失败:', err);
-      that.setData({ loading: false });
+      that.setData({ error: true, loading: false });
     });
   },
 
