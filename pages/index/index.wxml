@@ -41,7 +41,7 @@
       <icon name="paw" size="40" color="#4A8C5C" />
       <view class="guest-card-text">
         <text class="guest-card-title">登录解锁全部功能</text>
-        <text class="guest-card-desc">记下第一只小家伙、记录健康、管理繁育</text>
+        <text class="guest-card-desc">添加宠物、记录健康、管理繁育</text>
       </view>
     </view>
     <icon name="chevron-right" size="28" color="#C0C4CC" />
@@ -111,7 +111,7 @@
     <view class="quick-entry">
       <view class="quick-item" bindtap="goAddPet">
         <view class="quick-icon" style="background:#EDF4EF"><icon name="pet-add" size="36" color="#4A8C5C" /></view>
-        <text class="quick-label">记下第一只小家伙</text>
+        <text class="quick-label">添加宠物</text>
       </view>
       <view class="quick-item" bindtap="goAddBreeding">
         <view class="quick-icon" style="background:#FDF3E5"><icon name="breeding-new" size="36" color="#D4914A" /></view>
@@ -154,7 +154,7 @@
       wx:else
       type="no-record"
       text="暂无动态"
-      subText="记下第一只小家伙或记录后，动态会显示在这里"
+      subText="添加宠物或记录后，动态会显示在这里"
     />
   </view>
 
