@@ -27,11 +27,11 @@ App({
     // 正式版/体验版 → 生产域名，开发版 → 本地 Mac IP（微信开发者工具需用局域网 IP）
     baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
       ? 'https://api.chongbaoshu.cn/api'
-      : 'http://localhost:3000/api',
+      : 'http://localhost:8081/api',
     // 静态资源 base URL，不含 /api 后缀，用于图片等资源
     staticBaseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
       ? 'https://api.chongbaoshu.cn'
-      : 'http://localhost:3000',
+      : 'http://localhost:8081',
   },
 
   /**
