@@ -28,14 +28,14 @@
     "pages/payment-confirm/payment-confirm",
     "pages/payment-success/payment-success",
     "pages/webview/webview",
-    "pages/agreement/agreement"
+    "pages/agreement/agreement",
     "pages/buyer-leads/buyer-leads",
     "pages/buyer-lead-add/buyer-lead-add",
     "pages/sales/sales",
     "pages/ledger/ledger",
     "pages/litters/litters",
     "pages/cert-verify/cert-verify",
-    "pages/share-card/share-card",
+    "pages/share-card/share-card"
   ],
   "window": {
     "navigationBarBackgroundColor": "#4A8C5C",
