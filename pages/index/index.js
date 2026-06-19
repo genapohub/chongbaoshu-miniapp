@@ -65,7 +65,6 @@ Page({
         petCount: 0,
         breedingInProgressCount: 0,
         reminderCount: 0,
-    error: false,
         reminders: [],
         recentActivities: [],
       });
@@ -80,11 +79,18 @@ Page({
       api.get('/auth/limits').catch(function() { return null; }),
     ]).then(function(results) {
       const dashboard = results[0];
+      const usage = results[1];
+      const limits = results[2];
+
+      // API 全部失败时显示错误状态与重试按钮
+      if (!dashboard && !usage && !limits) {
+        that.setData({ error: true, loading: false });
         return;
       }
-      that.setData({ error: false });
 
-      // 原有逻辑续
+      const tier = usage && usage.tier ? usage.tier : 'free';
+      const planNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
+
       // ===== 构建待办提醒 =====
       const upcomingReminders = dashboard && dashboard.upcomingReminders ? dashboard.upcomingReminders : [];
       const healthReminders = [];
