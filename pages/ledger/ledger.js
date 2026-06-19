@@ -6,8 +6,8 @@ Page({
   load() {
     const type = this.data.tab === 'all' ? '' : this.data.tab;
     Promise.all([
-      get(`/api/ledger?entry_type=${type}`),
-      get('/api/ledger/summary'),
+      get(`/ledger?entry_type=${type}`),
+      get('/ledger/summary'),
     ]).then(([res1, res2]) => {
       this.setData({
         entries: res1.code === 0 ? res1.data.list : [],
@@ -47,7 +47,7 @@ Page({
         if (!res.confirm) return;
         const yuan = parseFloat(res.content);
         if (isNaN(yuan) || yuan <= 0) return;
-        post('/api/ledger', {
+        post('/ledger', {
           entry_type: type,
           category: cat,
           amount: Math.round(yuan * 100),

@@ -16,8 +16,8 @@ Page({
   loadData() {
     this.setData({ loading: true });
     Promise.all([
-      get('/api/pet-sales'),
-      get('/api/pet-sales/summary'),
+      get('/pet-sales'),
+      get('/pet-sales/summary'),
     ]).then(([salesRes, summaryRes]) => {
       this.setData({
         sales: salesRes.code === 0 ? salesRes.data.list : [],

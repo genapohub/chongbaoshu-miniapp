@@ -17,7 +17,7 @@ Page({
   },
 
   loadPets() {
-    get('/api/pets?status=active').then(res => {
+    get('/pets?status=active').then(res => {
       if (res.code === 0 && res.data.list.length > 0) {
         const pet = res.data.list[0];
         this.setData({ selectedPet: pet });
@@ -27,7 +27,7 @@ Page({
   },
 
   loadPedigree(petId) {
-    get(`/api/pets/${petId}/pedigree?generation=3`).then(res => {
+    get(`/pets/${petId}/pedigree?generation=3`).then(res => {
       if (res.code === 0) {
         this.setData({ pedigreeData: res.data }, () => {
           this.drawTree();
