@@ -85,6 +85,19 @@
     </view>
   </view>
 
+
+    <view class="form-item">
+      <text class="form-label">售价（¥）</text>
+      <input class="input-field" type="digit" placeholder="输入售价，如 3500" value="{{formData.price}}" bindinput="onInputChange" data-field="price" />
+    </view>
+
+    <view class="form-item">
+      <view class="switch-row">
+        <text class="form-label">标记为在售</text>
+        <switch checked="{{formData.is_for_sale}}" bindchange="onSwitchChange" data-field="is_for_sale" color="#4A8C5C" />
+      </view>
+    </view>
+
   <!-- 血统信息（展开/收起） -->
   <view class="card">
     <view class="card-header" bindtap="togglePedigree">

@@ -637,3 +637,13 @@
   background: #f5f5f5;
   color: #5E5953;
 }
+.sale-price-badge {
+  display: inline-block;
+  padding: 4rpx 14rpx;
+  background: #FFEBEE;
+  color: #E34D59;
+  font-size: 22rpx;
+  font-weight: 700;
+  border-radius: 6rpx;
+  margin-left: auto;
+}

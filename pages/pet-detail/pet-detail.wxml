@@ -38,6 +38,8 @@
       <field-row label="物种" value="{{pet.speciesLabel}}" />
       <field-row label="品种" value="{{pet.breed}}" />
       <field-row label="性别" value="{{pet.genderLabel}}" />
+      <field-row label="售价" value="{{pet.price ? ¥ + (pet.price/100) : 未设置}}" />
+      <field-row label="在售状态" value="{{pet.is_for_sale ? 在售中 : 非在售}}" />
       <field-row label="出生日期" value="{{pet.birthDate}}" />
       <field-row label="毛色" value="{{pet.color}}" />
       <field-row label="芯片号" value="{{pet.chipNo}}" />

@@ -53,6 +53,7 @@
           <view class="pet-name-row">
             <text class="pet-name">{{item.name}}</text>
             <status-badge wx:if="{{item.statusBadge}}" type="{{item.statusBadge.type}}" label="{{item.statusBadge.label}}" />
+            <view wx:if="{{item.is_for_sale && item.price}}" class="sale-price-badge">¥{{item.price / 100}}</view>
           </view>
           <text class="pet-desc">{{item.speciesLabel}} · {{item.genderLabel}} · {{item.age}}</text>
         </view>

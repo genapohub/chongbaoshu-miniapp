@@ -21,6 +21,8 @@ Page({
       mother_breed: '',
       grandfather_m_name: '',
       grandmother_m_name: '',
+      price: null,
+      is_for_sale: false,
       role: '',
       avatar: '',
     },
@@ -134,6 +136,8 @@ Page({
     const uploadData = formHelpers.buildUploadData(formData, that.data.selectedTags);
     // pet-add 独有：包含 role 字段
     uploadData.role = formData.role || '';
+    uploadData.price = formData.price || null;
+    uploadData.is_for_sale = formData.is_for_sale || false;
 
     if (avatarPath) {
       wx.uploadFile({
