@@ -1,268 +1,30 @@
-/* P21 我的页面样式 - 按设计稿一比一复刻 */
+/* 我的 */
 
-.container {
-  min-height: 100vh;
-  background: #F6F4F0;
-}
+.container { min-height: 100vh; background: var(--bg); }
 
-/* 头部 */
-.profile-header {
-  background: linear-gradient(135deg, #4A8C5C, #245BDB);
-  padding: 48rpx 24rpx;
-  text-align: center;
-  color: #fff;
-}
+.profile-header { background: var(--green); padding: 56rpx 24rpx 40rpx; text-align: center; color: #fff; }
+.profile-avatar { width: 120rpx; height: 120rpx; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 16rpx; overflow: hidden; }
+.avatar-img { width: 100%; height: 100%; border-radius: 50%; }
+.profile-name { font-size: 36rpx; font-weight: 700; display: block; }
+.badge-pro { display: inline-flex; align-items: center; gap: 4rpx; background: var(--amber); color: #fff; padding: 4rpx 12rpx; border-radius: 6rpx; font-size: 20rpx; font-weight: 700; margin-top: 8rpx; }
 
-.profile-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16rpx;
-}
+.profile-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20rpx; margin-top: 32rpx; }
+.profile-stat { display: flex; flex-direction: column; align-items: center; }
+.stat-num { font-size: 40rpx; font-weight: 700; }
+.stat-label { font-size: 22rpx; opacity: 0.8; margin-top: 4rpx; }
 
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
+.content { padding: 24rpx; padding-bottom: 140rpx; }
 
-.avatar-placeholder {
-  font-size: 56rpx;
-}
+.sub-status-card { background: var(--green); border-radius: var(--radius); padding: 28rpx; color: #fff; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24rpx; }
+.ssc-left { display: flex; flex-direction: column; }
+.ssc-label { font-size: 22rpx; opacity: 0.7; }
+.ssc-plan { font-size: 32rpx; font-weight: 700; margin-top: 4rpx; }
 
-.profile-name {
-  font-size: 36rpx;
-  font-weight: 700;
-  display: block;
-}
+.card { background: var(--surface); border-radius: var(--radius); padding: 8rpx 0; margin-bottom: 20rpx; box-shadow: var(--shadow); }
 
-.badge-pro {
-  display: inline-flex;
-  align-items: center;
-  gap: 4rpx;
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
-  color: #fff;
-  padding: 4rpx 12rpx;
-  border-radius: 8rpx;
-  font-size: 18rpx;
-  font-weight: 700;
-  letter-spacing: 1rpx;
-  margin-top: 8rpx;
-}
+.menu-item { display: flex; align-items: center; padding: 24rpx 28rpx; border-bottom: 1rpx solid var(--line); }
+.menu-item:last-child { border-bottom: none; }
+.menu-text { flex: 1; font-size: 28rpx; color: var(--text); margin-left: 20rpx; }
+.menu-tag { background: var(--amber); color: #fff; padding: 4rpx 10rpx; border-radius: 4rpx; font-size: 20rpx; font-weight: 700; margin-left: 8rpx; }
 
-.profile-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20rpx;
-  margin-top: 32rpx;
-}
-
-.profile-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.stat-num {
-  font-size: 40rpx;
-  font-weight: 700;
-}
-
-.stat-label {
-  font-size: 22rpx;
-  opacity: 0.8;
-  margin-top: 4rpx;
-}
-
-/* 内容区 */
-.content {
-  padding: 24rpx;
-  padding-bottom: 140rpx;
-}
-
-/* 订阅状态卡片 */
-.sub-status-card {
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
-  border-radius: 24rpx;
-  padding: 28rpx;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8rpx;
-}
-
-.ssc-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.ssc-label {
-  font-size: 22rpx;
-  opacity: 0.7;
-}
-
-.ssc-plan {
-  font-size: 32rpx;
-  font-weight: 700;
-  margin-top: 4rpx;
-}
-
-.ssc-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-.ssc-meta {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 28rpx 16rpx;
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* 卡片 */
-.card {
-  background: #fff;
-  border-radius: var(--radius);
-  padding: 8rpx 0;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.06);
-}
-
-/* 菜单 */
-.menu-item {
-  display: flex;
-  align-items: center;
-  padding: 24rpx 28rpx;
-  border-bottom: 1rpx solid #EDEDEF;
-}
-
-.menu-item:last-child {
-  border-bottom: none;
-}
-
-.menu-icon {
-  font-size: 32rpx;
-  margin-right: 20rpx;
-}
-
-.menu-text {
-  flex: 1;
-  font-size: 28rpx;
-}
-
-.menu-tag {
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
-  color: #fff;
-  padding: 4rpx 12rpx;
-  border-radius: 8rpx;
-  font-size: 18rpx;
-  font-weight: 700;
-  letter-spacing: 1rpx;
-  margin-left: 8rpx;
-}
-
-.menu-arrow {
-  color: #948F89;
-  font-size: 28rpx;
-}
-
-/* 按钮 */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius);
-  padding: 16rpx 32rpx;
-  font-size: 26rpx;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-sm {
-  padding: 10rpx 20rpx;
-  font-size: 22rpx;
-  border-radius: 24rpx;
-}
-
-.btn-block {
-  width: 100%;
-  padding: 24rpx;
-}
-
-.logout-btn {
-  border-radius: var(--radius-s);
-  font-weight: 500;
-  letter-spacing: 2rpx;
-  background: #F3F4F6;
-  color: #D4534A;
-  margin-top: 8rpx;
-}
-
-/* 登录引导弹窗 */
-.login-guide-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.login-guide-modal {
-  width: 600rpx;
-  background: #fff;
-  border-radius: 32rpx;
-  padding: 48rpx;
-  text-align: center;
-}
-
-.login-guide-icon {
-  font-size: 80rpx;
-  margin-bottom: 24rpx;
-}
-
-.login-guide-title {
-  display: block;
-  font-size: 36rpx;
-  font-weight: 700;
-  color: #2D2A26;
-  margin-bottom: 16rpx;
-}
-
-.login-guide-desc {
-  display: block;
-  font-size: 28rpx;
-  color: #5E5953;
-  line-height: 1.6;
-  margin-bottom: 40rpx;
-}
-
-.login-guide-btn {
-  width: 100%;
-  height: 88rpx;
-  line-height: 88rpx;
-  border-radius: 44rpx;
-  font-size: 30rpx;
-  font-weight: 600;
-  margin-bottom: 16rpx;
-}
-
-.login-guide-btn.primary {
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
-  color: #fff;
-}
-
-.login-guide-btn.secondary {
-  background: #F3F4F6;
-  color: #5E5953;
-}
+.logout-btn { border-radius: var(--radius); font-weight: 500; background: var(--bg); color: var(--red); text-align: center; padding: 24rpx; margin-top: 8rpx; font-size: 28rpx; }

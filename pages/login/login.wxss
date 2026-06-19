@@ -1,77 +1,12 @@
-/* P15 登录引导页样式 - 按设计稿一比一复刻 */
+/* 登录页 */
 
-.login-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 80rpx 48rpx;
-  text-align: center;
-  background: linear-gradient(180deg, #4A8C5C 0%, #245BDB 100%);
-  color: #fff;
-}
-
-.login-logo {
-  font-size: 128rpx;
-  margin-bottom: 32rpx;
-}
-
-.login-title {
-  font-size: 48rpx;
-  font-weight: 800;
-}
-
-.login-subtitle {
-  font-size: 28rpx;
-  opacity: 0.8;
-  margin-top: 16rpx;
-}
-
-.login-btn {
-  width: 100%;
-  padding: 28rpx;
-  border-radius: 16rpx;
-  font-size: 32rpx;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16rpx;
-  margin-top: 80rpx;
-}
-
-.login-btn .btn-icon {
-  font-size: 36rpx;
-}
-
-.login-wechat {
-  background: #FFF;
-  color: #4A8C5C;
-}
-
-.login-phone {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  margin-top: 24rpx;
-}
-
-.login-skip {
-  font-size: 26rpx;
-  opacity: 0.8;
-  margin-top: 32rpx;
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-}
-
-.login-terms {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 48rpx;
-}
-
-.login-link {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: underline;
-}
+.login-page { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 80rpx 48rpx; text-align: center; background: var(--green); color: #fff; }
+.login-logo { font-size: 128rpx; margin-bottom: 32rpx; }
+.login-title { font-size: 48rpx; font-weight: 800; }
+.login-subtitle { font-size: 28rpx; opacity: 0.8; margin-top: 16rpx; }
+.login-btn { width: 100%; padding: 28rpx; border-radius: var(--radius); font-size: 32rpx; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 16rpx; margin-top: 80rpx; }
+.login-wechat { background: #fff; color: var(--green); }
+.login-phone { background: rgba(255,255,255,0.15); color: #fff; margin-top: 24rpx; }
+.login-skip { font-size: 26rpx; opacity: 0.7; margin-top: 32rpx; }
+.login-terms { font-size: 22rpx; color: rgba(255,255,255,0.5); margin-top: 48rpx; }
+.login-link { color: rgba(255,255,255,0.8); text-decoration: underline; }

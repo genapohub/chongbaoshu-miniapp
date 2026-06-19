@@ -1,443 +1,129 @@
-/* P1 工作台首页样式 */
-
-/* 容器 */
-.container {
-  padding: 24rpx;
-  padding-bottom: 120rpx;
-  min-height: 100vh;
-  background: #F6F4F0;
-}
+/* 首页 — 暖森林简约风格 */
 
 /* 升级引导条 */
 .upgrade-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(90deg, #4A8C5C, #5B8DEF);
-  border-radius: 16rpx;
-  padding: 20rpx 28rpx;
-  margin-bottom: 24rpx;
-  color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--green);
+  border-radius: var(--radius); padding: 20rpx 28rpx;
+  margin-bottom: 24rpx; color: #fff;
 }
-
-.upgrade-content {
-  display: flex;
-  align-items: center;
-  gap: 16rpx;
-}
-
-.upgrade-icon {
-  font-size: 32rpx;
-}
-
-.upgrade-text {
-  font-size: 26rpx;
-  font-weight: 600;
-}
-
-.upgrade-arrow {
-  font-size: 28rpx;
-}
+.upgrade-content { display: flex; align-items: center; gap: 14rpx; }
+.upgrade-text { font-size: 26rpx; font-weight: 600; }
 
 /* 订阅状态卡片 */
 .sub-status-card {
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
-  border-radius: 24rpx;
-  padding: 32rpx;
-  color: #fff;
-  margin-bottom: 24rpx;
+  background: var(--green);
+  border-radius: var(--radius); padding: 32rpx;
+  color: #fff; margin-bottom: 24rpx;
 }
+.ssc-label { font-size: 22rpx; opacity: 0.7; }
+.ssc-plan  { font-size: 36rpx; font-weight: 800; margin-top: 8rpx; }
+.ssc-meta  { display: flex; justify-content: space-between; margin-top: 20rpx; font-size: 22rpx; opacity: 0.85; }
+.ssc-upgrade { color: #fff; }
 
-.ssc-label {
-  font-size: 22rpx;
-  opacity: 0.7;
-}
-
-.ssc-plan {
-  font-size: 36rpx;
-  font-weight: 800;
-  margin-top: 8rpx;
-}
-
-.ssc-meta {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20rpx;
-  font-size: 22rpx;
-  opacity: 0.8;
-}
-
-.ssc-upgrade {
-  color: #fff;
-  cursor: pointer;
-}
-
-/* 数据概览 */
+/* 数据概览 — 无渐变，纯色卡片 */
 .data-overview {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16rpx;
-  margin-bottom: 24rpx;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx; margin-bottom: 24rpx;
 }
-
 .data-card {
-  border-radius: 16rpx;
-  padding: 24rpx;
-  color: #fff;
-  text-align: center;
+  border-radius: var(--radius); padding: 28rpx 16rpx;
+  color: #fff; text-align: center;
 }
+.data-card.primary { background: var(--green); }
+.data-card.orange  { background: var(--amber); }
+.data-card.green   { background: #3D8B37; }
+.data-num  { font-size: 48rpx; font-weight: 700; display: block; }
+.data-label { font-size: 22rpx; opacity: 0.85; margin-top: 6rpx; }
 
-.data-card.primary {
-  background: linear-gradient(135deg, #4A8C5C, #245BDB);
-}
-
-.data-card.orange {
-  background: linear-gradient(135deg, #F2994A, #FDCB6E);
-}
-
-.data-card.green {
-  background: linear-gradient(135deg, #27AE60, #55EFC4);
-}
-
-.data-num {
-  font-size: 48rpx;
-  font-weight: 700;
-  display: block;
-}
-
-.data-label {
-  font-size: 22rpx;
-  opacity: 0.85;
-  margin-top: 8rpx;
-}
-
-/* 卡片通用样式 */
-.card {
-  background: #fff;
-  border-radius: 16rpx;
-  padding: 28rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.06);
-}
-
-.card-title {
-  font-size: 28rpx;
-  font-weight: 600;
-  margin-bottom: 20rpx;
-  display: block;
-}
-
-/* ===== 待办提醒 ===== */
+/* 待办提醒 */
 .reminder-row {
-  display: flex;
-  align-items: center;
-  gap: 20rpx;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #EDEDEF;
+  display: flex; align-items: center; gap: 20rpx;
+  padding: 20rpx 0; border-bottom: 1rpx solid var(--line);
 }
-
-.reminder-row:last-child {
-  border-bottom: none;
-}
-
-.reminder-row-hover {
-  background: #F6F4F0;
-  border-radius: 12rpx;
-}
-
+.reminder-row:last-child { border-bottom: none; }
 .reminder-icon-wrap {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 16rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 60rpx; height: 60rpx; border-radius: 14rpx;
+  display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  background: var(--bg);
 }
-
-.reminder-icon-text {
-  font-size: 32rpx;
-}
-
-.reminder-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.reminder-top {
-  display: flex;
-  align-items: center;
-  gap: 12rpx;
-}
-
-.reminder-pet-name {
-  font-size: 28rpx;
-  font-weight: 600;
-  color: #2D2A26;
-}
-
+.reminder-content { flex: 1; min-width: 0; }
+.reminder-top { display: flex; align-items: center; gap: 10rpx; }
+.reminder-pet-name { font-size: 28rpx; font-weight: 600; color: var(--text); }
 .reminder-badge {
-  padding: 4rpx 14rpx;
-  border-radius: 20rpx;
-  font-size: 20rpx;
-  font-weight: 600;
-  flex-shrink: 0;
+  padding: 4rpx 12rpx; border-radius: 4rpx;
+  font-size: 20rpx; font-weight: 600; flex-shrink: 0;
 }
+.reminder-bottom { display: flex; align-items: center; gap: 14rpx; margin-top: 6rpx; }
+.reminder-type-text { font-size: 24rpx; color: var(--text2); }
+.reminder-date-hint  { font-size: 24rpx; font-weight: 500; }
 
-.reminder-bottom {
-  display: flex;
-  align-items: center;
-  gap: 16rpx;
-  margin-top: 6rpx;
-}
-
-.reminder-type-text {
-  font-size: 24rpx;
-  color: #5E5953;
-}
-
-.reminder-date-hint {
-  font-size: 24rpx;
-  font-weight: 500;
-}
-
-.reminder-arrow {
-  font-size: 32rpx;
-  color: #C0C4CC;
-  flex-shrink: 0;
-}
-
-/* ===== 快捷入口 ===== */
+/* 快捷入口 */
 .quick-entry {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20rpx;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20rpx;
 }
-
 .quick-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8rpx;
-  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8rpx; position: relative;
 }
-
 .quick-icon {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 16rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36rpx;
+  width: 76rpx; height: 76rpx; border-radius: 16rpx;
+  display: flex; align-items: center; justify-content: center;
 }
-
-.quick-label {
-  font-size: 22rpx;
-  color: #5E5953;
-}
-
-.pro-item {
-  position: relative;
-}
-
+.quick-label { font-size: 22rpx; color: var(--text2); }
 .pro-badge {
-  position: absolute;
-  top: -8rpx;
-  right: -8rpx;
-  background: linear-gradient(135deg, #4A8C5C, #5B8DEF);
-  color: #fff;
-  font-size: 18rpx;
-  font-weight: 700;
-  padding: 4rpx 12rpx;
-  border-radius: 16rpx;
-  letter-spacing: 1rpx;
+  position: absolute; top: -6rpx; right: -6rpx;
+  background: var(--amber); color: #fff; font-size: 18rpx;
+  font-weight: 700; padding: 2rpx 10rpx; border-radius: 8rpx;
 }
 
-/* ===== 最近动态 ===== */
+/* 最近动态 */
 .activity-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 16rpx;
-  padding: 16rpx 0;
-  border-bottom: 1rpx solid #EDEDEF;
+  display: flex; align-items: flex-start; gap: 16rpx;
+  padding: 18rpx 0; border-bottom: 1rpx solid var(--line);
 }
-
-.activity-row:last-child {
-  border-bottom: none;
-}
-
+.activity-row:last-child { border-bottom: none; }
 .activity-icon-wrap {
-  width: 52rpx;
-  height: 52rpx;
-  border-radius: 14rpx;
-  background: #F3F4F6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 48rpx; height: 48rpx; border-radius: 12rpx;
+  background: var(--bg); display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-
-.activity-icon-text {
-  font-size: 28rpx;
-}
-
-.activity-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.activity-text {
-  font-size: 26rpx;
-  color: #2D2A26;
-  display: block;
-  line-height: 1.5;
-}
-
-.activity-time {
-  font-size: 22rpx;
-  color: #948F89;
-  margin-top: 4rpx;
-  display: block;
-}
-
-/* 未登录状态 */
-.login-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 120rpx 40rpx;
-  text-align: center;
-}
-
-.login-icon {
-  font-size: 120rpx;
-  margin-bottom: 24rpx;
-}
-
-.login-title {
-  font-size: 48rpx;
-  font-weight: 800;
-  color: #4A8C5C;
-}
-
-.login-subtitle {
-  font-size: 28rpx;
-  color: #5E5953;
-  margin-top: 16rpx;
-}
-
-/* 按钮 */
-.btn-primary {
-  width: 100%;
-  background: #4A8C5C;
-  color: #fff;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  font-size: 28rpx;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 48rpx;
-}
+.activity-content { flex: 1; min-width: 0; }
+.activity-text { font-size: 26rpx; color: var(--text); display: block; line-height: 1.5; }
+.activity-time { font-size: 22rpx; color: var(--text3); margin-top: 4rpx; display: block; }
 
 /* 游客引导卡片 */
-.guest-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.guest-card-content {
-  display: flex;
-  align-items: center;
-  gap: 20rpx;
-}
-
-.guest-card-icon {
-  font-size: 48rpx;
-}
-
-.guest-card-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.guest-card-title {
-  font-size: 30rpx;
-  font-weight: 700;
-  color: #fff;
-}
-
-.guest-card-desc {
-  font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.8);
-  margin-top: 4rpx;
-}
-
-.guest-card-arrow {
-  font-size: 36rpx;
-  color: rgba(255, 255, 255, 0.8);
-}
+.guest-card { background: var(--green); }
+.guest-card-content { display: flex; align-items: center; gap: 20rpx; }
+.guest-card-text { display: flex; flex-direction: column; }
+.guest-card-title { font-size: 30rpx; font-weight: 700; color: #fff; }
+.guest-card-desc  { font-size: 24rpx; color: rgba(255,255,255,0.8); margin-top: 4rpx; }
 
 /* 登录引导弹窗 */
 .login-guide-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4); display: flex; align-items: center;
+  justify-content: center; z-index: 1000;
 }
-
 .login-guide-modal {
-  background: #fff;
-  border-radius: 24rpx;
-  padding: 64rpx 48rpx;
-  width: 80%;
-  max-width: 560rpx;
-  text-align: center;
+  background: var(--surface); border-radius: var(--radius);
+  padding: 56rpx 48rpx; width: 80%; max-width: 560rpx; text-align: center;
 }
+.login-guide-icon  { font-size: 80rpx; margin-bottom: 24rpx; }
+.login-guide-title { font-size: 34rpx; font-weight: 700; color: var(--text); }
+.login-guide-desc  { font-size: 26rpx; color: var(--text2); margin: 16rpx 0 44rpx; }
+.login-guide-btn   { padding: 26rpx; border-radius: var(--radius); font-size: 30rpx; font-weight: 600; margin-bottom: 14rpx; }
+.login-guide-btn.primary   { background: var(--green); color: #fff; }
+.login-guide-btn.secondary { background: var(--bg); color: var(--text2); }
 
-.login-guide-icon {
-  font-size: 80rpx;
-  margin-bottom: 24rpx;
-}
+/* 错误状态 */
+.error-state { display: flex; flex-direction: column; align-items: center; padding: 160rpx 48rpx; }
+.error-text  { font-size: 28rpx; color: var(--text3); margin-top: 24rpx; display: block; }
+.error-retry { margin-top: 32rpx; padding: 16rpx 48rpx; background: var(--green); color: #fff; border-radius: 40rpx; font-size: 28rpx; display: inline-block; }
 
-.login-guide-title {
-  font-size: 36rpx;
-  font-weight: 700;
-  color: #2D2A26;
-}
-
-.login-guide-desc {
-  font-size: 28rpx;
-  color: #5E5953;
-  margin: 16rpx 0 48rpx;
-}
-
-.login-guide-btn {
-  padding: 28rpx;
-  border-radius: 16rpx;
-  font-size: 32rpx;
-  font-weight: 600;
-  margin-bottom: 16rpx;
-}
-
-.login-guide-btn.primary {
-  background: #4A8C5C;
-  color: #fff;
-}
-
-.login-guide-btn.secondary {
-  background: #f5f5f5;
-  color: #5E5953;
-}
-
-.error-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 160rpx 48rpx; }
-.error-text { font-size: 28rpx; color: #8F959E; margin-top: 24rpx; display: block; }
-.error-retry { margin-top: 32rpx; padding: 16rpx 48rpx; background: #4A8C5C; color: #FFF; border-radius: 40rpx; font-size: 28rpx; display: inline-block; }
+/* 未登录状态 */
+.login-state { display: flex; flex-direction: column; align-items: center; padding: 120rpx 40rpx; text-align: center; }
+.login-icon    { font-size: 120rpx; margin-bottom: 24rpx; }
+.login-title   { font-size: 44rpx; font-weight: 800; color: var(--green); }
+.login-subtitle { font-size: 28rpx; color: var(--text2); margin-top: 14rpx; }
