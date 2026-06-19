@@ -6,6 +6,13 @@
   <!-- 加载状态 -->
   <loading-spinner wx:if="{{loading}}" />
 
+  <!-- 错误状态：API 加载失败时提示 -->
+  <view wx:elif="{{error}}" class="error-state">
+    <icon name="warning" size="72" color="#E0903C" />
+    <text class="error-text">数据加载失败，请检查网络</text>
+    <view class="error-retry" bindtap="loadData">点击重试</view>
+  </view>
+
   <!-- 已登录/游客模式 - 主要内容（游客也可浏览） -->
   <view wx:elif="{{!loading}}">
   <!-- 升级引导条（免费用户显示，游客不显示） -->

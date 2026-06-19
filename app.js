@@ -11,6 +11,11 @@ App({
 
     // 恢复之前的登录态
     this.checkLogin();
+    // 首次启动显示引导页
+    if (!wx.getStorageSync("onboarding_done")) {
+      wx.reLaunch({ url: "/pages/onboarding/onboarding" });
+      return;
+    }
   },
 
   globalData: {

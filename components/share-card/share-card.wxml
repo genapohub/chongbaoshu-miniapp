@@ -1,0 +1,56 @@
+<view class="share-card" wx:if="{{pet}}">
+  <!-- 顶部宠舍标识 -->
+  <view class="sc-header">
+    <image wx:if="{{kennelLogo}}" src="{{kennelLogo}}" class="sc-kennel-logo" mode="aspectFit" />
+    <text class="sc-kennel-name">{{kennelName || '宠宝树认证宠舍'}}</text>
+  </view>
+
+  <!-- 宠物照片 -->
+  <view class="sc-photo-wrap">
+    <image wx:if="{{pet.avatar}}" src="{{pet.avatar}}" class="sc-photo" mode="aspectFill" />
+    <view wx:else class="sc-photo-placeholder">
+      <icon name="paw" size="80" color="#C0C4CC" />
+    </view>
+  </view>
+
+  <!-- 宠物核心信息 -->
+  <view class="sc-info">
+    <view class="sc-name-row">
+      <text class="sc-name">{{pet.name}}</text>
+      <text class="sc-breed">{{pet.breed || pet.species}}</text>
+    </view>
+    <view class="sc-meta-row">
+      <text class="sc-meta">{{pet.gender || '未知'}}</text>
+      <text class="sc-meta-divider">|</text>
+      <text class="sc-meta">{{pet.age || ''}}</text>
+      <text class="sc-meta-divider" wx:if="{{pet.price}}">|</text>
+      <text class="sc-price" wx:if="{{pet.price}}">¥{{pet.price / 100}}</text>
+    </view>
+  </view>
+
+  <!-- 健康/疫苗标签 -->
+  <view class="sc-tags" wx:if="{{hasHealth}}">
+    <view class="sc-tag sc-tag-vaccine" wx:if="{{vaccineInfo}}">💉 {{vaccineInfo}}</view>
+    <view class="sc-tag sc-tag-deworm" wx:if="{{dewormInfo}}">💊 {{dewormInfo}}</view>
+  </view>
+
+  <!-- 血统信息 -->
+  <view class="sc-pedigree" wx:if="{{pet.fatherName || pet.motherName}}">
+    <view class="sc-pedigree-title">血统信息</view>
+    <view class="sc-pedigree-row">
+      <text class="sc-parent" wx:if="{{pet.fatherName}}">父：{{pet.fatherName}}（{{pet.fatherBreed || ''}}）</text>
+      <text class="sc-parent" wx:if="{{pet.motherName}}">母：{{pet.motherName}}（{{pet.motherBreed || ''}}）</text>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="sc-footer">
+    <text class="sc-footer-text">扫码查看完整血统证书</text>
+  </view>
+
+  <!-- 操作区 -->
+  <view class="sc-actions">
+    <button class="sc-btn sc-btn-save" bindtap="onSaveImage">保存图片</button>
+    <button class="sc-btn sc-btn-share" open-type="share">分享给朋友</button>
+  </view>
+</view>

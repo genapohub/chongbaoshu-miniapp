@@ -152,3 +152,22 @@ Page({
     }
   },
 });
+
+  subscribeMessages() {
+    // 微信模板消息订阅授权
+    const tmplIds = [];
+    // 从后端获取当前环境需要的模板ID列表
+    const app = getApp();
+    wx.requestSubscribeMessage({
+      tmplIds: tmplIds.length ? tmplIds : [],
+      success: (res) => {
+        wx.showToast({ title: '授权成功', icon: 'success' });
+        this.setData({ subscribed: true });
+      },
+      fail: (err) => {
+        if (err.errMsg.indexOf('cancel') !== -1) {
+          wx.showToast({ title: '已取消', icon: 'none' });
+        }
+      },
+    });
+  },

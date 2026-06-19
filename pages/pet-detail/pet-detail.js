@@ -302,6 +302,11 @@ Page({
     wx.navigateTo({ url: `/pages/pedigree-cert/pedigree-cert?pet_id=${this.data.petId}` });
   },
 
+  goShareCard() {
+    const id = this.data.pet.id;
+    wx.navigateTo({ url: `/pages/share-card/share-card?pet_id=${id}` });
+  },
+
   goEdit() {
     this.setData({ needRefresh: true });
     wx.navigateTo({ url: `/pages/pet-edit/pet-edit?id=${this.data.petId}` });

@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="header-bar">
+    <view class="tabs">
+      <view class="tab {{currentTab==='all'?'active':''}}" bindtap="switchTab" data-tab="all">全部</view>
+      <view class="tab {{currentTab==='consulting'?'active':''}}" bindtap="switchTab" data-tab="consulting">咨询中</view>
+      <view class="tab {{currentTab==='negotiating'?'active':''}}" bindtap="switchTab" data-tab="negotiating">议价</view>
+      <view class="tab {{currentTab==='sold'?'active':''}}" bindtap="switchTab" data-tab="sold">已成交</view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{leads.length === 0}}" class="empty">
+    <icon name="user" size="80" color="#C0C4CC" />
+    <text class="empty-text">暂无客户</text>
+    <text class="empty-desc">添加意向客户，跟踪销售进度</text>
+  </view>
+
+  <view wx:else class="lead-list">
+    <view wx:for="{{leads}}" wx:key="id" class="lead-card" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="lead-top">
+        <text class="lead-name">{{item.buyer_name}}</text>
+        <text class="lead-status lead-status-{{item.status}}">{{statusLabel(item.status)}}</text>
+      </view>
+      <view class="lead-meta">
+        <text wx:if="{{item.pet_name}}" class="lead-pet">🐾 {{item.pet_name}}</text>
+        <text wx:if="{{item.budget}}" class="lead-budget">💰 {{item.budget}}</text>
+      </view>
+      <view class="lead-bottom">
+        <text class="lead-time" wx:if="{{item.last_followed_at}}">{{timeAgo(item.last_followed_at)}}</text>
+        <view class="lead-actions">
+          <view class="lead-btn follow" catchtap="quickFollow" data-id="{{item.id}}">跟进</view>
+          <view wx:if="{{item.status !== 'sold'}}" class="lead-btn sold" catchtap="markSold" data-id="{{item.id}}">成交</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="fab" bindtap="goAdd">
+    <icon name="add" size="48" color="#FFF" />
+  </view>
+</view>

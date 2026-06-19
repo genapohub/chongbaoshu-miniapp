@@ -18,6 +18,7 @@ Page({
     maxBreedingRecords: 3,
     breedingInProgressCount: 0,
     reminderCount: 0,
+    error: false,
     reminders: [],
     recentActivities: [],
     loading: true,
@@ -64,6 +65,7 @@ Page({
         petCount: 0,
         breedingInProgressCount: 0,
         reminderCount: 0,
+    error: false,
         reminders: [],
         recentActivities: [],
       });
@@ -78,12 +80,11 @@ Page({
       api.get('/auth/limits').catch(function() { return null; }),
     ]).then(function(results) {
       const dashboard = results[0];
-      const usage = results[1];
-      const limits = results[2];
+        return;
+      }
+      that.setData({ error: false });
 
-      const tier = usage && usage.tier ? usage.tier : 'free';
-      const planNames = { free: '免费版', basic: '基础版', pro: 'Pro版' };
-
+      // 原有逻辑续
       // ===== 构建待办提醒 =====
       const upcomingReminders = dashboard && dashboard.upcomingReminders ? dashboard.upcomingReminders : [];
       const healthReminders = [];

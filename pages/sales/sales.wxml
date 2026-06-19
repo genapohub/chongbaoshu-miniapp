@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="summary-card" wx:if="{{summary}}">
+    <text class="summary-month">{{summary.month}} 销售汇总</text>
+    <view class="summary-row">
+      <view class="summary-item"><text class="s-num">{{summary.sale_count}}</text><text class="s-label">成交单数</text></view>
+      <view class="summary-item"><text class="s-num">¥{{summary.total_revenue}}</text><text class="s-label">总收入</text></view>
+      <view class="summary-item"><text class="s-num">¥{{summary.avg_price}}</text><text class="s-label">均价</text></view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{sales.length === 0}}" class="empty">
+    <icon name="money" size="80" color="#C0C4CC" />
+    <text class="empty-text">暂无销售记录</text>
+  </view>
+
+  <view wx:else class="sale-list">
+    <view wx:for="{{sales}}" wx:key="id" class="sale-card">
+      <view class="sale-top">
+        <text class="sale-pet">{{item.pet_name || '未知宠物'}}</text>
+        <text class="sale-price">¥{{item.sale_price / 100}}</text>
+      </view>
+      <view class="sale-meta">
+        <text>买家：{{item.buyer_name}}</text>
+        <text>日期：{{item.sale_date}}</text>
+      </view>
+      <text wx:if="{{item.items_included}}" class="sale-items">附带：{{item.items_included}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+.container { background: #F6F4F0; min-height: 100vh; padding: 24rpx; }
+.summary-card { background: linear-gradient(135deg, #4A8C5C, #2BA471); border-radius: 16rpx; padding: 32rpx; margin-bottom: 24rpx; }
+.summary-month { font-size: 26rpx; color: rgba(255,255,255,0.8); }
+.summary-row { display: flex; margin-top: 24rpx; }
+.summary-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.s-num { font-size: 40rpx; font-weight: 700; color: #FFF; }
+.s-label { font-size: 22rpx; color: rgba(255,255,255,0.7); margin-top: 8rpx; }
+.sale-list {}
+.sale-card { background: #FFF; border-radius: 12rpx; padding: 24rpx; margin-bottom: 16rpx; }
+.sale-top { display: flex; justify-content: space-between; align-items: center; }
+.sale-pet { font-size: 32rpx; font-weight: 600; }
+.sale-price { font-size: 36rpx; font-weight: 700; color: #E34D59; }
+.sale-meta { display: flex; gap: 24rpx; margin-top: 12rpx; font-size: 24rpx; color: #8F959E; }
+.sale-items { font-size: 24rpx; color: #666; margin-top: 8rpx; }
+.empty { display: flex; flex-direction: column; align-items: center; padding-top: 200rpx; }
+.empty-text { font-size: 32rpx; color: #8F959E; margin-top: 24rpx; }

@@ -1,0 +1,54 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">验证中...</view>
+
+  <view wx:elif="{{error}}" class="error">
+    <icon name="warning" size="80" color="#E34D59" />
+    <text class="error-text">{{error}}</text>
+  </view>
+
+  <view wx:elif="{{cert}}" class="cert-card">
+    <view class="cert-badge">
+      <icon name="check-circle" size="48" color="#2BA471" />
+      <text class="badge-text">宠宝树认证血统证书</text>
+    </view>
+
+    <view class="cert-body">
+      <view class="cert-no">证书编号：{{cert.cert_no}}</view>
+
+      <view class="pet-section">
+        <text class="pet-name">{{cert.pet_name}}</text>
+        <text class="pet-info">{{cert.pet_breed || cert.pet_species}} · {{cert.pet_gender || ''}}</text>
+        <text class="pet-birth" wx:if="{{cert.pet_birth_date}}">出生日期：{{cert.pet_birth_date}}</text>
+      </view>
+
+      <view class="pedigree-section" wx:if="{{cert.father_name || cert.mother_name}}">
+        <view class="section-title">血统信息</view>
+        <view class="parent-row">
+          <view class="parent" wx:if="{{cert.father_name}}">
+            <text class="parent-label">父</text>
+            <text class="parent-name">{{cert.father_name}}</text>
+            <text class="parent-breed" wx:if="{{cert.father_breed}}">{{cert.father_breed}}</text>
+          </view>
+          <view class="parent" wx:if="{{cert.mother_name}}">
+            <text class="parent-label">母</text>
+            <text class="parent-name">{{cert.mother_name}}</text>
+            <text class="parent-breed" wx:if="{{cert.mother_breed}}">{{cert.mother_breed}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="kennel-section" wx:if="{{cert.kennel_name}}">
+        <text class="kennel-label">认证宠舍</text>
+        <text class="kennel-name">{{cert.kennel_name}}</text>
+      </view>
+
+      <view class="issue-section">
+        <text class="issue-date" wx:if="{{cert.issue_date}}">签发日期：{{cert.issue_date}}</text>
+      </view>
+    </view>
+
+    <view class="cert-footer">
+      <text class="footer-text">本证书由宠宝树平台认证签发</text>
+    </view>
+  </view>
+</view>

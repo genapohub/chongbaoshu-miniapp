@@ -109,5 +109,6 @@
       <field-row label="母方祖母" value="{{isPro ? pedigree.motherMother : ''}}" empty="—" />
     </view>
     <view class="btn btn-outline btn-block" bindtap="goPedigreeCert">查看血统证书 →</view>
+    <view class="btn btn-primary btn-block" bindtap="goShareCard">📤 生成分享卡片</view>
   </view>
 </view>

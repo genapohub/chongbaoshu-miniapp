@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="card-preview">
+    <canvas type="2d" id="shareCanvas" class="canvas" style="width:{{canvasW}}px;height:{{canvasH}}px;"></canvas>
+  </view>
+
+  <view class="actions">
+    <button class="btn-save" bindtap="saveToAlbum">保存到相册</button>
+  </view>
+</view>

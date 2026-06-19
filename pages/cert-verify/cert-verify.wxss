@@ -1,0 +1,33 @@
+.container { background: #F6F4F0; min-height: 100vh; padding: 24rpx; }
+.loading, .error { display: flex; flex-direction: column; align-items: center; padding-top: 200rpx; }
+.error-text { font-size: 28rpx; color: #E34D59; margin-top: 24rpx; }
+
+.cert-card { background: #FFF; border-radius: 16rpx; overflow: hidden; box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.06); }
+.cert-badge { display: flex; align-items: center; justify-content: center; padding: 32rpx; background: linear-gradient(135deg, #4A8C5C, #2BA471); gap: 12rpx; }
+.badge-text { color: #FFF; font-size: 28rpx; font-weight: 600; }
+
+.cert-body { padding: 32rpx; }
+.cert-no { font-size: 22rpx; color: #B0B0B0; margin-bottom: 24rpx; }
+
+.pet-section { text-align: center; margin-bottom: 32rpx; }
+.pet-name { font-size: 44rpx; font-weight: 700; color: #1A1A1A; display: block; }
+.pet-info { font-size: 28rpx; color: #666; margin-top: 8rpx; display: block; }
+.pet-birth { font-size: 24rpx; color: #8F959E; margin-top: 8rpx; display: block; }
+
+.pedigree-section { margin-bottom: 24rpx; }
+.section-title { font-size: 26rpx; font-weight: 600; color: #4A8C5C; margin-bottom: 16rpx; }
+.parent-row { display: flex; gap: 16rpx; }
+.parent { flex: 1; background: #F6F4F0; border-radius: 12rpx; padding: 16rpx; }
+.parent-label { font-size: 20rpx; color: #4A8C5C; font-weight: 600; display: block; }
+.parent-name { font-size: 28rpx; font-weight: 600; margin-top: 4rpx; display: block; }
+.parent-breed { font-size: 22rpx; color: #8F959E; display: block; }
+
+.kennel-section { margin-bottom: 24rpx; }
+.kennel-label { font-size: 22rpx; color: #B0B0B0; display: block; }
+.kennel-name { font-size: 28rpx; font-weight: 600; color: #1A1A1A; display: block; }
+
+.issue-section { margin-top: 24rpx; }
+.issue-date { font-size: 22rpx; color: #B0B0B0; }
+
+.cert-footer { padding: 24rpx; text-align: center; border-top: 1rpx solid #F0F0F0; }
+.footer-text { font-size: 22rpx; color: #C0C4CC; }

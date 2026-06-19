@@ -1,8 +1,20 @@
 <view class="container">
   <view class="card">
     <view class="card-header">
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       <view class="card-icon"><icon name="syringe" size="36" color="#2D9CDB" /></view>
       <text class="card-title">疫苗提醒</text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item">
       <text class="setting-label">到期提醒</text>
@@ -12,20 +24,56 @@
         bindchange="onSwitchChange"
         data-field="remind_vaccine"
       />
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item pro-locked" bindtap="showDaysPicker" data-type="vaccine">
       <text class="setting-label">提前提醒天数</text>
       <view class="setting-right">
         <text class="setting-value">{{settings.remind_vaccine_days}}天</text>
         <text class="setting-arrow"><icon name="chevron-right" size="28" color="#C0C4CC" /></text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
   </view>
 
   <view class="card">
     <view class="card-header">
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       <view class="card-icon"><icon name="bug" size="36" color="#2BA471" /></view>
       <text class="card-title">驱虫提醒</text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item">
       <text class="setting-label">到期提醒</text>
@@ -35,20 +83,56 @@
         bindchange="onSwitchChange"
         data-field="remind_deworm"
       />
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item pro-locked" bindtap="showDaysPicker" data-type="deworm">
       <text class="setting-label">提前提醒天数</text>
       <view class="setting-right">
         <text class="setting-value">{{settings.remind_deworm_days}}天</text>
         <text class="setting-arrow"><icon name="chevron-right" size="28" color="#C0C4CC" /></text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
   </view>
 
   <view class="card">
     <view class="card-header">
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       <view class="card-icon"><icon name="pregnant" size="36" color="#F54A45" /></view>
       <text class="card-title">配种提醒</text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item">
       <text class="setting-label">预产期提醒</text>
@@ -58,20 +142,56 @@
         bindchange="onSwitchChange"
         data-field="remind_due"
       />
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item pro-locked" bindtap="showDaysPicker" data-type="due">
       <text class="setting-label">提前提醒天数</text>
       <view class="setting-right">
         <text class="setting-value">{{settings.remind_due_days}}天</text>
         <text class="setting-arrow"><icon name="chevron-right" size="28" color="#C0C4CC" /></text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
   </view>
 
   <view class="card">
     <view class="card-header">
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       <view class="card-icon"><icon name="announcement" size="36" color="#646A73" /></view>
       <text class="card-title">通知方式</text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item">
       <text class="setting-label">站内通知</text>
@@ -81,6 +201,12 @@
         bindchange="onSwitchChange"
         data-field="notify_in_app"
       />
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item">
       <text class="setting-label">微信推送</text>
@@ -90,6 +216,12 @@
         bindchange="onSwitchChange"
         data-field="notify_wechat"
       />
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <view class="setting-item">
       <text class="setting-label">短信通知<text class="coming-soon">即将上线</text></text>
@@ -100,12 +232,42 @@
         data-field="notify_sms"
         disabled
       />
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
   </view>
 
   <view class="pro-banner">
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     <view class="pro-icon"><icon name="diamond" size="36" color="#3370FF" /></view>
     <text class="pro-text">Pro专属：自定义提醒时间 + 多渠道通知（微信+短信）</text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
+  </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
   </view>
 </view>
 
@@ -113,7 +275,19 @@
   <view class="picker-content" catchtap="stopPropagation">
     <view class="picker-header">
       <text class="picker-title">{{pickerTitle}}</text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       <view class="picker-close" bindtap="hideDaysPicker"><icon name="close" size="28" color="#8F959E" /></view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
     </view>
     <scroll-view scroll-y class="picker-list">
       <view
@@ -124,7 +298,25 @@
         data-value="{{item}}"
       >
         <text class="picker-item-text">{{item}}天</text>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
       </view>
     </scroll-view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
+  </view>
+  </view>
+
+  <view class="card subscribe-card">
+    <view class="subscribe-title">🔔 微信提醒授权</view>
+    <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
+    <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
   </view>
 </view>
