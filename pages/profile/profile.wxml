@@ -50,31 +50,6 @@
         <text class="menu-text">提醒设置</text>
         <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
-      <view class="menu-item" bindtap="goMenu" data-url="/pages/invite/invite">
-        <icon name="gift" size="36" color="#F54A45" />
-        <text class="menu-text">邀请好友 <text class="menu-tag">+1月Pro</text></text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
-      <view class="menu-item" bindtap="goMenu" data-url="/pages/invite-redeem/invite-redeem">
-        <icon name="key" size="36" color="#F7BA1E" />
-        <text class="menu-text">兑换邀请码</text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
-      <view class="menu-item" bindtap="goMenu" data-url="/pages/subscription/subscription">
-        <icon name="diamond" size="36" color="#4A8C5C" />
-        <text class="menu-text">订阅管理</text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
-      <view class="menu-item" bindtap="goFeedback">
-        <icon name="chat" size="36" color="#4A8C5C" />
-        <text class="menu-text">意见反馈</text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
-      <view class="menu-item" bindtap="goAbout">
-        <icon name="info" size="36" color="#8F959E" />
-        <text class="menu-text">关于宠宝树</text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
     </view>
 
     <!-- 退出登录 -->

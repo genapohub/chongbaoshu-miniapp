@@ -72,10 +72,6 @@ Page({
         breedingCount = dashboard.stats.breedingCount;
       }
 
-      let inviteCount = 0;
-      if (inviteStats && inviteStats.inviteCount) {
-        inviteCount = inviteStats.inviteCount;
-      }
 
       let expireDate = '';
       if (subscription && subscription.expires_at) {
@@ -106,8 +102,7 @@ Page({
         stats: {
           petCount: petCount,
           breedingCount: breedingCount,
-          inviteCount: inviteCount,
-        },
+          },
         subscriptionPlan: planNames[tier],
         expireDate: expireDate,
         isAutoRenew: isAutoRenew,
