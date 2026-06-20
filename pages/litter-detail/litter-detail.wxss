@@ -1,0 +1,23 @@
+.container { background: var(--bg); min-height: 100vh; padding: 32rpx; }
+.loading-state { display: flex; align-items: center; justify-content: center; padding: 120rpx; color: var(--text3); }
+
+.parents-card { text-align: center; }
+.parent-row { display: flex; align-items: center; justify-content: center; gap: 32rpx; margin-bottom: 24rpx; }
+.parent { display: flex; flex-direction: column; align-items: center; }
+.parent-label { font-size: 24rpx; color: var(--green); font-weight: 600; margin-bottom: 8rpx; }
+.parent-name { font-size: 32rpx; font-weight: 700; color: var(--text); }
+.parent-divider { font-size: 36rpx; color: var(--text3); }
+.litter-meta { display: flex; gap: 24rpx; justify-content: center; font-size: 24rpx; color: var(--text2); }
+.litter-notes { font-size: 24rpx; color: var(--text3); margin-top: 16rpx; }
+
+.puppy-list {}
+.puppy-row { display: flex; align-items: center; gap: 16rpx; padding: 16rpx 0; border-bottom: 1rpx solid var(--line); }
+.puppy-row:last-child { border-bottom: none; }
+.puppy-name { font-size: 28rpx; font-weight: 600; color: var(--text); min-width: 100rpx; }
+.puppy-info { font-size: 24rpx; color: var(--text3); flex: 1; }
+.puppy-status { font-size: 22rpx; color: var(--text2); }
+.puppy-price { font-size: 26rpx; font-weight: 700; color: var(--red); }
+
+.empty-inner { text-align: center; padding: 40rpx; color: var(--text3); font-size: 26rpx; }
+.empty-state { display: flex; flex-direction: column; align-items: center; padding-top: 200rpx; }
+.empty-text { font-size: 32rpx; color: var(--text3); }

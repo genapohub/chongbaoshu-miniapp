@@ -1,0 +1,46 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading-state">加载中...</view>
+
+  <view wx:elif="{{litter}}" class="detail">
+    <!-- 母犬/父犬信息 -->
+    <view class="card parents-card">
+      <view class="parent-row">
+        <view class="parent">
+          <text class="parent-label">母</text>
+          <text class="parent-name">{{litter.mother_name || '未知'}}</text>
+        </view>
+        <view class="parent-divider">×</view>
+        <view class="parent">
+          <text class="parent-label">父</text>
+          <text class="parent-name">{{litter.father_name || '未知'}}</text>
+        </view>
+      </view>
+      <view class="litter-meta">
+        <text>出生日期: {{litter.birth_date}}</text>
+        <text>窝仔数: {{litter.litter_size}}只</text>
+      </view>
+      <view wx:if="{{litter.notes}}" class="litter-notes">{{litter.notes}}</view>
+    </view>
+
+    <!-- 幼犬列表 -->
+    <view class="card">
+      <text class="card-title">幼犬 ({{litter.puppies.length}}/{{litter.litter_size}})</text>
+      <view wx:if="{{litter.puppies.length === 0}}" class="empty-inner">暂无幼犬记录</view>
+      <view wx:else class="puppy-list">
+        <view wx:for="{{litter.puppies}}" wx:key="id" class="puppy-row" bindtap="goPetDetail" data-id="{{item.id}}">
+          <text class="puppy-name">{{item.name}}</text>
+          <text class="puppy-info">{{item.breed || ''}} · {{item.gender || ''}}</text>
+          <text class="puppy-status">{{item.status === 'sold' ? '已售' : '活跃'}}</text>
+          <text wx:if="{{item.price}}" class="puppy-price">¥{{item.price / 100}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 补齐按钮 -->
+    <view wx:if="{{litter.puppies.length < litter.litter_size}}" class="btn-primary" bindtap="batchAdd">补齐幼犬</view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="empty-text">同窝记录不存在</text>
+  </view>
+</view>

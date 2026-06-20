@@ -33,6 +33,7 @@
     "pages/buyer-lead-add/buyer-lead-add",
     "pages/sales/sales",
     "pages/ledger/ledger",
+    "pages/litter-detail/litter-detail",
     "pages/litters/litters",
     "pages/cert-verify/cert-verify",
     "pages/share-card/share-card"
