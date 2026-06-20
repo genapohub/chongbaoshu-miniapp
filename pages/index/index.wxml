@@ -110,11 +110,11 @@
     </view>
     <view class="quick-entry">
       <view class="quick-item" bindtap="goAddPet">
-        <view class="quick-icon" style="background:#EDF4EF"><icon name="pet-add" size="36" color="#4A8C5C" /></view>
+        <view class="quick-icon" style="background:#EDF4EF"><icon name="pet-add" size="36" color="#4A8C5C" v="2" /></view>
         <text class="quick-label">添加宠物</text>
       </view>
       <view class="quick-item" bindtap="goAddBreeding">
-        <view class="quick-icon" style="background:#FDF3E5"><icon name="breeding-new" size="36" color="#D4914A" /></view>
+        <view class="quick-icon" style="background:#FDF3E5"><icon name="breeding-new" size="36" color="#D4914A" v="2" /></view>
         <text class="quick-label">添加配种</text>
       </view>
       <view class="quick-item" bindtap="goAddHealth">

@@ -12,6 +12,7 @@ const { icons, svgToUri } = require('../../constants/icons');
 
 Component({
   properties: {
+    v: { type: String, value: '' },
     name: { type: String, value: '' },
     size: { type: String, value: '40' },
     color: { type: String, value: '#1F2329' },
@@ -25,7 +26,7 @@ Component({
   },
 
   observers: {
-    'name,color'(name, color) {
+    'name,color,v'(name, color, v) {
       if (!name || !icons[name]) return;
       const svg = icons[name];
       if (svg) {
