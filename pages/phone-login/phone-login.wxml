@@ -65,7 +65,7 @@
     </view>
 
     <view class="dev-hint" wx:if="{{devMode}}">
-      <icon name="tool" size="36" color="#F7BA1E" />
+      <icon name="tool" size="36" color="#D4914A" />
       <text>开发模式：输入任意手机号 + 验证码 123456 即可登录</text>
     </view>
   </view>

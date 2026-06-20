@@ -2,7 +2,7 @@
   P15 登录引导页 - 按设计稿一比一复刻
 -->
 <view class="login-page">
-  <view class="login-logo"><icon name="paw" size="80" color="#4A8C5C" /></view>
+  <view class="login-logo"><icon name="paw" size="80" color="#FFFFFF" /></view>
   <text class="login-title">宠宝树</text>
   <text class="login-subtitle">记录宠物成长的每一刻</text>
   
@@ -12,7 +12,7 @@
   </view>
   
   <view class="login-btn login-phone" bindtap="onPhoneLogin">
-    <icon name="phone" size="36" color="#4A8C5C" />
+    <icon name="phone" size="36" color="#FFFFFF" />
     <text>手机号登录</text>
   </view>
   
