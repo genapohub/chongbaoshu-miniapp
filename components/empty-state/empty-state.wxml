@@ -1,4 +1,4 @@
-<!-- 空状态组件 (飞书风格)
+<!-- 空状态组件 
   Properties:
     icon {String} - 图标名称（飞书图标），默认根据 type 自动匹配
     text {String} - 提示文字
