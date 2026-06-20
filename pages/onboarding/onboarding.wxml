@@ -1,31 +1,49 @@
 <view class="onboarding">
-  <swiper class="swiper" indicator-dots="{{true}}" indicator-color="#C0C4CC" indicator-active-color="#4A8C5C" current="{{current}}" bindchange="onSwiperChange">
+  <view class="bg-decor">
+    <view class="decor-circle c1"></view>
+    <view class="decor-circle c2"></view>
+    <view class="decor-circle c3"></view>
+  </view>
+
+  <swiper class="swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#FFFFFF" current="{{current}}" bindchange="onSwiperChange">
+    <!-- 第1页 -->
     <swiper-item>
       <view class="slide">
-        <view class="slide-icon"><icon name="paw" size="120" color="#4A8C5C" /></view>
+        <view class="icon-ring ring-green">
+          <icon name="paw" size="80" color="#4A8C5C" />
+        </view>
+        <view class="slide-num">01</view>
         <text class="slide-title">记录每一只宠物</text>
-        <text class="slide-desc">建立宠物档案，品种/年龄/血统一目了然\n买家咨询时快速响应</text>
+        <text class="slide-desc">建立宠物档案，品种、年龄、血统一目了然\n买家咨询时快速响应</text>
       </view>
     </swiper-item>
+    <!-- 第2页 -->
     <swiper-item>
       <view class="slide">
-        <view class="slide-icon"><icon name="notification" size="120" color="#E67E22" /></view>
+        <view class="icon-ring ring-amber">
+          <icon name="bell" size="80" color="#D4914A" />
+        </view>
+        <view class="slide-num">02</view>
         <text class="slide-title">健康提醒不遗漏</text>
-        <text class="slide-desc">疫苗、驱虫自动提醒\n到时间了微信通知你</text>
+        <text class="slide-desc">疫苗、驱虫自动提醒\n到期时微信通知你</text>
       </view>
     </swiper-item>
+    <!-- 第3页 -->
     <swiper-item>
       <view class="slide">
-        <view class="slide-icon"><icon name="certificate" size="120" color="var(--red)" /></view>
+        <view class="icon-ring ring-red">
+          <icon name="certificate" size="80" color="#D4534A" />
+        </view>
+        <view class="slide-num">03</view>
         <text class="slide-title">让生意更专业</text>
-        <text class="slide-desc">管理意向客户，追踪销售进度\n血统证书+分享卡片，提升信任度</text>
+        <text class="slide-desc">管理意向客户，追踪销售进度\n血统证书 + 分享卡片，提升信任度</text>
       </view>
     </swiper-item>
   </swiper>
 
   <view class="actions">
     <view wx:if="{{current < 2}}" class="btn-skip" bindtap="skip">跳过</view>
-    <view wx:if="{{current < 2}}" class="btn-next" bindtap="next">下一步</view>
+    <view wx:if="{{current < 2}}" class="btn-next" bindtap="next">下一步 →</view>
     <view wx:else class="btn-start" bindtap="start">开始使用宠宝树</view>
   </view>
 </view>
