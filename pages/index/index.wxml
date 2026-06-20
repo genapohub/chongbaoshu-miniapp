@@ -11,7 +11,6 @@
     <icon name="warning" size="72" color="#E0903C" />
     <text class="error-text">数据加载失败，请检查网络</text>
     <view class="error-retry" bindtap="loadData">点击重试</view>
-  </view>
 
   <!-- 已登录/游客模式 - 主要内容（游客也可浏览） -->
   <view wx:elif="{{!loading}}">
@@ -20,7 +19,6 @@
     <view class="upgrade-content">
       <icon name="sparkle" size="40" color="#F7BA1E" />
       <text class="upgrade-text">升级Pro，解锁血统证书与无限宠物</text>
-    </view>
     <icon name="chevron-right" size="28" color="#C0C4CC" />
   </view>
 
@@ -125,33 +123,6 @@
         <view class="pro-badge">PRO</view>
         <view class="quick-icon" style="background:#EDF4EF"><icon name="cert-tree" size="36" color="#4A8C5C" /></view>
         <text class="quick-label">血统证书</text>
-      </view>
-    </view>
-  </view>
-
-
-  <!-- 生意管理 -->
-  <view class="card">
-    <view class="card-title">
-      <icon name="shop" size="36" color="#E34D59" />
-      <text>生意管理</text>
-    </view>
-    <view class="quick-entry">
-      <view class="quick-item" bindtap="goBuyerLeads">
-        <view class="quick-icon" style="background:#E3F2FD"><icon name="user" size="36" color="#1976D2" /></view>
-        <text class="quick-label">意向客户</text>
-      </view>
-      <view class="quick-item" bindtap="goSales">
-        <view class="quick-icon" style="background:#FFEBEE"><icon name="money" size="36" color="#E34D59" /></view>
-        <text class="quick-label">销售记录</text>
-      </view>
-      <view class="quick-item" bindtap="goLedger">
-        <view class="quick-icon" style="background:#FFF3E0"><icon name="wallet" size="36" color="#E67E22" /></view>
-        <text class="quick-label">收支账本</text>
-      </view>
-      <view class="quick-item" bindtap="goLitters">
-        <view class="quick-icon" style="background:#F3E5F5"><icon name="baby" size="36" color="#7B1FA2" /></view>
-        <text class="quick-label">同窝管理</text>
       </view>
     </view>
   </view>
