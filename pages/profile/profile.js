@@ -169,6 +169,15 @@ Page({
     });
   },
 
+  onHeaderTap: function() {
+    if (!getApp().globalData.token) {
+      wx.navigateTo({ url: '/pages/login/login' });
+      return;
+    }
+    wx.navigateTo({ url: '/pages/profile-edit/profile-edit' });
+  },
+
+
   goLogin: function() {
     wx.navigateTo({ url: '/pages/login/login' });
   },
