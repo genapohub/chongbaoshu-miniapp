@@ -1,15 +1,28 @@
-/* 宠宝树品牌样式 — 暖森林·毛玻璃 */
-.container { min-height: 100vh; background: var(--bg); padding: 32rpx; }
-.card { background: var(--surface); border-radius: var(--radius); padding: 32rpx; margin-bottom: 24rpx; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.card-title { font-size: 30rpx; font-weight: 600; color: var(--text); margin-bottom: 24rpx; letter-spacing: 0.5rpx; }
-.btn-primary { background: var(--green); color: #fff; border-radius: 48rpx; font-size: 30rpx; font-weight: 600; text-align: center; padding: 26rpx 0; border: none; display: flex; align-items: center; justify-content: center; gap: 10rpx; }
-.btn-primary::after { border: none; }
-.btn-primary:active { opacity: 0.88; }
-.btn-primary.disabled, .btn-primary[disabled] { opacity: 0.4; pointer-events: none; }
-.btn-secondary { background: rgba(0,0,0,0.04); color: var(--text2); border-radius: 48rpx; font-size: 28rpx; text-align: center; padding: 22rpx 0; border: none; }
-.btn-secondary::after { border: none; }
-.form-item { margin-bottom: 28rpx; }
-.form-label { display: block; font-size: 26rpx; color: var(--text2); margin-bottom: 12rpx; font-weight: 500; }
-.input-field { background: rgba(0,0,0,0.03); border-radius: var(--radius-sm); padding: 22rpx 24rpx; font-size: 28rpx; border: 2rpx solid transparent; color: var(--text); width: 100%; box-sizing: border-box; }
-.input-field:focus { border-color: var(--green); }
-.input-field::placeholder { color: var(--text3); }
+/* 提醒设置 */
+
+.setting-item { display: flex; align-items: center; justify-content: space-between; padding: 20rpx 0; }
+.pro-locked { opacity: 1; }
+.switch-row { display: flex; align-items: center; gap: 12rpx; }
+
+/* 卡片头 */
+.card-icon { margin-right: 12rpx; }
+
+/* 提前天数选择 */
+.days-options { display: flex; gap: 10rpx; margin-top: 12rpx; }
+.day-option { padding: 10rpx 20rpx; border-radius: 24rpx; font-size: 24rpx; background: rgba(0,0,0,0.04); color: var(--text2); }
+.day-option.selected { background: var(--green); color: #fff; }
+
+/* 订阅卡片 */
+.subscribe-card { text-align: center; padding: 40rpx; }
+.subscribe-title { font-size: 28rpx; font-weight: 600; color: var(--text); margin-bottom: 12rpx; }
+.subscribe-desc { font-size: 24rpx; color: var(--text3); margin-bottom: 24rpx; display: block; }
+.subscribe-btn { display: inline-block; padding: 18rpx 48rpx; background: var(--green); color: #fff; border-radius: 48rpx; font-size: 28rpx; font-weight: 600; }
+
+/* Picker弹窗 */
+.picker-modal { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-radius: var(--radius) var(--radius) 0 0; z-index: 1000; -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
+.picker-header { display: flex; justify-content: space-between; align-items: center; padding: 28rpx 32rpx; border-bottom: 1rpx solid var(--line); }
+.picker-title { font-size: 28rpx; font-weight: 600; }
+.picker-close { font-size: 26rpx; color: var(--green); }
+.picker-list { padding: 16rpx 0; max-height: 400rpx; overflow-y: auto; }
+.picker-item { padding: 24rpx 32rpx; font-size: 28rpx; color: var(--text); }
+.picker-item.selected { color: var(--green); font-weight: 600; background: var(--tint-mint); }

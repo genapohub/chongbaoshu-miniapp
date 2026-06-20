@@ -1,0 +1,27 @@
+/* 添加配种 — 页面特有样式 */
+
+/* 母犬/父犬选择 */
+.mother-section, .father-section { margin-bottom: 24rpx; }
+.pet-picker-wrap { display: flex; flex-wrap: wrap; gap: 10rpx; }
+.pet-chip { padding: 12rpx 24rpx; border-radius: 32rpx; font-size: 26rpx; background: rgba(0,0,0,0.04); color: var(--text2); }
+.pet-chip.selected { background: var(--green); color: #fff; }
+.pet-chip.disabled { opacity: 0.4; }
+
+/* 配种方式 */
+.breed-method-group { display: flex; gap: 12rpx; }
+.method-option { flex: 1; text-align: center; padding: 16rpx; border-radius: var(--radius-sm); font-size: 26rpx; background: rgba(0,0,0,0.04); color: var(--text2); border: 2rpx solid transparent; }
+.method-option.selected { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* 预产期 */
+.due-date-card { background: var(--tint-cream); border-radius: var(--radius); padding: 24rpx; margin-top: 24rpx; display: flex; flex-direction: column; align-items: center; }
+.due-date-label { font-size: 24rpx; color: var(--text2); }
+.due-date-value { font-size: 40rpx; font-weight: 700; color: var(--green); margin-top: 8rpx; }
+.due-date-note { font-size: 22rpx; color: var(--text3); margin-top: 8rpx; }
+
+/* 计数控制 */
+.count-control { display: flex; align-items: center; gap: 16rpx; }
+.count-btn { width: 56rpx; height: 56rpx; border-radius: 50%; background: rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: center; font-size: 32rpx; color: var(--text2); }
+.count-value { min-width: 60rpx; text-align: center; font-size: 36rpx; font-weight: 700; color: var(--text); }
+
+/* 错误提示 */
+.error-tip { font-size: 22rpx; color: var(--red); margin-top: 6rpx; }

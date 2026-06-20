@@ -1,0 +1,23 @@
+/* 添加健康记录 — 页面特有样式 */
+
+/* 类型Tab */
+.tab-bar { display: flex; background: var(--surface-solid); border-bottom: 1rpx solid var(--line); margin: -24rpx -24rpx 24rpx; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; }
+.tab-item { flex: 1; text-align: center; padding: 24rpx 0; font-size: 28rpx; color: var(--text3); position: relative; }
+.tab-item.active { color: var(--green); font-weight: 600; }
+.tab-item.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 48rpx; height: 4rpx; background: var(--green); border-radius: 2rpx; }
+
+/* 宠物选择 */
+.pet-avatar { width: 88rpx; height: 88rpx; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.pet-avatar.placeholder { background: rgba(0,0,0,0.04); }
+
+/* 下次日期 */
+.next-date-row { display: flex; align-items: center; justify-content: space-between; padding: 24rpx 0; }
+.next-date-label { font-size: 26rpx; color: var(--text); }
+.next-date-value { font-size: 26rpx; color: var(--green); font-weight: 500; }
+
+/* 间隔输入 */
+.interval-row { display: flex; align-items: center; gap: 12rpx; }
+.interval-row input { flex: 1; }
+
+/* 字段错误 */
+.field-error { font-size: 22rpx; color: var(--red); margin-top: 6rpx; }

@@ -1,0 +1,23 @@
+/* 添加宠物 — 页面特有样式 */
+
+/* 头像上传 */
+.avatar-upload { width: 160rpx; height: 160rpx; border-radius: var(--radius); overflow: hidden; background: rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: center; }
+.avatar-img { width: 100%; height: 100%; }
+.avatar-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8rpx; }
+.avatar-text { font-size: 22rpx; color: var(--text3); }
+
+/* 物种/性别/角色选择 */
+.species-options, .gender-options, .role-options { display: flex; gap: 12rpx; flex-wrap: wrap; }
+.species-option, .gender-option, .role-option { padding: 16rpx 32rpx; border-radius: 32rpx; font-size: 26rpx; background: rgba(0,0,0,0.04); color: var(--text2); border: 2rpx solid transparent; }
+.species-option.active, .gender-option.active, .role-option.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* 标签 */
+.tag-options { display: flex; flex-wrap: wrap; gap: 10rpx; }
+.tag-option { padding: 10rpx 22rpx; border-radius: 32rpx; font-size: 24rpx; background: rgba(0,0,0,0.04); color: var(--text2); }
+.tag-option.selected { background: var(--green); color: #fff; }
+.add-tag-row { display: flex; gap: 10rpx; margin-top: 12rpx; }
+.add-tag-row input { flex: 1; }
+.btn-add-tag { padding: 14rpx 24rpx; background: var(--green); color: #fff; border-radius: var(--radius-sm); font-size: 24rpx; display: flex; align-items: center; white-space: nowrap; }
+
+/* 开关行 */
+.switch-row { display: flex; align-items: center; justify-content: space-between; padding: 8rpx 0; }
