@@ -11,7 +11,7 @@ Page({
     stats: {
       petCount: 0,
       breedingCount: 0,
-      inviteCount: 0,
+      healthCount: 0,
     },
     subscriptionPlan: '免费版',
     expireDate: '',
@@ -44,13 +44,12 @@ Page({
     Promise.all([
       api.get('/auth/profile').catch(function() { return null; }),
       api.get('/subscriptions/current').catch(function() { return null; }),
-      api.get('/auth/dashboard').catch(function() { return null; }),
-      api.get('/invite/stats').catch(function() { return null; }),
+      api.get('/auth/dashboard').catch(function() { return null; })
     ]).then(function(results) {
       const profile = results[0];
       const subscription = results[1];
       const dashboard = results[2];
-      const inviteStats = results[3];
+      
 
       const planNames = { free: '免费版', basic: '基础版', pro: 'Pro 专业版' };
       const tier = subscription && subscription.tier ? subscription.tier : 'free';

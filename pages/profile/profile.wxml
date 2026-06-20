@@ -22,24 +22,20 @@
         <text class="stat-label">配种</text>
       </view>
       <view class="profile-stat">
-        <text class="stat-num">{{stats.inviteCount}}</text>
-        <text class="stat-label">邀请</text>
+        <text class="stat-num">{{stats.healthCount}}</text>
+        <text class="stat-label">健康</text>
       </view>
     </view>
   </view>
 
   <view class="content">
-    <!-- 订阅状态卡片 -->
+    <!-- 订阅信息 -->
     <view class="sub-status-card">
       <view class="ssc-left">
         <text class="ssc-label">当前方案</text>
         <text class="ssc-plan">{{subscriptionPlan}}</text>
+        <text class="ssc-expire" wx:if="{{expireDate}}">到期 {{expireDate}}</text>
       </view>
-      <view class="btn btn-sm ssc-btn" bindtap="goSubscription"><text>管理 </text><icon name="chevron-right" size="24" color="#4A8C5C" /></view>
-    </view>
-    <view class="ssc-meta">
-      <text>到期：{{expireDate || '永久'}}</text>
-      <text>{{isAutoRenew ? '自动续费' : '已关闭'}}</text>
     </view>
 
     <!-- 菜单列表 -->

@@ -33,7 +33,7 @@
 .content { padding: 32rpx; padding-bottom: 160rpx; }
 
 .sub-status-card {
-  background: rgba(255,255,255,0.35);
+  background: var(--green-dark);
   border-radius: var(--radius); padding: 32rpx;
   color: #fff; display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 12rpx;
@@ -64,3 +64,6 @@
   background: rgba(0,0,0,0.04); color: var(--red);
   text-align: center; padding: 26rpx; margin-top: 12rpx; font-size: 28rpx;
 }
+
+.ssc-expire { font-size: 20rpx; opacity: 0.7; margin-top: 4rpx; }
+.menu-card { padding: 0; }
