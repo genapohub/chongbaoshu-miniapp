@@ -20,6 +20,7 @@
     <view class="upgrade-content">
       <icon name="sparkle" size="40" color="#F7BA1E" />
       <text class="upgrade-text">升级Pro，解锁血统证书与无限宠物</text>
+    </view>
     <icon name="chevron-right" size="28" color="#C0C4CC" />
   </view>
 
