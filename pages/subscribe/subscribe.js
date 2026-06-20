@@ -35,9 +35,34 @@ Page({
   },
 
   onLoad(options) {
+    var that = this;
     if (options && options.tier) {
       this.setData({ selectedPlan: options.tier });
     }
+    // 从后端加载实时套餐数据
+    api.get('/subscriptions/plans').then(function(res) {
+      if (res.code === 0 && res.data) {
+        var plans = [];
+        var data = res.data;
+        Object.keys(data).forEach(function(tier) {
+          var p = data[tier];
+          plans.push({
+            tier: tier,
+            name: p.name || tier,
+            desc: (p.maxPets === 'unlimited' ? '无限宠物' : p.maxPets + '只宠物'),
+            icon: tier === 'pro' ? 'diamond' : (tier === 'basic' ? 'star' : 'paw'),
+            iconBg: tier === 'pro' ? '#FFE4E8' : (tier === 'basic' ? '#E3F2FD' : '#F3F4F6'),
+            price: String(p.price || 0),
+            period: tier === 'free' ? '永久' : '月',
+          });
+        });
+        if (plans.length > 0) {
+          that.setData({ plans: plans });
+        }
+      }
+    }).catch(function() {
+      // API失败时保留静态默认数据
+    });
   },
 
   selectPlan(e) {
