@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="card">
+  <view class="card card--cream">
     <view class="card-header">
 
   <view class="card subscribe-card">
@@ -58,7 +58,7 @@
   </view>
   </view>
 
-  <view class="card">
+  <view class="card card--cream">
     <view class="card-header">
 
   <view class="card subscribe-card">
@@ -117,7 +117,7 @@
   </view>
   </view>
 
-  <view class="card">
+  <view class="card card--cream">
     <view class="card-header">
 
   <view class="card subscribe-card">
@@ -176,7 +176,7 @@
   </view>
   </view>
 
-  <view class="card">
+  <view class="card card--cream">
     <view class="card-header">
 
   <view class="card subscribe-card">

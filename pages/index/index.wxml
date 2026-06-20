@@ -64,7 +64,7 @@
   </view>
 
   <!-- 待办提醒 -->
-  <view class="card">
+  <view class="card card--cream">
     <view class="card-title">
       <icon name="bell" size="36" color="#4A8C5C" />
       <text>待办提醒</text>
