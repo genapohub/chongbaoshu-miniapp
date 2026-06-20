@@ -8,8 +8,8 @@
 .lead-top { display: flex; justify-content: space-between; align-items: center; }
 .lead-name { font-size: 32rpx; font-weight: 600; color: var(--text); }
 .lead-status { font-size: 24rpx; padding: 4rpx 12rpx; border-radius: 6rpx; }
-.lead-status-consulting { background: #E3F2FD; color: #1976D2; }
-.lead-status-visited { background: #F3E5F5; color: #7B1FA2; }
+.lead-status-consulting { background: #E3F2FD; color: var(--green); }
+.lead-status-visited { background: #F3E5F5; color: var(--amber); }
 .lead-status-negotiating { background: #FFF4E5; color: var(--amber); }
 .lead-status-sold { background: #EDF4EF; color: var(--green); }
 .lead-status-lost { background: #FDEDEC; color: var(--red); }

@@ -98,13 +98,13 @@
             <view class="limit-plan-name">基础版</view>
             <view class="limit-plan-price">¥49</view>
             <view class="limit-plan-period">/月 · 100只</view>
-            <icon wx:if="{{selectedPlan === 'basic'}}" name="check" size="28" color="#2BA471" />
+            <icon wx:if="{{selectedPlan === 'basic'}}" name="check" size="28" color="var(--green)" />
           </view>
           <view class="limit-plan {{selectedPlan === 'pro' ? 'selected' : ''}}" data-plan="pro" bindtap="selectPlan">
             <view class="limit-plan-name">Pro</view>
             <view class="limit-plan-price">¥119</view>
             <view class="limit-plan-period">/月 · 无限</view>
-            <icon wx:if="{{selectedPlan === 'pro'}}" name="check" size="28" color="#2BA471" />
+            <icon wx:if="{{selectedPlan === 'pro'}}" name="check" size="28" color="var(--green)" />
           </view>
         </view>
         <view class="limit-modal-btn" bindtap="goPayment">立即升级</view>

@@ -3,7 +3,7 @@
 
   <!-- 成功状态 -->
   <view class="result-section" wx:if="{{status === 'success'}}">
-    <view class="result-icon success"><icon name="celebration" size="48" color="#2BA471" /></view>
+    <view class="result-icon success"><icon name="celebration" size="48" color="var(--green)" /></view>
     <view class="result-title">兑换成功！</view>
     <view class="result-desc">您已获得{{rewardDays}}天Pro体验</view>
     <button class="btn-action" bindtap="onGoHome">开始使用</button>

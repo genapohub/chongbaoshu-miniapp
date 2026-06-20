@@ -2,13 +2,13 @@
   <view wx:if="{{loading}}" class="loading">验证中...</view>
 
   <view wx:elif="{{error}}" class="error">
-    <icon name="warning" size="80" color="#E34D59" />
+    <icon name="warning" size="80" color="var(--red)" />
     <text class="error-text">{{error}}</text>
   </view>
 
   <view wx:elif="{{cert}}" class="cert-card">
     <view class="cert-badge">
-      <icon name="check-circle" size="48" color="#2BA471" />
+      <icon name="check-circle" size="48" color="var(--green)" />
       <text class="badge-text">宠宝树认证血统证书</text>
     </view>
 

@@ -3,7 +3,7 @@
     <view class="summary-row">
       <view class="summary-item income"><text class="s-label">收入</text><text class="s-amount">+¥{{summary.income_total || 0}}</text></view>
       <view class="summary-item expense"><text class="s-label">支出</text><text class="s-amount">-¥{{summary.expense_total || 0}}</text></view>
-      <view class="summary-item net"><text class="s-label">结余</text><text class="s-amount" style="color:{{summary.net >= 0 ? '#2BA471' : '#E34D59'}}">{{summary.net >= 0 ? '¥' : '-¥'}}{{Math.abs(summary.net || 0)}}</text></view>
+      <view class="summary-item net"><text class="s-label">结余</text><text class="s-amount" style="color:{{summary.net >= 0 ? 'var(--green)' : 'var(--red)'}}">{{summary.net >= 0 ? '¥' : '-¥'}}{{Math.abs(summary.net || 0)}}</text></view>
     </view>
   </view>
 

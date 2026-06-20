@@ -76,7 +76,7 @@
 
   <view wx:if="{{currentType === 'deworm'}}">
     <view class="card">
-      <view class="card-title"><icon name="bug" size="36" color="#2BA471" /><text>驱虫信息</text></view>
+      <view class="card-title"><icon name="bug" size="36" color="var(--green)" /><text>驱虫信息</text></view>
 
       <view class="form-item">
         <text class="form-label">宠物 *</text>

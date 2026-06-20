@@ -46,7 +46,7 @@
 
     <view class="record-section" wx:if="{{dewormRecords.length > 0}}">
       <view class="section-header">
-        <view class="section-icon"><icon name="bug" size="36" color="#2BA471" /></view>
+        <view class="section-icon"><icon name="bug" size="36" color="var(--green)" /></view>
         <text class="section-title">驱虫记录</text>
       </view>
       <view class="record-list">

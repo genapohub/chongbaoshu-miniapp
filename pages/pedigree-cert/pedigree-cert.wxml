@@ -22,7 +22,7 @@
   </view>
 
   <view class="tree-section">
-    <view class="section-title"><icon name="tree" size="36" color="#2BA471" /> 三代血统树</view>
+    <view class="section-title"><icon name="tree" size="36" color="var(--green)" /> 三代血统树</view>
     
     <view class="tree-container">
       <!-- 第四代（曾祖父母） -->
@@ -86,7 +86,7 @@
     <view class="inbreed-result">
       <view class="inbreed-status {{pedigree.inbreed_coefficient !== null && pedigree.inbreed_coefficient > 6.25 ? 'warning' : 'safe'}}">
         <block wx:if="{{pedigree.inbreed_coefficient !== null}}">
-          <icon name="check" size="24" color="#2BA471" /> 近亲系数：{{pedigree.inbreed_coefficient}}%
+          <icon name="check" size="24" color="var(--green)" /> 近亲系数：{{pedigree.inbreed_coefficient}}%
           <block wx:if="{{pedigree.inbreed_coefficient === 0}}">（无近亲关系）</block>
           <block wx:if="{{pedigree.inbreed_coefficient > 0 && pedigree.inbreed_coefficient <= 6.25}}">（低风险）</block>
         </block>

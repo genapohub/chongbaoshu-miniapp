@@ -66,7 +66,7 @@
     <text class="subscribe-desc">授权后可接收疫苗、驱虫、预产期的微信服务通知</text>
     <button class="subscribe-btn" bindtap="subscribeMessages">授权消息提醒</button>
   </view>
-      <view class="card-icon"><icon name="bug" size="36" color="#2BA471" /></view>
+      <view class="card-icon"><icon name="bug" size="36" color="var(--green)" /></view>
       <text class="card-title">驱虫提醒</text>
 
   <view class="card subscribe-card">

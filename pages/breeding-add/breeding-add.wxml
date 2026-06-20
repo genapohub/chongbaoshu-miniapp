@@ -41,7 +41,7 @@
     <view wx:if="{{inbreedingResult}}" class="inbreeding-result {{inbreedingResult.is_inbreeding ? 'warning' : 'success'}}">
       <view class="inbreeding-icon">
         <icon wx:if="{{inbreedingResult.is_inbreeding}}" name="warning" size="36" color="#F7BA1E" />
-        <icon wx:else name="check" size="28" color="#2BA471" />
+        <icon wx:else name="check" size="28" color="var(--green)" />
       </view>
       <view class="inbreeding-text">
         <text class="inbreeding-title">{{inbreedingResult.is_inbreeding ? '近亲检测警告' : '近亲检测通过'}}</text>

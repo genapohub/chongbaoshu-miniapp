@@ -16,7 +16,7 @@
     </swiper-item>
     <swiper-item>
       <view class="slide">
-        <view class="slide-icon"><icon name="certificate" size="120" color="#E34D59" /></view>
+        <view class="slide-icon"><icon name="certificate" size="120" color="var(--red)" /></view>
         <text class="slide-title">让生意更专业</text>
         <text class="slide-desc">管理意向客户，追踪销售进度\n血统证书+分享卡片，提升信任度</text>
       </view>

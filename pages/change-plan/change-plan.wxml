@@ -46,7 +46,7 @@
 
     <view class="notice-card upgrade-card">
       <view class="notice-header">
-        <view class="notice-icon"><icon name="trending" size="32" color="#2BA471" /></view>
+        <view class="notice-icon"><icon name="trending" size="32" color="var(--green)" /></view>
         <text class="notice-title">升级规则</text>
       </view>
       <view class="notice-list">

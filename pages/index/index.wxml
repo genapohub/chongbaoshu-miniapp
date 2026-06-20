@@ -114,11 +114,11 @@
         <text class="quick-label">添加宠物</text>
       </view>
       <view class="quick-item" bindtap="goAddBreeding">
-        <view class="quick-icon" style="background:#FDF3E5"><icon name="breeding-new" size="36" color="#D4914A" /></view>
+        <view class="quick-icon" style="background:#FFF4E5"><icon name="breeding-new" size="36" color="#D4914A" /></view>
         <text class="quick-label">添加配种</text>
       </view>
       <view class="quick-item" bindtap="goAddHealth">
-        <view class="quick-icon" style="background:#EDF7EC"><icon name="health-shield" size="36" color="#3D8B37" /></view>
+        <view class="quick-icon" style="background:#EDF4EF"><icon name="health-shield" size="36" color="var(--green)" /></view>
         <text class="quick-label">健康记录</text>
       </view>
       <view class="quick-item pro-item" bindtap="goPedigree">
@@ -133,16 +133,16 @@
   <!-- 生意管理 -->
   <view class="card">
     <view class="card-title">
-      <icon name="shop" size="36" color="#E34D59" />
+      <icon name="shop" size="36" color="var(--red)" />
       <text>生意管理</text>
     </view>
     <view class="quick-entry">
       <view class="quick-item" bindtap="goBuyerLeads">
-        <view class="quick-icon" style="background:#E3F2FD"><icon name="user" size="36" color="#1976D2" /></view>
+        <view class="quick-icon" style="background:#E3F2FD"><icon name="user" size="36" color="var(--green)" /></view>
         <text class="quick-label">意向客户</text>
       </view>
       <view class="quick-item" bindtap="goSales">
-        <view class="quick-icon" style="background:#FFEBEE"><icon name="money" size="36" color="#E34D59" /></view>
+        <view class="quick-icon" style="background:#FFEBEE"><icon name="money" size="36" color="var(--red)" /></view>
         <text class="quick-label">销售记录</text>
       </view>
       <view class="quick-item" bindtap="goLedger">
@@ -150,7 +150,7 @@
         <text class="quick-label">收支账本</text>
       </view>
       <view class="quick-item" bindtap="goLitters">
-        <view class="quick-icon" style="background:#F3E5F5"><icon name="baby" size="36" color="#7B1FA2" /></view>
+        <view class="quick-icon" style="background:#F3E5F5"><icon name="baby" size="36" color="var(--amber)" /></view>
         <text class="quick-label">同窝管理</text>
       </view>
     </view>

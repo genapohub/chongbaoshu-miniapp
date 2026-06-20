@@ -35,7 +35,7 @@
 }
 .data-card.primary { background: var(--green); }
 .data-card.orange  { background: var(--amber); }
-.data-card.green   { background: #3D8B37; }
+.data-card.green   { background: var(--green); }
 .data-num  { font-size: 48rpx; font-weight: 700; display: block; }
 .data-label { font-size: 22rpx; opacity: 0.85; margin-top: 8rpx; }
 

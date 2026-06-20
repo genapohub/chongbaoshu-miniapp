@@ -1,6 +1,6 @@
 .container { background: #F6F4F0; min-height: 100vh; padding: 24rpx; }
 .loading, .error { display: flex; flex-direction: column; align-items: center; padding-top: 200rpx; }
-.error-text { font-size: 28rpx; color: #E34D59; margin-top: 24rpx; }
+.error-text { font-size: 28rpx; color: var(--red); margin-top: 24rpx; }
 
 .cert-card { background: #FFF; border-radius: 16rpx; overflow: hidden; box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.06); }
 .cert-badge { display: flex; align-items: center; justify-content: center; padding: 32rpx; background: var(--green); gap: 12rpx; }

@@ -8,7 +8,7 @@
   </view>
 
   <view class="page-content">
-    <view class="success-icon"><icon name="check" size="64" color="#FFFFFF" bg="#2BA471" /></view>
+    <view class="success-icon"><icon name="check" size="64" color="#FFFFFF" bg="var(--green)" /></view>
     <view class="success-title">支付成功</view>
     <view class="success-desc">恭喜您已成功升级到{{planName}}</view>
     

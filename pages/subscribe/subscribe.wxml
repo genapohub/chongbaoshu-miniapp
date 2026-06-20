@@ -17,7 +17,7 @@
           <text class="price-symbol">¥</text>
           <text class="price-num">0</text>
         </view>
-        <view wx:if="{{selectedPlan === 'free'}}" class="check-icon"><icon name="check" size="36" color="#2BA471" /></view>
+        <view wx:if="{{selectedPlan === 'free'}}" class="check-icon"><icon name="check" size="36" color="var(--green)" /></view>
       </view>
 
       <view
@@ -37,7 +37,7 @@
           <text class="price-unit">/月</text>
           <view class="yearly-discount">年付¥39/月 · 省¥120</view>
         </view>
-        <view wx:if="{{selectedPlan === 'basic'}}" class="check-icon"><icon name="check" size="36" color="#2BA471" /></view>
+        <view wx:if="{{selectedPlan === 'basic'}}" class="check-icon"><icon name="check" size="36" color="var(--green)" /></view>
       </view>
 
       <view
@@ -56,7 +56,7 @@
           <text class="price-unit">/月</text>
           <view class="yearly-discount">年付¥99/月 · 省¥240</view>
         </view>
-        <view wx:if="{{selectedPlan === 'pro'}}" class="check-icon"><icon name="check" size="36" color="#2BA471" /></view>
+        <view wx:if="{{selectedPlan === 'pro'}}" class="check-icon"><icon name="check" size="36" color="var(--green)" /></view>
       </view>
     </view>
 
@@ -90,39 +90,39 @@
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">健康档案</view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">数据导出</view>
             <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">血统证书</view>
             <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
             <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">近亲检测</view>
             <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">优先提醒</view>
             <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
           </view>
           <view class="comparison-row">
             <view class="comparison-cell feature-cell">专属客服</view>
             <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
             <view class="comparison-cell cross"><icon name="close" size="24" color="#F54A45" /></view>
-            <view class="comparison-cell check"><icon name="check" size="24" color="#2BA471" /></view>
+            <view class="comparison-cell check"><icon name="check" size="24" color="var(--green)" /></view>
           </view>
         </view>
       </scroll-view>
