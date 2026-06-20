@@ -345,7 +345,6 @@ Page({
   // 跳转血统证书（Pro功能）
   goPedigree() {
     this.requireLogin(function() {
-      wx.navigateTo({ url: '/pages/pedigree/pedigree' });
     });
   },
 

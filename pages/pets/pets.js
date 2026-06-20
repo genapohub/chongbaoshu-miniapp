@@ -243,7 +243,6 @@ Page({
 
   goPayment() {
     this.setData({ showLimitModal: false });
-    wx.navigateTo({ url: '/pages/subscribe/subscribe' });
   },
 
   stopPropagation() {},
