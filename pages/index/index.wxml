@@ -19,6 +19,7 @@
   <view wx:if="{{userInfo && subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
     <view class="upgrade-content">
       <icon name="sparkle" size="40" color="#F7BA1E" />
+    </view>
     <icon name="chevron-right" size="28" color="#C0C4CC" />
   </view>
 
@@ -62,7 +63,7 @@
   </view>
 
   <!-- 待办提醒 -->
-  <view class="card card--cream">
+  <view class="card">
     <view class="card-title">
       <icon name="bell" size="36" color="#4A8C5C" />
       <text>待办提醒</text>
@@ -118,6 +119,10 @@
       <view class="quick-item" bindtap="goAddHealth">
         <view class="quick-icon" style="background:#EDF4EF"><icon name="health-shield" size="36" color="var(--green)" /></view>
         <text class="quick-label">健康记录</text>
+      </view>
+      <view class="quick-item pro-item" bindtap="goPedigree">
+        <view class="pro-badge">PRO</view>
+        <view class="quick-icon" style="background:#EDF4EF"><icon name="cert-tree" size="36" color="#4A8C5C" /></view>
       </view>
     </view>
   </view>
