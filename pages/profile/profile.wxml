@@ -1,16 +1,11 @@
-<!--
-  P21 我的页面 - 按设计稿一比一复刻
-  结构：头部渐变背景 → 订阅状态卡片 → 菜单列表 → 退出登录
--->
-<view class="container">
-  <!-- 头部 -->
-  <view class="profile-header" bindtap="onHeaderTap">
-    <view class="profile-avatar">
-      <image wx:if="{{displayAvatar}}" src="{{displayAvatar}}" mode="aspectFill" class="avatar-img" lazy-load />
-      <view wx:else class="avatar-placeholder"><icon name="user" size="48" color="#8F959E" /></view>
+<view class="profile-page">
+  <view class="profile-header">
+    <view class="profile-avatar-wrap">
+      <image wx:if="{{displayAvatar}}" class="profile-avatar" src="{{displayAvatar}}" mode="aspectFill" />
+      <view wx:else class="profile-avatar-placeholder">👤</view>
     </view>
     <text class="profile-name">{{displayName || '未设置昵称'}}</text>
-    <view wx:if="{{userInfo.subscription_tier === 'pro'}}" class="badge-pro">PRO</view>
+    <text wx:if="{{userInfo.subscription_tier === 'pro'}}" class="badge-amber">PRO</text>
     
     <view class="profile-stats">
       <view class="profile-stat">
@@ -27,42 +22,47 @@
       </view>
     </view>
   </view>
-
-  <view class="content">
-    <!-- 订阅信息 -->
-    <view class="sub-status-card">
-      <view class="ssc-left">
-        <text class="ssc-label">当前方案</text>
-        <text class="ssc-plan">{{subscriptionPlan}}</text>
-        <text class="ssc-expire" wx:if="{{expireDate}}">到期 {{expireDate}}</text>
+  
+  <view class="content-area">
+    <view class="card card-green" bindtap="goSubscription">
+      <text class="sub-label">当前方案</text>
+      <text class="sub-plan">{{subscriptionPlan}}</text>
+      <text class="sub-arrow">→</text>
+    </view>
+    
+    <view class="menu-list-bg">
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/profile-edit/profile-edit">
+        <text class="menu-icon">🏠</text>
+        <text class="menu-label">宠舍信息</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/remind-settings/remind-settings">
+        <text class="menu-icon">🔔</text>
+        <text class="menu-label">提醒设置</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/ledger/ledger">
+        <text class="menu-icon">📒</text>
+        <text class="menu-label">收支账本</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/sales/sales">
+        <text class="menu-icon">💰</text>
+        <text class="menu-label">销售记录</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/litters/litters">
+        <text class="menu-icon">🍼</text>
+        <text class="menu-label">同窝管理</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goAbout">
+        <text class="menu-icon">ℹ️</text>
+        <text class="menu-label">关于我们</text>
+        <text class="menu-arrow">→</text>
       </view>
     </view>
-
-    <!-- 菜单列表 -->
-    <view class="card menu-card">
-      <view class="menu-item" bindtap="goMenu" data-url="/pages/profile-edit/profile-edit">
-        <icon name="home" size="36" color="#4A8C5C" />
-        <text class="menu-text">宠舍信息</text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
-      <view class="menu-item" bindtap="goMenu" data-url="/pages/remind-settings/remind-settings">
-        <icon name="bell" size="36" color="#4A8C5C" />
-        <text class="menu-text">提醒设置</text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
-    </view>
-
-    <!-- 退出登录 -->
-    <view wx:if="{{isLoggedIn}}" class="btn btn-block logout-btn" bindtap="onLogout">退出登录</view>
-  </view>
-
-  <!-- 登录引导弹窗 -->
-  <view wx:if="{{showLoginGuide}}" class="login-guide-mask" bindtap="hideLoginGuide">
-    <view class="login-guide-modal" catchtap="stopPropagation">
-      <icon name="lock" size="48" color="#8F959E" />
-      <text class="login-guide-title">登录后即可使用</text>
-      <view class="login-guide-btn primary" bindtap="goLoginFromGuide">立即登录</view>
-      <view class="login-guide-btn secondary" bindtap="hideLoginGuide">稍后再说</view>
-    </view>
+    
+    <view wx:if="{{isLoggedIn}}" class="btn btn-outline btn-block logout-btn" bindtap="onLogout">退出登录</view>
   </view>
 </view>

@@ -1,21 +1,44 @@
-.container { min-height: 100vh; background: var(--bg); padding: 20rpx; padding-bottom: 180rpx; }
-.search { display: flex; align-items: center; background: var(--surface); border-radius: var(--radius-sm); padding: 18rpx 24rpx; margin-bottom: 24rpx; box-shadow: var(--shadow-sm); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.search-input { border: none; outline: none; font-size: 28rpx; flex: 1; margin-left: 14rpx; background: transparent; }
+.pet-page { padding: var(--sp-lg); padding-bottom: 200rpx; }
+
+.search-bar {
+  display: flex; align-items: center;
+  background: var(--surface); border-radius: var(--radius-full);
+  padding: 20rpx 32rpx; margin-bottom: var(--sp-lg);
+  box-shadow: var(--shadow);
+}
+.search-icon { font-size: 32rpx; color: var(--text3); margin-right: 16rpx; }
+.search-input { flex: 1; font-size: 28rpx; background: transparent; border: none; }
 .search-placeholder { color: var(--text3); }
-.filters { display: flex; gap: 16rpx; margin-bottom: 24rpx; white-space: nowrap; }
-.filter-tab { display: inline-flex; align-items: center; padding: 16rpx 30rpx; border-radius: 40rpx; font-size: 26rpx; background: var(--surface); color: var(--text2); border: 2rpx solid var(--line); }
-.filter-tab.active { background: var(--green); color: #fff; border-color: var(--green); }
-.pet-list { display: flex; flex-direction: column; gap: 18rpx; }
-.pet-card { display: flex; align-items: center; gap: 24rpx; padding: 28rpx; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-sm); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.pet-avatar { width: 112rpx; height: 112rpx; border-radius: var(--radius-sm); background: rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
-.avatar-img { width: 100%; height: 100%; border-radius: var(--radius-sm); }
+
+.filter-scroll { white-space: nowrap; margin-bottom: var(--sp-lg); }
+.filter-item {
+  display: inline-flex; align-items: center;
+  padding: 16rpx 32rpx; border-radius: var(--radius-full);
+  font-size: 26rpx; color: var(--text2); background: var(--surface);
+  margin-right: 16rpx; border: 2rpx solid transparent;
+}
+.filter-item.active {
+  background: var(--green); color: #fff;
+}
+
+.pet-list { display: flex; flex-direction: column; gap: var(--sp-md); }
+.pet-card {
+  display: flex; align-items: center; gap: var(--sp-lg);
+  background: var(--surface); border-radius: var(--radius);
+  padding: var(--sp-lg); box-shadow: var(--shadow);
+}
+.pet-avatar-wrap {
+  width: 120rpx; height: 120rpx; border-radius: var(--radius-sm);
+  overflow: hidden; flex-shrink: 0; background: rgba(0,0,0,0.03);
+}
+.pet-avatar { width: 100%; height: 100%; }
+.pet-avatar-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-size: 48rpx;
+}
 .pet-info { flex: 1; min-width: 0; }
-.pet-name-row { display: flex; align-items: center; gap: 12rpx; }
-.pet-name { font-size: 30rpx; font-weight: 600; }
-.pet-desc { font-size: 24rpx; color: var(--text3); margin-top: 6rpx; }
-.sale-price-badge { display: inline-block; padding: 4rpx 14rpx; background: rgba(212,83,74,0.08); color: var(--red); font-size: 22rpx; font-weight: 700; border-radius: 6rpx; margin-left: auto; }
-.limit-hint { background: var(--bg); border-radius: var(--radius); padding: 24rpx 28rpx; display: flex; align-items: center; justify-content: space-between; margin-top: 20rpx; }
-.limit-text { font-size: 26rpx; color: var(--green); font-weight: 600; }
-.limit-btn { background: var(--green); color: #fff; padding: 14rpx 28rpx; border-radius: 28rpx; font-size: 24rpx; font-weight: 600; }
-.empty-state { display: flex; flex-direction: column; align-items: center; padding: 180rpx 0; }
-.fab { position: fixed; bottom: 160rpx; right: 32rpx; width: 104rpx; height: 104rpx; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; box-shadow: 0 12rpx 32rpx rgba(74,140,92,0.35); z-index: 10; }
+.pet-name-row { display: flex; align-items: center; justify-content: space-between; }
+.pet-name { font-size: 32rpx; font-weight: 700; color: var(--text); }
+.price-tag { font-size: 26rpx; font-weight: 700; color: var(--red); }
+.pet-desc { font-size: 24rpx; color: var(--text3); margin-top: 8rpx; display: block; }
+.pet-arrow { font-size: 32rpx; color: var(--text3); flex-shrink: 0; }

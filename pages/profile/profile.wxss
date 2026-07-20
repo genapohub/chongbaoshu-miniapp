@@ -1,69 +1,42 @@
-/* 我的 — 毛玻璃 */
-
-.container { min-height: 100vh; background: var(--bg); }
+.profile-page { min-height: 100vh; background: var(--bg); }
 
 .profile-header {
-  background: var(--green);
-  padding: 64rpx 32rpx 48rpx; text-align: center; color: #fff;
+  background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+  padding: 100rpx var(--sp-xl) 60rpx; text-align: center; color: #fff;
+  position: relative;
 }
-.profile-avatar {
-  width: 128rpx; height: 128rpx; border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20rpx; overflow: hidden;
-  border: 3rpx solid rgba(255,255,255,0.3);
+.profile-avatar-wrap {
+  width: 140rpx; height: 140rpx; border-radius: 50%;
+  overflow: hidden; margin: 0 auto 20rpx;
+  border: 4rpx solid rgba(255,255,255,0.3);
 }
-.avatar-img { width: 100%; height: 100%; border-radius: 50%; }
-.profile-name { font-size: 36rpx; font-weight: 700; display: block; letter-spacing: 0.5rpx; }
-.badge-pro {
-  display: inline-flex; align-items: center; gap: 4rpx;
-  background: var(--amber); color: #fff;
-  padding: 4rpx 14rpx; border-radius: 6rpx;
-  font-size: 20rpx; font-weight: 700; margin-top: 10rpx;
+.profile-avatar { width: 100%; height: 100%; }
+.profile-avatar-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-size: 56rpx; background: rgba(255,255,255,0.1);
 }
+.profile-name { font-size: 38rpx; font-weight: 800; display: block; letter-spacing: 1rpx; }
 
 .profile-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24rpx; margin-top: 36rpx;
+  display: flex; justify-content: space-around; margin-top: 40rpx;
 }
 .profile-stat { display: flex; flex-direction: column; align-items: center; }
-.stat-num { font-size: 42rpx; font-weight: 700; }
-.stat-label { font-size: 22rpx; opacity: 0.8; margin-top: 6rpx; }
+.stat-num { font-size: 44rpx; font-weight: 800; }
+.stat-label { font-size: 22rpx; opacity: 0.8; margin-top: 8rpx; }
 
-.content { padding: 32rpx; padding-bottom: 160rpx; }
+.content-area { padding-bottom: 180rpx; }
 
-.sub-status-card {
-  background: var(--green-dark);
-  border-radius: var(--radius); padding: 32rpx;
-  color: #fff; display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 12rpx;
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+.card-green {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: #fff; margin: var(--sp-lg); padding: 32rpx;
+  border-radius: var(--radius); display: flex; align-items: center;
 }
-.ssc-left { display: flex; flex-direction: column; }
-.ssc-label { font-size: 22rpx; opacity: 0.8; }
-.ssc-plan { font-size: 32rpx; font-weight: 700; margin-top: 4rpx; }
-
-.card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 8rpx 0; margin-bottom: 24rpx;
-  box-shadow: var(--shadow);
-  -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass);
-}
-
-.menu-item {
-  display: flex; align-items: center;
-  padding: 30rpx 32rpx; border-bottom: 1rpx solid var(--line);
-}
-.menu-item:last-child { border-bottom: none; }
-.menu-text { flex: 1; font-size: 28rpx; color: var(--text); margin-left: 20rpx; }
-.menu-tag { background: var(--amber); color: #fff; padding: 4rpx 10rpx; border-radius: 4rpx; font-size: 20rpx; font-weight: 700; margin-left: 8rpx; }
+.sub-label { font-size: 22rpx; opacity: 0.7; }
+.sub-plan { font-size: 36rpx; font-weight: 800; flex: 1; margin-left: 8rpx; }
+.sub-arrow { font-size: 32rpx; opacity: 0.5; }
 
 .logout-btn {
-  border-radius: 48rpx; font-weight: 500;
-  background: rgba(0,0,0,0.04); color: var(--red);
-  text-align: center; padding: 26rpx; margin-top: 12rpx; font-size: 28rpx;
+  margin: var(--sp-lg); background: transparent;
+  border: 2rpx solid var(--red); color: var(--red);
+  font-weight: 600;
 }
-
-.ssc-expire { font-size: 20rpx; opacity: 0.7; margin-top: 4rpx; }
-.menu-card { padding: 0; }

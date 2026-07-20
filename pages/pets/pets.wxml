@@ -1,175 +1,33 @@
-<!--
-  P2 宠物列表 - 按设计稿一比一复刻
-  结构：搜索栏 → 物种筛选Tab → 宠物卡片列表 → 限额提示 → FAB按钮
--->
-<view class="container">
-  <!-- 搜索栏 -->
-  <view class="search">
-    <icon name="search" size="36" color="#8F959E" />
-    <input
-      class="search-input"
-      placeholder="搜索宠物名称…"
-      placeholder-class="search-placeholder"
-      value="{{searchKeyword}}"
-      bindinput="onSearch"
-    />
+<view class="pet-page">
+  <view class="search-bar">
+    <text class="search-icon">🔍</text>
+    <input class="search-input" placeholder="搜索宠物名称…" placeholder-class="search-placeholder" value="{{searchKeyword}}" bindinput="onSearch" />
   </view>
-
-  <!-- 物种筛选Tab -->
-  <scroll-view class="filters" scroll-x enable-flex>
-    <view
-      wx:for="{{filterTabs}}"
-      wx:key="key"
-      class="filter-tab {{currentFilter === item.key ? 'active' : ''}}"
-      data-key="{{item.key}}"
-      bindtap="onFilterTab"
-    >
-      <text wx:if="{{item.icon}}" class="filter-icon">{{item.icon}}</text>
-      <text class="filter-label">{{item.label}}</text>
+  
+  <scroll-view class="filter-scroll" scroll-x enable-flex>
+    <view wx:for="{{filterTabs}}" wx:key="key" class="filter-item {{currentFilter === item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="onFilterTab">
+      <text>{{item.icon}} {{item.label}}</text>
     </view>
   </scroll-view>
-
-  <!-- 宠物列表 -->
-  <view class="pet-list">
-    <view
-      wx:for="{{petList}}"
-      wx:key="id"
-      class="pet-card-container"
-    >
-      <view class="pet-delete-btn" bindtap="deletePet" data-pet="{{item}}">
-        <text>删除</text>
-      </view>
-      <view
-        class="pet-card"
-        data-id="{{item.id}}"
-        bindtap="goPetDetail"
-        bindtouchstart="onTouchStart"
-        bindtouchmove="onTouchMove"
-        bindtouchend="onTouchEnd"
-        style="transform: translateX({{item.translateX || 0}}rpx);"
-      >
-        <pet-avatar src="{{item.avatar}}" icon="{{item.speciesIcon}}" size="md" />
-        <view class="pet-info">
-          <view class="pet-name-row">
-            <text class="pet-name">{{item.name}}</text>
-            <status-badge wx:if="{{item.statusBadge}}" type="{{item.statusBadge.type}}" label="{{item.statusBadge.label}}" />
-            <view wx:if="{{item.is_for_sale && item.price}}" class="sale-price-badge">¥{{item.price / 100}}</view>
-          </view>
-          <text class="pet-desc">{{item.speciesLabel}} · {{item.genderLabel}} · {{item.age}}</text>
-        </view>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
-      </view>
-    </view>
-  </view>
-
-  <!-- 左滑提示 -->
-  <view wx:if="{{petList.length > 0}}" class="swipe-hint">
-    <icon name="arrow-left" size="32" color="#8F959E" />
-    <text class="swipe-hint-text">左滑显示删除按钮</text>
-  </view>
-
-  <!-- 限额提示 -->
-  <view wx:if="{{showLimitHint && petList.length > 0}}" class="limit-hint">
-    <view class="limit-text">{{currentTier || '免费版'}}限额 {{petCount}}/{{maxPets}} 只</view>
-    <view class="limit-desc">升级解锁更多宠物管理</view>
-    <view class="limit-btn" bindtap="goUpgrade">升级</view>
-  </view>
-
-  <!-- P14 限额弹窗 -->
-  <view wx:if="{{showLimitModal}}" class="limit-modal-overlay" bindtap="hideLimitModal">
-    <view class="limit-modal" catchtap="stopPropagation">
-      <view class="limit-modal-header">
-        <icon name="paw" size="40" color="#4A8C5C" />
-        <view class="limit-modal-title">宠物数量已达上限</view>
-        <view class="limit-modal-subtitle">免费版最多管理{{maxPets}}只宠物</view>
-      </view>
-      <view class="limit-modal-body">
-        <view class="limit-modal-progress">
-          <view class="limit-progress-info">
-            <text>当前使用</text>
-            <text class="limit-progress-num">{{petCount}}/{{maxPets}}</text>
-          </view>
-          <view class="limit-progress-bar">
-            <view class="limit-progress-fill" style="width: {{petCount/maxPets*100}}%"></view>
-          </view>
-        </view>
-        <view class="limit-modal-plans">
-          <view class="limit-plan {{selectedPlan === 'basic' ? 'selected' : ''}}" data-plan="basic" bindtap="selectPlan">
-            <view class="limit-plan-name">基础版</view>
-            <view class="limit-plan-price">¥49</view>
-            <view class="limit-plan-period">/月 · 100只</view>
-            <icon wx:if="{{selectedPlan === 'basic'}}" name="check" size="28" color="var(--green)" />
-          </view>
-          <view class="limit-plan {{selectedPlan === 'pro' ? 'selected' : ''}}" data-plan="pro" bindtap="selectPlan">
-            <view class="limit-plan-name">Pro</view>
-            <view class="limit-plan-price">¥119</view>
-            <view class="limit-plan-period">/月 · 无限</view>
-            <icon wx:if="{{selectedPlan === 'pro'}}" name="check" size="28" color="var(--green)" />
-          </view>
-        </view>
-        <view class="limit-modal-btn" bindtap="goPayment">立即升级</view>
-        <view class="limit-modal-cancel" bindtap="hideLimitModal">暂不升级</view>
-      </view>
-    </view>
-  </view>
-
   
-  <view wx:elif="{{error}}" class="error-state">
-    <text class="error-text">加载失败，请检查网络</text>
-    <view class="error-retry" bindtap="loadPets">重试</view>
-  </view>
-
-<!-- 空状态 -->
-  <empty-state wx:if="{{petList.length === 0 && !loading}}" icon="paw" text="{{!userInfo ? '登录后即可管理宠物' : '还没有宠物，添加第一只吧，点击下方添加'}}" />
-
-  <!-- 登录引导弹窗 -->
-  <view wx:if="{{showLoginGuide}}" class="login-guide-mask" bindtap="hideLoginGuide">
-    <view class="login-guide-modal" catchtap="stopPropagation">
-      <icon name="lock" size="48" color="#8F959E" />
-      <text class="login-guide-title">登录后即可使用</text>
-      <view class="login-guide-btn primary" bindtap="goLoginFromGuide">立即登录</view>
-      <view class="login-guide-btn secondary" bindtap="hideLoginGuide">稍后再说</view>
-    </view>
-  </view>
-
-  <!-- 删除确认弹窗 -->
-  <view wx:if="{{showDeleteModal}}" class="delete-modal-overlay" bindtap="cancelDelete">
-    <view class="delete-modal" catchtap="stopPropagation">
-      <icon name="warning" size="36" color="#F7BA1E" />
-      <view class="delete-modal-title">确认删除宠物？</view>
-      <view class="delete-modal-desc">删除后该宠物的所有档案、繁育记录、健康记录将无法恢复。</view>
-      <view class="delete-modal-stats">
-        <icon name="warning" size="28" color="#F7BA1E" />
-        <text>{{deletingPet.name || ''}}删除后关联数据将一并移除。</text>
+  <view class="pet-list">
+    <view wx:for="{{petList}}" wx:key="id" class="pet-card" bindtap="goPetDetail" data-id="{{item.id}}">
+      <view class="pet-avatar-wrap">
+        <image wx:if="{{item.avatar}}" class="pet-avatar" src="{{item.avatar}}" mode="aspectFill" />
+        <view wx:else class="pet-avatar-placeholder">{{item.speciesIcon}}</view>
       </view>
-      <view class="delete-modal-actions">
-        <view class="delete-modal-btn cancel" bindtap="cancelDelete">取消</view>
-        <view class="delete-modal-btn confirm" bindtap="confirmDelete">确认删除</view>
-      </view>
-    </view>
-  </view>
-
-  <!-- 无法删除弹窗 -->
-  <view wx:if="{{showCannotDeleteModal}}" class="delete-modal-overlay" bindtap="closeCannotDeleteModal">
-    <view class="delete-modal cannot-delete" catchtap="stopPropagation">
-      <icon name="ban" size="36" color="#F54A45" />
-      <view class="delete-modal-title">无法删除</view>
-      <view class="delete-modal-desc">该宠物存在进行中的繁育记录（怀孕中），请先将繁育状态更改为"已结束"后再删除。</view>
-      <view class="delete-modal-guide">
-        <view class="guide-title">
-          <icon name="lightbulb" size="28" color="#F7BA1E" />
-          <text> 操作指引：</text>
+      <view class="pet-info">
+        <view class="pet-name-row">
+          <text class="pet-name">{{item.name}}</text>
+          <text wx:if="{{item.is_for_sale && item.price}}" class="price-tag">¥{{item.price / 100}}</text>
         </view>
-        <text class="guide-step">1. 进入宠物详情 → 繁育Tab</text>
-        <text class="guide-step">2. 将当前繁育记录标记为"已结束"</text>
-        <text class="guide-step">3. 返回列表重新删除</text>
+        <text class="pet-desc">{{item.speciesLabel}} · {{item.genderLabel}} · {{item.age}}</text>
       </view>
-      <view class="delete-modal-actions">
-        <view class="delete-modal-btn confirm" bindtap="closeCannotDeleteModal">我知道了</view>
-      </view>
+      <text class="pet-arrow">→</text>
     </view>
   </view>
-
-  <!-- FAB 添加按钮 -->
-  <view class="fab" bindtap="goAddPet"><text class="fab-plus">+</text></view>
+  
+  <empty-state wx:if="{{petList.length === 0 && !loading}}" icon="paw" text="{{!userInfo ? '登录后即可管理宠物' : '还没有宠物，添加第一只吧'}}" />
+  
+  <view class="fab-btn" bindtap="goAddPet">+</view>
 </view>

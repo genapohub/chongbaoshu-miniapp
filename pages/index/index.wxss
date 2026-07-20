@@ -1,134 +1,71 @@
-/* 首页 — 毛玻璃·呼吸感 */
+.home-scroll { padding-bottom: 180rpx; }
 
-/* 升级条 */
 .upgrade-bar {
   display: flex; align-items: center; justify-content: space-between;
-  background: var(--green);
-  border-radius: var(--radius); padding: 22rpx 32rpx;
-  margin-bottom: 28rpx; color: #fff;
-  box-shadow: 0 4rpx 20rpx rgba(74,140,92,0.2);
+  background: rgba(74,140,92,0.1); border-radius: var(--radius);
+  padding: 24rpx 32rpx; margin: var(--sp-lg);
+  font-size: 26rpx; font-weight: 600; color: var(--green);
 }
-.upgrade-content { display: flex; align-items: center; gap: 14rpx; }
-.upgrade-text { font-size: 26rpx; font-weight: 600; }
+.upgrade-arrow { font-size: 32rpx; opacity: 0.5; }
 
-/* 订阅状态卡片 */
-.sub-status-card {
-  background: var(--green);
-  border-radius: var(--radius); padding: 36rpx;
-  color: #fff; margin-bottom: 28rpx;
-  box-shadow: 0 4rpx 24rpx rgba(74,140,92,0.25);
+.card-green {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: #fff;
 }
-.ssc-label { font-size: 22rpx; opacity: 0.7; }
-.ssc-plan  { font-size: 38rpx; font-weight: 800; margin-top: 8rpx; letter-spacing: 0.5rpx; }
-.ssc-meta  { display: flex; justify-content: space-between; margin-top: 24rpx; font-size: 22rpx; opacity: 0.85; }
-.ssc-upgrade { color: #fff; }
 
-/* 数据概览 */
-.data-overview {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 18rpx; margin-bottom: 28rpx;
-}
-.data-card {
-  border-radius: var(--radius); padding: 32rpx 16rpx;
-  color: #fff; text-align: center;
-  box-shadow: var(--shadow);
-}
-.data-card.primary { background: var(--green); }
-.data-card.orange  { background: var(--amber); }
-.data-card.green   { background: var(--green); }
-.data-num  { font-size: 48rpx; font-weight: 700; display: block; }
-.data-label { font-size: 22rpx; opacity: 0.85; margin-top: 8rpx; }
+.card-sm { padding: 32rpx; }
 
-/* 待办提醒 */
-.reminder-row {
-  display: flex; align-items: center; gap: 22rpx;
-  padding: 22rpx 0; border-bottom: 1rpx solid var(--line);
+.sub-label { font-size: 22rpx; opacity: 0.7; display: block; }
+.sub-plan { font-size: 36rpx; font-weight: 800; margin-top: 8rpx; display: block; }
+.sub-meta {
+  display: flex; justify-content: space-between; margin-top: 24rpx;
+  font-size: 22rpx; opacity: 0.85;
 }
-.reminder-row:last-child { border-bottom: none; }
-.reminder-icon-wrap {
-  width: 64rpx; height: 64rpx; border-radius: 16rpx;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  background: rgba(0,0,0,0.03);
-}
-.reminder-content { flex: 1; min-width: 0; }
-.reminder-top { display: flex; align-items: center; gap: 12rpx; }
-.reminder-pet-name { font-size: 28rpx; font-weight: 600; color: var(--text); }
-.reminder-badge {
-  padding: 4rpx 12rpx; border-radius: 4rpx;
-  font-size: 20rpx; font-weight: 600; flex-shrink: 0;
-}
-.reminder-bottom { display: flex; align-items: center; gap: 14rpx; margin-top: 8rpx; }
-.reminder-type-text { font-size: 24rpx; color: var(--text2); }
-.reminder-date-hint  { font-size: 24rpx; font-weight: 500; }
 
-/* 快捷入口 */
-.quick-entry {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24rpx;
+.stats {
+  display: flex; gap: var(--sp-md); padding: 0 var(--sp-lg); margin-bottom: var(--sp-lg);
+}
+.stat {
+  flex: 1; border-radius: var(--radius); padding: 28rpx 20rpx;
+  text-align: center;
+}
+.stat.bg-green { background: var(--green); }
+.stat.bg-amber { background: var(--amber); }
+.stat.bg-teal { background: var(--teal); }
+.stat-num { font-size: 48rpx; font-weight: 800; color: #fff; display: block; }
+.stat-label { font-size: 22rpx; color: rgba(255,255,255,0.8); margin-top: 8rpx; display: block; }
+
+.section-title { font-size: 28rpx; font-weight: 700; color: var(--text); margin-bottom: var(--sp-md); display: block; }
+
+.reminder {
+  display: flex; align-items: center; padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.reminder:last-child { border-bottom: none; }
+.rem-icon { font-size: 48rpx; width: 72rpx; text-align: center; }
+.rem-content { flex: 1; }
+.rem-name { font-size: 28rpx; font-weight: 600; color: var(--text); display: block; }
+.rem-type { font-size: 24rpx; color: var(--text2); margin-top: 6rpx; display: block; }
+
+.grid4 {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32rpx;
 }
 .quick-item {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 10rpx; position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 12rpx;
+  position: relative;
 }
 .quick-icon {
-  width: 80rpx; height: 80rpx; border-radius: 20rpx;
+  width: 80rpx; height: 80rpx; border-radius: var(--radius-sm);
   display: flex; align-items: center; justify-content: center;
+  font-size: 36rpx;
 }
 .quick-label { font-size: 22rpx; color: var(--text2); }
-.pro-badge {
-  position: absolute; top: -6rpx; right: -6rpx;
-  background: var(--amber); color: #fff; font-size: 18rpx;
-  font-weight: 700; padding: 2rpx 10rpx; border-radius: 8rpx;
-}
 
-/* 最近动态 */
-.activity-row {
-  display: flex; align-items: flex-start; gap: 18rpx;
-  padding: 20rpx 0; border-bottom: 1rpx solid var(--line);
+.loading-state { padding: 120rpx; text-align: center; }
+.error-state { padding: 180rpx var(--sp-lg); text-align: center; }
+.error-text { font-size: 28rpx; color: var(--text3); display: block; }
+.error-retry {
+  margin-top: 32rpx; padding: 20rpx 48rpx;
+  background: var(--green); color: #fff;
+  border-radius: 48rpx; font-size: 28rpx; display: inline-block;
 }
-.activity-row:last-child { border-bottom: none; }
-.activity-icon-wrap {
-  width: 52rpx; height: 52rpx; border-radius: 14rpx;
-  background: rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.activity-content { flex: 1; min-width: 0; }
-.activity-text { font-size: 26rpx; color: var(--text); display: block; line-height: 1.6; }
-.activity-time { font-size: 22rpx; color: var(--text3); margin-top: 6rpx; display: block; }
-
-/* 游客引导卡片 */
-.guest-card { background: var(--green); }
-.guest-card-content { display: flex; align-items: center; gap: 22rpx; }
-.guest-card-text { display: flex; flex-direction: column; }
-.guest-card-title { font-size: 30rpx; font-weight: 700; color: #fff; }
-.guest-card-desc  { font-size: 24rpx; color: rgba(255,255,255,0.8); margin-top: 6rpx; }
-
-/* 登录引导弹窗 */
-.login-guide-mask {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.35);
-  display: flex; align-items: center; justify-content: center; z-index: 1000;
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-}
-.login-guide-modal {
-  background: rgba(255,255,255,0.88);
-  border-radius: var(--radius);
-  padding: 56rpx 48rpx; width: 80%; max-width: 560rpx; text-align: center;
-  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-lg);
-}
-.login-guide-icon  { font-size: 80rpx; margin-bottom: 24rpx; }
-.login-guide-title { font-size: 34rpx; font-weight: 700; color: var(--text); }
-.login-guide-desc  { font-size: 26rpx; color: var(--text2); margin: 16rpx 0 44rpx; }
-.login-guide-btn   { padding: 26rpx; border-radius: 48rpx; font-size: 30rpx; font-weight: 600; margin-bottom: 14rpx; }
-.login-guide-btn.primary   { background: var(--green); color: #fff; }
-.login-guide-btn.secondary { background: rgba(0,0,0,0.04); color: var(--text2); }
-
-.error-state { display: flex; flex-direction: column; align-items: center; padding: 180rpx 48rpx; }
-.error-text  { font-size: 28rpx; color: var(--text3); margin-top: 28rpx; display: block; }
-.error-retry { margin-top: 36rpx; padding: 18rpx 56rpx; background: var(--green); color: #fff; border-radius: 48rpx; font-size: 28rpx; display: inline-block; }
-
-.login-state { display: flex; flex-direction: column; align-items: center; padding: 140rpx 40rpx; text-align: center; }
-.login-icon    { font-size: 120rpx; margin-bottom: 24rpx; }
-.login-title   { font-size: 44rpx; font-weight: 800; color: var(--green); letter-spacing: 1rpx; }
-.login-subtitle { font-size: 28rpx; color: var(--text2); margin-top: 14rpx; }

@@ -1,116 +1,88 @@
-<!--
-  P4 宠物详情 - 按设计稿一比一复刻
-  结构：头部信息 → 4Tab切换（概览/繁育/健康/血统）→ 各Tab内容
--->
-<view class="container">
-  <!-- 加载状态 -->
-  <loading-spinner wx:if="{{loading}}" />
-
-  <!-- 头部信息 -->
-  <view wx:elif="{{pet.name}}" class="pet-header">
-    <pet-avatar src="{{pet.avatar}}" icon="{{pet.speciesIcon}}" size="lg" radius="16rpx" />
-    <view class="pet-info">
-      <text class="pet-name">{{pet.name}}</text>
-      <text class="pet-desc">{{pet.speciesLabel}} · {{pet.genderLabel}} · {{pet.age}}</text>
-      <view class="pet-status">{{pet.statusLabel}}</view>
+<view class="detail-page">
+  <view class="pet-header">
+    <view class="pet-avatar-wrap">
+      <image wx:if="{{pet.avatar}}" class="pet-avatar-lg" src="{{pet.avatar}}" mode="aspectFill" />
+      <view wx:else class="pet-avatar-placeholder-lg">{{pet.speciesIcon}}</view>
     </view>
-    <view class="edit-btn" bindtap="goEdit">
-      <icon name="edit" size="36" color="#4A8C5C" />
-    </view>
+    <text class="pet-name-lg">{{pet.name}}</text>
+    <text class="pet-desc-lg">{{pet.speciesLabel}} · {{pet.genderLabel}} · {{pet.age}}</text>
+    <view class="pet-status-badge">{{pet.statusLabel}}</view>
   </view>
-
-  <!-- Tab切换 -->
+  
   <view class="detail-tabs">
-    <view
-      wx:for="{{tabs}}"
-      wx:key="key"
-      class="detail-tab {{currentTab === item.key ? 'active' : ''}}"
-      data-key="{{item.key}}"
-      bindtap="switchTab"
-    >
+    <view wx:for="{{tabs}}" wx:key="key" class="detail-tab {{currentTab === item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="switchTab">
       {{item.label}}
     </view>
   </view>
-
-  <!-- 概览Tab -->
+  
   <view wx:if="{{currentTab === 'overview'}}" class="tab-content">
     <view class="card">
-      <field-row label="物种" value="{{pet.speciesLabel}}" />
-      <field-row label="品种" value="{{pet.breed}}" />
-      <field-row label="性别" value="{{pet.genderLabel}}" />
-      <field-row label="售价" value="{{pet.price ? '¥' + (pet.price/100) : '未设置'}}" />
-      <field-row label="在售状态" value="{{pet.is_for_sale ? '在售中' : '非在售'}}" />
-      <field-row label="出生日期" value="{{pet.birthDate}}" />
-      <field-row label="毛色" value="{{pet.color}}" />
-      <field-row label="芯片号" value="{{pet.chipNo}}" />
+      <text class="section-title">基本信息</text>
+      <view class="field-row"><text class="field-label">物种</text><text class="field-value">{{pet.speciesLabel}}</text></view>
+      <view class="field-row"><text class="field-label">品种</text><text class="field-value">{{pet.breed || '—'}}</text></view>
+      <view class="field-row"><text class="field-label">性别</text><text class="field-value">{{pet.genderLabel}}</text></view>
+      <view class="field-row"><text class="field-label">售价</text><text class="field-value">{{pet.price ? '¥' + (pet.price/100) : '未设置'}}</text></view>
+      <view class="field-row"><text class="field-label">在售状态</text><text class="field-value">{{pet.is_for_sale ? '在售中' : '非在售'}}</text></view>
+      <view class="field-row"><text class="field-label">出生日期</text><text class="field-value">{{pet.birthDate || '—'}}</text></view>
+      <view class="field-row"><text class="field-label">毛色</text><text class="field-value">{{pet.color || '—'}}</text></view>
+      <view class="field-row"><text class="field-label">芯片号</text><text class="field-value">{{pet.chipNo || '—'}}</text></view>
     </view>
-
-    <view class="card photo-card">
-      <view class="card-header">
-        <text class="card-title">照片</text>
-        <text class="photo-count">({{photoCount}}/{{maxPhotos}})</text>
-        <text class="pro-tag" wx:if="{{isPro}}">PRO</text>
-      </view>
+    
+    <view class="card">
+      <text class="section-title">照片 ({{photoCount}}/{{maxPhotos}})</text>
       <view class="photo-grid">
-        <view wx:for="{{pet.photos}}" wx:key="index" class="photo-item">
-          <image src="{{item}}" mode="aspectFill" class="photo-img" lazy-load />
-        </view>
-        <view wx:if="{{canAddPhoto}}" class="photo-add" bindtap="addPhoto"><icon name="plus" size="44" color="#FFFFFF" /></view>
+        <view wx:for="{{pet.photos}}" wx:key="index" class="photo-item"><image src="{{item}}" mode="aspectFill" class="photo-img" /></view>
+        <view wx:if="{{canAddPhoto}}" class="photo-add" bindtap="addPhoto">+</view>
       </view>
-      <view class="form-hint">免费版每只3张，基础版每只10张，Pro版每只20张</view>
+    </view>
+    
+    <view class="card">
+      <text class="section-title">操作</text>
+      <view class="btn btn-green btn-block" bindtap="goEdit">编辑宠物信息</view>
     </view>
   </view>
-
-  <!-- 繁育Tab -->
+  
   <view wx:if="{{currentTab === 'breeding'}}" class="tab-content">
     <view class="card">
-      <view class="card-title"><icon name="heart" size="36" color="#F54A45" /><text>繁育记录</text></view>
-      <view wx:for="{{breedingRecords}}" wx:key="id" class="breeding-item" data-id="{{item.id}}" bindtap="goBreedingDetail">
-        <view class="breeding-info">
-          <text class="breeding-name">{{item.name}}</text>
-          <text class="breeding-date">{{item.date}}</text>
+      <text class="section-title">🐕 繁育记录</text>
+      <view wx:for="{{breedingRecords}}" wx:key="id" class="record-row" bindtap="goBreedingDetail" data-id="{{item.id}}">
+        <view class="record-info">
+          <text class="record-name">{{item.name}}</text>
+          <text class="record-date">{{item.date}}</text>
         </view>
-        <status-badge type="{{item.statusType}}" label="{{item.status}}" />
+        <text class="record-arrow">→</text>
       </view>
-      <view wx:if="{{breedingRecords.length === 0}}" class="empty-card">暂无繁育记录</view>
+      <empty-state wx:if="{{breedingRecords.length === 0}}" text="暂无繁育记录" subText="点击下方添加配种记录" />
     </view>
-    <view class="btn btn-primary btn-block" bindtap="goAddBreeding"><icon name="plus" size="32" color="#FFFFFF" />添加配种记录</view>
+    <view class="btn btn-green btn-block" bindtap="goAddBreeding">添加配种记录</view>
   </view>
-
-  <!-- 健康Tab -->
+  
   <view wx:if="{{currentTab === 'health'}}" class="tab-content">
     <view class="card">
-      <view class="card-title"><icon name="syringe" size="36" color="#2D9CDB" /><text>健康记录</text></view>
-      <view wx:for="{{healthRecords}}" wx:key="id" class="health-item" data-id="{{item.id}}" bindtap="goHealthDetail">
-        <view class="health-info">
-          <view class="health-header">
-            <text class="health-name">{{item.name}}</text>
-            <status-badge type="{{item.statusType}}" label="{{item.status}}" />
-          </view>
-          <text class="health-date">{{item.date}} · 下次：{{item.nextDate}}</text>
+      <text class="section-title">💉 健康记录</text>
+      <view wx:for="{{healthRecords}}" wx:key="id" class="record-row" bindtap="goHealthDetail" data-id="{{item.id}}">
+        <view class="record-info">
+          <text class="record-name">{{item.name}}</text>
+          <text class="record-date">{{item.date}} · 下次：{{item.nextDate}}</text>
         </view>
+        <text class="record-arrow">→</text>
       </view>
-      <view wx:if="{{healthRecords.length === 0}}" class="empty-card">暂无健康记录</view>
+      <empty-state wx:if="{{healthRecords.length === 0}}" text="暂无健康记录" subText="点击下方添加健康记录" />
     </view>
-    <view class="btn btn-primary btn-block" bindtap="goAddHealth"><icon name="plus" size="32" color="#FFFFFF" />添加健康记录</view>
+    <view class="btn btn-green btn-block" bindtap="goAddHealth">添加健康记录</view>
   </view>
-
-  <!-- 血统Tab -->
+  
   <view wx:if="{{currentTab === 'pedigree'}}" class="tab-content">
     <view class="card">
-      <view class="card-title"><icon name="document" size="36" color="#8B5CF6" /><text>血统信息 <text class="pro-tag">PRO</text></text></view>
-      <field-row label="注册名" value="{{isPro ? pedigree.regName : ''}}" empty="—" />
-      <field-row label="注册号" value="{{isPro ? pedigree.regNo : ''}}" empty="—" />
-      <field-row label="犬舍名" value="{{isPro ? pedigree.kennel : ''}}" empty="—" />
-      <field-row label="毛色(血统)" value="{{isPro ? pedigree.color : ''}}" empty="—" />
-      <field-row label="父亲" value="{{isPro ? pedigree.father : ''}}" empty="—" />
-      <field-row label="母亲" value="{{isPro ? pedigree.mother : ''}}" empty="—" />
-      <field-row label="父方祖父" value="{{isPro ? pedigree.fatherFather : ''}}" empty="—" />
-      <field-row label="父方祖母" value="{{isPro ? pedigree.fatherMother : ''}}" empty="—" />
-      <field-row label="母方祖父" value="{{isPro ? pedigree.motherFather : ''}}" empty="—" />
-      <field-row label="母方祖母" value="{{isPro ? pedigree.motherMother : ''}}" empty="—" />
+      <text class="section-title">📜 血统信息</text>
+      <view class="field-row"><text class="field-label">注册名</text><text class="field-value">{{isPro ? pedigree.regName : '—'}}</text></view>
+      <view class="field-row"><text class="field-label">注册号</text><text class="field-value">{{isPro ? pedigree.regNo : '—'}}</text></view>
+      <view class="field-row"><text class="field-label">犬舍名</text><text class="field-value">{{isPro ? pedigree.kennel : '—'}}</text></view>
+      <view class="field-row"><text class="field-label">毛色(血统)</text><text class="field-value">{{isPro ? pedigree.color : '—'}}</text></view>
+      <view class="field-row"><text class="field-label">父亲</text><text class="field-value">{{isPro ? pedigree.father : '—'}}</text></view>
+      <view class="field-row"><text class="field-label">母亲</text><text class="field-value">{{isPro ? pedigree.mother : '—'}}</text></view>
     </view>
     <view class="btn btn-outline btn-block" bindtap="goPedigreeCert">查看血统证书 →</view>
-    <view class="btn btn-primary btn-block" bindtap="goShareCard">📤 生成分享卡片</view>
+    <view class="btn btn-green btn-block" bindtap="goShareCard">📤 生成分享卡片</view>
   </view>
 </view>

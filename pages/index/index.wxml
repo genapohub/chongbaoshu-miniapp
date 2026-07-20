@@ -1,173 +1,117 @@
-<!--
-  P1 工作台首页
-  结构：升级引导条 → 订阅状态卡片 → 数据概览 → 待办提醒 → 快捷入口 → 最近动态
--->
-<view class="container">
-  <!-- 加载状态 -->
-  <loading-spinner wx:if="{{loading}}" />
-
-  <!-- 错误状态：API 加载失败时提示 -->
+<view class="home-scroll">
+  <view wx:if="{{loading}}" class="loading-state">
+    <loading-spinner />
+  </view>
+  
   <view wx:elif="{{error}}" class="error-state">
-    <icon name="warning" size="72" color="#E0903C" />
     <text class="error-text">数据加载失败，请检查网络</text>
     <view class="error-retry" bindtap="loadData">点击重试</view>
   </view>
-
-  <!-- 已登录/游客模式 - 主要内容（游客也可浏览） -->
-  <view wx:elif="{{!loading}}">
-  <!-- 升级引导条（免费用户显示，游客不显示） -->
-  <view wx:if="{{userInfo && subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
-    <view class="upgrade-content">
-      <icon name="sparkle" size="40" color="#F7BA1E" />
-      <text class="upgrade-text">升级Pro，解锁血统证书与无限宠物</text>
+  
+  <view wx:else>
+    <view wx:if="{{userInfo && subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
+      <text>🌟 升级Pro，解锁血统证书与无限宠物</text>
+      <text class="upgrade-arrow">→</text>
     </view>
-    <icon name="chevron-right" size="28" color="#C0C4CC" />
-  </view>
-
-  <!-- 订阅状态卡片（已登录） -->
-  <view wx:if="{{userInfo}}" class="sub-status-card">
-    <text class="ssc-label">当前方案</text>
-    <text class="ssc-plan">{{subscriptionPlan}}</text>
-    <view class="ssc-meta">
-      <text>宠物 {{petCount}}/{{maxPets}}</text>
-      <text>配种记录 {{breedingCount}}/{{maxBreedingRecords}}</text>
-      <view class="ssc-upgrade" bindtap="goSubscription"><text>升级 </text><icon name="chevron-right" size="24" color="#C0C4CC" /></view>
-    </view>
-  </view>
-
-  <!-- 游客引导卡片（未登录） -->
-  <view wx:else class="sub-status-card guest-card" bindtap="goLogin">
-    <view class="guest-card-content">
-      <icon name="paw" size="40" color="#4A8C5C" />
-      <view class="guest-card-text">
-        <text class="guest-card-title">登录解锁全部功能</text>
-        <text class="guest-card-desc">添加宠物、记录健康、管理繁育</text>
+    
+    <view wx:if="{{userInfo}}" class="card card-sm card-green" bindtap="goSubscription">
+      <text class="sub-label">当前方案</text>
+      <text class="sub-plan">Pro 专业版</text>
+      <view class="sub-meta">
+        <text>宠物 {{petCount}}/无限</text>
+        <text>配种 {{breedingCount}}/无限</text>
+        <text>升级 →</text>
       </view>
     </view>
-    <icon name="chevron-right" size="28" color="#C0C4CC" />
-  </view>
-
-  <!-- 数据概览 -->
-  <view class="data-overview">
-    <view class="data-card primary">
-      <text class="data-num">{{petCount}}</text>
-      <text class="data-label">宠物</text>
+    
+    <view wx:else class="card card-sm card-green" bindtap="goLogin">
+      <text class="sub-label">当前方案</text>
+      <text class="sub-plan">免费版</text>
+      <view class="sub-meta">
+        <text>宠物 {{petCount}}/5</text>
+        <text>配种 {{breedingCount}}/3</text>
+        <text>升级 →</text>
+      </view>
     </view>
-    <view class="data-card orange">
-      <text class="data-num">{{breedingInProgressCount}}</text>
-      <text class="data-label">配种中</text>
+    
+    <view class="stats">
+      <view class="stat bg-green">
+        <text class="stat-num">{{petCount}}</text>
+        <text class="stat-label">宠物</text>
+      </view>
+      <view class="stat bg-amber">
+        <text class="stat-num">{{breedingInProgressCount}}</text>
+        <text class="stat-label">繁育中</text>
+      </view>
+      <view class="stat bg-teal">
+        <text class="stat-num">{{reminderCount}}</text>
+        <text class="stat-label">健康记录</text>
+      </view>
     </view>
-    <view class="data-card green">
-      <text class="data-num">{{reminderCount}}</text>
-      <text class="data-label">健康提醒</text>
-    </view>
-  </view>
-
-  <!-- 待办提醒 -->
-  <view class="card">
-    <view class="card-title">
-      <icon name="bell" size="36" color="#4A8C5C" />
-      <text>待办提醒</text>
-    </view>
-    <view wx:if="{{reminders.length > 0}}">
-      <view
-        wx:for="{{reminders}}"
-        wx:key="id"
-        class="reminder-row"
-        hover-class="reminder-row-hover"
-        bindtap="onReminderTap"
-        data-item="{{item}}"
-      >
-        <view class="reminder-icon-wrap" style="background: {{item.badgeBg}}">
-          <icon name="{{item.icon}}" size="36" color="#FFFFFF" />
-        </view>
-        <view class="reminder-content">
-          <view class="reminder-top">
-            <text class="reminder-pet-name">{{item.petName}}</text>
-            <view class="reminder-badge" style="background: {{item.badgeBg}}; color: {{item.badgeColor}}">{{item.badge}}</view>
-          </view>
-          <view class="reminder-bottom">
-            <text class="reminder-type-text">{{item.typeText}}</text>
-            <text class="reminder-date-hint" style="color: {{item.color}}">{{item.dateHint}}</text>
+    
+    <view class="card">
+      <text class="section-title">⏰ 待办提醒</text>
+      <view wx:if="{{reminders.length > 0}}">
+        <view
+          wx:for="{{reminders}}"
+          wx:key="id"
+          class="reminder"
+          bindtap="onReminderTap"
+          data-item="{{item}}"
+        >
+          <view class="rem-icon">{{item.iconEmoji}}</view>
+          <view class="rem-content">
+            <text class="rem-name">{{item.petName}}<text class="badge badge-red" wx:if="{{item.status === 'overdue'}}">已过期</text><text class="badge badge-orange" wx:elif="{{item.status === 'soon'}}">即将到期</text><text class="badge badge-green" wx:else>计划中</text></text>
+            <text class="rem-type">{{item.typeText}}</text>
           </view>
         </view>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
+      <empty-state wx:else type="no-record" text="暂无待办提醒" subText="宠物健康和繁育提醒会显示在这里" />
     </view>
-    <empty-state
-      wx:else
-      type="no-record"
-      text="暂无待办提醒"
-      subText="宠物健康和繁育提醒会显示在这里"
-    />
-  </view>
-
-  <!-- 快捷入口 -->
-  <view class="card">
-    <view class="card-title">
-      <icon name="lightning" size="36" color="#4A8C5C" />
-      <text>快捷入口</text>
-    </view>
-    <view class="quick-entry">
-      <view class="quick-item" bindtap="goAddPet">
-        <view class="quick-icon" style="background:#EDF4EF"><icon name="pet-add" size="36" color="#4A8C5C" v="2" /></view>
-        <text class="quick-label">添加宠物</text>
-      </view>
-      <view class="quick-item" bindtap="goAddBreeding">
-        <view class="quick-icon" style="background:#FDF3E5"><icon name="breeding-new" size="36" color="#D4914A" v="2" /></view>
-        <text class="quick-label">添加配种</text>
-      </view>
-      <view class="quick-item" bindtap="goAddHealth">
-        <view class="quick-icon" style="background:#EDF7EC"><icon name="health-shield" size="36" color="#3D8B37" /></view>
-        <text class="quick-label">健康记录</text>
-      </view>
-      <view class="quick-item pro-item" bindtap="goPedigree">
-        <view class="pro-badge">PRO</view>
-        <view class="quick-icon" style="background:#EDF4EF"><icon name="cert-tree" size="36" color="#4A8C5C" /></view>
-        <text class="quick-label">血统证书</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- 最近动态 -->
-  <view class="card">
-    <view class="card-title">
-      <icon name="clock" size="36" color="#646A73" />
-      <text>最近动态</text>
-    </view>
-    <view wx:if="{{recentActivities.length > 0}}">
-      <view
-        wx:for="{{recentActivities}}"
-        wx:key="index"
-        class="activity-row"
-      >
-        <view class="activity-icon-wrap">
-          <icon name="{{item.icon}}" size="32" color="{{item.iconColor}}" />
+    
+    <view class="card">
+      <text class="section-title">💼 生意管理</text>
+      <view class="grid4">
+        <view class="quick-item" bindtap="goBuyerLeads">
+          <view class="quick-icon" style="background:#E3F2FD">👤</view>
+          <text class="quick-label">意向客户</text>
         </view>
-        <view class="activity-content">
-          <text class="activity-text">{{item.text}}</text>
-          <text class="activity-time">{{item.time}}</text>
+        <view class="quick-item" bindtap="goSales">
+          <view class="quick-icon" style="background:#FFEBEE">💰</view>
+          <text class="quick-label">销售记录</text>
+        </view>
+        <view class="quick-item" bindtap="goLedger">
+          <view class="quick-icon" style="background:#FFF3E0">📒</view>
+          <text class="quick-label">收支账本</text>
+        </view>
+        <view class="quick-item" bindtap="goLitters">
+          <view class="quick-icon" style="background:#F3E5F5">🍼</view>
+          <text class="quick-label">同窝管理</text>
         </view>
       </view>
     </view>
-    <empty-state
-      wx:else
-      type="no-record"
-      text="暂无动态"
-      subText="添加宠物或记录后，动态会显示在这里"
-    />
-  </view>
-
-  <!-- 未登录且已加载完成时，不显示单独的登录状态页面，上方游客可浏览的布局已覆盖 -->
-
-  <!-- 登录引导弹窗 -->
-  <view wx:if="{{showLoginGuide}}" class="login-guide-mask" bindtap="hideLoginGuide">
-    <view class="login-guide-modal" catchtap="stopPropagation">
-      <icon name="lock" size="48" color="#8F959E" />
-      <text class="login-guide-title">登录后即可使用</text>
-      <view class="login-guide-btn primary" bindtap="goLoginFromGuide">立即登录</view>
-      <view class="login-guide-btn secondary" bindtap="hideLoginGuide">稍后再说</view>
+    
+    <view class="card">
+      <text class="section-title">⚡ 快捷入口</text>
+      <view class="grid4">
+        <view class="quick-item" bindtap="goAddPet">
+          <view class="quick-icon" style="background:#EDF4EF">➕</view>
+          <text class="quick-label">添加宠物</text>
+        </view>
+        <view class="quick-item" bindtap="goAddBreeding">
+          <view class="quick-icon" style="background:#FFF4E5">🐕</view>
+          <text class="quick-label">添加配种</text>
+        </view>
+        <view class="quick-item" bindtap="goAddHealth">
+          <view class="quick-icon" style="background:#E8F5E9">💚</view>
+          <text class="quick-label">健康记录</text>
+        </view>
+        <view class="quick-item" style="position:relative" bindtap="goPedigree">
+          <view class="quick-icon" style="background:#EDF4EF">📜</view>
+          <text class="quick-label">血统证书</text>
+          <text class="badge-amber">PRO</text>
+        </view>
+      </view>
     </view>
   </view>
-  </view> <!-- 关闭 wx:elif -->
 </view>

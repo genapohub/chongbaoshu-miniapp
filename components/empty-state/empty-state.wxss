@@ -1,52 +1,37 @@
-/* empty-state — 飞书风格 */
-
 .empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 100rpx 40rpx;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 120rpx 40rpx;
 }
 
 .empty-icon-wrap {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 28rpx;
+  width: 160rpx; height: 160rpx; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 32rpx;
 }
 
-.empty-empty     .empty-icon-wrap { background: #F6F4F0; }
-.empty-error     .empty-icon-wrap { background: #FEF0EF; }
-.empty-network   .empty-icon-wrap { background: #FFF8E1; }
-.empty-no-pet    .empty-icon-wrap { background: #E8F0FE; }
-.empty-no-record .empty-icon-wrap { background: #F6F4F0; }
+.empty-empty .empty-icon-wrap { background: rgba(0,0,0,0.03); }
+.empty-error .empty-icon-wrap { background: #FEF0EF; }
+.empty-network .empty-icon-wrap { background: #FFF8E1; }
+.empty-no-pet .empty-icon-wrap { background: #E8F0FE; }
+.empty-no-record .empty-icon-wrap { background: rgba(0,0,0,0.03); }
 
 .empty-text {
-  font-size: 30rpx;
-  color: #2D2A26;
-  font-weight: 500;
-  margin-bottom: 8rpx;
+  font-size: 32rpx; color: var(--text); font-weight: 600;
+  margin-bottom: 12rpx;
 }
 
 .empty-sub-text {
-  font-size: 26rpx;
-  color: #948F89;
-  margin-bottom: 32rpx;
-  line-height: 1.5;
+  font-size: 26rpx; color: var(--text3);
+  margin-bottom: 40rpx; line-height: 1.6;
   text-align: center;
 }
 
 .empty-action {
-  padding: 16rpx 48rpx;
-  background: #4A8C5C;
-  border-radius: 44rpx;
+  padding: 20rpx 48rpx; background: var(--green);
+  border-radius: 48rpx;
 }
 .empty-action:active { opacity: 0.85; }
 
 .empty-action-text {
-  font-size: 28rpx;
-  color: #FFFFFF;
-  font-weight: 500;
+  font-size: 28rpx; color: #fff; font-weight: 600;
 }
