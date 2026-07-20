@@ -21,16 +21,16 @@ App({
   globalData: {
     userInfo: null,
     token: null,
-    // 页面来源路径，用于 pageView 埋点追踪页面跳转来源
     prevPagePath: '',
     // 根据小程序环境自动切换 API 地址
-    // 正式版/体验版 → 生产域名，开发版 → 本地 Mac IP（微信开发者工具需用局域网 IP）
+    // 正式版/体验版 → 云托管域名，开发版 → 本地
+    // 部署后请将 YOUR_CLOUDRUN_DOMAIN 替换为实际的云托管域名
+    // 格式示例: https://service-xxx-xxx.gz.apigw.tencentcs.com
     baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? 'https://api.chongbaoshu.cn/api'
+      ? 'https://YOUR_CLOUDRUN_DOMAIN/api'
       : 'http://localhost:8081/api',
-    // 静态资源 base URL，不含 /api 后缀，用于图片等资源
     staticBaseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? 'https://api.chongbaoshu.cn'
+      ? 'https://YOUR_CLOUDRUN_DOMAIN'
       : 'http://localhost:8081',
   },
 
