@@ -50,6 +50,10 @@
   "libVersion": "3.10.3",
   "appid": "wx217600e18466774e",
   "projectname": "chongbaoshu",
+  "cloudrun": {
+    "envId": "chongbaoshu-d6gui53f1919f1dc0",
+    "serviceName": "chongbaoshu-api"
+  },
   "condition": {},
   "simulatorPluginLibVersion": {},
   "editorSetting": {}
