@@ -27,10 +27,10 @@ App({
     // 部署后请将 YOUR_CLOUDRUN_DOMAIN 替换为实际的云托管域名
     // 格式示例: https://service-xxx-xxx.gz.apigw.tencentcs.com
     baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? 'https://chongbaoshu-api-284865-4-1455892980.sh.run.tcloudbase.com//api'
+      ? 'https://chongbaoshu-api-284865-4-1455892980.sh.run.tcloudbase.com/api'
       : 'http://localhost:8081/api',
     staticBaseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? 'https://chongbaoshu-api-284865-4-1455892980.sh.run.tcloudbase.com/'
+      ? 'https://chongbaoshu-api-284865-4-1455892980.sh.run.tcloudbase.com'
       : 'http://localhost:8081',
   },
 
