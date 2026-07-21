@@ -64,7 +64,7 @@ Page({
     that.setData({ loading: true,
     error: false });
     api.get('/pets', { page: 1, pageSize: 100 }).then(function(res) {
-      const baseUrl = getApp().globalData.staticBaseUrl || getApp().globalData.baseUrl.replace('/api', '');
+      const baseUrl = getApp().globalData.staticBaseUrl || getApp().globalData.baseUrl.replace('/api', '') || '';
       const data = res.data || res;
       const list = data.list || [];
       const allPetList = [];

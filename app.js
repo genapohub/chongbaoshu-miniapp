@@ -22,15 +22,14 @@ App({
     userInfo: null,
     token: null,
     prevPagePath: '',
-    // 根据小程序环境自动切换 API 地址
-    // 正式版/体验版 → 云托管域名，开发版 → 本地
-    // 部署后请将 YOUR_CLOUDRUN_DOMAIN 替换为实际的云托管域名
-    // 格式示例: https://service-xxx-xxx.gz.apigw.tencentcs.com
+    // 微信云托管私有协议配置（无需配置服务器域名）
+    // 开发版 → 本地，正式版/体验版 → 云托管
+    isDev: __wxConfig && __wxConfig.envVersion === 'develop',
     baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? 'https://chongbaoshu-api-284865-4-1455892980.sh.run.tcloudbase.com/api'
+      ? ''
       : 'http://localhost:8081/api',
     staticBaseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? 'https://chongbaoshu-api-284865-4-1455892980.sh.run.tcloudbase.com'
+      ? ''
       : 'http://localhost:8081',
   },
 
@@ -54,31 +53,24 @@ App({
       wx.login({
         success: (res) => {
           if (res.code) {
-            wx.request({
-              url: `${this.globalData.baseUrl}/auth/wx-login`,
-              method: 'POST',
-              data: { code: res.code },
-              success: (response) => {
-                if (response.data.code === 0) {
-                  const { token, user, isNew } = response.data.data;
-                  this.globalData.token = token;
-                  this.globalData.userInfo = user;
-                  wx.setStorageSync('token', token);
-                  wx.setStorageSync('userInfo', user);
+            const api = require('./utils/api');
+            api.post('/auth/wx-login', { code: res.code })
+              .then((data) => {
+                const { token, user, isNew } = data;
+                this.globalData.token = token;
+                this.globalData.userInfo = user;
+                wx.setStorageSync('token', token);
+                wx.setStorageSync('userInfo', user);
 
-                  // 监控：关联 Sentry 用户上下文
-                  sentry.setUser(user.id, {
-                    openid: user.openid || '',
-                    nickname: user.nickname || '',
-                  });
+                // 监控：关联 Sentry 用户上下文
+                sentry.setUser(user.id, {
+                  openid: user.openid || '',
+                  nickname: user.nickname || '',
+                });
 
-                  resolve({ user, isNew });
-                } else {
-                  reject(new Error(response.data.message));
-                }
-              },
-              fail: (err) => reject(err),
-            });
+                resolve({ user, isNew });
+              })
+              .catch((err) => reject(err));
           } else {
             reject(new Error('微信登录失败'));
           }
@@ -92,28 +84,21 @@ App({
    * 获取用户信息
    */
   getUserInfo() {
-    wx.request({
-      url: `${this.globalData.baseUrl}/auth/profile`,
-      method: 'GET',
-      header: {
-        Authorization: `Bearer ${this.globalData.token}`,
-      },
-      success: (res) => {
-        if (res.data.code === 0) {
-          const user = res.data.data;
-          this.globalData.userInfo = user;
-          wx.setStorageSync('userInfo', user);
+    const api = require('./utils/api');
+    api.get('/auth/profile')
+      .then((user) => {
+        this.globalData.userInfo = user;
+        wx.setStorageSync('userInfo', user);
 
-          // 监控：更新 Sentry 用户上下文
-          if (user && user.id) {
-            sentry.setUser(user.id, {
-              openid: user.openid || '',
-              nickname: user.nickname || '',
-            });
-          }
+        // 监控：更新 Sentry 用户上下文
+        if (user && user.id) {
+          sentry.setUser(user.id, {
+            openid: user.openid || '',
+            nickname: user.nickname || '',
+          });
         }
-      },
-    });
+      })
+      .catch(() => {});
   },
 
   /**
