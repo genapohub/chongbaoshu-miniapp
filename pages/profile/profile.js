@@ -117,7 +117,8 @@ Page({
   goMenu: function(e) {
     const app = getApp();
     if (!app.globalData.token) {
-      this.setData({ showLoginGuide: true });
+      wx.showToast({ title: '请先登录', icon: 'none', duration: 1500 });
+      setTimeout(function() { wx.navigateTo({ url: '/pages/login/login' }); }, 800);
       return;
     }
     const url = e.currentTarget.dataset.url;
@@ -127,7 +128,8 @@ Page({
   goSubscription: function() {
     const app = getApp();
     if (!app.globalData.token) {
-      this.setData({ showLoginGuide: true });
+      wx.showToast({ title: '请先登录', icon: 'none', duration: 1500 });
+      setTimeout(function() { wx.navigateTo({ url: '/pages/login/login' }); }, 800);
       return;
     }
     wx.navigateTo({ url: '/pages/subscription/subscription' });
@@ -136,7 +138,8 @@ Page({
   goFeedback: function() {
     const app = getApp();
     if (!app.globalData.token) {
-      this.setData({ showLoginGuide: true });
+      wx.showToast({ title: '请先登录', icon: 'none', duration: 1500 });
+      setTimeout(function() { wx.navigateTo({ url: '/pages/login/login' }); }, 800);
       return;
     }
     wx.navigateTo({ url: '/pages/feedback/feedback' });

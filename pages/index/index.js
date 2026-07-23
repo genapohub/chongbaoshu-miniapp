@@ -264,25 +264,17 @@ Page({
     });
   },
 
-  // 检查是否登录，未登录弹引导
+  // 检查是否登录，未登录时跳转到登录页
   requireLogin(callback) {
     const app = getApp();
     if (!app.globalData.token) {
-      this.setData({ showLoginGuide: true });
+      wx.showToast({ title: '请先登录', icon: 'none', duration: 1500 });
+      setTimeout(function() {
+        wx.navigateTo({ url: '/pages/login/login' });
+      }, 800);
       return;
     }
     callback && callback();
-  },
-
-  // 隐藏登录引导弹窗
-  hideLoginGuide() {
-    this.setData({ showLoginGuide: false });
-  },
-
-  // 从登录引导弹窗跳转登录
-  goLoginFromGuide() {
-    this.setData({ showLoginGuide: false });
-    wx.navigateTo({ url: '/pages/login/login' });
   },
 
   // 阻止事件冒泡
@@ -344,7 +336,9 @@ Page({
 
   // 跳转血统证书（Pro功能）
   goPedigree() {
+    const that = this;
     this.requireLogin(function() {
+      wx.navigateTo({ url: '/pages/pedigree/pedigree' });
     });
   },
 
