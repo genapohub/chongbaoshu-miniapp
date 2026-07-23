@@ -3,7 +3,7 @@
 
   <!-- 成功状态 -->
   <view class="result-section" wx:if="{{status === 'success'}}">
-    <view class="result-icon success"><icon name="celebration" size="48" color="var(--green)" /></view>
+    <view class="result-icon success"><cbs-icon name="celebration" size="48" color="var(--green)" /></view>
     <view class="result-title">兑换成功！</view>
     <view class="result-desc">您已获得{{rewardDays}}天Pro体验</view>
     <button class="btn-action" bindtap="onGoHome">开始使用</button>
@@ -11,7 +11,7 @@
 
   <!-- 错误状态 -->
   <view class="result-section" wx:elif="{{status === 'error'}}">
-    <view class="result-icon error"><icon name="close" size="36" color="#F54A45" /></view>
+    <view class="result-icon error"><cbs-icon name="close" size="36" color="#F54A45" /></view>
     <view class="result-title">邀请码无效</view>
     <view class="result-desc">{{errorMessage || '该邀请码不存在或已过期，请确认后重试'}}</view>
     <button class="btn-action" bindtap="onReInput">重新输入</button>
@@ -20,7 +20,7 @@
   <!-- 输入状态 -->
   <view class="form-section" wx:else>
     <view class="form-header">
-      <view class="header-icon"><icon name="gift" size="36" color="#F54A45" /></view>
+      <view class="header-icon"><cbs-icon name="gift" size="36" color="#F54A45" /></view>
       <view class="header-title">输入邀请码</view>
       <view class="header-desc">兑换后双方各得7天Pro体验</view>
     </view>

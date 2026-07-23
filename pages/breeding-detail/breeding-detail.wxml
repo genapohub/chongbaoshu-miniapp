@@ -5,7 +5,7 @@
   <!-- 繁育记录卡片 -->
   <view class="card breeding-card">
     <view class="card-header">
-      <view class="card-title"><icon name="heart" size="36" color="#F54A45" /><text>繁育记录</text></view>
+      <view class="card-title"><cbs-icon name="heart" size="36" color="#F54A45" /><text>繁育记录</text></view>
       <status-badge type="{{statusType}}" label="{{statusText}}" />
     </view>
 
@@ -48,7 +48,7 @@
 
   <!-- 状态更新卡片 -->
   <view class="card status-card">
-    <view class="card-title"><icon name="clipboard" size="36" color="#646A73" /><text>更新状态</text></view>
+    <view class="card-title"><cbs-icon name="clipboard" size="36" color="#646A73" /><text>更新状态</text></view>
 
     <view class="status-list">
       <view
@@ -58,13 +58,13 @@
         bindtap="updateStatus"
         data-status="{{item.value}}"
       >
-        <icon name="{{item.iconName}}" size="36" color="{{item.iconColor}}" />
+        <cbs-icon name="{{item.iconName}}" size="36" color="{{item.iconColor}}" />
         <view class="status-info">
           <text class="status-name">{{item.label}}</text>
           <text class="status-desc">{{item.desc}}</text>
         </view>
-        <view wx:if="{{breeding.status === item.value}}" class="status-check"><icon name="check" size="28" color="#4A8C5C" /></view>
-        <view wx:if="{{item.disabled}}" class="status-lock"><icon name="lock" size="40" color="#8F959E" /></view>
+        <view wx:if="{{breeding.status === item.value}}" class="status-check"><cbs-icon name="check" size="28" color="#4A8C5C" /></view>
+        <view wx:if="{{item.disabled}}" class="status-lock"><cbs-icon name="lock" size="40" color="#8F959E" /></view>
       </view>
     </view>
   </view>

@@ -4,7 +4,7 @@
   <view wx:elif="{{!loading}}" class="content">
     <view class="reminder-section" wx:if="{{reminders.length > 0}}">
       <view class="section-header">
-        <view class="section-icon"><icon name="alert-circle" size="36" color="#F54A45" /></view>
+        <view class="section-icon"><cbs-icon name="alert-circle" size="36" color="#F54A45" /></view>
         <text class="section-title">待处理提醒</text>
       </view>
       <view class="reminder-list">
@@ -27,7 +27,7 @@
 
     <view class="record-section" wx:if="{{vaccineRecords.length > 0}}">
       <view class="section-header">
-        <view class="section-icon"><icon name="syringe" size="36" color="#2D9CDB" /></view>
+        <view class="section-icon"><cbs-icon name="syringe" size="36" color="#2D9CDB" /></view>
         <text class="section-title">疫苗记录</text>
       </view>
       <view class="record-list">
@@ -46,7 +46,7 @@
 
     <view class="record-section" wx:if="{{dewormRecords.length > 0}}">
       <view class="section-header">
-        <view class="section-icon"><icon name="bug" size="36" color="var(--green)" /></view>
+        <view class="section-icon"><cbs-icon name="bug" size="36" color="var(--green)" /></view>
         <text class="section-title">驱虫记录</text>
       </view>
       <view class="record-list">
@@ -65,7 +65,7 @@
 
     <view class="record-section" wx:if="{{otherRecords.length > 0}}">
       <view class="section-header">
-        <view class="section-icon"><icon name="clipboard" size="36" color="#646A73" /></view>
+        <view class="section-icon"><cbs-icon name="clipboard" size="36" color="#646A73" /></view>
         <text class="section-title">其他记录</text>
       </view>
       <view class="record-list">
@@ -82,7 +82,7 @@
     </view>
 
     <view class="empty-state" wx:if="{{reminders.length === 0 && vaccineRecords.length === 0 && dewormRecords.length === 0 && otherRecords.length === 0}}">
-      <view class="empty-icon"><icon name="clipboard" size="36" color="#646A73" /></view>
+      <view class="empty-icon"><cbs-icon name="clipboard" size="36" color="#646A73" /></view>
       <text class="empty-text">暂无健康记录</text>
       <text class="empty-hint">点击下方按钮添加记录</text>
     </view>
@@ -90,11 +90,11 @@
 
   <view class="bottom-actions">
     <view class="action-btn vaccine-btn" bindtap="goRecordVaccine">
-      <icon name="syringe" size="34" color="#FFFFFF" />
+      <cbs-icon name="syringe" size="34" color="#FFFFFF" />
       <text class="btn-text">记录疫苗</text>
     </view>
     <view class="action-btn deworm-btn" bindtap="goRecordDeworm">
-      <icon name="bug" size="34" color="#FFFFFF" />
+      <cbs-icon name="bug" size="34" color="#FFFFFF" />
       <text class="btn-text">记录驱虫</text>
     </view>
   </view>

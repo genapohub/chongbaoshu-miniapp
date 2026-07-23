@@ -4,11 +4,11 @@
 
   <!-- 错误状态 -->
   <view wx:elif="{{error}}" class="error-state">
-    <icon name="warning" size="72" color="#E0903C" />
+    <cbs-icon name="warning" size="72" color="#E0903C" />
     <text class="error-text">加载失败，请检查网络</text>
     <view class="error-retry" bindtap="loadData">点击重试</view>
   </view>
-  <view wx:elif="{{litters.length===0}}" class="empty"><icon name="baby" size="80" color="#C0C4CC"/><text class="empty-text">暂无同窝记录</text><text class="empty-desc">在繁育记录中标记"已分娩"时自动创建</text></view>
+  <view wx:elif="{{litters.length===0}}" class="empty"><cbs-icon name="baby" size="80" color="#C0C4CC"/><text class="empty-text">暂无同窝记录</text><text class="empty-desc">在繁育记录中标记"已分娩"时自动创建</text></view>
   <view wx:else class="list">
     <view wx:for="{{litters}}" wx:key="id" class="card" bindtap="goDetail" data-id="{{item.id}}" data-id="{{item.id}}">
       <view class="card-top">

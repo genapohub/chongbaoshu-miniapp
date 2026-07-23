@@ -10,7 +10,7 @@
       <view class="avatar-upload" bindtap="chooseAvatar">
         <image wx:if="{{formData.avatar}}" src="{{formData.avatar}}" class="avatar-img" mode="aspectFill" lazy-load />
         <view wx:else class="avatar-placeholder">
-          <icon name="camera" size="48" color="#8F959E" />
+          <cbs-icon name="camera" size="48" color="#8F959E" />
           <text class="avatar-text">点击上传</text>
         </view>
       </view>
@@ -32,7 +32,7 @@
         <text class="picker-value">
           {{speciesDisplay.label || '请选择物种'}}
         </text>
-        <icon name="chevron-right" size="28" color="#C0C4CC" />
+        <cbs-icon name="chevron-right" size="28" color="#C0C4CC" />
       </view>
     </view>
 
@@ -58,7 +58,7 @@
       <picker mode="date" value="{{formData.birth_date}}" bindchange="onBirthDateChange">
         <view class="picker-wrap">
           <text class="picker-value">{{formData.birth_date || '请选择日期'}}</text>
-          <icon name="chevron-right" size="28" color="#C0C4CC" />
+          <cbs-icon name="chevron-right" size="28" color="#C0C4CC" />
         </view>
       </picker>
     </view>
@@ -78,8 +78,8 @@
   <view class="card">
     <view class="card-header" bindtap="togglePedigree">
       <text class="card-title">血统信息</text>
-      <icon wx:if="{{showPedigree}}" name="chevron-left" size="28" color="#C0C4CC" />
-      <icon wx:if="{{!showPedigree}}" name="chevron-right" size="28" color="#C0C4CC" />
+      <cbs-icon wx:if="{{showPedigree}}" name="chevron-left" size="28" color="#C0C4CC" />
+      <cbs-icon wx:if="{{!showPedigree}}" name="chevron-right" size="28" color="#C0C4CC" />
     </view>
 
     <view wx:if="{{showPedigree}}" class="pedigree-section">

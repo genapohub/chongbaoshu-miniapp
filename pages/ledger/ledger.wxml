@@ -28,5 +28,5 @@
     </view>
   </view>
 
-  <view class="fab" bindtap="goAdd"><icon name="add" size="48" color="#FFF" /></view>
+  <view class="fab" bindtap="goAdd"><cbs-icon name="add" size="48" color="#FFF" /></view>
 </view>

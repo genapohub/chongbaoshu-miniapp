@@ -10,7 +10,7 @@
     <swiper-item>
       <view class="slide">
         <view class="icon-ring ring-green">
-          <icon name="paw" size="80" color="#4A8C5C" />
+          <cbs-icon name="paw" size="80" color="#4A8C5C" />
         </view>
         <view class="slide-num">01</view>
         <text class="slide-title">记录每一只宠物</text>
@@ -21,7 +21,7 @@
     <swiper-item>
       <view class="slide">
         <view class="icon-ring ring-amber">
-          <icon name="bell" size="80" color="#D4914A" />
+          <cbs-icon name="bell" size="80" color="#D4914A" />
         </view>
         <view class="slide-num">02</view>
         <text class="slide-title">健康提醒不遗漏</text>
@@ -32,7 +32,7 @@
     <swiper-item>
       <view class="slide">
         <view class="icon-ring ring-red">
-          <icon name="certificate" size="80" color="#D4534A" />
+          <cbs-icon name="certificate" size="80" color="#D4534A" />
         </view>
         <view class="slide-num">03</view>
         <text class="slide-title">让生意更专业</text>

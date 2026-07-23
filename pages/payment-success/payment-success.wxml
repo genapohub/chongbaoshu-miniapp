@@ -8,12 +8,12 @@
   </view>
 
   <view class="page-content">
-    <view class="success-icon"><icon name="check" size="64" color="#FFFFFF" bg="var(--green)" /></view>
+    <view class="success-icon"><cbs-icon name="check" size="64" color="#FFFFFF" bg="var(--green)" /></view>
     <view class="success-title">支付成功</view>
     <view class="success-desc">恭喜您已成功升级到{{planName}}</view>
     
     <view class="plan-card">
-      <view class="plan-icon" style="background: {{planIconBg}}"><icon name="{{planIcon}}" size="36" color="#FFFFFF" /></view>
+      <view class="plan-icon" style="background: {{planIconBg}}"><cbs-icon name="{{planIcon}}" size="36" color="#FFFFFF" /></view>
       <view class="plan-info">
         <text class="plan-name">{{planName}}</text>
         <text class="plan-desc">{{planDesc}}</text>
@@ -44,7 +44,7 @@
     </view>
 
     <view class="tips-section">
-      <view class="tips-title"><icon name="lightbulb" size="36" color="#F7BA1E" /> 温馨提示</view>
+      <view class="tips-title"><cbs-icon name="lightbulb" size="36" color="#F7BA1E" /> 温馨提示</view>
       <view class="tips-list">
         <text>• 订阅已生效，功能已解锁</text>
         <text>• 可在「我的」-「订阅方案」查看详情</text>
@@ -53,7 +53,7 @@
     </view>
 
     <view class="invite-card">
-      <view class="invite-icon"><icon name="gift" size="36" color="#F54A45" /></view>
+      <view class="invite-icon"><cbs-icon name="gift" size="36" color="#F54A45" /></view>
       <view class="invite-content">
         <view class="invite-title">邀请好友，各得1个月Pro</view>
         <view class="invite-desc">分享你的邀请码，好友注册后双方各获Pro体验</view>

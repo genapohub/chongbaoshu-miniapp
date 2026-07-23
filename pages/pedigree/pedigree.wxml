@@ -1,7 +1,7 @@
 <view class="container">
   <view wx:if="{{!isPro}}" class="upgrade-popup">
     <view class="upgrade-header">
-      <view class="upgrade-icon"><icon name="diamond" size="36" color="#4A8C5C" /></view>
+      <view class="upgrade-icon"><cbs-icon name="diamond" size="36" color="#4A8C5C" /></view>
       <view class="upgrade-title">解锁血统树</view>
       <view class="upgrade-desc">升级Pro查看完整血统可视化</view>
     </view>

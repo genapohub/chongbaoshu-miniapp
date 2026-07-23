@@ -1,7 +1,7 @@
 <view class="container">
   <view class="cert-card">
     <view class="cert-header">
-      <view class="cert-badge"><icon name="trophy" size="40" color="#F7BA1E" /></view>
+      <view class="cert-badge"><cbs-icon name="trophy" size="40" color="#F7BA1E" /></view>
       <view class="cert-title">宠宝树血统证书</view>
     </view>
     
@@ -22,7 +22,7 @@
   </view>
 
   <view class="tree-section">
-    <view class="section-title"><icon name="tree" size="36" color="var(--green)" /> 三代血统树</view>
+    <view class="section-title"><cbs-icon name="tree" size="36" color="var(--green)" /> 三代血统树</view>
     
     <view class="tree-container">
       <!-- 第四代（曾祖父母） -->
@@ -82,18 +82,18 @@
   </view>
 
   <view class="inbreed-section">
-    <view class="section-title"><icon name="chart" size="36" color="#4A8C5C" /> 近亲系数检测</view>
+    <view class="section-title"><cbs-icon name="chart" size="36" color="#4A8C5C" /> 近亲系数检测</view>
     <view class="inbreed-result">
       <view class="inbreed-status {{pedigree.inbreed_coefficient !== null && pedigree.inbreed_coefficient > 6.25 ? 'warning' : 'safe'}}">
         <block wx:if="{{pedigree.inbreed_coefficient !== null}}">
-          <icon name="check" size="24" color="var(--green)" /> 近亲系数：{{pedigree.inbreed_coefficient}}%
+          <cbs-icon name="check" size="24" color="var(--green)" /> 近亲系数：{{pedigree.inbreed_coefficient}}%
           <block wx:if="{{pedigree.inbreed_coefficient === 0}}">（无近亲关系）</block>
           <block wx:if="{{pedigree.inbreed_coefficient > 0 && pedigree.inbreed_coefficient <= 6.25}}">（低风险）</block>
         </block>
         <block wx:else>近亲系数：还没有记录，
 从第一只开始吧</block>
         <block wx:if="{{pedigree.inbreed_coefficient !== null && pedigree.inbreed_coefficient > 6.25}}">
-          <icon name="warning" size="24" color="#F7BA1E" /> 高风险！建议避免近亲繁殖
+          <cbs-icon name="warning" size="24" color="#F7BA1E" /> 高风险！建议避免近亲繁殖
         </block>
       </view>
       <view class="inbreed-desc">基于三代血统数据自动计算，系数>6.25%将发出警告</view>
@@ -110,7 +110,7 @@
 <view class="edit-pedigree-overlay {{showEditPedigree ? 'show' : ''}}" bindtap="hideEditPedigree">
   <view class="edit-pedigree-card" catchtap="noop">
     <!-- 关闭按钮 -->
-    <view class="edit-close" bindtap="hideEditPedigree"><icon name="close" size="36" color="#8F959E" /></view>
+    <view class="edit-close" bindtap="hideEditPedigree"><cbs-icon name="close" size="36" color="#8F959E" /></view>
 
     <!-- 标题 -->
     <view class="edit-header">
@@ -176,11 +176,11 @@
 <view class="cert-preview-overlay {{showCertPreview ? 'show' : ''}}" bindtap="hideCertPreview">
   <view class="cert-preview-card" catchtap="noop">
     <!-- 关闭按钮 -->
-    <view class="preview-close" bindtap="hideCertPreview"><icon name="close" size="36" color="#8F959E" /></view>
+    <view class="preview-close" bindtap="hideCertPreview"><cbs-icon name="close" size="36" color="#8F959E" /></view>
 
     <!-- 证书卡片（金色风格） -->
     <view class="preview-cert">
-      <view class="preview-seal"><icon name="medal" size="40" color="#F7BA1E" /></view>
+      <view class="preview-seal"><cbs-icon name="medal" size="40" color="#F7BA1E" /></view>
       <view class="preview-title">宠宝树 血统证书</view>
       <view class="preview-name">{{certPreviewData.petName}}</view>
       <view class="preview-divider"></view>
@@ -193,7 +193,7 @@
       </view>
       <view class="preview-qr">
         <view class="qr-code-box">
-          <view class="qr-icon"><icon name="qrcode" size="28" color="#1F2329" /></view>
+          <view class="qr-icon"><cbs-icon name="qrcode" size="28" color="#1F2329" /></view>
           <text class="qr-label">扫码验证真伪</text>
         </view>
       </view>
@@ -202,29 +202,29 @@
 
     <!-- 操作按钮 -->
     <view class="preview-actions">
-      <button class="preview-btn share-btn" open-type="share"><icon name="upload" size="32" color="#4A8C5C" /> 分享</button>
-      <button class="preview-btn download-btn" bindtap="downloadCert"><icon name="download" size="32" color="#4A8C5C" /> 下载图片</button>
+      <button class="preview-btn share-btn" open-type="share"><cbs-icon name="upload" size="32" color="#4A8C5C" /> 分享</button>
+      <button class="preview-btn download-btn" bindtap="downloadCert"><cbs-icon name="download" size="32" color="#4A8C5C" /> 下载图片</button>
     </view>
 
     <!-- 分享渠道 -->
     <view class="preview-share-channels">
       <view class="share-channel">
-        <view class="channel-icon wx-icon"><icon name="chat" size="36" color="#4A8C5C" /></view>
+        <view class="channel-icon wx-icon"><cbs-icon name="chat" size="36" color="#4A8C5C" /></view>
         <text class="channel-label">微信好友</text>
       </view>
       <view class="share-channel">
-        <view class="channel-icon moment-icon"><icon name="refresh" size="32" color="#4A8C5C" /></view>
+        <view class="channel-icon moment-icon"><cbs-icon name="refresh" size="32" color="#4A8C5C" /></view>
         <text class="channel-label">朋友圈</text>
       </view>
       <view class="share-channel" bindtap="copyCertLink">
-        <view class="channel-icon link-icon"><icon name="share" size="32" color="#4A8C5C" /></view>
+        <view class="channel-icon link-icon"><cbs-icon name="share" size="32" color="#4A8C5C" /></view>
         <text class="channel-label">复制链接</text>
       </view>
     </view>
 
     <!-- 证书管理 -->
     <view class="cert-management">
-      <view class="management-title"><icon name="clipboard" size="36" color="#646A73" /> 证书管理</view>
+      <view class="management-title"><cbs-icon name="clipboard" size="36" color="#646A73" /> 证书管理</view>
       <view class="management-row">
         <text class="management-label">证书状态</text>
         <view class="status-badge {{certStatus === 'issued' ? 'status-issued' : certStatus === 'revoked' ? 'status-revoked' : 'status-draft'}}">
@@ -250,8 +250,8 @@
         </view>
       </view>
       <view class="management-actions">
-        <view class="manage-btn revoke-btn" bindtap="showRevokeConfirm" wx:if="{{certStatus === 'issued'}}"><icon name="trash" size="32" color="#F54A45" /> 撤销证书</view>
-        <view class="manage-btn reissue-btn" bindtap="reissueCertificate" wx:if="{{certStatus === 'revoked' && isPro}}"><icon name="refresh" size="32" color="#4A8C5C" /> 重新签发</view>
+        <view class="manage-btn revoke-btn" bindtap="showRevokeConfirm" wx:if="{{certStatus === 'issued'}}"><cbs-icon name="trash" size="32" color="#F54A45" /> 撤销证书</view>
+        <view class="manage-btn reissue-btn" bindtap="reissueCertificate" wx:if="{{certStatus === 'revoked' && isPro}}"><cbs-icon name="refresh" size="32" color="#4A8C5C" /> 重新签发</view>
       </view>
     </view>
 
@@ -265,7 +265,7 @@
   <view class="revoke-modal" catchtap="noop">
     <view class="revoke-header">
       <text class="revoke-title">确认撤销证书</text>
-      <view class="revoke-close" bindtap="hideRevokeModal"><icon name="close" size="36" color="#8F959E" /></view>
+      <view class="revoke-close" bindtap="hideRevokeModal"><cbs-icon name="close" size="36" color="#8F959E" /></view>
     </view>
     <view class="revoke-content">
       <text class="revoke-desc">撤销后证书将变为无效状态，扫描二维码将显示证书已撤销。此操作不可撤销，请谨慎操作。</text>

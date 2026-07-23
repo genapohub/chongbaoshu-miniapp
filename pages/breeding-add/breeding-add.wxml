@@ -13,7 +13,7 @@
             <text wx:if="{{motherPetName}}" class="pet-detail">（{{motherPetBreed}}·<text>♀</text>）</text>
           </view>
         </view>
-        <icon name="chevron-down" size="28" color="#8F959E" />
+        <cbs-icon name="chevron-down" size="28" color="#8F959E" />
       </view>
     </view>
 
@@ -30,18 +30,18 @@
             <text wx:if="{{fatherPetName}}" class="pet-detail">（{{fatherPetBreed}}·<text>♂</text>）</text>
           </view>
         </view>
-        <icon name="chevron-down" size="28" color="#8F959E" />
+        <cbs-icon name="chevron-down" size="28" color="#8F959E" />
       </view>
       <view wx:if="{{!fatherPetId && showFatherError}}" class="error-tip">
-        <view><icon name="warning" size="24" color="#F7BA1E" /><text>请选择公犬</text></view>
+        <view><cbs-icon name="warning" size="24" color="#F7BA1E" /><text>请选择公犬</text></view>
       </view>
     </view>
 
     <!-- 近亲检测结果 -->
     <view wx:if="{{inbreedingResult}}" class="inbreeding-result {{inbreedingResult.is_inbreeding ? 'warning' : 'success'}}">
       <view class="inbreeding-icon">
-        <icon wx:if="{{inbreedingResult.is_inbreeding}}" name="warning" size="36" color="#F7BA1E" />
-        <icon wx:else name="check" size="28" color="var(--green)" />
+        <cbs-icon wx:if="{{inbreedingResult.is_inbreeding}}" name="warning" size="36" color="#F7BA1E" />
+        <cbs-icon wx:else name="check" size="28" color="var(--green)" />
       </view>
       <view class="inbreeding-text">
         <text class="inbreeding-title">{{inbreedingResult.is_inbreeding ? '近亲检测警告' : '近亲检测通过'}}</text>
@@ -54,14 +54,14 @@
       <picker mode="date" value="{{formData.breed_date}}" bindchange="onDateChange">
         <view class="picker-wrap date-picker">
           <text class="picker-value">{{formData.breed_date || '请选择日期'}}</text>
-          <icon name="clock" size="28" color="#8F959E" />
+          <cbs-icon name="clock" size="28" color="#8F959E" />
         </view>
       </picker>
     </view>
 
     <view class="due-date-card">
       <view class="due-date-main">
-        <icon name="clock" size="28" color="#646A73" />
+        <cbs-icon name="clock" size="28" color="#646A73" />
         <text class="due-date-label">预计预产期：</text>
         <text class="due-date-value">{{dueDate || '--'}}</text>
       </view>
@@ -90,11 +90,11 @@
       <text class="form-label">配种次数</text>
       <view class="count-control">
         <view class="count-btn" bindtap="decreaseCount">
-          <icon name="minus" size="28" color="#4A8C5C" />
+          <cbs-icon name="minus" size="28" color="#4A8C5C" />
         </view>
         <text class="count-value">{{formData.breed_count}}</text>
         <view class="count-btn plus" bindtap="increaseCount">
-          <icon name="plus" size="28" color="#4A8C5C" />
+          <cbs-icon name="plus" size="28" color="#4A8C5C" />
         </view>
       </view>
     </view>
@@ -122,7 +122,7 @@
   <view class="picker-content" catchtap="stopPropagation">
     <view class="picker-header">
       <text class="picker-title">选择母犬</text>
-      <icon name="close" size="36" color="#8F959E" class="picker-close" bindtap="hideMotherPicker" />
+      <cbs-icon name="close" size="36" color="#8F959E" class="picker-close" bindtap="hideMotherPicker" />
     </view>
     <scroll-view scroll-y class="picker-list">
       <view wx:if="{{motherPetList.length === 0}}" class="picker-empty">
@@ -155,7 +155,7 @@
   <view class="picker-content" catchtap="stopPropagation">
     <view class="picker-header">
       <text class="picker-title">选择公犬</text>
-      <icon name="close" size="36" color="#8F959E" class="picker-close" bindtap="hideFatherPicker" />
+      <cbs-icon name="close" size="36" color="#8F959E" class="picker-close" bindtap="hideFatherPicker" />
     </view>
     <scroll-view scroll-y class="picker-list">
       <view wx:if="{{fatherPetList.length === 0}}" class="picker-empty">

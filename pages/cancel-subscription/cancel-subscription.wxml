@@ -2,7 +2,7 @@
   <view class="page-content">
     <!-- 损失提示 -->
     <view class="retention-card">
-      <view class="rt-title"><icon name="broken-heart" size="36" color="#F54A45" /> 取消后你将失去</view>
+      <view class="rt-title"><cbs-icon name="broken-heart" size="36" color="#F54A45" /> 取消后你将失去</view>
       <view class="rt-desc">
         <text>• 无限宠物管理 → 降为3只</text>
         <text>• 血统证书功能 → 不可访问</text>
@@ -14,7 +14,7 @@
 
     <!-- 挽留优惠 -->
     <view class="discount-card">
-      <view class="discount-title"><icon name="gift" size="36" color="#F54A45" /> 专属挽留优惠</view>
+      <view class="discount-title"><cbs-icon name="gift" size="36" color="#F54A45" /> 专属挽留优惠</view>
       <view class="discount-desc">续费年付Pro享8折优惠</view>
       <view class="discount-price">¥758.40/年</view>
       <view class="discount-original">原价 ¥948/年 · 省 ¥189.60</view>

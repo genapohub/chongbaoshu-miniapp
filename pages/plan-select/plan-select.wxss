@@ -1,15 +1,84 @@
-/* 宠宝树品牌样式 — 暖森林·毛玻璃 */
-.container { min-height: 100vh; background: var(--bg); padding: 32rpx; }
-.card { background: var(--surface); border-radius: var(--radius); padding: 32rpx; margin-bottom: 24rpx; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.card-title { font-size: 30rpx; font-weight: 600; color: var(--text); margin-bottom: 24rpx; letter-spacing: 0.5rpx; }
-.btn-primary { background: var(--green); color: #fff; border-radius: 48rpx; font-size: 30rpx; font-weight: 600; text-align: center; padding: 26rpx 0; border: none; display: flex; align-items: center; justify-content: center; gap: 10rpx; }
-.btn-primary::after { border: none; }
-.btn-primary:active { opacity: 0.88; }
-.btn-primary.disabled, .btn-primary[disabled] { opacity: 0.4; pointer-events: none; }
-.btn-secondary { background: rgba(0,0,0,0.04); color: var(--text2); border-radius: 48rpx; font-size: 28rpx; text-align: center; padding: 22rpx 0; border: none; }
-.btn-secondary::after { border: none; }
-.form-item { margin-bottom: 28rpx; }
-.form-label { display: block; font-size: 26rpx; color: var(--text2); margin-bottom: 12rpx; font-weight: 500; }
-.input-field { background: rgba(0,0,0,0.03); border-radius: var(--radius-sm); padding: 22rpx 24rpx; font-size: 28rpx; border: 2rpx solid transparent; color: var(--text); width: 100%; box-sizing: border-box; }
-.input-field:focus { border-color: var(--green); }
-.input-field::placeholder { color: var(--text3); }
+/* 方案选择页 - 设计稿还原 */
+.container { min-height: 100vh; background: var(--bg); padding-bottom: calc(180rpx + env(safe-area-inset-bottom)); }
+.page-content { padding: var(--sp-lg); }
+
+/* ── 方案卡片 ── */
+.plans-section { display: flex; flex-direction: column; gap: var(--sp-md); margin-bottom: var(--sp-lg); }
+.plan-card {
+  position: relative;
+  background: var(--surface-solid);
+  border-radius: var(--radius);
+  padding: var(--sp-xl);
+  box-shadow: var(--shadow);
+  border: 3rpx solid transparent;
+  transition: all 0.2s;
+}
+.plan-card.selected {
+  border-color: var(--green);
+  box-shadow: 0 8rpx 40rpx rgba(74,140,92,0.18);
+}
+.plan-card.disabled { opacity: 0.5; pointer-events: none; }
+
+.popular-badge {
+  position: absolute; top: -2rpx; right: var(--sp-lg);
+  background: var(--amber); color: #fff;
+  font-size: 22rpx; padding: 6rpx 24rpx;
+  border-radius: 0 0 16rpx 16rpx; font-weight: 700;
+}
+
+.plan-header { display: flex; flex-direction: column; align-items: center; gap: 12rpx; }
+.plan-icon-wrapper {
+  width: 80rpx; height: 80rpx; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 8rpx;
+}
+.plan-name { font-size: 32rpx; font-weight: 700; color: var(--text); }
+.plan-price { display: flex; align-items: baseline; gap: 4rpx; }
+.price-value { font-size: 52rpx; font-weight: 800; color: var(--green); line-height: 1; }
+.price-unit { font-size: 26rpx; color: var(--text2); }
+.plan-desc { font-size: 24rpx; color: var(--text3); text-align: center; margin-top: 4rpx; }
+
+.yearly-price {
+  margin-top: 16rpx; padding: 12rpx;
+  background: rgba(74,140,92,0.06); border-radius: var(--radius-sm);
+  font-size: 26rpx; color: var(--green); text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 12rpx;
+}
+.save-tag {
+  background: var(--green); color: #fff;
+  font-size: 20rpx; padding: 4rpx 12rpx; border-radius: 8rpx; font-weight: 700;
+}
+
+.current-tag {
+  margin-top: 16rpx; text-align: center;
+  font-size: 24rpx; color: var(--green); font-weight: 600;
+}
+
+/* ── 功能对比 ── */
+.features-section { margin-top: var(--sp-lg); }
+.features-title {
+  font-size: 30rpx; font-weight: 600; color: var(--text);
+  margin-bottom: var(--sp-md); display: flex; align-items: center; gap: 12rpx;
+}
+.features-scroll { white-space: nowrap; }
+.features-table { display: inline-block; min-width: 100%; background: var(--surface-solid); border-radius: var(--radius); overflow: hidden; }
+.feature-row { display: flex; border-bottom: 1rpx solid var(--line); }
+.feature-row.header { background: rgba(74,140,92,0.06); }
+.feature-row:last-child { border-bottom: none; }
+.feature-cell {
+  flex: 1; padding: 20rpx 16rpx; font-size: 24rpx;
+  text-align: center; color: var(--text);
+  min-width: 120rpx;
+}
+.feature-row.header .feature-cell { font-weight: 600; font-size: 26rpx; }
+
+/* ── 确认按钮 ── */
+.confirm-btn {
+  width: 92%; margin: var(--sp-xl) auto;
+  background: var(--green); color: #fff;
+  border-radius: var(--radius-full); font-size: 32rpx; font-weight: 600;
+  padding: 32rpx 0; border: none;
+  box-shadow: 0 8rpx 32rpx rgba(74,140,92,0.25);
+}
+.confirm-btn[disabled] { background: rgba(0,0,0,0.08); color: var(--text3); box-shadow: none; }
+.confirm-btn::after { border: none; }

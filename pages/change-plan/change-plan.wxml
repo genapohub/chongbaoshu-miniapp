@@ -2,7 +2,7 @@
   <view class="page-content">
     <view class="current-plan">
       <view class="current-badge">当前方案</view>
-      <view class="current-plan-icon"><icon name="{{currentPlan.icon}}" size="36" color="#FFFFFF" /></view>
+      <view class="current-plan-icon"><cbs-icon name="{{currentPlan.icon}}" size="36" color="#FFFFFF" /></view>
       <view class="current-plan-info">
         <view class="current-plan-name">{{currentPlan.name}}</view>
       </view>
@@ -21,7 +21,7 @@
       >
         <view class="plan-icon-wrapper" style="background: {{item.iconBg}};">
           <text wx:if="{{item.tier === 'free'}}" class="free-tag">FREE</text>
-          <icon wx:else name="{{item.icon}}" size="36" color="#FFFFFF" />
+          <cbs-icon wx:else name="{{item.icon}}" size="36" color="#FFFFFF" />
         </view>
         <view class="plan-details">
           <view class="plan-card-name">{{item.name}}</view>
@@ -33,7 +33,7 @@
 
     <view class="notice-card downgrade-card">
       <view class="notice-header">
-        <view class="notice-icon"><icon name="warning" size="36" color="#F7BA1E" /></view>
+        <view class="notice-icon"><cbs-icon name="warning" size="36" color="#F7BA1E" /></view>
         <text class="notice-title">降级须知</text>
       </view>
       <view class="notice-list">
@@ -46,7 +46,7 @@
 
     <view class="notice-card upgrade-card">
       <view class="notice-header">
-        <view class="notice-icon"><icon name="trending" size="32" color="var(--green)" /></view>
+        <view class="notice-icon"><cbs-icon name="trending" size="32" color="var(--green)" /></view>
         <text class="notice-title">升级规则</text>
       </view>
       <view class="notice-list">

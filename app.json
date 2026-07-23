@@ -80,6 +80,7 @@
   ],
   "usingComponents": {
     "loading-spinner": "/components/loading-spinner/loading-spinner",
-    "empty-state": "/components/empty-state/empty-state"
+    "empty-state": "/components/empty-state/empty-state",
+    "cbs-icon": "/components/cbs-icon/cbs-icon"
   }
 }

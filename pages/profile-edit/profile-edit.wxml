@@ -6,7 +6,7 @@
         <view class="logo-upload" bindtap="chooseLogo">
           <image wx:if="{{formData.kennel_logo}}" src="{{formData.kennel_logo}}" class="logo-img" mode="aspectFill" lazy-load />
           <view wx:else class="logo-placeholder">
-            <view class="logo-icon"><icon name="camera" size="48" color="#8F959E" /></view>
+            <view class="logo-icon"><cbs-icon name="camera" size="48" color="#8F959E" /></view>
             <text class="logo-text">点击上传</text>
           </view>
         </view>
@@ -30,7 +30,7 @@
           <text class="picker-value {{formData.region.length ? '' : 'placeholder'}}">
             {{formData.region.length ? formData.region[0] + ' ' + formData.region[1] + ' ' + formData.region[2] : '请选择地区'}}
           </text>
-          <text class="picker-arrow"><icon name="chevron-right" size="28" color="#C0C4CC" /></text>
+          <text class="picker-arrow"><cbs-icon name="chevron-right" size="28" color="#C0C4CC" /></text>
         </view>
       </picker>
     </view>

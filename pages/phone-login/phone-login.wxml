@@ -4,7 +4,7 @@
 <view class="phone-login-page">
   <view class="header">
     <view class="back-btn" bindtap="goBack">
-      <icon name="arrow-left" size="36" color="#4A8C5C" />
+      <cbs-icon name="arrow-left" size="36" color="#4A8C5C" />
     </view>
     <view class="header-title">手机号登录</view>
   </view>
@@ -65,7 +65,7 @@
     </view>
 
     <view class="dev-hint" wx:if="{{devMode}}">
-      <icon name="tool" size="36" color="#D4914A" />
+      <cbs-icon name="tool" size="36" color="#D4914A" />
       <text>开发模式：输入任意手机号 + 验证码 123456 即可登录</text>
     </view>
   </view>

@@ -1,0 +1,1 @@
+<text class="cbs-icon" style="font-size:{{size}}rpx;color:{{color}};{{bg ? 'background:'+bg+';border-radius:50%;padding:8rpx;display:inline-flex;align-items:center;justify-content:center;' : ''}}">{{char}}</text>

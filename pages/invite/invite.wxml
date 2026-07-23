@@ -3,7 +3,7 @@
 
   <!-- 顶部横幅 -->
   <view class="banner">
-    <view class="banner-icon"><icon name="gift" size="36" color="#F54A45" /></view>
+    <view class="banner-icon"><cbs-icon name="gift" size="36" color="#F54A45" /></view>
     <view class="banner-title">邀请好友，双方各得7天Pro</view>
     <view class="banner-subtitle">每成功邀请1人注册，额外获得7天Pro会员</view>
   </view>
@@ -39,7 +39,7 @@
   <!-- 邀请记录 -->
   <view class="records-section">
     <view class="section-header">
-      <view class="section-icon"><icon name="clipboard" size="36" color="#646A73" /></view>
+      <view class="section-icon"><cbs-icon name="clipboard" size="36" color="#646A73" /></view>
       <text class="section-title">邀请记录</text>
     </view>
 
@@ -58,7 +58,7 @@
     </view>
 
     <view class="empty-state" wx:elif="{{!loading}}">
-      <view class="empty-icon"><icon name="share" size="32" color="#4A8C5C" /></view>
+      <view class="empty-icon"><cbs-icon name="share" size="32" color="#4A8C5C" /></view>
       <view class="empty-text">还没有邀请记录</view>
       <view class="empty-hint">快去邀请好友吧</view>
     </view>
