@@ -1,28 +1,124 @@
-/* 宠舍信息编辑 — 页面特有样式 */
+/* 宠舍信息编辑 — 页面特有样式（暖森林毛玻璃风格） */
 
-/* Logo区 */
-.logo-upload-wrap { display: flex; flex-direction: column; align-items: center; margin-top: 8rpx; }
-.logo-upload { width: 160rpx; height: 160rpx; border-radius: var(--radius); overflow: hidden; background: rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: center; }
+/* ── Logo 上传区 ── */
+.form-section { display: flex; flex-direction: column; gap: 4rpx; }
+.logo-upload-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  margin-top: 12rpx;
+}
+.logo-upload {
+  width: 160rpx; height: 160rpx;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(0,0,0,0.04);
+  display: flex; align-items: center; justify-content: center;
+  border: 2rpx solid var(--line);
+}
 .logo-img { width: 100%; height: 100%; }
-.logo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8rpx; }
+.logo-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 8rpx;
+}
+.logo-icon {
+  width: 72rpx; height: 72rpx;
+  border-radius: 50%;
+  background: rgba(74,140,92,0.1);
+  display: flex; align-items: center; justify-content: center;
+}
 .logo-text { font-size: 22rpx; color: var(--text3); }
-.logo-hint { font-size: 22rpx; color: var(--text3); margin-top: 12rpx; }
+.logo-hint {
+  font-size: 22rpx; color: var(--text3);
+  margin-top: 12rpx;
+}
 
-/* 输入框组 */
-.required { color: var(--red); margin-left: 4rpx; }
-.textarea-wrap { position: relative; }
-.textarea-field { width: 100%; min-height: 160rpx; background: rgba(0,0,0,0.03); border-radius: var(--radius-sm); padding: 22rpx 24rpx; font-size: 28rpx; color: var(--text); border: 2rpx solid transparent; box-sizing: border-box; }
-.textarea-field:focus { border-color: var(--green); }
-.char-count { text-align: right; font-size: 22rpx; color: var(--text3); margin-top: 6rpx; }
+/* ── 必填星号 ── */
+.required {
+  color: var(--red);
+  margin-left: 4rpx;
+  font-weight: 500;
+}
 
-/* 品种标签 */
-.tag-options { display: flex; flex-wrap: wrap; gap: 12rpx; }
-.tag-option { padding: 12rpx 24rpx; border-radius: 32rpx; font-size: 26rpx; background: rgba(0,0,0,0.04); color: var(--text2); border: 2rpx solid transparent; }
-.tag-option.selected { background: var(--green); color: #fff; border-color: var(--green); }
-.add-tag-row { display: flex; gap: 12rpx; margin-top: 16rpx; }
+/* ── picker 箭头 ── */
+.picker-arrow {
+  display: flex; align-items: center;
+  margin-left: 8rpx;
+}
+.picker-value.placeholder { color: var(--text3); }
+
+/* ── 文本域 ── */
+.textarea-wrap {
+  position: relative;
+  background: rgba(0,0,0,0.03);
+  border-radius: var(--radius-sm);
+  border: 2rpx solid transparent;
+  padding: 22rpx 24rpx;
+  transition: border-color 0.2s ease;
+}
+.textarea-wrap:focus-within { border-color: var(--green); }
+.textarea-field {
+  width: 100%;
+  min-height: 160rpx;
+  background: transparent;
+  font-size: 28rpx;
+  color: var(--text);
+  line-height: 1.6;
+}
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 22rpx; color: var(--text3);
+  margin-top: 8rpx;
+}
+
+/* ── 品种标签 ── */
+.tag-options {
+  display: flex; flex-wrap: wrap; gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+.tag-option {
+  padding: 12rpx 26rpx;
+  border-radius: var(--radius-full);
+  font-size: 26rpx;
+  background: rgba(0,0,0,0.04);
+  color: var(--text2);
+  border: 2rpx solid transparent;
+  transition: all 0.2s ease;
+}
+.tag-option.selected {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 4rpx 16rpx rgba(74,140,92,0.2);
+}
+.add-tag-row {
+  display: flex; gap: 12rpx; margin-top: 16rpx;
+  align-items: center;
+}
 .add-tag-row .input-field { flex: 1; }
-.btn-add-tag { padding: 18rpx 28rpx; background: var(--green); color: #fff; border-radius: var(--radius-sm); font-size: 26rpx; display: flex; align-items: center; white-space: nowrap; }
+.input-field.small { padding: 18rpx 22rpx; font-size: 26rpx; }
+.btn-add-tag {
+  padding: 18rpx 28rpx;
+  background: var(--green);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: 26rpx;
+  display: flex; align-items: center; white-space: nowrap;
+  box-shadow: 0 4rpx 16rpx rgba(74,140,92,0.25);
+}
+.btn-add-tag:active { opacity: 0.9; }
 
-/* 提交区 */
-.submit-section { padding: 32rpx; padding-bottom: calc(32rpx + env(safe-area-inset-bottom)); }
+/* ── 提交区（底部固定） ── */
+.submit-section {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 24rpx 40rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: var(--bg);
+  z-index: 50;
+}
 .submit-section .btn-primary { margin-top: 0; }
+.btn-primary.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  box-shadow: none;
+}
+.container { padding-bottom: calc(180rpx + env(safe-area-inset-bottom)); }

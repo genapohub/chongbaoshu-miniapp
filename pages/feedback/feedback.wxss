@@ -1,15 +1,103 @@
-/* 宠宝树品牌样式 — 暖森林·毛玻璃 */
-.container { min-height: 100vh; background: var(--bg); padding: 32rpx; }
-.card { background: var(--surface); border-radius: var(--radius); padding: 32rpx; margin-bottom: 24rpx; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.card-title { font-size: 30rpx; font-weight: 600; color: var(--text); margin-bottom: 24rpx; letter-spacing: 0.5rpx; }
-.btn-primary { background: var(--green); color: #fff; border-radius: 48rpx; font-size: 30rpx; font-weight: 600; text-align: center; padding: 26rpx 0; border: none; display: flex; align-items: center; justify-content: center; gap: 10rpx; }
-.btn-primary::after { border: none; }
-.btn-primary:active { opacity: 0.88; }
-.btn-primary.disabled, .btn-primary[disabled] { opacity: 0.4; pointer-events: none; }
-.btn-secondary { background: rgba(0,0,0,0.04); color: var(--text2); border-radius: 48rpx; font-size: 28rpx; text-align: center; padding: 22rpx 0; border: none; }
-.btn-secondary::after { border: none; }
-.form-item { margin-bottom: 28rpx; }
-.form-label { display: block; font-size: 26rpx; color: var(--text2); margin-bottom: 12rpx; font-weight: 500; }
-.input-field { background: rgba(0,0,0,0.03); border-radius: var(--radius-sm); padding: 22rpx 24rpx; font-size: 28rpx; border: 2rpx solid transparent; color: var(--text); width: 100%; box-sizing: border-box; }
-.input-field:focus { border-color: var(--green); }
-.input-field::placeholder { color: var(--text3); }
+/* 宠宝树品牌样式 — 暖森林·毛玻璃 | feedback */
+.container {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+/* ===== 页头 ===== */
+.header {
+  padding: 24rpx 8rpx 40rpx;
+}
+.title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1rpx;
+}
+.subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text2);
+  margin-top: 14rpx;
+  line-height: 1.5;
+}
+
+/* ===== 表单区 ===== */
+.form-section {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8rpx 28rpx 16rpx;
+}
+.input-group {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.input-group:last-child { border-bottom: none; }
+.label {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text2);
+  font-weight: 500;
+  margin-bottom: 18rpx;
+  letter-spacing: 0.5rpx;
+}
+.textarea {
+  width: 100%;
+  min-height: 200rpx;
+  box-sizing: border-box;
+  padding: 24rpx;
+  background: rgba(0,0,0,0.03);
+  border-radius: var(--radius-sm);
+  font-size: 28rpx;
+  color: var(--text);
+  border: 2rpx solid transparent;
+  line-height: 1.6;
+}
+.textarea:focus { border-color: var(--green); }
+.count {
+  display: block;
+  text-align: right;
+  font-size: 22rpx;
+  color: var(--text3);
+  margin-top: 12rpx;
+}
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 22rpx 24rpx;
+  background: rgba(0,0,0,0.03);
+  border-radius: var(--radius-sm);
+  font-size: 28rpx;
+  color: var(--text);
+  border: 2rpx solid transparent;
+}
+.input:focus { border-color: var(--green); }
+.input::placeholder, .textarea::placeholder { color: var(--text3); }
+
+/* ===== 提交区 ===== */
+.submit-area {
+  padding: 40rpx 0 calc(40rpx + env(safe-area-inset-bottom));
+}
+.submit-btn {
+  width: 100%;
+  height: 96rpx;
+  border-radius: var(--radius-full);
+  background: var(--green);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(74,140,92,0.32);
+}
+.submit-btn::after { border: none; }
+.submit-btn:active { opacity: 0.88; }
+.submit-btn[disabled] { opacity: 0.5; box-shadow: none; }

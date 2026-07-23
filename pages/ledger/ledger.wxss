@@ -1,21 +1,159 @@
-.container { background: var(--bg); min-height: 100vh; padding-bottom: 160rpx; }
-.summary-card { background: var(--surface); margin: 28rpx; border-radius: var(--radius); padding: 36rpx; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.summary-row { display: flex; }
-.summary-item { flex: 1; text-align: center; }
-.s-label { font-size: 24rpx; color: var(--text3); }
-.s-amount { font-size: 38rpx; font-weight: 700; margin-top: 10rpx; display: block; }
+/* ledger 收支台账 — 暖森林毛玻璃 */
+.container {
+  background: var(--bg);
+  min-height: 100vh;
+  padding-bottom: 200rpx;
+}
+
+/* 汇总卡片 */
+.summary-card {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  margin: var(--sp-md) var(--sp-lg) 0;
+  border-radius: var(--radius);
+  padding: 40rpx var(--sp-lg);
+  box-shadow: var(--shadow);
+}
+.summary-row {
+  display: flex;
+}
+.summary-item {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.summary-item + .summary-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rpx;
+  height: 56rpx;
+  background: var(--line);
+}
+.s-label {
+  font-size: 24rpx;
+  color: var(--text3);
+  display: block;
+}
+.s-amount {
+  font-size: 38rpx;
+  font-weight: 700;
+  margin-top: 10rpx;
+  display: block;
+  letter-spacing: -0.5rpx;
+}
 .summary-item.income .s-amount { color: var(--green); }
 .summary-item.expense .s-amount { color: var(--red); }
-.tabs { display: flex; background: var(--surface); margin: 0 28rpx; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
-.tab { flex: 1; text-align: center; padding: 22rpx; font-size: 26rpx; color: var(--text3); }
-.tab.active { background: var(--green); color: #fff; font-weight: 600; }
-.entry-list { padding: 20rpx 28rpx; }
-.entry-card { background: var(--surface); border-radius: var(--radius); padding: 28rpx; margin-bottom: 14rpx; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.entry-category { font-size: 28rpx; font-weight: 600; }
-.entry-date { font-size: 22rpx; color: var(--text3); margin-top: 4rpx; }
-.entry-desc { font-size: 24rpx; color: var(--text3); margin-top: 4rpx; }
-.amount-income { font-size: 32rpx; font-weight: 700; color: var(--green); }
-.amount-expense { font-size: 32rpx; font-weight: 700; color: var(--red); }
-.empty { text-align: center; padding: 180rpx 0; }
-.empty-text { font-size: 28rpx; color: var(--text3); }
-.fab { position: fixed; right: 32rpx; bottom: 160rpx; width: 104rpx; height: 104rpx; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; box-shadow: 0 12rpx 32rpx rgba(74,140,92,0.35); }
+
+/* Tab 筛选 */
+.tabs {
+  display: flex;
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  margin: var(--sp-md) var(--sp-lg) 0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  padding: 6rpx;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  font-size: 26rpx;
+  color: var(--text3);
+  border-radius: var(--radius-full);
+  transition: all 0.2s;
+}
+.tab.active {
+  background: var(--green);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4rpx 16rpx rgba(74, 140, 92, 0.25);
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text3);
+}
+
+/* 记录列表 */
+.entry-list {
+  padding: var(--sp-md) var(--sp-lg) 0;
+}
+.entry-card {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+.entry-card:active {
+  opacity: 0.92;
+}
+.entry-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.entry-category {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+.entry-date {
+  font-size: 22rpx;
+  color: var(--text3);
+  margin-top: 6rpx;
+}
+.entry-desc {
+  font-size: 24rpx;
+  color: var(--text2);
+  margin-top: 6rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.entry-amount {
+  font-size: 34rpx;
+  font-weight: 700;
+  letter-spacing: -0.5rpx;
+}
+.amount-income { color: var(--green); }
+.amount-expense { color: var(--red); }
+
+/* FAB */
+.fab {
+  position: fixed;
+  right: var(--sp-lg);
+  bottom: 200rpx;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: var(--shadow-fab);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.fab:active {
+  opacity: 0.88;
+}

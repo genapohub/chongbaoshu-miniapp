@@ -1,42 +1,243 @@
-.profile-page { min-height: 100vh; background: var(--bg); }
+/* ══════════════════════════════════════════════
+   个人中心 — 暖森林毛玻璃风格
+   ══════════════════════════════════════════════ */
 
+.profile-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* ── 绿色头部 ── */
 .profile-header {
   background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
-  padding: 100rpx var(--sp-xl) 60rpx; text-align: center; color: #fff;
+  padding: 120rpx var(--sp-xl) 60rpx;
+  text-align: center;
+  color: #fff;
   position: relative;
+  overflow: hidden;
 }
+.profile-header::before {
+  content: '';
+  position: absolute;
+  top: -100rpx;
+  right: -100rpx;
+  width: 320rpx;
+  height: 320rpx;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.profile-header::after {
+  content: '';
+  position: absolute;
+  bottom: -120rpx;
+  left: -80rpx;
+  width: 260rpx;
+  height: 260rpx;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── 圆形头像 ── */
 .profile-avatar-wrap {
-  width: 140rpx; height: 140rpx; border-radius: 50%;
-  overflow: hidden; margin: 0 auto 20rpx;
-  border: 4rpx solid rgba(255,255,255,0.3);
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 24rpx;
+  border: 6rpx solid rgba(255,255,255,0.35);
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.1);
 }
-.profile-avatar { width: 100%; height: 100%; }
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+}
 .profile-avatar-placeholder {
-  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-  font-size: 56rpx; background: rgba(255,255,255,0.1);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64rpx;
+  background: rgba(255,255,255,0.12);
 }
-.profile-name { font-size: 38rpx; font-weight: 800; display: block; letter-spacing: 1rpx; }
 
+/* ── 用户名 ── */
+.profile-name {
+  font-size: 40rpx;
+  font-weight: 800;
+  display: inline-block;
+  letter-spacing: 1rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── PRO 徽章（覆盖全局 badge-amber 以适配头部） ── */
+.profile-header .badge-amber {
+  position: static;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12rpx;
+  background: var(--amber);
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 14rpx;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  box-shadow: 0 4rpx 12rpx rgba(212,145,74,0.4);
+}
+
+/* ── 数据统计 ── */
 .profile-stats {
-  display: flex; justify-content: space-around; margin-top: 40rpx;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 44rpx;
+  position: relative;
+  z-index: 1;
 }
-.profile-stat { display: flex; flex-direction: column; align-items: center; }
-.stat-num { font-size: 44rpx; font-weight: 800; }
-.stat-label { font-size: 22rpx; opacity: 0.8; margin-top: 8rpx; }
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120rpx;
+}
+.profile-stat .stat-num {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1rpx;
+  line-height: 1.1;
+}
+.profile-stat .stat-label {
+  font-size: 22rpx;
+  color: rgba(255,255,255,0.85);
+  margin-top: 8rpx;
+  letter-spacing: 1rpx;
+}
 
-.content-area { padding-bottom: 180rpx; }
+/* ── 内容区 ── */
+.content-area {
+  padding-bottom: 200rpx;
+  margin-top: -32rpx;
+  position: relative;
+  z-index: 2;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--bg);
+  padding-top: var(--sp-md);
+}
 
+/* ── 订阅卡片（绿色渐变） ── */
 .card-green {
   background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
-  color: #fff; margin: var(--sp-lg); padding: 32rpx;
-  border-radius: var(--radius); display: flex; align-items: center;
+  color: #fff;
+  margin: var(--sp-md) var(--sp-lg);
+  padding: 36rpx var(--sp-lg);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8rpx 32rpx rgba(74,140,92,0.25);
+  border: 1rpx solid rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
 }
-.sub-label { font-size: 22rpx; opacity: 0.7; }
-.sub-plan { font-size: 36rpx; font-weight: 800; flex: 1; margin-left: 8rpx; }
-.sub-arrow { font-size: 32rpx; opacity: 0.5; }
+.card-green::before {
+  content: '';
+  position: absolute;
+  top: -40rpx;
+  right: -40rpx;
+  width: 180rpx;
+  height: 180rpx;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.card-green:active { transform: scale(0.99); opacity: 0.95; }
+.sub-label {
+  font-size: 22rpx;
+  opacity: 0.75;
+  letter-spacing: 1rpx;
+  flex-shrink: 0;
+}
+.sub-plan {
+  font-size: 36rpx;
+  font-weight: 800;
+  flex: 1;
+  margin-left: 16rpx;
+  letter-spacing: -0.5rpx;
+}
+.sub-arrow {
+  font-size: 32rpx;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
 
+/* ── 菜单列表（毛玻璃容器） ── */
+.menu-list-bg {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  margin: var(--sp-md) var(--sp-lg);
+  padding: 0;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1rpx solid rgba(255,255,255,0.6);
+}
+.menu-row {
+  display: flex;
+  align-items: center;
+  padding: 32rpx var(--sp-lg);
+  border-bottom: 1rpx solid var(--line);
+  font-size: 30rpx;
+  position: relative;
+  transition: background 0.15s ease;
+}
+.menu-row:last-child { border-bottom: none; }
+.menu-row:active {
+  background: rgba(74,140,92,0.06);
+}
+.menu-icon {
+  width: 56rpx;
+  height: 56rpx;
+  text-align: center;
+  line-height: 56rpx;
+  margin-right: var(--sp-md);
+  font-size: 32rpx;
+  background: rgba(74,140,92,0.08);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+.menu-label {
+  flex: 1;
+  color: var(--text);
+  font-weight: 500;
+}
+.menu-arrow {
+  color: var(--text3);
+  font-size: 32rpx;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ── 退出登录按钮 ── */
 .logout-btn {
-  margin: var(--sp-lg); background: transparent;
-  border: 2rpx solid var(--red); color: var(--red);
+  margin: var(--sp-xl) var(--sp-lg);
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border: 2rpx solid var(--red);
+  color: var(--red);
   font-weight: 600;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow);
+  width: calc(100% - var(--sp-lg) * 2);
+  box-sizing: border-box;
+}
+.logout-btn:active {
+  background: rgba(212,83,74,0.08);
+  transform: scale(0.99);
 }

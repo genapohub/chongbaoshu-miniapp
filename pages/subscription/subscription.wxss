@@ -1,15 +1,190 @@
-/* 宠宝树品牌样式 — 暖森林·毛玻璃 */
-.container { min-height: 100vh; background: var(--bg); padding: 32rpx; }
-.card { background: var(--surface); border-radius: var(--radius); padding: 32rpx; margin-bottom: 24rpx; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.card-title { font-size: 30rpx; font-weight: 600; color: var(--text); margin-bottom: 24rpx; letter-spacing: 0.5rpx; }
-.btn-primary { background: var(--green); color: #fff; border-radius: 48rpx; font-size: 30rpx; font-weight: 600; text-align: center; padding: 26rpx 0; border: none; display: flex; align-items: center; justify-content: center; gap: 10rpx; }
-.btn-primary::after { border: none; }
-.btn-primary:active { opacity: 0.88; }
-.btn-primary.disabled, .btn-primary[disabled] { opacity: 0.4; pointer-events: none; }
-.btn-secondary { background: rgba(0,0,0,0.04); color: var(--text2); border-radius: 48rpx; font-size: 28rpx; text-align: center; padding: 22rpx 0; border: none; }
-.btn-secondary::after { border: none; }
-.form-item { margin-bottom: 28rpx; }
-.form-label { display: block; font-size: 26rpx; color: var(--text2); margin-bottom: 12rpx; font-weight: 500; }
-.input-field { background: rgba(0,0,0,0.03); border-radius: var(--radius-sm); padding: 22rpx 24rpx; font-size: 28rpx; border: 2rpx solid transparent; color: var(--text); width: 100%; box-sizing: border-box; }
-.input-field:focus { border-color: var(--green); }
-.input-field::placeholder { color: var(--text3); }
+/* subscription 订阅管理 — 暖森林毛玻璃 */
+.container {
+  min-height: 100vh;
+  background: var(--bg);
+}
+.page-content {
+  padding: var(--sp-md) var(--sp-lg) 200rpx;
+}
+
+/* 当前方案卡片 */
+.sub-status-card {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-md);
+  box-shadow: var(--shadow);
+}
+.ssc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.ssc-left {
+  display: flex;
+  flex-direction: column;
+}
+.ssc-label {
+  font-size: 24rpx;
+  color: var(--text3);
+  margin-bottom: 8rpx;
+}
+.ssc-plan {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5rpx;
+}
+.badge {
+  font-size: 22rpx;
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+.badge-white {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--green);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+.ssc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx 24rpx;
+  margin-top: 24rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid var(--line);
+  font-size: 24rpx;
+  color: var(--text2);
+}
+
+/* 使用量 / 支付历史卡片 */
+.card {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-md);
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  letter-spacing: 0.5rpx;
+}
+
+/* 使用量条目 */
+.usage-item {
+  margin-bottom: var(--sp-md);
+}
+.usage-item:last-child {
+  margin-bottom: 0;
+}
+.usage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.usage-label {
+  font-size: 26rpx;
+  color: var(--text2);
+  font-weight: 500;
+}
+.usage-value {
+  font-size: 26rpx;
+  color: var(--text);
+  font-weight: 600;
+}
+.progress-bar {
+  width: 100%;
+  height: 16rpx;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s;
+}
+.progress-fill.fill-green { background: var(--green); }
+.progress-fill.fill-red { background: var(--red); }
+.progress-fill.fill-blue { background: #2D9CDB; }
+
+/* 操作按钮区 */
+.action-btns {
+  display: flex;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-md);
+}
+.action-btns .btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 26rpx 0;
+  border-radius: var(--radius-full);
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.action-btns .btn::after { border: none; }
+.btn-outline {
+  background: transparent;
+  color: var(--green);
+  border: 2rpx solid var(--green);
+}
+.btn-outline.btn-danger {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+/* 支付历史列表 */
+.payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.payment-item:last-child {
+  border-bottom: none;
+}
+.payment-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.payment-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+.payment-date {
+  font-size: 22rpx;
+  color: var(--text3);
+  margin-top: 6rpx;
+}
+.payment-amount {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5rpx;
+}
+
+/* 空支付记录 */
+.empty-payment {
+  text-align: center;
+  padding: 60rpx 0;
+  font-size: 26rpx;
+  color: var(--text3);
+}

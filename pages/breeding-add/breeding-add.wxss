@@ -1,27 +1,203 @@
-/* 添加配种 — 页面特有样式 */
+/* 添加配种 — 页面特有样式（暖森林毛玻璃风格） */
 
-/* 母犬/父犬选择 */
-.mother-section, .father-section { margin-bottom: 24rpx; }
-.pet-picker-wrap { display: flex; flex-wrap: wrap; gap: 10rpx; }
-.pet-chip { padding: 12rpx 24rpx; border-radius: 32rpx; font-size: 26rpx; background: rgba(0,0,0,0.04); color: var(--text2); }
-.pet-chip.selected { background: var(--green); color: #fff; }
-.pet-chip.disabled { opacity: 0.4; }
+/* ── 表单容器 ── */
+.form-section { display: flex; flex-direction: column; gap: 4rpx; }
+.form-item.required .form-label::after {
+  content: ' *';
+  color: var(--red);
+}
 
-/* 配种方式 */
-.breed-method-group { display: flex; gap: 12rpx; }
-.method-option { flex: 1; text-align: center; padding: 16rpx; border-radius: var(--radius-sm); font-size: 26rpx; background: rgba(0,0,0,0.04); color: var(--text2); border: 2rpx solid transparent; }
-.method-option.selected { background: var(--green); color: #fff; border-color: var(--green); }
+/* ── 母犬 / 公犬选择 ── */
+.pet-picker {
+  padding: 18rpx 24rpx;
+}
+.pet-picker.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  background: rgba(0,0,0,0.02);
+}
+.pet-display {
+  display: flex; align-items: center; gap: 16rpx;
+  flex: 1;
+}
+.pet-avatar-small {
+  width: 64rpx; height: 64rpx;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  overflow: hidden;
+  background: rgba(0,0,0,0.04);
+  display: flex; align-items: center; justify-content: center;
+}
+.pet-avatar-small.placeholder {
+  background: var(--green);
+  color: #fff;
+}
+.pet-avatar-small .avatar-text {
+  font-size: 28rpx; font-weight: 600; color: #fff;
+}
+.pet-text-wrap { display: flex; align-items: baseline; gap: 4rpx; flex: 1; }
+.pet-text {
+  font-size: 28rpx; color: var(--text);
+}
+.pet-text.placeholder { color: var(--text3); }
+.pet-detail { font-size: 24rpx; color: var(--text3); }
 
-/* 预产期 */
-.due-date-card { background: var(--tint-cream); border-radius: var(--radius); padding: 24rpx; margin-top: 24rpx; display: flex; flex-direction: column; align-items: center; }
+/* ── 错误提示 ── */
+.error-tip {
+  display: flex; align-items: center; gap: 6rpx;
+  font-size: 22rpx; color: var(--red);
+  margin-top: 8rpx; padding-left: 4rpx;
+}
+.error-tip view { display: flex; align-items: center; gap: 6rpx; }
+
+/* ── 近亲检测结果 ── */
+.inbreeding-result {
+  display: flex; align-items: flex-start; gap: 16rpx;
+  padding: 24rpx;
+  border-radius: var(--radius-sm);
+  margin-top: 16rpx;
+}
+.inbreeding-result.warning {
+  background: #FFF3E0;
+  border: 2rpx solid rgba(212,145,74,0.3);
+}
+.inbreeding-result.success {
+  background: #EDF4EF;
+  border: 2rpx solid rgba(74,140,92,0.3);
+}
+.inbreeding-icon { flex-shrink: 0; }
+.inbreeding-text { display: flex; flex-direction: column; gap: 4rpx; flex: 1; }
+.inbreeding-title {
+  font-size: 28rpx; font-weight: 600;
+}
+.inbreeding-result.warning .inbreeding-title { color: var(--amber); }
+.inbreeding-result.success .inbreeding-title { color: var(--green); }
+.inbreeding-message { font-size: 24rpx; color: var(--text2); line-height: 1.5; }
+
+/* ── 日期选择器 ── */
+.date-picker .picker-value { color: var(--text); }
+
+/* ── 预产期卡片 ── */
+.due-date-card {
+  background: #EDF4EF;
+  border-radius: var(--radius);
+  padding: 24rpx 28rpx;
+  margin-top: 16rpx;
+  display: flex; flex-direction: column; gap: 6rpx;
+}
+.due-date-main {
+  display: flex; align-items: center; gap: 8rpx;
+}
 .due-date-label { font-size: 24rpx; color: var(--text2); }
-.due-date-value { font-size: 40rpx; font-weight: 700; color: var(--green); margin-top: 8rpx; }
-.due-date-note { font-size: 22rpx; color: var(--text3); margin-top: 8rpx; }
+.due-date-value {
+  font-size: 36rpx; font-weight: 700; color: var(--green);
+  margin-left: auto;
+}
+.due-date-note { font-size: 22rpx; color: var(--text3); }
 
-/* 计数控制 */
-.count-control { display: flex; align-items: center; gap: 16rpx; }
-.count-btn { width: 56rpx; height: 56rpx; border-radius: 50%; background: rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: center; font-size: 32rpx; color: var(--text2); }
-.count-value { min-width: 60rpx; text-align: center; font-size: 36rpx; font-weight: 700; color: var(--text); }
+/* ── 配种方式 ── */
+.breed-method-group { display: flex; gap: 12rpx; }
+.method-option {
+  flex: 1; text-align: center;
+  padding: 20rpx;
+  border-radius: var(--radius-sm);
+  font-size: 26rpx;
+  background: rgba(0,0,0,0.04);
+  color: var(--text2);
+  border: 2rpx solid transparent;
+  transition: all 0.2s ease;
+}
+.method-option.active {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 4rpx 16rpx rgba(74,140,92,0.25);
+}
 
-/* 错误提示 */
-.error-tip { font-size: 22rpx; color: var(--red); margin-top: 6rpx; }
+/* ── 配种次数计数器 ── */
+.count-control {
+  display: flex; align-items: center; gap: 24rpx;
+}
+.count-btn {
+  width: 64rpx; height: 64rpx;
+  border-radius: 50%;
+  background: rgba(74,140,92,0.08);
+  display: flex; align-items: center; justify-content: center;
+  border: 2rpx solid transparent;
+}
+.count-btn:active { background: rgba(74,140,92,0.16); }
+.count-value {
+  min-width: 80rpx; text-align: center;
+  font-size: 36rpx; font-weight: 700; color: var(--text);
+}
+
+/* ── 提交区（底部固定） ── */
+.submit-section {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 24rpx 40rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: var(--bg);
+  z-index: 50;
+}
+.btn-block { width: 100%; }
+.container { padding-bottom: calc(180rpx + env(safe-area-inset-bottom)); }
+
+/* ── 宠物选择弹窗（本地实现） ── */
+.picker-modal {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: flex-end;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+.picker-content {
+  width: 100%;
+  background: var(--surface-solid);
+  border-radius: var(--radius) var(--radius) 0 0;
+  max-height: 70vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+.picker-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 32rpx 32rpx 24rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+.picker-title { font-size: 32rpx; font-weight: 600; color: var(--text); }
+.picker-close {
+  width: 56rpx; height: 56rpx;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--bg);
+}
+.picker-list { max-height: 50vh; }
+.picker-empty {
+  padding: 80rpx 32rpx;
+  text-align: center;
+  color: var(--text3); font-size: 28rpx;
+}
+.picker-item.pet-item {
+  display: flex; align-items: center; gap: 16rpx;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+.picker-item.pet-item:last-child { border-bottom: none; }
+.picker-item.pet-item.selected { background: #EDF4EF; }
+.picker-item.pet-item:active { background: rgba(0,0,0,0.03); }
+.pet-avatar {
+  width: 80rpx; height: 80rpx;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.04);
+  display: flex; align-items: center; justify-content: center;
+}
+.pet-avatar.placeholder { background: var(--green); }
+.pet-avatar.placeholder .avatar-text {
+  font-size: 32rpx; font-weight: 600; color: #fff;
+}
+.pet-info { display: flex; flex-direction: column; gap: 4rpx; flex: 1; }
+.pet-name { font-size: 30rpx; color: var(--text); font-weight: 500; }
+.pet-breed { font-size: 24rpx; color: var(--text3); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }

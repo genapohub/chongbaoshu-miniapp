@@ -1,44 +1,194 @@
-.pet-page { padding: var(--sp-lg); padding-bottom: 200rpx; }
+/* ══════════════════════════════════════════════
+   宠物列表 — 暖森林毛玻璃风格
+   ══════════════════════════════════════════════ */
 
+.pet-page {
+  padding: var(--sp-lg);
+  padding-bottom: 240rpx;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* ── 搜索栏（胶囊形毛玻璃） ── */
 .search-bar {
-  display: flex; align-items: center;
-  background: var(--surface); border-radius: var(--radius-full);
-  padding: 20rpx 32rpx; margin-bottom: var(--sp-lg);
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius-full);
+  padding: 22rpx 32rpx;
+  margin-bottom: var(--sp-md);
   box-shadow: var(--shadow);
+  border: 1rpx solid rgba(255,255,255,0.6);
 }
-.search-icon { font-size: 32rpx; color: var(--text3); margin-right: 16rpx; }
-.search-input { flex: 1; font-size: 28rpx; background: transparent; border: none; }
-.search-placeholder { color: var(--text3); }
+.search-icon {
+  font-size: 30rpx;
+  color: var(--text3);
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text);
+  background: transparent;
+  border: none;
+}
+.search-placeholder {
+  color: var(--text3);
+  font-size: 28rpx;
+}
 
-.filter-scroll { white-space: nowrap; margin-bottom: var(--sp-lg); }
+/* ── 筛选Tab（横向滚动） ── */
+.filter-scroll {
+  white-space: nowrap;
+  margin-bottom: var(--sp-md);
+  padding: 4rpx 0;
+}
 .filter-item {
-  display: inline-flex; align-items: center;
-  padding: 16rpx 32rpx; border-radius: var(--radius-full);
-  font-size: 26rpx; color: var(--text2); background: var(--surface);
-  margin-right: 16rpx; border: 2rpx solid transparent;
+  display: inline-flex;
+  align-items: center;
+  padding: 16rpx 32rpx;
+  border-radius: var(--radius-full);
+  font-size: 26rpx;
+  font-weight: 500;
+  color: var(--text2);
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  margin-right: 16rpx;
+  border: 2rpx solid transparent;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
 }
+.filter-item:active { transform: scale(0.97); }
 .filter-item.active {
-  background: var(--green); color: #fff;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(74,140,92,0.3);
+  border-color: rgba(255,255,255,0.2);
 }
 
-.pet-list { display: flex; flex-direction: column; gap: var(--sp-md); }
+/* ── 宠物列表容器 ── */
+.pet-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+/* ── 宠物卡片（毛玻璃行） ── */
 .pet-card {
-  display: flex; align-items: center; gap: var(--sp-lg);
-  background: var(--surface); border-radius: var(--radius);
-  padding: var(--sp-lg); box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  padding: var(--sp-md);
+  box-shadow: var(--shadow);
+  border: 1rpx solid rgba(255,255,255,0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+.pet-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 16rpx rgba(0,0,0,0.08);
+}
+
+/* ── 宠物头像 80rpx 圆角 ── */
 .pet-avatar-wrap {
-  width: 120rpx; height: 120rpx; border-radius: var(--radius-sm);
-  overflow: hidden; flex-shrink: 0; background: rgba(0,0,0,0.03);
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(74,140,92,0.1) 0%, rgba(212,145,74,0.1) 100%);
+  border: 2rpx solid rgba(255,255,255,0.8);
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
 }
-.pet-avatar { width: 100%; height: 100%; }
+.pet-avatar {
+  width: 100%;
+  height: 100%;
+}
 .pet-avatar-placeholder {
-  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-  font-size: 48rpx;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52rpx;
 }
-.pet-info { flex: 1; min-width: 0; }
-.pet-name-row { display: flex; align-items: center; justify-content: space-between; }
-.pet-name { font-size: 32rpx; font-weight: 700; color: var(--text); }
-.price-tag { font-size: 26rpx; font-weight: 700; color: var(--red); }
-.pet-desc { font-size: 24rpx; color: var(--text3); margin-top: 8rpx; display: block; }
-.pet-arrow { font-size: 32rpx; color: var(--text3); flex-shrink: 0; }
+
+/* ── 宠物信息 ── */
+.pet-info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.pet-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+.pet-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.price-tag {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: var(--red);
+  background: rgba(212,83,74,0.1);
+  padding: 4rpx 14rpx;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+.pet-desc {
+  font-size: 24rpx;
+  color: var(--text2);
+  margin-top: 8rpx;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── 箭头 ── */
+.pet-arrow {
+  font-size: 32rpx;
+  color: var(--text3);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* ── FAB 浮动按钮 ── */
+.fab-btn {
+  position: fixed;
+  right: var(--sp-lg);
+  bottom: calc(200rpx + env(safe-area-inset-bottom));
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  box-shadow: 0 16rpx 48rpx rgba(74,140,92,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+  font-weight: 300;
+  color: #fff;
+  z-index: 100;
+  border: 2rpx solid rgba(255,255,255,0.3);
+}
+.fab-btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 8rpx 24rpx rgba(74,140,92,0.35);
+}

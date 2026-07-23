@@ -1,15 +1,150 @@
-.container { background: var(--bg); min-height: 100vh; padding: 24rpx; }
-.summary-card { background: var(--green); border-radius: var(--radius); padding: 32rpx; margin-bottom: 24rpx; }
-.summary-month { font-size: 26rpx; color: rgba(255,255,255,0.8); }
-.summary-row { display: flex; margin-top: 24rpx; }
-.summary-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
-.s-num { font-size: 40rpx; font-weight: 700; color: #fff; }
-.s-label { font-size: 22rpx; color: rgba(255,255,255,0.7); margin-top: 8rpx; }
-.sale-card { background: var(--surface); border-radius: var(--radius); padding: 24rpx; margin-bottom: 16rpx; box-shadow: var(--shadow); }
-.sale-top { display: flex; justify-content: space-between; align-items: center; }
-.sale-pet { font-size: 32rpx; font-weight: 600; }
-.sale-price { font-size: 36rpx; font-weight: 700; color: var(--red); }
-.sale-meta { display: flex; gap: 24rpx; margin-top: 12rpx; font-size: 24rpx; color: var(--text3); }
-.sale-items { font-size: 24rpx; color: var(--text2); margin-top: 8rpx; }
-.empty { display: flex; flex-direction: column; align-items: center; padding-top: 200rpx; }
-.empty-text { font-size: 32rpx; color: var(--text3); margin-top: 24rpx; }
+/* 宠宝树品牌样式 — 暖森林·毛玻璃 | sales */
+.container {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+/* ===== 汇总卡片 ===== */
+.summary-card {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  border-radius: var(--radius);
+  padding: 36rpx 32rpx 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 8rpx 32rpx rgba(74,140,92,0.22);
+}
+.summary-month {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.5rpx;
+}
+.summary-row {
+  display: flex;
+  margin-top: 28rpx;
+}
+.summary-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.summary-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 12rpx;
+  bottom: 12rpx;
+  width: 1rpx;
+  background: rgba(255,255,255,0.18);
+}
+.s-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5rpx;
+}
+.s-label {
+  font-size: 22rpx;
+  color: rgba(255,255,255,0.75);
+  margin-top: 10rpx;
+}
+
+/* ===== 加载中 ===== */
+.loading {
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--text3);
+  padding: 120rpx 0;
+}
+
+/* ===== 错误状态 ===== */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+.error-text {
+  font-size: 28rpx;
+  color: var(--text2);
+  margin-top: 24rpx;
+}
+.error-retry {
+  margin-top: 28rpx;
+  padding: 18rpx 56rpx;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  box-shadow: var(--shadow);
+  font-size: 28rpx;
+  color: var(--green);
+  font-weight: 600;
+}
+.error-retry:active { opacity: 0.85; }
+
+/* ===== 空状态 ===== */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160rpx 0;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text3);
+  margin-top: 28rpx;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ===== 销售列表 ===== */
+.sale-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.sale-card {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  padding: 28rpx 28rpx 24rpx;
+  box-shadow: var(--shadow);
+}
+.sale-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+.sale-pet {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+.sale-price {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--red);
+}
+.sale-meta {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: var(--text3);
+}
+.sale-items {
+  display: block;
+  font-size: 24rpx;
+  color: var(--text2);
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid var(--line);
+  line-height: 1.5;
+}

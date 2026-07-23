@@ -1,0 +1,216 @@
+/* 繁育详情页 — 暖森林·毛玻璃 */
+.container {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 32rpx 32rpx 200rpx;
+  box-sizing: border-box;
+}
+
+/* 卡片通用 */
+.card {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  padding: 36rpx 32rpx;
+  margin-bottom: 28rpx;
+  box-shadow: var(--shadow);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28rpx;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.5rpx;
+}
+
+/* 繁育信息列表 */
+.breeding-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: var(--text2);
+  letter-spacing: 0.4rpx;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: var(--text);
+  font-weight: 500;
+  text-align: right;
+}
+
+.due-date {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+/* 备注区块 */
+.notes-section {
+  margin-top: 28rpx;
+  padding: 24rpx;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.notes-label {
+  font-size: 24rpx;
+  color: var(--text3);
+  letter-spacing: 0.5rpx;
+}
+
+.notes-text {
+  font-size: 28rpx;
+  color: var(--text2);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+/* 状态更新卡片 */
+.status-card {
+  padding-bottom: 16rpx;
+}
+
+.status-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 28rpx 12rpx;
+  border-bottom: 1rpx solid var(--line);
+  transition: opacity 0.2s ease;
+}
+
+.status-item:last-child {
+  border-bottom: none;
+}
+
+.status-item.current {
+  background: rgba(74, 140, 92, 0.06);
+  border-radius: var(--radius-sm);
+  padding-left: 16rpx;
+  padding-right: 16rpx;
+}
+
+.status-item.disabled {
+  opacity: 0.45;
+}
+
+.status-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  min-width: 0;
+}
+
+.status-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.status-desc {
+  font-size: 24rpx;
+  color: var(--text3);
+  line-height: 1.5;
+}
+
+.status-check {
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-lock {
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 底部操作按钮区 */
+.action-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 20rpx;
+  padding: 24rpx 32rpx calc(24rpx + env(safe-area-inset-bottom));
+  background: var(--surface-solid);
+  box-shadow: 0 -4rpx 32rpx rgba(0, 0, 0, 0.06);
+  z-index: 10;
+}
+
+.btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: var(--radius-full);
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn-outline {
+  background: var(--surface-solid);
+  color: var(--green);
+  border: 2rpx solid var(--green);
+}
+
+.btn-outline:active {
+  background: rgba(74, 140, 92, 0.08);
+}
+
+.btn-danger {
+  background: var(--surface-solid);
+  color: var(--red);
+  border: 2rpx solid var(--red);
+}
+
+.btn-danger:active {
+  background: rgba(212, 83, 74, 0.08);
+}

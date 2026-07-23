@@ -1,15 +1,189 @@
-/* 宠宝树品牌样式 — 暖森林·毛玻璃 */
-.container { min-height: 100vh; background: var(--bg); padding: 32rpx; }
-.card { background: var(--surface); border-radius: var(--radius); padding: 32rpx; margin-bottom: 24rpx; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
-.card-title { font-size: 30rpx; font-weight: 600; color: var(--text); margin-bottom: 24rpx; letter-spacing: 0.5rpx; }
-.btn-primary { background: var(--green); color: #fff; border-radius: 48rpx; font-size: 30rpx; font-weight: 600; text-align: center; padding: 26rpx 0; border: none; display: flex; align-items: center; justify-content: center; gap: 10rpx; }
-.btn-primary::after { border: none; }
-.btn-primary:active { opacity: 0.88; }
-.btn-primary.disabled, .btn-primary[disabled] { opacity: 0.4; pointer-events: none; }
-.btn-secondary { background: rgba(0,0,0,0.04); color: var(--text2); border-radius: 48rpx; font-size: 28rpx; text-align: center; padding: 22rpx 0; border: none; }
-.btn-secondary::after { border: none; }
-.form-item { margin-bottom: 28rpx; }
-.form-label { display: block; font-size: 26rpx; color: var(--text2); margin-bottom: 12rpx; font-weight: 500; }
-.input-field { background: rgba(0,0,0,0.03); border-radius: var(--radius-sm); padding: 22rpx 24rpx; font-size: 28rpx; border: 2rpx solid transparent; color: var(--text); width: 100%; box-sizing: border-box; }
-.input-field:focus { border-color: var(--green); }
-.input-field::placeholder { color: var(--text3); }
+/* 宠宝树品牌样式 — 暖森林·毛玻璃 | payment-success */
+.container {
+  min-height: 100vh;
+  background: var(--bg);
+  box-sizing: border-box;
+}
+
+/* ===== 顶部导航 ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-bottom: 1rpx solid var(--line);
+}
+.navbar-left, .navbar-right { width: 64rpx; display: flex; align-items: center; }
+.navbar-back { font-size: 48rpx; color: var(--text); line-height: 1; }
+.navbar-title { font-size: 32rpx; font-weight: 600; color: var(--text); }
+
+/* ===== 主内容区 ===== */
+.page-content {
+  padding: 32rpx;
+  padding-bottom: 160rpx;
+}
+
+/* ===== 成功标识 ===== */
+.success-icon {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: var(--radius-full);
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32rpx auto 24rpx;
+  box-shadow: 0 12rpx 36rpx rgba(74,140,92,0.32);
+}
+.success-title {
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1rpx;
+}
+.success-desc {
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--text2);
+  margin-top: 12rpx;
+  margin-bottom: 40rpx;
+}
+
+/* ===== 当前套餐卡片 ===== */
+.plan-card {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  padding: 28rpx 24rpx;
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 24rpx;
+}
+.plan-icon {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.plan-info { flex: 1; display: flex; flex-direction: column; gap: 6rpx; }
+.plan-name { font-size: 32rpx; font-weight: 600; color: var(--text); }
+.plan-desc { font-size: 24rpx; color: var(--text3); }
+
+/* ===== 订单明细 ===== */
+.order-detail {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8rpx 28rpx;
+  margin-bottom: 24rpx;
+}
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label { font-size: 28rpx; color: var(--text2); }
+.detail-value { font-size: 28rpx; color: var(--text); font-weight: 500; }
+.detail-value.primary { color: var(--red); font-weight: 700; font-size: 32rpx; }
+.detail-value.success { color: var(--green); font-weight: 600; }
+
+/* ===== 温馨提示 ===== */
+.tips-section {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+}
+.tips-title {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 18rpx;
+}
+.tips-list { display: flex; flex-direction: column; gap: 12rpx; }
+.tips-list text { font-size: 26rpx; color: var(--text2); line-height: 1.6; }
+
+/* ===== 邀请卡片 ===== */
+.invite-card {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 28rpx;
+  background: linear-gradient(135deg, rgba(245,74,69,0.08), rgba(212,145,74,0.08));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 32rpx;
+}
+.invite-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: var(--radius-full);
+  background: rgba(245,74,69,0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.invite-content { flex: 1; }
+.invite-title { font-size: 28rpx; font-weight: 600; color: var(--text); }
+.invite-desc { font-size: 22rpx; color: var(--text2); margin-top: 6rpx; line-height: 1.5; }
+.invite-btn {
+  flex-shrink: 0;
+  height: 64rpx;
+  padding: 0 28rpx;
+  border-radius: var(--radius-full);
+  background: var(--red);
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  line-height: 64rpx;
+}
+.invite-btn::after { border: none; }
+.invite-btn:active { opacity: 0.88; }
+
+/* ===== 底部按钮 ===== */
+.start-btn {
+  width: 100%;
+  height: 96rpx;
+  border-radius: var(--radius-full);
+  background: var(--green);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(74,140,92,0.32);
+}
+.start-btn::after { border: none; }
+.start-btn:active { opacity: 0.88; }

@@ -1,23 +1,118 @@
-/* 添加宠物 — 页面特有样式 */
+/* 添加宠物 — 页面特有样式（暖森林毛玻璃风格） */
 
-/* 头像上传 */
-.avatar-upload { width: 160rpx; height: 160rpx; border-radius: var(--radius); overflow: hidden; background: rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: center; }
+/* ── 头像上传 ── */
+.form-section { display: flex; flex-direction: column; gap: 4rpx; }
+.avatar-upload {
+  width: 160rpx; height: 160rpx;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(0,0,0,0.04);
+  display: flex; align-items: center; justify-content: center;
+  border: 2rpx solid var(--line);
+}
 .avatar-img { width: 100%; height: 100%; }
 .avatar-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8rpx; }
 .avatar-text { font-size: 22rpx; color: var(--text3); }
 
-/* 物种/性别/角色选择 */
-.species-options, .gender-options, .role-options { display: flex; gap: 12rpx; flex-wrap: wrap; }
-.species-option, .gender-option, .role-option { padding: 16rpx 32rpx; border-radius: 32rpx; font-size: 26rpx; background: rgba(0,0,0,0.04); color: var(--text2); border: 2rpx solid transparent; }
-.species-option.active, .gender-option.active, .role-option.active { background: var(--green); color: #fff; border-color: var(--green); }
+/* ── 卡片头部（可展开/收起） ── */
+.card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 8rpx;
+}
+.card-header .card-title { margin-bottom: 0; }
 
-/* 标签 */
-.tag-options { display: flex; flex-wrap: wrap; gap: 10rpx; }
-.tag-option { padding: 10rpx 22rpx; border-radius: 32rpx; font-size: 24rpx; background: rgba(0,0,0,0.04); color: var(--text2); }
-.tag-option.selected { background: var(--green); color: #fff; }
-.add-tag-row { display: flex; gap: 10rpx; margin-top: 12rpx; }
-.add-tag-row input { flex: 1; }
-.btn-add-tag { padding: 14rpx 24rpx; background: var(--green); color: #fff; border-radius: var(--radius-sm); font-size: 24rpx; display: flex; align-items: center; white-space: nowrap; }
+/* ── 血统信息展开区 ── */
+.pedigree-section {
+  margin-top: 24rpx;
+  padding-top: 24rpx;
+  border-top: 1rpx solid var(--line);
+  animation: fadeIn 0.25s ease;
+}
 
-/* 开关行 */
-.switch-row { display: flex; align-items: center; justify-content: space-between; padding: 8rpx 0; }
+/* ── 性别 / 角色选择 ── */
+.gender-options, .role-options {
+  display: flex; gap: 12rpx; flex-wrap: wrap;
+}
+.gender-option, .role-option {
+  padding: 16rpx 40rpx;
+  border-radius: var(--radius-full);
+  font-size: 26rpx;
+  background: rgba(0,0,0,0.04);
+  color: var(--text2);
+  border: 2rpx solid transparent;
+  transition: all 0.2s ease;
+}
+.gender-option.active, .role-option.active {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 4rpx 16rpx rgba(74,140,92,0.25);
+}
+
+/* ── 售价 / 在售开关 ── */
+.switch-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8rpx 0;
+}
+.switch-row .form-label { margin-bottom: 0; }
+
+/* ── 标签选择 ── */
+.tag-options {
+  display: flex; flex-wrap: wrap; gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+.tag-option {
+  padding: 12rpx 26rpx;
+  border-radius: var(--radius-full);
+  font-size: 24rpx;
+  background: rgba(0,0,0,0.04);
+  color: var(--text2);
+  border: 2rpx solid transparent;
+  transition: all 0.2s ease;
+}
+.tag-option.selected {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 4rpx 16rpx rgba(74,140,92,0.2);
+}
+.add-tag-row {
+  display: flex; gap: 12rpx; margin-top: 16rpx;
+  align-items: center;
+}
+.add-tag-row .input-field { flex: 1; }
+.input-field.small { padding: 18rpx 22rpx; font-size: 26rpx; }
+.btn-add-tag {
+  padding: 18rpx 28rpx;
+  background: var(--green);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: 24rpx;
+  display: flex; align-items: center; white-space: nowrap;
+  box-shadow: 0 4rpx 16rpx rgba(74,140,92,0.25);
+}
+.btn-add-tag:active { opacity: 0.9; }
+
+/* ── 提交区（底部固定） ── */
+.submit-section {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 24rpx 40rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: var(--bg);
+  z-index: 50;
+}
+.submit-section .btn-primary { margin-top: 0; }
+.btn-primary.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* ── 容器底部留白，避免被固定按钮遮挡 ── */
+.container { padding-bottom: calc(180rpx + env(safe-area-inset-bottom)); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8rpx); }
+  to   { opacity: 1; transform: translateY(0); }
+}

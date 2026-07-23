@@ -1,13 +1,125 @@
-.container { background: var(--bg); min-height: 100vh; padding: 24rpx; }
-.header-bar { padding: 24rpx 0; }
-.title { font-size: 36rpx; font-weight: 700; }
-.card { background: var(--surface); border-radius: var(--radius); padding: 24rpx; margin-bottom: 16rpx; box-shadow: var(--shadow); }
-.card-top { display: flex; gap: 16rpx; margin-bottom: 12rpx; }
-.card-mother { font-size: 30rpx; font-weight: 600; color: var(--green); }
-.card-father { font-size: 26rpx; color: var(--text3); }
-.card-meta { display: flex; gap: 24rpx; font-size: 24rpx; color: var(--text3); }
-.card-actions { margin-top: 16rpx; }
-.btn-batch { display: inline-block; padding: 12rpx 24rpx; background: var(--green); color: #fff; border-radius: 8rpx; font-size: 24rpx; }
-.empty { display: flex; flex-direction: column; align-items: center; padding-top: 200rpx; }
-.empty-text { font-size: 32rpx; color: var(--text3); margin-top: 24rpx; }
-.empty-desc { font-size: 26rpx; color: #C0C4CC; margin-top: 8rpx; }
+/* litters 同窝管理 — 暖森林毛玻璃 */
+.container {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: var(--sp-lg);
+  padding-bottom: 200rpx;
+}
+
+/* 顶部标题 */
+.header-bar {
+  padding: var(--sp-md) var(--sp-xs);
+  display: flex;
+  align-items: center;
+}
+.title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5rpx;
+}
+
+/* 加载中 */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 200rpx 0;
+  font-size: 28rpx;
+  color: var(--text3);
+}
+
+/* 错误状态 */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200rpx var(--sp-lg);
+}
+.error-text {
+  font-size: 28rpx;
+  color: var(--text3);
+  margin-top: var(--sp-md);
+  display: block;
+}
+.error-retry {
+  margin-top: var(--sp-lg);
+  padding: 20rpx 56rpx;
+  background: var(--green);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: 28rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 32rpx rgba(74, 140, 92, 0.25);
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+}
+.empty-text {
+  font-size: 30rpx;
+  color: var(--text3);
+  margin-top: var(--sp-md);
+}
+.empty-desc {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.25);
+  margin-top: var(--sp-xs);
+}
+
+/* 列表 */
+.list {
+  padding-top: var(--sp-xs);
+}
+.card {
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-sm);
+  box-shadow: var(--shadow);
+}
+.card:active {
+  opacity: 0.92;
+}
+.card-top {
+  display: flex;
+  gap: 20rpx;
+  align-items: baseline;
+  margin-bottom: var(--sp-xs);
+  border-bottom: 1rpx solid var(--line);
+  padding-bottom: 16rpx;
+}
+.card-mother {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--green);
+}
+.card-father {
+  font-size: 26rpx;
+  color: var(--text2);
+}
+.card-meta {
+  display: flex;
+  gap: 32rpx;
+  font-size: 24rpx;
+  color: var(--text3);
+}
+.card-actions {
+  margin-top: 20rpx;
+}
+.btn-batch {
+  display: inline-block;
+  padding: 14rpx 32rpx;
+  background: var(--green);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: 24rpx;
+  font-weight: 600;
+  box-shadow: 0 6rpx 20rpx rgba(74, 140, 92, 0.25);
+}

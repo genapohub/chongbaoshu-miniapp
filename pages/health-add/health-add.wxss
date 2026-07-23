@@ -1,23 +1,134 @@
-/* 添加健康记录 — 页面特有样式 */
+/* 添加健康记录 — 页面特有样式（暖森林毛玻璃风格） */
 
-/* 类型Tab */
-.tab-bar { display: flex; background: var(--surface-solid); border-bottom: 1rpx solid var(--line); margin: -24rpx -24rpx 24rpx; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; }
-.tab-item { flex: 1; text-align: center; padding: 24rpx 0; font-size: 28rpx; color: var(--text3); position: relative; }
-.tab-item.active { color: var(--green); font-weight: 600; }
-.tab-item.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 48rpx; height: 4rpx; background: var(--green); border-radius: 2rpx; }
+/* ── 类型切换 Tab ── */
+.tab-bar {
+  display: flex;
+  background: var(--surface);
+  -webkit-backdrop-filter: var(--glass);
+  backdrop-filter: var(--glass);
+  border-radius: var(--radius);
+  margin-bottom: var(--sp-md);
+  padding: 6rpx;
+  box-shadow: var(--shadow);
+}
+.tab-item {
+  flex: 1; text-align: center;
+  padding: 18rpx 0;
+  font-size: 28rpx;
+  color: var(--text3);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: all 0.25s ease;
+}
+.tab-item.active {
+  color: #fff;
+  background: var(--green);
+  font-weight: 600;
+  box-shadow: 0 4rpx 16rpx rgba(74,140,92,0.25);
+}
 
-/* 宠物选择 */
-.pet-avatar { width: 88rpx; height: 88rpx; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.pet-avatar.placeholder { background: rgba(0,0,0,0.04); }
+/* ── 卡片标题（含图标） ── */
+.card-title {
+  display: flex; align-items: center; gap: 12rpx;
+}
 
-/* 下次日期 */
-.next-date-row { display: flex; align-items: center; justify-content: space-between; padding: 24rpx 0; }
+/* ── 输入框错误态 ── */
+.input-field.input-error {
+  border-color: var(--red);
+  background: rgba(212,83,74,0.04);
+}
+.field-error {
+  display: block;
+  font-size: 22rpx; color: var(--red);
+  margin-top: 8rpx; padding-left: 4rpx;
+}
+
+/* ── 下次日期提示行 ── */
+.next-date-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20rpx 24rpx;
+  margin-top: 8rpx;
+  background: #EDF4EF;
+  border-radius: var(--radius-sm);
+  border: 2rpx solid rgba(74,140,92,0.15);
+}
 .next-date-label { font-size: 26rpx; color: var(--text); }
-.next-date-value { font-size: 26rpx; color: var(--green); font-weight: 500; }
+.next-date-value {
+  font-size: 26rpx; color: var(--green);
+  font-weight: 600;
+}
 
-/* 间隔输入 */
-.interval-row { display: flex; align-items: center; gap: 12rpx; }
-.interval-row input { flex: 1; }
+/* ── picker-value 占位态 ── */
+.picker-value.placeholder { color: var(--text3); }
 
-/* 字段错误 */
-.field-error { font-size: 22rpx; color: var(--red); margin-top: 6rpx; }
+/* ── 提交区（底部固定） ── */
+.submit-section {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 24rpx 40rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: var(--bg);
+  z-index: 50;
+}
+.btn-block { width: 100%; }
+.container { padding-bottom: calc(180rpx + env(safe-area-inset-bottom)); }
+
+/* ── 宠物选择弹窗（本地实现） ── */
+.picker-modal {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: flex-end;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+.picker-content {
+  width: 100%;
+  background: var(--surface-solid);
+  border-radius: var(--radius) var(--radius) 0 0;
+  max-height: 70vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+.picker-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 32rpx 32rpx 24rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+.picker-title { font-size: 32rpx; font-weight: 600; color: var(--text); }
+.picker-close {
+  width: 56rpx; height: 56rpx;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--bg);
+}
+.picker-list { max-height: 50vh; }
+.picker-empty {
+  padding: 80rpx 32rpx;
+  text-align: center;
+  color: var(--text3); font-size: 28rpx;
+  line-height: 1.6;
+}
+.picker-item.pet-item {
+  display: flex; align-items: center; gap: 16rpx;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+.picker-item.pet-item:last-child { border-bottom: none; }
+.picker-item.pet-item.selected { background: #EDF4EF; }
+.picker-item.pet-item:active { background: rgba(0,0,0,0.03); }
+.pet-avatar {
+  width: 80rpx; height: 80rpx;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.04);
+  display: flex; align-items: center; justify-content: center;
+}
+.pet-avatar.placeholder { background: var(--green); }
+.pet-avatar.placeholder .avatar-text {
+  font-size: 32rpx; font-weight: 600; color: #fff;
+}
+.pet-info { display: flex; flex-direction: column; gap: 4rpx; flex: 1; }
+.pet-name { font-size: 30rpx; color: var(--text); font-weight: 500; }
+.pet-breed { font-size: 24rpx; color: var(--text3); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
