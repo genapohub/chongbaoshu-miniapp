@@ -23,14 +23,10 @@ App({
     token: null,
     prevPagePath: '',
     // 微信云托管私有协议配置（无需配置服务器域名）
-    // 开发版 → 本地，正式版/体验版 → 云托管
-    isDev: __wxConfig && __wxConfig.envVersion === 'develop',
-    baseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? ''
-      : 'http://localhost:8081/api',
-    staticBaseUrl: __wxConfig && __wxConfig.envVersion !== 'develop'
-      ? ''
-      : 'http://localhost:8081',
+    // 需要本地调试时，把 api.js 里的 USE_LOCAL_API 改为 true
+    // 并确保本地后端运行在 localhost:8081
+    baseUrl: '',
+    staticBaseUrl: '',
   },
 
   /**

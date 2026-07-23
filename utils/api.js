@@ -10,8 +10,12 @@ const app = getApp();
 const analytics = require('./analytics');
 const sentry = require('./sentry');
 
-// 判断是否为开发环境
-const isDev = __wxConfig && __wxConfig.envVersion === 'develop';
+// 是否使用本地后端（手动开关，本地启动后端时改为 true）
+// 改成 true 后用 wx.request 连 localhost，默认 false 走云托管私有协议
+const USE_LOCAL_API = false;
+
+// 是否开发环境：只看手动开关
+const isDev = USE_LOCAL_API;
 
 // 云托管实例（生产环境初始化一次）
 let cloudInstance = null;
