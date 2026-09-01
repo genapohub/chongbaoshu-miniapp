@@ -9,22 +9,8 @@
   </view>
   
   <view wx:else>
-    <view wx:if="{{userInfo && subscriptionTier === 'free'}}" class="upgrade-bar" bindtap="goSubscription">
-      <text>🌟 升级Pro，解锁血统证书与无限宠物</text>
-      <text class="upgrade-arrow">→</text>
-    </view>
     
-    <view wx:if="{{userInfo}}" class="card card-sm card-green" bindtap="goSubscription">
-      <text class="sub-label">当前方案</text>
-      <text class="sub-plan">Pro 专业版</text>
-      <view class="sub-meta">
-        <text>宠物 {{petCount}}/无限</text>
-        <text>配种 {{breedingCount}}/无限</text>
-        <text>升级 →</text>
-      </view>
-    </view>
-    
-    <view wx:else class="card card-sm card-green" bindtap="goLogin">
+    <view wx:else class="card-sm card-green" bindtap="goLogin">
       <text class="sub-label">当前方案</text>
       <text class="sub-plan">免费版</text>
       <view class="sub-meta">
@@ -70,28 +56,6 @@
     </view>
     
     <view class="card">
-      <text class="section-title">💼 生意管理</text>
-      <view class="grid4">
-        <view class="quick-item" bindtap="goBuyerLeads">
-          <view class="quick-icon" style="background:#E3F2FD">👤</view>
-          <text class="quick-label">意向客户</text>
-        </view>
-        <view class="quick-item" bindtap="goSales">
-          <view class="quick-icon" style="background:#FFEBEE">💰</view>
-          <text class="quick-label">销售记录</text>
-        </view>
-        <view class="quick-item" bindtap="goLedger">
-          <view class="quick-icon" style="background:#FFF3E0">📒</view>
-          <text class="quick-label">收支账本</text>
-        </view>
-        <view class="quick-item" bindtap="goLitters">
-          <view class="quick-icon" style="background:#F3E5F5">🍼</view>
-          <text class="quick-label">同窝管理</text>
-        </view>
-      </view>
-    </view>
-    
-    <view class="card">
       <text class="section-title">⚡ 快捷入口</text>
       <view class="grid4">
         <view class="quick-item" bindtap="goAddPet">
@@ -106,10 +70,9 @@
           <view class="quick-icon" style="background:#E8F5E9">💚</view>
           <text class="quick-label">健康记录</text>
         </view>
-        <view class="quick-item" style="position:relative" bindtap="goPedigree">
-          <view class="quick-icon" style="background:#EDF4EF">📜</view>
-          <text class="quick-label">血统证书</text>
-          <text class="badge-amber">PRO</text>
+        <view class="quick-item" bindtap="goRemindSettings">
+          <view class="quick-icon" style="background:#F3E5F5">🔔</view>
+          <text class="quick-label">提醒设置</text>
         </view>
       </view>
     </view>

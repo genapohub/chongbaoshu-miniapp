@@ -83,6 +83,5 @@
       <view class="field-row"><text class="field-label">母亲</text><text class="field-value">{{isPro ? pedigree.mother : '—'}}</text></view>
     </view>
     <view class="btn btn-outline btn-block" bindtap="goPedigreeCert">查看血统证书 →</view>
-    <view class="btn btn-green btn-block" bindtap="goShareCard">📤 生成分享卡片</view>
   </view>
 </view>

@@ -125,26 +125,6 @@ Page({
     wx.navigateTo({ url: url });
   },
 
-  goSubscription: function() {
-    const app = getApp();
-    if (!app.globalData.token) {
-      wx.showToast({ title: '请先登录', icon: 'none', duration: 1500 });
-      setTimeout(function() { wx.navigateTo({ url: '/pages/login/login' }); }, 800);
-      return;
-    }
-    wx.navigateTo({ url: '/pages/subscription/subscription' });
-  },
-
-  goFeedback: function() {
-    const app = getApp();
-    if (!app.globalData.token) {
-      wx.showToast({ title: '请先登录', icon: 'none', duration: 1500 });
-      setTimeout(function() { wx.navigateTo({ url: '/pages/login/login' }); }, 800);
-      return;
-    }
-    wx.navigateTo({ url: '/pages/feedback/feedback' });
-  },
-
   goAbout: function() {
     wx.showModal({
       title: '关于宠宝树',

@@ -306,45 +306,11 @@ Page({
     });
   },
 
-  // 跳转意向客户
-  goBuyerLeads() {
+  // 跳转提醒设置
+  goRemindSettings() {
     this.requireLogin(function() {
-      wx.navigateTo({ url: "/pages/buyer-leads/buyer-leads" });
+      wx.navigateTo({ url: '/pages/remind-settings/remind-settings' });
     });
-  },
-
-  // 跳转销售记录
-  goSales() {
-    this.requireLogin(function() {
-      wx.navigateTo({ url: "/pages/sales/sales" });
-    });
-  },
-
-  // 跳转收支账本
-  goLedger() {
-    this.requireLogin(function() {
-      wx.navigateTo({ url: "/pages/ledger/ledger" });
-    });
-  },
-
-  // 跳转同窝管理
-  goLitters() {
-    this.requireLogin(function() {
-      wx.navigateTo({ url: "/pages/litters/litters" });
-    });
-  },
-
-  // 跳转血统证书（Pro功能）
-  goPedigree() {
-    const that = this;
-    this.requireLogin(function() {
-      wx.navigateTo({ url: '/pages/pedigree/pedigree' });
-    });
-  },
-
-  // 跳转订阅
-  goSubscription() {
-    wx.navigateTo({ url: '/pages/plan-select/plan-select' });
   },
 
   // 提醒项点击

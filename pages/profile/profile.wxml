@@ -1,5 +1,5 @@
 <view class="profile-page">
-  <view class="profile-header">
+  <view class="profile-header" bindtap="onHeaderTap">
     <view class="profile-avatar-wrap">
       <image wx:if="{{displayAvatar}}" class="profile-avatar" src="{{displayAvatar}}" mode="aspectFill" />
       <view wx:else class="profile-avatar-placeholder">👤</view>
@@ -24,12 +24,6 @@
   </view>
   
   <view class="content-area">
-    <view class="card card-green" bindtap="goSubscription">
-      <text class="sub-label">当前方案</text>
-      <text class="sub-plan">{{subscriptionPlan}}</text>
-      <text class="sub-arrow">→</text>
-    </view>
-    
     <view class="menu-list-bg">
       <view class="menu-row" bindtap="goMenu" data-url="/pages/profile-edit/profile-edit">
         <text class="menu-icon">🏠</text>
@@ -39,21 +33,6 @@
       <view class="menu-row" bindtap="goMenu" data-url="/pages/remind-settings/remind-settings">
         <text class="menu-icon">🔔</text>
         <text class="menu-label">提醒设置</text>
-        <text class="menu-arrow">→</text>
-      </view>
-      <view class="menu-row" bindtap="goMenu" data-url="/pages/ledger/ledger">
-        <text class="menu-icon">📒</text>
-        <text class="menu-label">收支账本</text>
-        <text class="menu-arrow">→</text>
-      </view>
-      <view class="menu-row" bindtap="goMenu" data-url="/pages/sales/sales">
-        <text class="menu-icon">💰</text>
-        <text class="menu-label">销售记录</text>
-        <text class="menu-arrow">→</text>
-      </view>
-      <view class="menu-row" bindtap="goMenu" data-url="/pages/litters/litters">
-        <text class="menu-icon">🍼</text>
-        <text class="menu-label">同窝管理</text>
         <text class="menu-arrow">→</text>
       </view>
       <view class="menu-row" bindtap="goAbout">
