@@ -230,3 +230,39 @@
   color: var(--text2);
   font-weight: 500;
 }
+
+/* ── 最近动态列表 ── */
+.activity {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.activity:last-child { border-bottom: none; padding-bottom: 0; }
+.activity:first-child { padding-top: 0; }
+.activity-icon {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(74,140,92,0.08);
+  border-radius: var(--radius-sm);
+  margin-right: var(--sp-md);
+  flex-shrink: 0;
+}
+.activity-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 26rpx;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.activity-time {
+  font-size: 22rpx;
+  color: var(--text3);
+  margin-left: var(--sp-sm);
+  flex-shrink: 0;
+}

@@ -73,7 +73,7 @@
           <text class="quick-label">销售记录</text>
         </view>
         <view class="quick-item" bindtap="goLedger">
-          <view class="quick-icon" style="background:#F3E5F5">📒</view>
+          <view class="quick-icon" style="background:#FFF4E5">📒</view>
           <text class="quick-label">收支账本</text>
         </view>
         <view class="quick-item" bindtap="goLitters">
@@ -99,10 +99,24 @@
           <text class="quick-label">健康记录</text>
         </view>
         <view class="quick-item" bindtap="goRemindSettings">
-          <view class="quick-icon" style="background:#F3E5F5">🔔</view>
+          <view class="quick-icon" style="background:#FFF3E0">🔔</view>
           <text class="quick-label">提醒设置</text>
         </view>
       </view>
+    </view>
+
+    <view class="card">
+      <text class="section-title">🕐 最近动态</text>
+      <view wx:if="{{recentActivities.length > 0}}">
+        <view wx:for="{{recentActivities}}" wx:key="key" class="activity">
+          <view class="activity-icon">
+            <cbs-icon name="{{item.icon}}" size="28" color="{{item.iconColor}}" />
+          </view>
+          <text class="activity-text">{{item.text}}</text>
+          <text class="activity-time">{{item.time}}</text>
+        </view>
+      </view>
+      <empty-state wx:else type="no-record" text="暂无动态" subText="添加宠物、记录健康后会显示在这里" />
     </view>
   </view>
 </view>

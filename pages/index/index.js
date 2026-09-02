@@ -175,6 +175,7 @@ Page({
         }
 
         formattedActivities.push({
+          key: 'act-' + k,
           text: act.text,
           time: timeAgo(act.time),
           icon: icon,

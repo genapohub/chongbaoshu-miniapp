@@ -50,4 +50,5 @@ const ICON_MAP = {
   'tool': '🔧',          'medal': '🏅',
   'broken-heart': '💔',  'celebration': '🎉',
   'lock': '🔒',          'alert-circle': '⚠',
+  'activity-heart': '💗', 'activity': '📝',
 };
