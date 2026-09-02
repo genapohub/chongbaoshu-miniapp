@@ -58,6 +58,28 @@
     </view>
 
     <view class="card">
+      <text class="section-title">💼 生意管理</text>
+      <view class="grid4">
+        <view class="quick-item" bindtap="goBuyerLeads">
+          <view class="quick-icon" style="background:#EDF4EF">👤</view>
+          <text class="quick-label">意向客户</text>
+        </view>
+        <view class="quick-item" bindtap="goSales">
+          <view class="quick-icon" style="background:#FFF3E0">💰</view>
+          <text class="quick-label">销售记录</text>
+        </view>
+        <view class="quick-item" bindtap="goLedger">
+          <view class="quick-icon" style="background:#F3E5F5">📒</view>
+          <text class="quick-label">收支账本</text>
+        </view>
+        <view class="quick-item" bindtap="goLitters">
+          <view class="quick-icon" style="background:#E8F5E9">🍼</view>
+          <text class="quick-label">同窝管理</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
       <text class="section-title">⚡ 快捷入口</text>
       <view class="grid4">
         <view class="quick-item" bindtap="goAddPet">

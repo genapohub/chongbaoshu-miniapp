@@ -34,5 +34,10 @@ Page({
       wx.showToast({ title: res.message || '已完成', icon: 'success' });
       that.loadLitters();
     });
+  },
+
+  goDetail: function (e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({ url: '/pages/litter-detail/litter-detail?id=' + id });
   }
 });

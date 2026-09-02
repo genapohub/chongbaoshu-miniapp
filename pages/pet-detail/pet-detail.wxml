@@ -41,6 +41,7 @@
     <view class="card">
       <text class="section-title">操作</text>
       <view class="btn btn-green btn-block" bindtap="goEdit">编辑宠物信息</view>
+      <view class="btn btn-outline btn-block" bindtap="goShareCard">生成分享卡</view>
     </view>
   </view>
   

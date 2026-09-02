@@ -30,9 +30,29 @@
         <text class="menu-label">宠舍信息</text>
         <text class="menu-arrow">→</text>
       </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/subscription/subscription">
+        <text class="menu-icon">💳</text>
+        <text class="menu-label">订阅管理</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/pedigree/pedigree">
+        <text class="menu-icon">📜</text>
+        <text class="menu-label">血统树</text>
+        <text class="menu-arrow">→</text>
+      </view>
       <view class="menu-row" bindtap="goMenu" data-url="/pages/remind-settings/remind-settings">
         <text class="menu-icon">🔔</text>
         <text class="menu-label">提醒设置</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/invite/invite">
+        <text class="menu-icon">🎁</text>
+        <text class="menu-label">邀请好友</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-row" bindtap="goMenu" data-url="/pages/feedback/feedback">
+        <text class="menu-icon">✉️</text>
+        <text class="menu-label">意见反馈</text>
         <text class="menu-arrow">→</text>
       </view>
       <view class="menu-row" bindtap="goAbout">

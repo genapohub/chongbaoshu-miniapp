@@ -309,6 +309,10 @@ Page({
     wx.navigateTo({ url: `/pages/pet-edit/pet-edit?id=${this.data.petId}` });
   },
 
+  goShareCard() {
+    wx.navigateTo({ url: `/pages/share-card/share-card?pet_id=${this.data.petId}` });
+  },
+
   addPhoto: function() {
     const petId = this.data.petId;
     const photoCount = this.data.photoCount;
