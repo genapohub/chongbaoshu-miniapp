@@ -69,6 +69,20 @@
   margin-top: 12rpx;
   display: block;
 }
+.hero-plan {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.hero-upgrade {
+  display: inline-block;
+  padding: 4rpx 20rpx;
+  background: rgba(74,140,92,0.14);
+  color: #4A8C5C;
+  font-size: 22rpx;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+}
 .hero-login-btn {
   margin-top: 32rpx;
   display: inline-block;

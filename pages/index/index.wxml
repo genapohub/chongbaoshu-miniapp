@@ -16,7 +16,11 @@
       <view class="decor-ring hr3"></view>
       <view class="hero-inner">
         <text class="hero-title">{{showLoginGuide ? '欢迎来到宠宝树' : '宠宝树'}}</text>
-        <text class="hero-sub">{{showLoginGuide ? '宠物档案 · 繁育记录 · 健康提醒' : '当前方案 · ' + subscriptionPlan}}</text>
+        <text wx:if="{{showLoginGuide}}" class="hero-sub">宠物档案 · 繁育记录 · 健康提醒</text>
+        <view wx:else class="hero-sub hero-plan" bindtap="goSubscribe">
+          <text>当前方案 · {{subscriptionPlan}}</text>
+          <text wx:if="{{subscriptionTier !== 'pro'}}" class="hero-upgrade">升级 ›</text>
+        </view>
         <view wx:if="{{showLoginGuide}}" class="hero-login-btn" bindtap="goLogin">微信登录</view>
       </view>
     </view>

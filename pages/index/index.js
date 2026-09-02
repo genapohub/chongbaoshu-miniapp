@@ -7,6 +7,9 @@ const constants = require('../../utils/constants'); // theme/HEALTH_TYPE for UI 
 const { daysFromNow, formatReminderDate, timeAgo } = require('../../utils/auth');
 const analytics = require('../../utils/analytics');
 
+/** 健康记录类型 → 图标 emoji（首页待办提醒用） */
+const HEALTH_EMOJI = { vaccine: '💉', deworm: '🐛', checkup: '🩺', illness: '🤒', other: '📋' };
+
 Page({
   data: {
     userInfo: null,
@@ -98,24 +101,7 @@ Page({
       for (let i = 0; i < upcomingReminders.length; i++) {
         const r = upcomingReminders[i];
         const days = daysFromNow(r.next_date);
-        let color, badge, badgeBg, badgeColor;
-
-        if (days <= 0) {
-          color = '#D4534A';
-          badge = '已过期';
-          badgeBg = '#E1EAFF';
-          badgeColor = '#D4534A';
-        } else if (days <= 3) {
-          color = '#E0903C';
-          badge = '即将到期';
-          badgeBg = '#FFF3E0';
-          badgeColor = '#E0903C';
-        } else {
-          color = '#5B9E8C';
-          badge = '计划中';
-          badgeBg = '#E3F2FD';
-          badgeColor = '#5B9E8C';
-        }
+        const status = days <= 0 ? 'overdue' : (days <= 3 ? 'soon' : 'scheduled');
 
         const typeConfig = constants.HEALTH_TYPE[r.type] || constants.HEALTH_TYPE.other;
         const vaccineType = r.vaccine_type ? '(' + r.vaccine_type + ')' : '';
@@ -123,14 +109,11 @@ Page({
 
         healthReminders.push({
           id: r.id,
-          icon: typeConfig.icon || 'clipboard',
+          iconEmoji: HEALTH_EMOJI[r.type] || '📋',
           petName: r.pet_name || '宠物',
           typeText: typeConfig.label + vaccineType,
           dateHint: dateHint,
-          color: color,
-          badge: badge,
-          badgeBg: badgeBg,
-          badgeColor: badgeColor,
+          status: status,
           priority: days <= 0 ? 0 : (days <= 3 ? 1 : 2),
           targetType: 'health',
         });
@@ -141,42 +124,17 @@ Page({
       for (let j = 0; j < dueBreedings.length; j++) {
         const r = dueBreedings[j];
         const days = daysFromNow(r.due_date);
-        let badge, badgeColor, badgeBg, color;
-
-        if (days < 0) {
-          badge = '已过预产期';
-          badgeColor = '#D4534A';
-          badgeBg = '#E1EAFF';
-          color = '#D4534A';
-        } else if (days === 0) {
-          badge = '今天预产';
-          badgeColor = '#3370FF';
-          badgeBg = '#E1EAFF';
-          color = '#3370FF';
-        } else if (days <= 3) {
-          badge = '即将分娩';
-          badgeColor = '#9B51E0';
-          badgeBg = '#F3E5F5';
-          color = '#9B51E0';
-        } else {
-          badge = '待产中';
-          badgeColor = '#9B51E0';
-          badgeBg = '#F3E5F5';
-          color = '#9B51E0';
-        }
+        const status = days < 0 ? 'overdue' : (days <= 3 ? 'soon' : 'scheduled');
 
         const dateHint = formatReminderDate(r.due_date);
 
         dueReminders.push({
           id: 'due-' + r.id,
-          icon: 'pregnant',
+          iconEmoji: '🤰',
           petName: r.mother_name || '母犬',
           typeText: '预产期',
           dateHint: dateHint,
-          color: color,
-          badge: badge,
-          badgeBg: badgeBg,
-          badgeColor: badgeColor,
+          status: status,
           priority: days <= 0 ? 0 : (days <= 3 ? 1 : 3),
           targetType: 'breeding',
           targetId: r.id,
@@ -198,22 +156,22 @@ Page({
       for (let k = 0; k < activityLimit; k++) {
         const act = activities[k];
         let icon = 'clipboard';
-        let iconColor = '#8F959E';
+        let iconColor = '#948F89';
         if (act.text.indexOf('宠物') !== -1) {
           icon = 'paw';
-          iconColor = '#3370FF';
+          iconColor = '#4A8C5C';
         } else if (act.text.indexOf('疫苗') !== -1) {
           icon = 'syringe';
-          iconColor = '#5B9E8C';
+          iconColor = '#3D8B37';
         } else if (act.text.indexOf('驱虫') !== -1) {
           icon = 'bug';
-          iconColor = '#3D8B37';
+          iconColor = '#D4914A';
         } else if (act.text.indexOf('配种') !== -1) {
           icon = 'heart';
           iconColor = '#D4534A';
         } else if (act.text.indexOf('健康') !== -1) {
           icon = 'activity-heart';
-          iconColor = '#3370FF';
+          iconColor = '#4A8C5C';
         }
 
         formattedActivities.push({
@@ -284,6 +242,11 @@ Page({
   // 跳转登录
   goLogin() {
     wx.navigateTo({ url: '/pages/login/login' });
+  },
+
+  // 跳转升级/订阅（免费版、基础版用户主动升级入口）
+  goSubscribe() {
+    wx.navigateTo({ url: '/pages/subscribe/subscribe' });
   },
 
   // 跳转添加宠物
