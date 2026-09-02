@@ -104,9 +104,9 @@ Page({
     this.setData({ loading: true });
     wx.showLoading({ title: '支付中...', mask: true });
 
-    api.post('/subscriptions/create-order', {
+    api.post('/subscriptions/create', {
       tier: tier,
-      period: period,
+      cycle: period,
     }).then(function(orderRes) {
       wx.hideLoading();
 
