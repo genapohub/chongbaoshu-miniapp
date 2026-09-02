@@ -10,12 +10,14 @@ const app = getApp();
 const analytics = require('./analytics');
 const sentry = require('./sentry');
 
-// 是否使用本地后端（手动开关，本地启动后端时改为 true）
-// 改成 true 后用 wx.request 连 localhost，默认 false 走云托管私有协议
-const USE_LOCAL_API = true;
-
-// 是否开发环境：只看手动开关
-const isDev = USE_LOCAL_API;
+// 是否使用本地后端：单一事实来源是 app.js globalData.baseUrl 是否指向 localhost。
+// 本地调试时把 baseUrl 改成 http://localhost:8081/api 即走 wx.request；
+// 生产环境保持云托管地址（任意非 localhost）走 callContainer 私有协议。
+// 不再使用硬编码开关，避免生产包忘改导致全部请求打向本地。
+// 惰性求值：App 注册前被 require 时 getApp() 不可用。
+function isDev() {
+  return getApp().globalData.baseUrl.indexOf('localhost') !== -1;
+}
 
 // 云托管实例（生产环境初始化一次）
 let cloudInstance = null;
@@ -73,7 +75,7 @@ function request(options) {
       }
 
       // 生产环境需要服务名 header
-      if (!isDev) {
+      if (!isDev()) {
         header['X-WX-SERVICE'] = 'chongbaoshu-api'; // 云托管服务名
       }
 
@@ -158,7 +160,7 @@ function request(options) {
         }
       }
 
-      if (isDev) {
+      if (isDev()) {
         // 开发环境：使用 wx.request 连接本地后端
         wx.request({
           url: `${app.globalData.baseUrl}${url}`,

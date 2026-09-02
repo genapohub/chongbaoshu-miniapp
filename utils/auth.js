@@ -1,16 +1,22 @@
 /**
  * 认证工具
  */
-const app = getApp();
-// formatDate is re-exported from constants.js for convenience
+// formatDate 从 constants 引入仅供本模块内部使用（timeAgo），
+// 不再 re-export——外部请直接 require('./constants').formatDate
 const { formatDate } = require('./constants');
+// getApp() 惰性获取：模块可能在 App 注册前被 require，顶层取会得到 undefined
+let _app = null;
+function app() {
+  if (!_app) _app = getApp();
+  return _app;
+}
 
 /**
  * 检查登录态，未登录跳转登录页
  * @returns {boolean} 是否已登录
  */
 function checkAuth() {
-  if (app.globalData.token) {
+  if (app().globalData.token) {
     return true;
   }
   wx.navigateTo({ url: '/pages/login/login' });
@@ -85,7 +91,6 @@ function timeAgo(dateStr) {
 
 module.exports = {
   checkAuth,
-  formatDate,
   daysFromNow,
   calcAge,
   formatReminderDate,
