@@ -28,6 +28,7 @@
   </view>
   
   <empty-state wx:if="{{petList.length === 0 && !loading}}" icon="paw" text="{{!userInfo ? '登录后即可管理宠物' : '还没有宠物，添加第一只吧'}}" />
+  <view wx:if="{{showLoginGuide}}" class="btn btn-green btn-block" style="margin: 24rpx 32rpx; width: auto;" bindtap="goLogin">微信登录</view>
   
   <view class="fab-btn" bindtap="goAddPet">+</view>
 </view>

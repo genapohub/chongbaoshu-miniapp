@@ -58,9 +58,10 @@ Page({
     const that = this;
     const app = getApp();
     if (!app.globalData.token) {
-      // 游客模式：显示空数据但允许浏览页面布局
+      // 游客模式：显示登录引导而非静默空数据
       that.setData({
         loading: false,
+        showLoginGuide: true,
         userInfo: null,
         petCount: 0,
         breedingInProgressCount: 0,
@@ -71,7 +72,7 @@ Page({
       return;
     }
 
-    that.setData({ userInfo: app.globalData.userInfo });
+    that.setData({ showLoginGuide: false, userInfo: app.globalData.userInfo });
 
     Promise.all([
       api.get('/auth/dashboard').catch(function() { return null; }),

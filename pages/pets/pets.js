@@ -42,10 +42,11 @@ Page({
     this.setData({ fromBreeding: app.globalData.fromBreeding || false });
     app.globalData.fromBreeding = false;
 
-    // 游客模式：不跳转登录页，显示空列表
+    // 游客模式：不跳转登录页，显示空列表 + 登录引导
     if (!app.globalData.token) {
       this.setData({
         loading: false,
+        showLoginGuide: true,
         userInfo: null,
         petList: [],
         allPetList: [],
@@ -54,7 +55,7 @@ Page({
       return;
     }
 
-    this.setData({ userInfo: app.globalData.userInfo });
+    this.setData({ showLoginGuide: false, userInfo: app.globalData.userInfo });
     this.loadPets();
     this.loadLimits();
   },
@@ -193,6 +194,10 @@ Page({
       return;
     }
     callback && callback();
+  },
+
+  goLogin() {
+    wx.navigateTo({ url: '/pages/login/login' });
   },
 
   goAddPet() {

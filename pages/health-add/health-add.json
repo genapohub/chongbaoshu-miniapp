@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "添加健康记录",
-  "navigationBarBackgroundColor": "#3370FF",
+  "navigationBarBackgroundColor": "#4A8C5C",
   "navigationBarTextStyle": "white",
   "usingComponents": {
     "picker-modal": "/components/picker-modal/picker-modal",

@@ -150,6 +150,7 @@ page {
   background: rgba(0,0,0,0.03); border-radius: var(--radius-sm);
   padding: 24rpx 26rpx; font-size: 28rpx; border: 2rpx solid transparent;
   color: var(--text); width: 100%; box-sizing: border-box;
+  min-height: 80rpx;
 }
 .input-field:focus { border-color: var(--green); background: rgba(74,140,92,0.04); }
 .input-field::placeholder { color: var(--text3); }

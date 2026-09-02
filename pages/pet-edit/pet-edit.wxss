@@ -105,6 +105,7 @@
   color: var(--text);
   width: 100%;
   box-sizing: border-box;
+  min-height: 80rpx;
   transition: border-color 0.2s ease;
 }
 

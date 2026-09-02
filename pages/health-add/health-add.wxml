@@ -12,7 +12,7 @@
   </view>
 
   <view wx:if="{{currentType === 'vaccine'}}">
-    <view class="card card--mint">
+    <view class="card">
       <view class="card-title"><cbs-icon name="syringe" size="36" color="#2D9CDB" /><text>疫苗信息</text></view>
 
       <view class="form-item">
@@ -63,7 +63,7 @@
       </view>
     </view>
 
-    <view class="card card--mint">
+    <view class="card">
       <view class="card-title"><cbs-icon name="clipboard" size="36" color="#646A73" /><text>备注</text></view>
       <notes-textarea
         value="{{formData.notes}}"
@@ -75,7 +75,7 @@
   </view>
 
   <view wx:if="{{currentType === 'deworm'}}">
-    <view class="card card--mint">
+    <view class="card">
       <view class="card-title"><cbs-icon name="bug" size="36" color="var(--green)" /><text>驱虫信息</text></view>
 
       <view class="form-item">
@@ -125,7 +125,7 @@
       </view>
     </view>
 
-    <view class="card card--mint">
+    <view class="card">
       <view class="card-title"><cbs-icon name="clipboard" size="36" color="#646A73" /><text>备注</text></view>
       <notes-textarea
         value="{{formData.notes}}"
@@ -137,7 +137,7 @@
   </view>
 
   <view wx:if="{{currentType === 'other'}}">
-    <view class="card card--mint">
+    <view class="card">
       <view class="card-title"><cbs-icon name="clipboard" size="36" color="#646A73" /><text>其他记录</text></view>
 
       <view class="form-item">
@@ -164,7 +164,7 @@
       </view>
     </view>
 
-    <view class="card card--mint">
+    <view class="card">
       <view class="card-title"><cbs-icon name="clipboard" size="36" color="#646A73" /><text>备注</text></view>
       <notes-textarea
         value="{{formData.notes}}"

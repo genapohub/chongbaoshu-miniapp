@@ -81,7 +81,7 @@ App({
    */
   getUserInfo() {
     const api = require('./utils/api');
-    api.get('/auth/profile')
+    api.get('/auth/profile', null, { loading: false })
       .then((user) => {
         this.globalData.userInfo = user;
         wx.setStorageSync('userInfo', user);

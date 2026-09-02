@@ -1,6 +1,6 @@
 {
   "usingComponents": { "icon": "../../components/icon/icon" },
   "navigationBarTitleText": "宠舍信息",
-  "navigationBarBackgroundColor": "#3370FF",
+  "navigationBarBackgroundColor": "#4A8C5C",
   "navigationBarTextStyle": "white"
 }
