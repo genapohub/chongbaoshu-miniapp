@@ -1,21 +1,85 @@
+/* 登录 — 暖森林 2.0（onboarding 设计语言） */
+
 .login-page {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 100vh; padding: 160rpx 96rpx; text-align: center;
-  background: linear-gradient(180deg, var(--green-dark) 0%, var(--green-deep) 60%, #1E4A2A 100%);
-  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.login-logo { font-size: 160rpx; margin-bottom: 32rpx; text-shadow: 0 4rpx 16rpx rgba(0,0,0,0.15); }
-.login-title { font-size: 96rpx; font-weight: 800; letter-spacing: 4rpx; text-shadow: 0 4rpx 16rpx rgba(0,0,0,0.15); }
-.login-subtitle { font-size: 32rpx; opacity: 0.75; margin-top: 32rpx; font-weight: 400; }
+/* 装饰圆环 */
+.cr1 { width: 520rpx; height: 520rpx; top: -160rpx; right: -180rpx; }
+.cr2 { width: 360rpx; height: 360rpx; bottom: 220rpx; left: -140rpx; }
+.cr3 { width: 180rpx; height: 180rpx; top: 30%; right: -60rpx; }
 
-.login-btns { margin-top: 160rpx; width: 100%; }
-.login-btn { width: 100%; padding: 36rpx; border-radius: 96rpx; font-size: 32rpx; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 16rpx; margin-bottom: 32rpx; }
+.login-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 96rpx 80rpx;
+  text-align: center;
+}
+
+.login-title {
+  font-size: 64rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+  color: #2D2A26;
+  margin-top: 48rpx;
+}
+
+.login-subtitle {
+  font-size: 28rpx;
+  color: #5E5953;
+  margin-top: 16rpx;
+}
+
+.login-btns {
+  margin-top: 140rpx;
+  width: 100%;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 32rpx;
+  border-radius: 96rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
 .login-btn::after { border: none; }
 
-.login-wechat { background: rgba(255,255,255,0.9); color: var(--green); box-shadow: 0 8rpx 32rpx rgba(74,140,92,0.25); }
-.login-phone { background: rgba(255,255,255,0.1); color: #fff; border: 2rpx solid rgba(255,255,255,0.2); }
+.login-wechat {
+  background: #4A8C5C;
+  color: #fff;
+  box-shadow: 0 8rpx 32rpx rgba(74,140,92,0.30);
+}
+.login-phone {
+  background: rgba(255,255,255,0.75);
+  color: #4A8C5C;
+  border: 2rpx solid rgba(74,140,92,0.25);
+}
 
-.login-skip { font-size: 24rpx; opacity: 0.5; margin-top: 80rpx; }
-.login-terms { font-size: 22rpx; opacity: 0.4; margin-top: 80rpx; }
-.login-link { color: rgba(255,255,255,0.6); text-decoration: underline; }
+.login-skip {
+  font-size: 26rpx;
+  color: #5E5953;
+  opacity: 0.6;
+  margin-top: 56rpx;
+}
+
+.login-terms {
+  font-size: 22rpx;
+  color: #948F89;
+  margin-top: 64rpx;
+}
+
+.login-link {
+  color: #4A8C5C;
+  text-decoration: underline;
+}

@@ -2,6 +2,13 @@
   记下第一只小家伙页面 - 组件化重构版
   结构：头像上传 → 基本信息 → 血统信息 → 标签 → 提交按钮
 -->
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">添加宠物</text>
+  <text class="hero-sub">记录小家伙的详细信息与血统</text>
+</view>
+
 <view class="container">
   <!-- 头像上传区域 -->
   <view class="card">

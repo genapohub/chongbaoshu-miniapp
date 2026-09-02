@@ -1,12 +1,42 @@
 /* ══════════════════════════════════════════════
-   宠物列表 — 暖森林毛玻璃风格
+   宠物列表 — 暖森林 2.0（onboarding 设计语言）
    ══════════════════════════════════════════════ */
 
 .pet-page {
-  padding: var(--sp-lg);
   padding-bottom: 240rpx;
   min-height: 100vh;
   background: var(--bg);
+}
+
+/* ── 顶部 hero 区（绿色渐变 + 装饰圆环） ── */
+.pets-hero {
+  padding: 56rpx 48rpx 48rpx;
+  position: relative;
+  overflow: hidden;
+}
+.ph1 { width: 320rpx; height: 320rpx; top: -110rpx; right: -110rpx; }
+.ph2 { width: 200rpx; height: 200rpx; bottom: 20rpx; left: -80rpx; }
+.pets-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+.pets-title {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #2D2A26;
+  display: block;
+  letter-spacing: -1rpx;
+}
+.pets-sub {
+  font-size: 26rpx;
+  color: #5E5953;
+  margin-top: 10rpx;
+  display: block;
+}
+
+/* ── 内容区 ── */
+.pets-body {
+  padding: 0 var(--sp-lg);
 }
 
 /* ── 搜索栏（胶囊形毛玻璃） ── */

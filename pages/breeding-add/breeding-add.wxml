@@ -1,3 +1,10 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">添加配种记录</text>
+  <text class="hero-sub">记录配种信息，自动计算预产期</text>
+</view>
+
 <view class="container">
   <view class="form-section">
     <view class="form-item required">

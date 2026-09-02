@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════
-   首页 Dashboard — 暖森林毛玻璃风格
+   首页 Dashboard — 暖森林 2.0（onboarding 设计语言）
    ══════════════════════════════════════════════ */
 
 .home-scroll {
@@ -42,100 +42,75 @@
 }
 .error-retry:active { opacity: 0.9; transform: scale(0.98); }
 
-/* ── 升级引导条 ── */
-.upgrade-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, rgba(74,140,92,0.12) 0%, rgba(212,145,74,0.12) 100%);
-  -webkit-backdrop-filter: var(--glass);
-  backdrop-filter: var(--glass);
-  border: 1rpx solid rgba(74,140,92,0.15);
-  border-radius: var(--radius-full);
-  padding: 22rpx 32rpx;
-  margin: var(--sp-md) var(--sp-lg);
-  font-size: 26rpx;
-  font-weight: 600;
-  color: var(--green);
-  box-shadow: var(--shadow);
+/* ── 顶部 hero 区（绿色渐变 + 装饰圆环） ── */
+.home-hero {
+  padding: 64rpx 48rpx 128rpx;
+  position: relative;
+  overflow: hidden;
 }
-.upgrade-bar:active { opacity: 0.85; transform: scale(0.99); }
-.upgrade-arrow {
-  font-size: 32rpx;
-  opacity: 0.6;
-  font-weight: 400;
-}
+.hr1 { width: 420rpx; height: 420rpx; top: -140rpx; right: -150rpx; }
+.hr2 { width: 260rpx; height: 260rpx; bottom: 40rpx; left: -110rpx; }
+.hr3 { width: 130rpx; height: 130rpx; top: 200rpx; right: 48rpx; }
 
-/* ── 订阅状态卡片（绿色渐变） ── */
-.card-sm {
-  padding: var(--sp-lg);
-  margin: var(--sp-md) var(--sp-lg) 0;
+.hero-inner {
+  position: relative;
+  z-index: 1;
 }
-.card-green {
-  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
-  color: #fff;
-  border-radius: var(--radius);
-  box-shadow: 0 8rpx 32rpx rgba(74,140,92,0.25);
-  border: 1rpx solid rgba(255,255,255,0.15);
-}
-.sub-label {
-  font-size: 22rpx;
-  opacity: 0.75;
-  display: block;
-  letter-spacing: 1rpx;
-}
-.sub-plan {
-  font-size: 38rpx;
+.hero-title {
+  font-size: 48rpx;
   font-weight: 800;
-  margin-top: 8rpx;
+  color: #2D2A26;
   display: block;
-  letter-spacing: -0.5rpx;
+  letter-spacing: -1rpx;
 }
-.sub-meta {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 28rpx;
-  font-size: 22rpx;
-  opacity: 0.9;
-  font-weight: 500;
+.hero-sub {
+  font-size: 26rpx;
+  color: #5E5953;
+  margin-top: 12rpx;
+  display: block;
 }
+.hero-login-btn {
+  margin-top: 32rpx;
+  display: inline-block;
+  padding: 20rpx 56rpx;
+  background: #4A8C5C;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 700;
+  border-radius: 48rpx;
+  box-shadow: 0 8rpx 24rpx rgba(74,140,92,0.30);
+}
+.hero-login-btn:active { opacity: 0.9; transform: scale(0.98); }
 
-/* ── 数据概览 3列grid ── */
+/* ── 数据概览（白色浮起卡） ── */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-sm);
-  padding: var(--sp-md) var(--sp-lg) var(--sp-lg);
+  margin: -88rpx 40rpx 0;
+  position: relative;
+  z-index: 2;
 }
 .stat {
+  background: #FFFFFF;
   border-radius: var(--radius);
   padding: 32rpx 16rpx 28rpx;
   text-align: center;
-  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.08);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.08);
 }
-.stat::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2rpx;
-  background: rgba(255,255,255,0.25);
-}
-.stat.bg-green { background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%); }
-.stat.bg-amber { background: linear-gradient(135deg, var(--amber) 0%, #B8762E 100%); }
-.stat.bg-teal  { background: linear-gradient(135deg, var(--teal) 0%, #2A5E38 100%); }
 .stat-num {
-  font-size: 52rpx;
+  font-size: 48rpx;
   font-weight: 800;
-  color: #fff;
   display: block;
-  letter-spacing: -1rpx;
   line-height: 1.1;
+  letter-spacing: -1rpx;
 }
+.stat-green { color: #4A8C5C; }
+.stat-amber { color: #D4914A; }
+.stat-teal  { color: #3D8B37; }
 .stat-label {
   font-size: 22rpx;
-  color: rgba(255,255,255,0.85);
+  color: #948F89;
   margin-top: 8rpx;
   display: block;
   letter-spacing: 1rpx;
@@ -240,19 +215,4 @@
   font-size: 22rpx;
   color: var(--text2);
   font-weight: 500;
-}
-
-/* ── PRO 角标 ── */
-.badge-amber {
-  background: var(--amber);
-  color: #fff;
-  font-size: 18rpx;
-  padding: 4rpx 12rpx;
-  border-radius: var(--radius-full);
-  font-weight: 700;
-  position: absolute;
-  top: -4rpx;
-  right: -4rpx;
-  box-shadow: 0 4rpx 12rpx rgba(212,145,74,0.4);
-  letter-spacing: 0.5rpx;
 }

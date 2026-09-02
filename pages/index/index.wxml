@@ -2,38 +2,41 @@
   <view wx:if="{{loading}}" class="loading-state">
     <loading-spinner />
   </view>
-  
+
   <view wx:elif="{{error}}" class="error-state">
     <text class="error-text">数据加载失败，请检查网络</text>
     <view class="error-retry" bindtap="loadData">点击重试</view>
   </view>
-  
-  <view wx:else>
 
-    <view wx:if="{{showLoginGuide}}" class="card card-green login-guide">
-      <text class="sub-label">👋 欢迎来到宠宝树</text>
-      <text class="sub-plan">登录后开启宠物管理</text>
-      <view class="sub-meta">
-        <text>宠物档案 · 繁育记录 · 健康提醒</text>
+  <view wx:else>
+    <!-- 顶部 hero 区（绿色渐变 + 装饰圆环） -->
+    <view class="hero home-hero">
+      <view class="decor-ring hr1"></view>
+      <view class="decor-ring hr2"></view>
+      <view class="decor-ring hr3"></view>
+      <view class="hero-inner">
+        <text class="hero-title">{{showLoginGuide ? '欢迎来到宠宝树' : '宠宝树'}}</text>
+        <text class="hero-sub">{{showLoginGuide ? '宠物档案 · 繁育记录 · 健康提醒' : '当前方案 · ' + subscriptionPlan}}</text>
+        <view wx:if="{{showLoginGuide}}" class="hero-login-btn" bindtap="goLogin">微信登录</view>
       </view>
-      <view class="btn btn-green btn-block" bindtap="goLogin" style="margin-top:16rpx;">微信登录</view>
     </view>
 
+    <!-- 数据概览（白色浮起卡） -->
     <view class="stats">
-      <view class="stat bg-green">
-        <text class="stat-num">{{petCount}}</text>
+      <view class="stat">
+        <text class="stat-num stat-green">{{petCount}}</text>
         <text class="stat-label">宠物</text>
       </view>
-      <view class="stat bg-amber">
-        <text class="stat-num">{{breedingInProgressCount}}</text>
+      <view class="stat">
+        <text class="stat-num stat-amber">{{breedingInProgressCount}}</text>
         <text class="stat-label">繁育中</text>
       </view>
-      <view class="stat bg-teal">
-        <text class="stat-num">{{reminderCount}}</text>
+      <view class="stat">
+        <text class="stat-num stat-teal">{{reminderCount}}</text>
         <text class="stat-label">健康记录</text>
       </view>
     </view>
-    
+
     <view class="card">
       <text class="section-title">⏰ 待办提醒</text>
       <view wx:if="{{reminders.length > 0}}">
@@ -53,7 +56,7 @@
       </view>
       <empty-state wx:else type="no-record" text="暂无待办提醒" subText="宠物健康和繁育提醒会显示在这里" />
     </view>
-    
+
     <view class="card">
       <text class="section-title">⚡ 快捷入口</text>
       <view class="grid4">

@@ -1,5 +1,7 @@
 <view class="detail-page">
   <view class="pet-header">
+    <view class="decor-ring pr1"></view>
+    <view class="decor-ring pr2"></view>
     <view class="pet-avatar-wrap">
       <image wx:if="{{pet.avatar}}" class="pet-avatar-lg" src="{{pet.avatar}}" mode="aspectFill" />
       <view wx:else class="pet-avatar-placeholder-lg">{{pet.speciesIcon}}</view>

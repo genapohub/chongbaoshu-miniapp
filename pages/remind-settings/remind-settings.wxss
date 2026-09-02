@@ -127,6 +127,10 @@
   box-shadow: var(--shadow);
 }
 .subscribe-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
   font-size: 28rpx;
   font-weight: 600;
   color: var(--text);

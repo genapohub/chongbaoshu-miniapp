@@ -2,6 +2,8 @@
   P16 手机号登录页 - 按设计稿一比一复刻
 -->
 <view class="phone-login-page">
+  <view class="decor-ring pl-ring1"></view>
+  <view class="decor-ring pl-ring2"></view>
   <view class="header">
     <view class="back-btn" bindtap="goBack">
       <cbs-icon name="arrow-left" size="36" color="#4A8C5C" />

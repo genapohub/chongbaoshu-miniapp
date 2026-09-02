@@ -28,6 +28,11 @@ page {
   --shadow-lg:   0 8rpx 32rpx rgba(74,140,92,0.25);
   --shadow-fab:  0 16rpx 48rpx rgba(74,140,92,0.35);
 
+  /* 暖森林 2.0 — 品牌渐变（源自 onboarding） */
+  --gradient-hero:  linear-gradient(180deg, #EDF4EF 0%, #D4E8DA 45%, #B8D4C0 100%);
+  --gradient-brand: linear-gradient(180deg, #EDF4EF 0%, #D4E8DA 30%, #B8D4C0 70%, #9DC0A8 100%);
+  --gradient-deep:  linear-gradient(160deg, #5E9B72 0%, #4A8C5C 45%, #2A5E38 100%);
+
   --sp-xs: 16rpx;
   --sp-sm: 24rpx;
   --sp-md: 32rpx;
@@ -240,5 +245,78 @@ page {
 .error-state { display: flex; flex-direction: column; align-items: center; padding: 200rpx var(--sp-lg); }
 .error-text  { font-size: 28rpx; color: var(--text3); margin-top: var(--sp-md); display: block; }
 .error-retry { margin-top: var(--sp-lg); padding: 18rpx 60rpx; background: var(--green); color: #fff; border-radius: var(--radius-full); font-size: 28rpx; display: inline-block; }
+
+/* ══════════════════════════════════════════════
+   暖森林 2.0 — onboarding 设计语言公共组件
+   ══════════════════════════════════════════════ */
+
+/* ── 品牌渐变背景（全屏叙事页用） ── */
+.brand-bg {
+  background: var(--gradient-brand);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── 顶部 hero 渐变区（Tab 主页/功能页头部） ── */
+.hero {
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── 功能页 hero 头（渐变 + 装饰圆环 + 标题副标题） ── */
+.page-hero {
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+  padding: 56rpx var(--sp-lg) 40rpx;
+}
+.page-hero .hero-title {
+  display: block;
+  font-size: 44rpx; font-weight: 800;
+  color: #2D2A26; letter-spacing: 1rpx;
+  line-height: 1.25; position: relative; z-index: 1;
+}
+.page-hero .hero-sub {
+  display: block;
+  font-size: 26rpx; color: #5E5953;
+  margin-top: 12rpx; position: relative; z-index: 1;
+}
+/* 装饰圆环尺寸工具类 */
+.decor-ring.r1 { width: 360rpx; height: 360rpx; top: -140rpx; right: -120rpx; }
+.decor-ring.r2 { width: 220rpx; height: 220rpx; bottom: -80rpx; left: -70rpx; }
+.decor-ring.r3 { width: 120rpx; height: 120rpx; top: 40rpx; left: 40%; }
+
+/* ── 装饰虚线圆环 ── */
+.decor-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2rpx solid rgba(74,140,92,0.08);
+  pointer-events: none;
+}
+
+/* ── 图标圆环（icon-ring，实心浅底 + 虚线外环） ── */
+.icon-ring {
+  width: 180rpx; height: 180rpx; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.icon-ring::after {
+  content: ''; position: absolute;
+  width: 220rpx; height: 220rpx; border-radius: 50%;
+  border: 4rpx dashed currentColor; opacity: 0.18;
+}
+.ring-green { background: rgba(74,140,92,0.08); color: #4A8C5C; }
+.ring-amber { background: rgba(212,145,74,0.08); color: #D4914A; }
+.ring-red   { background: rgba(212,83,74,0.08);  color: #D4534A; }
+.ring-teal  { background: rgba(61,139,55,0.08);  color: #3D8B37; }
+
+/* ── 水印大字号数字 ── */
+.watermark-num {
+  font-size: 96rpx; font-weight: 900;
+  color: rgba(74,140,92,0.06);
+  letter-spacing: 2rpx;
+  line-height: 1;
+}
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

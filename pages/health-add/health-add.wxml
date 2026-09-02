@@ -1,3 +1,10 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">健康记录</text>
+  <text class="hero-sub">记录疫苗与驱虫，到期自动提醒</text>
+</view>
+
 <view class="container">
   <view class="tab-bar">
     <view class="tab-item {{currentType === 'vaccine' ? 'active' : ''}}" bindtap="switchType" data-type="vaccine">

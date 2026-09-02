@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════
-   个人中心 — 暖森林毛玻璃风格
+   个人中心 — 暖森林 2.0（onboarding 设计语言）
    ══════════════════════════════════════════════ */
 
 .profile-page {
@@ -7,12 +7,12 @@
   background: var(--bg);
 }
 
-/* ── 绿色头部 ── */
+/* ── 浅绿渐变头部 ── */
 .profile-header {
-  background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+  background: var(--gradient-hero);
   padding: 120rpx var(--sp-xl) 60rpx;
   text-align: center;
-  color: #fff;
+  color: #2D2A26;
   position: relative;
   overflow: hidden;
 }
@@ -23,7 +23,7 @@
   right: -100rpx;
   width: 320rpx;
   height: 320rpx;
-  background: rgba(255,255,255,0.08);
+  border: 2rpx solid rgba(74,140,92,0.10);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -34,7 +34,7 @@
   left: -80rpx;
   width: 260rpx;
   height: 260rpx;
-  background: rgba(255,255,255,0.05);
+  border: 2rpx solid rgba(74,140,92,0.08);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -46,11 +46,11 @@
   border-radius: 50%;
   overflow: hidden;
   margin: 0 auto 24rpx;
-  border: 6rpx solid rgba(255,255,255,0.35);
-  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.15);
+  border: 6rpx solid rgba(255,255,255,0.7);
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.12);
   position: relative;
   z-index: 1;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.5);
 }
 .profile-avatar {
   width: 100%;
@@ -63,7 +63,7 @@
   align-items: center;
   justify-content: center;
   font-size: 64rpx;
-  background: rgba(255,255,255,0.12);
+  background: rgba(74,140,92,0.08);
 }
 
 /* ── 用户名 ── */
@@ -74,6 +74,7 @@
   letter-spacing: 1rpx;
   position: relative;
   z-index: 1;
+  color: #2D2A26;
 }
 
 /* ── PRO 徽章（覆盖全局 badge-amber 以适配头部） ── */
@@ -108,13 +109,13 @@
 .profile-stat .stat-num {
   font-size: 48rpx;
   font-weight: 800;
-  color: #fff;
+  color: #2D2A26;
   letter-spacing: -1rpx;
   line-height: 1.1;
 }
 .profile-stat .stat-label {
   font-size: 22rpx;
-  color: rgba(255,255,255,0.85);
+  color: #5E5953;
   margin-top: 8rpx;
   letter-spacing: 1rpx;
 }

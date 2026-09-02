@@ -1,11 +1,17 @@
-/* 手机号登录 — 暖森林品牌 */
+/* 手机号登录 — 暖森林 2.0 */
 
 .phone-login-page {
   min-height: 100vh;
-  background: var(--bg);
+  background: linear-gradient(180deg, #EDF4EF 0%, #D4E8DA 35%, var(--bg) 100%);
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
+
+/* 装饰圆环 */
+.pl-ring1 { width: 420rpx; height: 420rpx; top: -140rpx; right: -160rpx; }
+.pl-ring2 { width: 260rpx; height: 260rpx; top: 220rpx; left: -120rpx; }
 
 .header {
   height: 88rpx;

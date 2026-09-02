@@ -1,21 +1,27 @@
-<view class="login-page">
-  <view class="login-logo">🐾</view>
-  <text class="login-title">宠宝树</text>
-  <text class="login-subtitle">繁育者的生意工具</text>
-  
-  <view class="login-btns">
-    <view class="login-btn login-wechat" bindtap="onWxLogin">
-      <text>🐾</text>
-      <text>微信一键登录</text>
+<view class="login-page brand-bg">
+  <view class="decor-ring cr1"></view>
+  <view class="decor-ring cr2"></view>
+  <view class="decor-ring cr3"></view>
+
+  <view class="login-body">
+    <view class="icon-ring ring-green">
+      <cbs-icon name="paw" size="80" color="#4A8C5C" />
     </view>
-    
-    <view class="login-btn login-phone" bindtap="onPhoneLogin">
-      <text>📱</text>
-      <text>手机号登录</text>
+    <text class="login-title">宠宝树</text>
+    <text class="login-subtitle">繁育者的生意工具</text>
+
+    <view class="login-btns">
+      <view class="login-btn login-wechat" bindtap="onWxLogin">
+        <cbs-icon name="chat" size="36" color="#FFFFFF" />
+        <text>微信一键登录</text>
+      </view>
+      <view class="login-btn login-phone" bindtap="onPhoneLogin">
+        <cbs-icon name="qrcode" size="36" color="#4A8C5C" />
+        <text>手机号登录</text>
+      </view>
     </view>
+
+    <text class="login-skip" bindtap="skipLogin">暂不登录，先看看 →</text>
+    <text class="login-terms">登录即同意<text class="login-link" bindtap="openTerms">《用户协议》</text>和<text class="login-link" bindtap="openPrivacy">《隐私政策》</text></text>
   </view>
-  
-  <text class="login-skip" bindtap="skipLogin">暂不登录，先看看 →</text>
-  
-  <text class="login-terms">登录即同意<text class="login-link" bindtap="openTerms">《用户协议》</text>和<text class="login-link" bindtap="openPrivacy">《隐私政策》</text></text>
 </view>

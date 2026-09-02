@@ -3,25 +3,33 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #FFF;
+  background: var(--bg);
 }
 
 .header {
-  padding: 40rpx 32rpx 24rpx;
-  border-bottom: 1rpx solid #EDEDEF;
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-hero);
+  padding: 56rpx 32rpx 40rpx;
+  border-bottom: none;
 }
 
 .title {
-  font-size: 36rpx;
-  font-weight: 600;
+  font-size: 40rpx;
+  font-weight: 800;
   color: #2D2A26;
   display: block;
   margin-bottom: 8rpx;
+  letter-spacing: 1rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .update-time {
   font-size: 24rpx;
-  color: #948F89;
+  color: #5E5953;
+  position: relative;
+  z-index: 1;
 }
 
 .content {

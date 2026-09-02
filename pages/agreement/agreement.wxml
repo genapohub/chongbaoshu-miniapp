@@ -1,5 +1,7 @@
 <view class="container">
   <view class="header">
+    <view class="decor-ring r1"></view>
+    <view class="decor-ring r2"></view>
     <text class="title">{{title}}</text>
     <text class="update-time">更新时间：{{updateTime}}</text>
   </view>

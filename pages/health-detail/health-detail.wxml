@@ -1,3 +1,10 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">健康档案</text>
+  <text class="hero-sub">疫苗、驱虫与到期提醒</text>
+</view>
+
 <view class="container">
   <loading-spinner wx:if="{{loading}}" />
   

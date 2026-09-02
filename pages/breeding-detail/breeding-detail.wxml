@@ -1,6 +1,13 @@
 <!--
   P7 繁育详情页 - 按设计稿复刻
 -->
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">繁育详情</text>
+  <text class="hero-sub">跟踪配种进度与状态</text>
+</view>
+
 <view class="container">
   <!-- 繁育记录卡片 -->
   <view class="card breeding-card">
