@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">意向客户</text>
+  <text class="hero-sub">跟踪买家咨询与成交进度</text>
+</view>
 <view class="leads-page">
   <view class="tab-bar">
     <view wx:for="{{tabList}}" wx:key="key" class="tab-item {{currentTab === item.key ? 'active' : ''}}" bindtap="switchTab" data-tab="{{item.key}}">

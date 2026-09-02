@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">同窝详情</text>
+  <text class="hero-sub">幼崽档案与父母信息</text>
+</view>
 <view class="container">
   <view wx:if="{{loading}}" class="loading-state">加载中...</view>
 

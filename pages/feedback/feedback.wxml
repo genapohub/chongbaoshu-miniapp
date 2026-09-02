@@ -1,9 +1,10 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">意见反馈</text>
+  <text class="hero-sub">您的反馈是我们进步的动力</text>
+</view>
 <view class="container">
-  <view class="header">
-    <text class="title">意见反馈</text>
-    <text class="subtitle">您的反馈是我们进步的动力</text>
-  </view>
-  
   <view class="form-section">
     <view class="input-group">
       <text class="label">反馈内容</text>

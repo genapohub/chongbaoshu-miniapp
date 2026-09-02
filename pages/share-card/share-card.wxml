@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">分享卡片</text>
+  <text class="hero-sub">生成宠物分享海报</text>
+</view>
 <view class="container">
   <view class="card-preview">
     <canvas type="2d" id="shareCanvas" class="canvas" style="width:{{canvasW}}px;height:{{canvasH}}px;"></canvas>

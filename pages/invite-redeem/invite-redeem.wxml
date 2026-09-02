@@ -1,3 +1,10 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">兑换邀请码</text>
+  <text class="hero-sub">输入邀请码，兑换Pro体验</text>
+</view>
+
 <!-- 邀请码兑换页 - 模板 -->
 <view class="redeem-page">
 

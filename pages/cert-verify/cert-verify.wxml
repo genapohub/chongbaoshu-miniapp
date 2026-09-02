@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">证书验证</text>
+  <text class="hero-sub">核验血统证书真伪</text>
+</view>
 <view class="container">
   <view wx:if="{{loading}}" class="loading">验证中...</view>
 

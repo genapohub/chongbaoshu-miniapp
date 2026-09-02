@@ -1,11 +1,12 @@
 <!-- 邀请好友页 - 模板 -->
 <view class="invite-page">
 
-  <!-- 顶部横幅 -->
-  <view class="banner">
-    <view class="banner-icon"><cbs-icon name="gift" size="36" color="#F54A45" /></view>
-    <view class="banner-title">邀请好友，双方各得7天Pro</view>
-    <view class="banner-subtitle">每成功邀请1人注册，额外获得7天Pro会员</view>
+  <!-- 顶部 hero -->
+  <view class="page-hero">
+    <view class="decor-ring r1"></view>
+    <view class="decor-ring r2"></view>
+    <text class="hero-title">邀请好友</text>
+    <text class="hero-sub">双方各得7天Pro会员</text>
   </view>
 
   <!-- 邀请码卡片 -->

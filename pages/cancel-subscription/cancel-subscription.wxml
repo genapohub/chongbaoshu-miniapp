@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">取消订阅</text>
+  <text class="hero-sub">确认是否结束会员权益</text>
+</view>
 <view class="container">
   <view class="page-content">
     <!-- 损失提示 -->

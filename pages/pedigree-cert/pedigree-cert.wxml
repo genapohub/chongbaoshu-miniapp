@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">血统证书</text>
+  <text class="hero-sub">三代血统与近亲系数检测</text>
+</view>
 <view class="container">
   <view class="cert-card">
     <view class="cert-header">

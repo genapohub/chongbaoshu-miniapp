@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">订阅方案</text>
+  <text class="hero-sub">管理当前会员权益与用量</text>
+</view>
 <view class="container">
   <view class="page-content">
     <!-- 当前方案卡片 -->

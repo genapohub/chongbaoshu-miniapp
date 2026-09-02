@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">收支账本</text>
+  <text class="hero-sub">宠舍收入与支出明细</text>
+</view>
 <view class="container">
   <view class="summary-card">
     <view class="summary-row">

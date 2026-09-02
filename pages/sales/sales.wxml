@@ -1,3 +1,9 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">销售记录</text>
+  <text class="hero-sub">成交明细与收入统计</text>
+</view>
 <view class="container">
   <view class="summary-card" wx:if="{{summary}}">
     <text class="summary-month">{{summary.month}} 销售汇总</text>

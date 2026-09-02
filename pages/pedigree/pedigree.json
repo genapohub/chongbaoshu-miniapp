@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "pedigree",
+  "navigationBarTitleText": "血统树",
   "usingComponents": {
     "pet-avatar": "/components/pet-avatar/pet-avatar",
     "icon": "../../components/icon/icon"

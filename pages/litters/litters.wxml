@@ -1,5 +1,10 @@
+<view class="page-hero">
+  <view class="decor-ring r1"></view>
+  <view class="decor-ring r2"></view>
+  <text class="hero-title">同窝管理</text>
+  <text class="hero-sub">同窝幼犬与父母信息一览</text>
+</view>
 <view class="container">
-  <view class="header-bar"><text class="title">同窝管理</text></view>
   <view wx:if="{{loading}}" class="loading">加载中...</view>
 
   <!-- 错误状态 -->
