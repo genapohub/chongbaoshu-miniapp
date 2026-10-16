@@ -25,6 +25,14 @@
 | 后端 | [`chongbaoshu-api`](https://github.com/genapohub/chongbaoshu-api)（FastAPI） |
 | 设计 | 设计系统 + 原型 HTML（见本地 `03-UI设计/`） |
 
+## 运行截图
+
+> 以下为小程序页面结构示意，依本仓库 `pages/` 真实 WXML/WXSS 渲染生成（非真机运行截图）。
+
+| 首页 Dashboard | 同窝管理 |
+|---|---|
+| ![首页](screenshots/chongbaoshu-01-index.png) | ![同窝管理](screenshots/chongbaoshu-02-litters.png) |
+
 ## 本地启动
 
 ```bash
